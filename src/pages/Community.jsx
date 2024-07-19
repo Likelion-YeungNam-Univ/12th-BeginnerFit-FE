@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Mobile, PC, responsiveSize } from "../styles/Mediaquery";
+import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
 
 const AppWrapper = ({ children }) => {
