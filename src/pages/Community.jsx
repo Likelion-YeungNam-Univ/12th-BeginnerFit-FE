@@ -6,7 +6,7 @@ import Header from "../components/Community/Header";
 import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
 
-export default function Community2() {
+export default function Community() {
   const [posts, setPosts] = useState([]);
   const TEST_SERVER_URL = "http://localhost:3001";
 

@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import PropTypes from "prop-types";
 const Mobile = ({ children }) => {
   const isMobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:600px)",
   });
   return <React.Fragment>{isMobile && children}</React.Fragment>;
 };
@@ -14,7 +14,7 @@ Mobile.propTypes = {
 
 const PC = ({ children }) => {
   const isPc = useMediaQuery({
-    query: "(min-width:600px)",
+    query: "(min-width:601px)",
   });
   return <React.Fragment>{isPc && children}</React.Fragment>;
 };
