@@ -1,9 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const navigate = useNavigate();
+    const navigateToForgetID = () => {
+        navigate("/ForgetID");
+    }
+    const navigateToForgetPW = () => {
+        navigate("/ForgetPW");
+    }
+    const navigateToSignUp = () => {
+        navigate("/signup");
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -33,11 +45,11 @@ function Login() {
                     <LoginButton type="submit">로그인</LoginButton>
                 </LoginForm>
                 <LoginEtc>
-                    <EtcButton>계정 찾기</EtcButton>    
+                    <EtcButton onClick={navigateToForgetID}>아이디 찾기</EtcButton>    
                     <span>|</span>
-                    <EtcButton>비밀번호 찾기</EtcButton>
+                    <EtcButton onClick={navigateToForgetPW}>비밀번호 찾기</EtcButton>
                     <span>|</span>
-                    <EtcButton>회원가입</EtcButton>
+                    <EtcButton onClick={navigateToSignUp}>회원가입</EtcButton>
                 </LoginEtc>
             </LoginBox>
         </Wrapper>
