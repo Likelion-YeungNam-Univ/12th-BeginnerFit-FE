@@ -4,9 +4,9 @@ import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
 import DropDown from "../components/Community/DropDown";
 import writebtn from "../images/writebtn.png";
-import { CiHeart } from "react-icons/ci";
 import { LuHeart } from "react-icons/lu";
 import { GoComment } from "react-icons/go";
+import {TimeCalculator} from '../utils/TimeCalculator.jsx';
 
 const AppWrapper = ({ children }) => {
   return (
@@ -57,7 +57,7 @@ export default function Community() {
             <TitleContainer>
               <TitleAndTime>
                 <TitleText>{post.title}</TitleText>
-                <TimeText>{post.date}</TimeText>
+                <TimeText>{TimeCalculator(post.date)}</TimeText>
               </TitleAndTime>
               <ContentText>{post.content}</ContentText>
               <RowContainer>
@@ -151,6 +151,7 @@ const ContentContaienr = styled.div`
   width: 100%;
   display: flex;
   cursor: pointer;
+  padding: 10px 0;
 `;
 //제목 내용 아이디 컨테이너박스
 const TitleContainer = styled.div`
