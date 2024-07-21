@@ -56,7 +56,7 @@ const LoginBox = styled.div`
     justify-content: center;
     
     width: 600px;
-    margin: auto;
+    margin: 0px auto 50px auto;
     /* background-color: cadetblue; */
 `
 
@@ -64,7 +64,7 @@ const Logo = styled.img.attrs({
     src: "https://images.velog.io/images/front/post/394731db-5b9d-42de-9b2f-2757c9b0b2c8/img.png",
     alt: "BeginnerFit"
 })`
-    margin: 20px auto;
+    margin: 0px auto 20px auto;
     width: 30%;
 `
 
