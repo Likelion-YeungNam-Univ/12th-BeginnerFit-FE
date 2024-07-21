@@ -7,8 +7,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        {/* 커뮤니티 페이지 테스트용 */}
         <Route path="/community" element={<Community/>}></Route>
+
       </Routes>
     </>
   );
