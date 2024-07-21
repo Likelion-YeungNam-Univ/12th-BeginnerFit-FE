@@ -4,6 +4,10 @@ import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
 import DropDown from "../components/Community/DropDown";
 import writebtn from "../images/writebtn.png";
+import { CiHeart } from "react-icons/ci";
+import { LuHeart } from "react-icons/lu";
+import { GoComment } from "react-icons/go";
+
 const AppWrapper = ({ children }) => {
   return (
     <Wrapper>
@@ -35,14 +39,14 @@ export default function Community() {
     <AppWrapper>
       {/* PC버전 */}
       <PC>
-        <HeaderContainer>
+        <RowContainer>
           <Header src={logo} />
           <DropDown />
-        </HeaderContainer>
-        <HeaderContainer>
+        </RowContainer>
+        <RowContainer>
           <Title>Community</Title>
           <WriteImgBtn src={writebtn} />
-        </HeaderContainer>
+        </RowContainer>
         <BtnContainer>
           {buttonList.map((item, index) => (
             <Button key={index}>{item}</Button>
@@ -56,7 +60,15 @@ export default function Community() {
                 <TimeText>{post.date}</TimeText>
               </TitleAndTime>
               <ContentText>{post.content}</ContentText>
-              <IdText>{post.author}</IdText>
+              <RowContainer>
+                <IdText>{post.author}</IdText>
+                <HeartCommentContainer>
+                  <LuHeart />
+                  <HeartCommentText>{post.likes}</HeartCommentText>
+                  <GoComment />
+                  <HeartCommentText>{post.comments}</HeartCommentText>
+                </HeartCommentContainer>
+              </RowContainer>
             </TitleContainer>
           </ContentContaienr>
         ))}
@@ -83,7 +95,7 @@ const Header = styled.img`
   justify-content: center;
   align-items: center;
 `;
-const HeaderContainer = styled.div`
+const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -152,6 +164,12 @@ const TitleAndTime = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+//좋아요,하트 컨테이너 박스
+const HeartCommentContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+`;
 const TitleText = styled.h3`
   font-size: ${responsiveSize("16")};
   font-weight: 600;
@@ -166,6 +184,10 @@ const IdText = styled.span`
   color: ${({ theme }) => theme.colors.gray02};
 `;
 const TimeText = styled.p`
+  font-size: ${responsiveSize("12")};
+  color: ${({ theme }) => theme.colors.gray02};
+`;
+const HeartCommentText = styled.a`
   font-size: ${responsiveSize("12")};
   color: ${({ theme }) => theme.colors.gray02};
 `;
