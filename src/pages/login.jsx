@@ -73,7 +73,7 @@ const LoginBox = styled.div`
 `
 
 const Logo = styled.img.attrs({
-    src: "https://images.velog.io/images/front/post/394731db-5b9d-42de-9b2f-2757c9b0b2c8/img.png",
+    src: "/src/BeginnerFitLogo.png",
     alt: "BeginnerFit"
 })`
     margin: 0px auto 20px auto;
@@ -87,7 +87,7 @@ const LoginForm = styled.form`
 
 const MyInput = styled.input`
     width: 100%;
-    background-color: #e9e9e9;
+    background-color: #f5f5f5;
     padding: 10px;
     margin: 5px 0px 15px 0px;
     border-radius: 8px;
@@ -98,7 +98,7 @@ const MyInput = styled.input`
 
 const LoginButton = styled.button`
     width: 100%;
-    background-color: #918f8f;
+    background-color: #653eff;
     color: white;
     font-size: large;
     padding: 10px;
