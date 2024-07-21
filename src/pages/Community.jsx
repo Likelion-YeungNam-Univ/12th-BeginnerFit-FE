@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
+import DropDown from "../components/DropDown";
 
 const AppWrapper = ({ children }) => {
   return (
     <Wrapper>
-      <TestNav>Beginner Fit</TestNav>
       <Container>
         <MainContent>{children}</MainContent>
       </Container>
@@ -27,10 +27,16 @@ export default function Community() {
       .catch((error) => console.log(error));
   }, []);
 
+  //
+
   return (
     <AppWrapper>
       {/* PC버전 */}
       <PC>
+        <HeaderContainer>
+          <Header>Beginner Fit</Header>
+          <DropDown />
+        </HeaderContainer>
         <Title>Community</Title>
         <BtnContainer>
           <Button>자유게시판</Button>
@@ -62,7 +68,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const TestNav = styled.nav`
+const Header = styled.header`
   height: 48px;
   width: 100%;
   max-width: 600px;
@@ -72,6 +78,11 @@ const TestNav = styled.nav`
   justify-content: center;
   align-items: center;
   font-size: 29px;
+`;
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 const Container = styled.div`
   display: flex;
