@@ -14,7 +14,7 @@ Mobile.propTypes = {
 
 const PC = ({ children }) => {
   const isPc = useMediaQuery({
-    query: "(min-width:768px)",
+    query: "(min-width:600px)",
   });
   return <React.Fragment>{isPc && children}</React.Fragment>;
 };
