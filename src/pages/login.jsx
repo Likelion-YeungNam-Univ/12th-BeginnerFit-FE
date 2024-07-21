@@ -68,7 +68,7 @@ const LoginBox = styled.div`
     justify-content: center;
     
     width: 600px;
-    margin: 0px auto 50px auto;
+    margin: 0px auto 150px auto;
     /* background-color: cadetblue; */
 `
 
@@ -76,8 +76,8 @@ const Logo = styled.img.attrs({
     src: "/src/BeginnerFitLogo.png",
     alt: "BeginnerFit"
 })`
-    margin: 0px auto 20px auto;
-    width: 30%;
+    margin: 0px auto 50px auto;
+    width: 40%;
 `
 
 const LoginForm = styled.form`
@@ -88,9 +88,9 @@ const LoginForm = styled.form`
 const MyInput = styled.input`
     width: 100%;
     background-color: #f5f5f5;
-    padding: 10px;
+    padding: 15px;
     margin: 5px 0px 15px 0px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
     box-sizing: border-box;
     margin-bottom: 15px;
@@ -101,9 +101,9 @@ const LoginButton = styled.button`
     background-color: #653eff;
     color: white;
     font-size: large;
-    padding: 10px;
+    padding: 15px;
     margin: 30px 0px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
     box-sizing: border-box;
 `
