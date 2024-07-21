@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./components/home/home";
 import Community from "./pages/Community";
-
 function App() {
   return (
     <>
