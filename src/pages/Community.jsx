@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import logo from "../images/logo.png";
 import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
-import DropDown from "../components/DropDown";
-
+import DropDown from "../components/Community/DropDown";
+import writebtn from "../images/writebtn.png";
 const AppWrapper = ({ children }) => {
   return (
     <Wrapper>
@@ -27,20 +28,25 @@ export default function Community() {
       .catch((error) => console.log(error));
   }, []);
 
-  //
+  //버튼 리스트
+  const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
 
   return (
     <AppWrapper>
       {/* PC버전 */}
       <PC>
         <HeaderContainer>
-          <Header>Beginner Fit</Header>
+          <Header src={logo} />
           <DropDown />
         </HeaderContainer>
-        <Title>Community</Title>
+        <HeaderContainer>
+          <Title>Community</Title>
+          <WriteImgBtn src={writebtn} />
+        </HeaderContainer>
         <BtnContainer>
-          <Button>자유게시판</Button>
-          <Button>정보공유</Button>
+          {buttonList.map((item, index) => (
+            <Button key={index}>{item}</Button>
+          ))}
         </BtnContainer>
         {posts.map((post) => (
           <ContentContaienr key={post.id}>
@@ -68,34 +74,38 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Header = styled.header`
-  height: 48px;
-  width: 100%;
+const Header = styled.img`
+  height: 35px;
+  width: auto;
   max-width: 600px;
-  background-color: #d9d9d9;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 29px;
 `;
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
+const WriteImgBtn = styled.img`
+  width: ${responsiveSize("60")};
+  height: ${responsiveSize("60")};
+  margin-top: ${responsiveSize("20")};
+  cursor: pointer;
+`;
 const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   height: 100vh;
 `;
 const MainContent = styled.div`
   width: 100%;
   max-width: 600px;
-  background-color: #fff;
-  border: solid 1px #d9d9d9;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;
   box-sizing: border-box;
 `;
@@ -113,13 +123,17 @@ const BtnContainer = styled.div`
 const Button = styled.button`
   width: fit-content;
   padding: 0 1rem;
-  color: black;
-  background-color: #d9d9d9;
+  color: ${({ theme }) => theme.colors.gray02};
+  background-color: ${({ theme }) => theme.colors.gray01};
   border: none;
   border-radius: ${responsiveSize("18")};
   height: ${responsiveSize("28")};
   font-size: ${responsiveSize("14")};
   cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
+  }
 `;
 const ContentContaienr = styled.div`
   width: 100%;
@@ -149,9 +163,9 @@ const ContentText = styled.span`
 const IdText = styled.span`
   font-size: ${responsiveSize("12")};
   font-weight: 400;
-  color: #00000080;
+  color: ${({ theme }) => theme.colors.gray02};
 `;
 const TimeText = styled.p`
   font-size: ${responsiveSize("12")};
-  color: #00000080;
+  color: ${({ theme }) => theme.colors.gray02};
 `;
