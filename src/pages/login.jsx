@@ -59,7 +59,6 @@ function Login() {
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
-    /* background-color: blue; */
     height: 100vh;
 `
 
@@ -69,7 +68,6 @@ const LoginBox = styled.div`
     
     width: 600px;
     margin: 0px auto 150px auto;
-    /* background-color: cadetblue; */
 `
 
 const Logo = styled.img.attrs({
