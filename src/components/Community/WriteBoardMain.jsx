@@ -3,22 +3,23 @@ import styled from "styled-components";
 import { IoPersonAddOutline } from "react-icons/io5";
 import profile from "../../images/profile.png";
 import { responsiveSize } from "../../utils/Mediaquery";
-import * as React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { TimeCalculator } from "../../utils/TimeCalculator";
 import axios from "axios";
+import { useState } from "react";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function WriteBoardMain({ post }) {
  
-  
+
   //테스트 서버주소
   const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
   //좋아요 기능함수
   const [clickLike, setClickLike] = useState(false);
   const [likes, setLikes] = useState(post.likes);
+  console.log(post.likes);
 
   const toggleLike = async () => {
     //사용자가 좋아요 누르면 갱신
