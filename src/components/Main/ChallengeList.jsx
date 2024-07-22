@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Challenge from "./Challenge";
 import styled from "styled-components";
+import { responsiveSize } from "../../utils/Mediaquery";
 
 const challengeList = [
   { content: "30분 이상 운동하기" },
@@ -22,7 +23,7 @@ export default function ChallengeList() {
   };
   return (
     <Container>
-      <SpeechBubble>사용자님 현재 1위에요!</SpeechBubble>
+      <SpeechBubble>친구 27명이 성공했어요!</SpeechBubble>
       {challengeList.map((item, idx) => (
         <Challenge
           key={idx}
@@ -49,11 +50,12 @@ const SpeechBubble = styled.div`
   top: -60px;
   right: 0px;
   padding: 10px;
+  font-size: ${responsiveSize("14")};
 
   &::after {
     content: "";
     position: absolute;
-    top: 40px;
+    top: 38px;
     bottom: 0;
     left: 90%;
     width: 0;

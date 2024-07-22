@@ -5,10 +5,7 @@ import checkFillButton from "../../images/checkFillButton.png";
 export default function Challenge({ content, complete, index, handleCheck }) {
   return (
     <Container>
-      <P>{content}</P>
-      <div>
-        <Image />
-      </div>
+      <P onClick={() => handleCheck(index)}>{content}</P>
       <div>
         <Image
           src={complete ? checkFillButton : checkButton}
@@ -32,6 +29,7 @@ const Container = styled.div`
 
 const P = styled.div`
   margin: 0px;
+  cursor: pointer;
 `;
 
 const Image = styled.img`
