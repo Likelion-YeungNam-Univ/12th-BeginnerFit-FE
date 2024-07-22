@@ -12,8 +12,6 @@ import { useState } from "react";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function WriteBoardMain({ post }) {
- 
-
   //테스트 서버주소
   const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
   //좋아요 기능함수
@@ -58,7 +56,7 @@ export default function WriteBoardMain({ post }) {
         <ContentText>{post.content}</ContentText>
       </TitleContentContainer>
       {/* 통신해서 이미지가 있을 때만 띄우기 */}
-      <Image></Image>
+      {post.pictureUrl && <Image src={post.pictureUrl}></Image>}
       {/* 하트 체크박스 */}
       <HeartContainer>
         <Checkbox
@@ -101,6 +99,7 @@ const ContentText = styled.div`
   color: ${({ theme }) => theme.colors.black};
 `;
 const Image = styled.img`
+  margin-top: ${responsiveSize("20")};
   width: 100%;
   height: auto;
   border-radius: ${responsiveSize("30")};

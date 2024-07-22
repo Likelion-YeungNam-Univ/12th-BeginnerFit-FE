@@ -4,11 +4,11 @@
       "id": "1",
       "title": "React 학습 가이드",
       "content": "React를 처음 시작하는 분들을 위한 단계별 학습 가이드입니다. 컴포넌트, 상태 관리, 라우팅 등 핵심 개념을 다룹니다.",
-      "pictureUrl": "https://example.com/images/react-guide.jpg",
+      "pictureUrl": "http://placehold.it/320x400",
       "createdAt": "2024-07-21T10:30:00.000Z",
       "userId": 101,
       "userName": "김개발",
-      "profileUrl": "https://example.com/profiles/kim.jpg",
+      "profileUrl": "http://placehold.it/320x100",
       "categoryName": "프로그래밍",
       "likes": 121,
       "comments": 15
@@ -23,7 +23,7 @@
       "userName": "이여행",
       "profileUrl": "https://example.com/profiles/lee.jpg",
       "categoryName": "여행",
-      "likes": 89,
+      "likes": 90,
       "comments": 23
     },
     {
@@ -36,7 +36,7 @@
       "userName": "박직장인",
       "profileUrl": "https://example.com/profiles/park.jpg",
       "categoryName": "라이프스타일",
-      "likes": 56,
+      "likes": 57,
       "comments": 8
     },
     {
