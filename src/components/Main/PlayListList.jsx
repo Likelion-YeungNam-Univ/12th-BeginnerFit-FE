@@ -45,7 +45,7 @@ export default function PlayListList() {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % playList.length);
     }, 1500); // 0.5초마다 슬라이드 이동
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+    return () => clearInterval(interval);
   }, [isAutoSliding]);
 
   // 버튼 클릭 핸들러

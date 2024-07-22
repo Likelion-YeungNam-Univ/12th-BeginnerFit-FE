@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/Community/Header";
+import { Header } from "../layouts/header";
 import styled from "styled-components";
 import TagList from "../components/Main/TagList";
 import YouTubeThumbnail from "../components/Main/YoutubeThumnail";
@@ -15,7 +15,7 @@ export default function Main() {
       <Container>
         <MainContent>
           {/* 헤더 내비 게이션 */}
-          <Header />
+          <Header type={"alarm"} size={"30"} />
           <MainH2>
             사용자님!
             <br />
