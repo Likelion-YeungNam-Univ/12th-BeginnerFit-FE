@@ -3,10 +3,12 @@ import Header from "../components/Community/Header";
 import styled from "styled-components";
 import TagList from "../components/Main/TagList";
 import YouTubeThumbnail from "../components/Main/YoutubeThumnail";
-import PlayList from "../components/Main/PlayList";
 import PlayListList from "../components/Main/PlayListList";
+import ChallengeList from "../components/Main/ChallengeList";
 
 export default function Main() {
+  const today = new Date();
+
   return (
     <Wrapper>
       <Container>
@@ -28,6 +30,12 @@ export default function Main() {
           </MainH3>
           <TagList />
           <PlayListList />
+          <MainH3>
+            {`${today.getMonth() + 1}월 ${today.getDate()}일`}
+            <br />
+            오늘의 챌린지
+          </MainH3>
+          <ChallengeList />
         </MainContent>
       </Container>
     </Wrapper>

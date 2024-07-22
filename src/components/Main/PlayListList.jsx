@@ -43,7 +43,7 @@ export default function PlayListList() {
 
   return (
     <Container>
-      <SlideContainer currentSlide={currentSlide}>
+      <SlideContainer $currentSlide={currentSlide}>
         {playList.map((item) => (
           <PlayList
             key={item.id}
@@ -79,7 +79,7 @@ const SlideContainer = styled.div`
   display: flex;
   width: 500%;
   height: ${responsiveSize("300")};
-  transform: translateX(-${(props) => props.currentSlide * 20}%);
+  transform: translateX(-${(props) => props.$currentSlide * 20}%);
   transition: transform 0.3s ease-in-out;
   margin-bottom: 10px;
 `;
