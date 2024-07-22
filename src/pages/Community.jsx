@@ -27,7 +27,7 @@ export default function Community() {
             <Header />
             <RowContainer>
               <Title>Community</Title>
-              <WriteImgBtn src={writebtn} />
+              <WriteImgBtn src={writebtn} alt="WriteBtn" />
             </RowContainer>
             <CommunityButtons buttonList={buttonList} />
             <PostList posts={posts} />

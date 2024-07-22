@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TimeText, TitleText } from "../../styles/GlobalStyle.jsx";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { LuHeart } from "react-icons/lu";
 import { GoComment } from "react-icons/go";
@@ -54,10 +55,7 @@ const HeartCommentContainer = styled.div`
   flex-direction: row;
   gap: 5px;
 `;
-const TitleText = styled.h3`
-  font-size: ${responsiveSize("16")};
-  font-weight: 600;
-`;
+
 const ContentText = styled.span`
   font-size: ${responsiveSize("16")};
   font-weight: 400;
@@ -67,10 +65,7 @@ const IdText = styled.span`
   font-weight: 400;
   color: ${({ theme }) => theme.colors.gray02};
 `;
-const TimeText = styled.p`
-  font-size: ${responsiveSize("12")};
-  color: ${({ theme }) => theme.colors.gray02};
-`;
+
 const HeartCommentText = styled.a`
   font-size: ${responsiveSize("12")};
   color: ${({ theme }) => theme.colors.gray02};
