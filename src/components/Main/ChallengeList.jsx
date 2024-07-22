@@ -42,19 +42,19 @@ const Container = styled.div`
   position: relative;
 `;
 
-const bounce = keyframes`
+export const bounce = keyframes`
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-30px);
+    transform: translateY(-20px);
   }
   60% {
-    transform: translateY(-15px);
+    transform: translateY(-10px);
   }
 `;
 
-const SpeechBubble = styled.div`
+export const SpeechBubble = styled.div`
   position: absolute;
   background: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.white};

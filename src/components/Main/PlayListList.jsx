@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PlayList from "./PlayList";
 import { responsiveSize } from "../../utils/Mediaquery";
@@ -35,9 +35,22 @@ const playList = [
 export default function PlayListList() {
   // 상태로 현재 슬라이드 인덱스를 관리
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
+
+  // 자동 슬라이드 효과
+  useEffect(() => {
+    if (!isAutoSliding) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % playList.length);
+    }, 1500); // 0.5초마다 슬라이드 이동
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+  }, [isAutoSliding]);
 
   // 버튼 클릭 핸들러
   const handleButtonClick = (index) => {
+    setIsAutoSliding(false); // 자동 슬라이딩 중지
     setCurrentSlide(index);
   };
 
@@ -55,15 +68,11 @@ export default function PlayListList() {
       </SlideContainer>
       <Wrap>
         <ButtonWrap>
-          {Array(5)
-            .fill(0)
-            .map((item, idx) => (
-              <Button key={idx} onClick={() => handleButtonClick(idx)}>
-                <GoDotFill
-                  color={currentSlide === idx ? "black" : "lightgrey"}
-                />
-              </Button>
-            ))}
+          {playList.map((_, idx) => (
+            <Button key={idx} onClick={() => handleButtonClick(idx)}>
+              <GoDotFill color={currentSlide === idx ? "black" : "lightgrey"} />
+            </Button>
+          ))}
         </ButtonWrap>
       </Wrap>
     </Container>
