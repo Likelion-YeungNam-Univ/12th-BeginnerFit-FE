@@ -9,8 +9,9 @@ import Favorite from "@mui/icons-material/Favorite";
 import { TimeCalculator } from "../../utils/TimeCalculator";
 import axios from "axios";
 import { useState } from "react";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+import Comment from "./Comment";
 
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function WriteBoardMain({ post }) {
   //테스트 서버주소
   const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
@@ -56,7 +57,9 @@ export default function WriteBoardMain({ post }) {
         <ContentText>{post.content}</ContentText>
       </TitleContentContainer>
       {/* 통신해서 이미지가 있을 때만 띄우기 */}
-      {post.pictureUrl && <Image src={post.pictureUrl}></Image>}
+      {post.pictureUrl && (
+        <Image alt={post.pictureUrl} src={post.pictureUrl}></Image>
+      )}
       {/* 하트 체크박스 */}
       <HeartContainer>
         <Checkbox
@@ -70,6 +73,7 @@ export default function WriteBoardMain({ post }) {
         <p>{likes}</p>
       </HeartContainer>
       <RowLine />
+      <Comment post={post} />
     </>
   );
 }
@@ -107,6 +111,7 @@ const Image = styled.img`
 
 const RowLine = styled.hr`
   position: absolute;
+  border: none;
   left: 0;
   right: 0;
   width: ${responsiveSize("600")};

@@ -76,6 +76,7 @@ export default function PostList() {
     </>
   );
 }
+
 const ContentContaienr = styled.li`
   width: 100%;
   display: flex;
@@ -101,7 +102,7 @@ const HeartCommentContainer = styled.div`
   gap: 5px;
 `;
 
-const ContentText = styled.span`
+const ContentText = styled.div`
   font-size: ${responsiveSize("16")};
   font-weight: 400;
 `;
