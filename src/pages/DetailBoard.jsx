@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Header2 from "../components/Community/Header2";
+import WriteBoardMain from "../components/Community/WriteBoardMain";
 
 export default function DetailBoard() {
   //뒤로 가기 버튼
@@ -8,6 +9,7 @@ export default function DetailBoard() {
     <Wrapper>
       <MainContent>
         <Header2 />
+        <WriteBoardMain/>
       </MainContent>
     </Wrapper>
   );
