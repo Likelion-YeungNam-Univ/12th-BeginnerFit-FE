@@ -3,6 +3,8 @@ import Header from "../components/Community/Header";
 import styled from "styled-components";
 import TagList from "../components/Main/TagList";
 import YouTubeThumbnail from "../components/Main/YoutubeThumnail";
+import PlayList from "../components/Main/PlayList";
+import PlayListList from "../components/Main/PlayListList";
 
 export default function Main() {
   return (
@@ -25,6 +27,7 @@ export default function Main() {
             오늘의 홈트 플레이리스트
           </MainH3>
           <TagList />
+          <PlayListList />
         </MainContent>
       </Container>
     </Wrapper>

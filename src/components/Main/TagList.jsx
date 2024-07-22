@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Tag from "../Tag";
+import playButton from "../../images/play button.png";
 
 const tagList = [
   { title: "잔잔한" },
@@ -12,7 +13,7 @@ export default function TagList() {
   return (
     <Container>
       {tagList.map((item) => (
-        <Tag title={item.title}></Tag>
+        <Tag title={item.title} key={item.title}></Tag>
       ))}
     </Container>
   );
@@ -21,4 +22,5 @@ export default function TagList() {
 const Container = styled.div`
   display: flex;
   gap: 10px;
+  margin-bottom: 10px;
 `;
