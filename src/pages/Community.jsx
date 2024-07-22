@@ -7,15 +7,6 @@ import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
 
 export default function Community() {
-  const [posts, setPosts] = useState([]);
-  const TEST_SERVER_URL = "http://localhost:3001";
-
-  useEffect(() => {
-    fetch(`${TEST_SERVER_URL}/posts`)
-      .then((response) => response.json())
-      .then((data) => setPosts(data))
-      .catch((error) => console.log(error));
-  }, []);
 
   const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
 
@@ -30,7 +21,7 @@ export default function Community() {
               <WriteImgBtn src={writebtn} alt="WriteBtn" />
             </RowContainer>
             <CommunityButtons buttonList={buttonList} />
-            <PostList posts={posts} />
+            <PostList />
           </PC>
           <Mobile>모바일버전</Mobile>
         </MainContent>
