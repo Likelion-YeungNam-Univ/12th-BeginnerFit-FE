@@ -53,6 +53,7 @@ const MainContent = styled.div`
   border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;
 `;
+
 const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
