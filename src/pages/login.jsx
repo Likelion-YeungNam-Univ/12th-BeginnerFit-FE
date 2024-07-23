@@ -51,7 +51,7 @@ function Login() {
                 <LoginForm onSubmit={handleSubmit}>
                     <div>아이디</div>
                     <MyInput 
-                        type='text'
+                        type='email'
                         placeholder="아이디를 입력하세요"
                         value={email}
                         onChange={(e)=>{setEmail(e.target.value)}}
