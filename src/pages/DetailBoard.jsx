@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Header2 from "../components/Community/Header2";
 import WriteBoardMain from "../components/Community/WriteBoardMain";
-import {Wrapper} from "../styles/GlobalStyle";
+import { RowContainer, Wrapper } from "../styles/GlobalStyle";
+import { BottomNavContainer } from "../components/BottomNav";
+import { responsiveSize } from "../utils/Mediaquery";
+import { FiChevronRight } from "react-icons/fi";
+
 export default function DetailBoard() {
   const { idx } = useParams();
   const [post, setPost] = useState(null);
@@ -31,18 +35,52 @@ export default function DetailBoard() {
   }, [idx]);
 
   return (
-    <Wrapper>
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : (
-        <>
-          <Header2 />
-          <WriteBoardMain post={post} />
-        </>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : (
+          <>
+            <Header2 />
+            <WriteBoardMain post={post} />
+          </>
+        )}
+      </Wrapper>
+      <BottomNavContainer>
+        <RowContainer
+          style={{ width: "100%", padding: `${responsiveSize("10")}` }}
+        >
+          <TextInput type="text"></TextInput>
+          <SendButton>
+            <FiChevronRight
+              style={{ height: "30px", width: "30px", color: "white" }}
+            />
+          </SendButton>
+        </RowContainer>
+      </BottomNavContainer>
+    </>
   );
 }
-
-
-
+//============================================
+const TextInput = styled.input`
+  padding: ${responsiveSize("10")};
+  border-radius: ${responsiveSize("30")};
+  height: ${responsiveSize("35")};
+  font-size: ${responsiveSize("20")};
+  border: none;
+  flex: 1;
+  margin-right: ${responsiveSize("10")};
+`;
+const SendButton = styled.button`
+  cursor: pointer;
+  flex-shrink: 0;
+  width: ${responsiveSize("50")};
+  height: ${responsiveSize("50")};
+  border: none;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.lightpurple};
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
