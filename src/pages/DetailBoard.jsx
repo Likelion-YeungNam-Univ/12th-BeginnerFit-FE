@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Header2 from "../components/Community/Header2";
 import WriteBoardMain from "../components/Community/WriteBoardMain";
-
+import {Wrapper} from "../styles/GlobalStyle";
 export default function DetailBoard() {
   const { idx } = useParams();
   const [post, setPost] = useState(null);
@@ -44,12 +44,10 @@ export default function DetailBoard() {
   );
 }
 
-const Wrapper = styled.div`
-  flex-direction: column;
-  align-items: center;
-`;
+
 const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;
+
 `;

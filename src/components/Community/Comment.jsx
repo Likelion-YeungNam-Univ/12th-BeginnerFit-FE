@@ -5,6 +5,8 @@ import DropDown from "./DropDown";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import profile from "../../images/profile.png";
+import Button from "@mui/material/Button";
+
 export default function Comment({ post }) {
   //테스트 서버
   const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
@@ -39,7 +41,7 @@ export default function Comment({ post }) {
       );
 
       const newComments = response.data;
-      if (Array.isArray(newComments)) {
+      if (Array.isArray(newComments) && newComments.length > 0) {
         setComments((prevComments) => [...prevComments, ...newComments]);
         setPage((prevPage) => prevPage + 1);
         setHasMore(newComments.length == 5);
@@ -54,8 +56,16 @@ export default function Comment({ post }) {
   };
 
   useEffect(() => {
+    setComments([]);
+    setPage(1);
+    setHasMore(true);
     getComment();
-  }, []);
+  }, [post.id]);
+
+  //5개씩 더보기 함수
+  const handleLoadMore = () => {
+    getComment();
+  };
 
   return (
     <>
@@ -76,9 +86,17 @@ export default function Comment({ post }) {
         </CommentItem>
       ))}
       {hasMore && (
-        <LoadMoreButton onClick={getComment} disabled={isLoading}>
+        <Button
+          variant="contained"
+          size="medium"
+          style={{
+            backgroundColor: "#7D7AFF",
+          }}
+          onClick={handleLoadMore}
+          disabled={isLoading}
+        >
           {isLoading ? "불러오는 중..." : "더 보기"}
-        </LoadMoreButton>
+        </Button>
       )}
     </>
   );
@@ -125,5 +143,3 @@ const CommentContent = styled.pre`
 const CommentItem = styled.div`
   margin-bottom: ${responsiveSize("20")};
 `;
-
-const LoadMoreButton = styled.button``;
