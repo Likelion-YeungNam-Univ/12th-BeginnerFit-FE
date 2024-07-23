@@ -49,18 +49,18 @@ export default function Main() {
   );
 }
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
   height: 100%;
 `;
 
-const MainContent = styled.div`
+export const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;

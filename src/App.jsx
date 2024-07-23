@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./components/home/home";
 import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
-import Main from "./pages/main";
+import Main from "./pages/Main";
+import PlayList from "./pages/PlayList";
 function App() {
   return (
     <>
@@ -11,6 +12,7 @@ function App() {
         <Route path="/posts" element={<Community />}></Route>
         <Route path="/posts/:idx" element={<DetailBoard />}></Route>
         <Route path="/main" element={<Main />}></Route>
+        <Route path="/playlist" element={<PlayList />}></Route>
       </Routes>
     </>
   );

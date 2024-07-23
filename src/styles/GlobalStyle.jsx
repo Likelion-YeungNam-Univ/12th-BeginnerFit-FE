@@ -21,3 +21,9 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const Image = styled.img`
+  cursor: pointer;
+  width: ${({ $width }) => responsiveSize($width)};
+  height: ${({ $height }) => responsiveSize($height)};
+`;

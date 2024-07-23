@@ -9,12 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = ({ type, size }) => {
   const nav = useNavigate();
-
   // 로고 클릭했을 때 main화면으로 이동
   const handleLogoClick = () => {
     nav("/main");
   };
-
   return (
     <RowContainer>
       <ImgWrap onClick={handleLogoClick}>
