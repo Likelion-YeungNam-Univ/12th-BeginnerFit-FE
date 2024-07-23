@@ -12,32 +12,49 @@ const api = axios.create({
 
 // 요청 인터셉터
 api.interceptors.request.use(config => {
-    config.headers["authorization"] = localStorage.getItem("accessToken");
-    config.headers["refresh-token"] = localStorage.getItem("refreshToken");
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+        config.headers['Authorization'] = `Bearer ${accessToken}`
+    }
     return config;
   }, error => {
     return Promise.reject(error);
   });
   
-  // 응답 인터셉터
-  api.interceptors.response.use(res => {
-    // 응답 헤더에 토큰이 있으면 true
-    if (res.headers["authorization"]){
-        // 만료된 access 토큰 삭제
-        localStorage.removeItem("accessToken");
-        // 새로운 access 토큰 저장
-        localStorage.setItem("accessToken", res.headers["authorization"]);
-    }else if(res.data.error === "INVALID_TOKEN"){
-        // refresh 토큰이 만료되었다면
-        // access 토큰 삭제
-        localStorage.removeItem("accessToken");
-        // refresh 토큰 삭제
-        localStorage.removeItem("accessToken");
-        alert("토큰이 만료되었습니다. 다시 로그인해주세요.")
-        
+// 응답 인터셉터
+api.interceptors.response.use(response => {
+    return response;
+}, async error => {
+    const originalRequest = error.config;
+    if (error.response && error.response.data.error === 'INVALID_TOKEN'){
+        try {
+            // 새로 발급받은 access token으로 재요청
+            const newAccessToken = await refreshToken();
+            localStorage.setItem('accessToken', newAccessToken);
+            // 새로 발급받은 토큰을 원래 요청의 헤더에 추가
+            originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+            return apiClient(originalRequest);
+        } catch (refreshError) {
+            console.error('Token refresh failed:', refreshError);
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
+            
+            return Promise.reject(refreshError);
+        }
     }
-    return res;
-  }
-  );
+    return Promise.reject(error);
+});
+
+const refreshToken = async ()=>{
+    try {
+        const refreshToken = localStorage.getItem('refreshToken');
+        const data = await api.post('/refresh-token', {token: refreshToken});
+        return data.accessToken;
+    }catch (e) {
+        console.log(e);
+        throw(e);
+    }
+}
 
 export default api;
