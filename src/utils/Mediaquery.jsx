@@ -24,6 +24,14 @@ PC.propTypes = {
 };
 
 // 반응형 크기 계산 함수
-const responsiveSize = (pixelValue) => `calc(${pixelValue}px + (100vw/1920))`;
+const responsiveSize = (pixelValue) => {
+  return `
+    ${pixelValue}px;
 
-export { Mobile, PC,responsiveSize };
+    @media (min-width: 600px) {
+      calc(${pixelValue}px + (${pixelValue} * (100vw - 1920px) / 1920));
+    }
+  `;
+};
+
+export { Mobile, PC, responsiveSize };

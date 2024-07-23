@@ -5,6 +5,7 @@ import writebtn from "../images/writebtn.png";
 import Header from "../components/Community/Header";
 import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
+import BottomNav from "../components/BottomNav";
 
 export default function Community() {
   const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
@@ -22,6 +23,7 @@ export default function Community() {
           <PostList />
         </MainContent>
       </Container>
+      <BottomNav />
     </Wrapper>
   );
 }
@@ -38,6 +40,7 @@ const Container = styled.div`
 const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
+  border-bottom: none;
   padding: 20px;
 `;
 

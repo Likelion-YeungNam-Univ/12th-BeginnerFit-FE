@@ -1466,7 +1466,8 @@
       "userId": 109,
       "userName": "문예술",
       "profileUrl": "https://example.com/profiles/moon.jpg",
-      "categoryName": "정보공유"
+      "categoryName": "정보공유",
+      "likes": null
     },
     {
       "id": "10",
