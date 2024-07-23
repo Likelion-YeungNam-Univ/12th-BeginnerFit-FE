@@ -76,9 +76,9 @@ export default function WriteBoardMain({ post }) {
     </Container>
   );
 }
-const Container=styled.div`
+const Container = styled.div`
   padding: 20px;
-`
+`;
 const ProfileImg = styled.img`
   width: ${responsiveSize("60")};
   height: ${responsiveSize("60")};

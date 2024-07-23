@@ -8,6 +8,7 @@ import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import { BottomNavContainer } from "../components/BottomNav";
 import { responsiveSize } from "../utils/Mediaquery";
 import { FiChevronRight } from "react-icons/fi";
+import { commentApi } from "../apis/commentApi";
 
 export default function DetailBoard() {
   const { idx } = useParams();
@@ -34,6 +35,24 @@ export default function DetailBoard() {
     getPost();
   }, [idx]);
 
+  //댓글 작성관리
+  const [comment, setComment] = useState("");
+  const accessToken = "";
+
+  const isCommentEmpty = comment.trim().length === 0;
+
+  const handleCommentSubmit = async () => {
+    //빈 댓글 작성 시 버튼 클릭 금지 및 비활성화
+    if (isCommentEmpty) return;
+
+    try {
+      await commentApi(idx, comment, accessToken);
+      //입력칸 초기화
+      setComment("");
+    } catch (error) {
+      console.log("댓글 전송 실패", error);
+    }
+  };
   return (
     <>
       <Wrapper>
@@ -50,8 +69,13 @@ export default function DetailBoard() {
         <RowContainer
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
         >
-          <TextInput type="text"></TextInput>
-          <SendButton>
+          <TextInput
+            type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="댓글을 입력하세요."
+          ></TextInput>
+          <SendButton onClick={handleCommentSubmit} disabled={isCommentEmpty}>
             <FiChevronRight
               style={{ height: "30px", width: "30px", color: "white" }}
             />
@@ -72,13 +96,14 @@ const TextInput = styled.input`
   margin-right: ${responsiveSize("10")};
 `;
 const SendButton = styled.button`
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   flex-shrink: 0;
   width: ${responsiveSize("50")};
   height: ${responsiveSize("50")};
   border: none;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.lightpurple};
+  background-color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.gray03 : theme.colors.lightpurple};
   transition: transform 0.3s;
   &:hover {
     transform: scale(1.2);
