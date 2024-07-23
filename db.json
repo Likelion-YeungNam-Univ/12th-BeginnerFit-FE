@@ -1,20 +1,1385 @@
 {
+  "comments1": [
+    {
+      "id": "1",
+      "postId": 1,
+      "userId": 201,
+      "username": "사용자1",
+      "content": "React 학습 가이드 정말 유용해요!",
+      "createdAt": "2024-07-21T12:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "postId": 1,
+      "userId": 202,
+      "username": "사용자2",
+      "content": "덕분에 많은 도움 받았습니다.",
+      "createdAt": "2024-07-21T13:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "postId": "1",
+      "userId": 203,
+      "username": "사용자3",
+      "content": "초보자에게 추천합니다.",
+      "createdAt": "2024-07-21T14:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "postId": "1",
+      "userId": 204,
+      "username": "사용자4",
+      "content": "잘 배웠습니다.",
+      "createdAt": "2024-07-21T15:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "postId": "1",
+      "userId": 205,
+      "username": "사용자5",
+      "content": "정말 쉽게 설명해주셨네요.",
+      "createdAt": "2024-07-21T16:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "postId": "1",
+      "userId": 206,
+      "username": "사용자6",
+      "content": "유익한 정보 감사합니다.",
+      "createdAt": "2024-07-21T17:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "postId": "1",
+      "userId": 207,
+      "username": "사용자7",
+      "content": "도움이 많이 되었어요.",
+      "createdAt": "2024-07-21T18:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "postId": "1",
+      "userId": 208,
+      "username": "사용자8",
+      "content": "기초부터 차근차근 설명해주셔서 좋네요.",
+      "createdAt": "2024-07-21T19:00:00.000Z"
+    },
+    {
+      "id": "9",
+      "postId": "1",
+      "userId": 209,
+      "username": "사용자9",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-21T20:00:00.000Z"
+    },
+    {
+      "id": "10",
+      "postId": "1",
+      "userId": 210,
+      "username": "사용자10",
+      "content": "이해하기 쉬워요.",
+      "createdAt": "2024-07-21T21:00:00.000Z"
+    },
+    {
+      "id": "11",
+      "postId": "1",
+      "userId": 211,
+      "username": "사용자11",
+      "content": "좋은 가이드입니다.",
+      "createdAt": "2024-07-21T22:00:00.000Z"
+    }
+  ],
+  "comments2": [
+    {
+      "id": "12",
+      "postId": "2",
+      "userId": 212,
+      "username": "사용자12",
+      "content": "여름 휴가지 추천 감사합니다!",
+      "createdAt": "2024-07-20T15:00:00.000Z"
+    },
+    {
+      "id": "13",
+      "postId": "2",
+      "userId": 213,
+      "username": "사용자13",
+      "content": "이번 여름에 꼭 가봐야겠어요.",
+      "createdAt": "2024-07-20T16:00:00.000Z"
+    },
+    {
+      "id": "14",
+      "postId": "2",
+      "userId": 214,
+      "username": "사용자14",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-20T17:00:00.000Z"
+    },
+    {
+      "id": "15",
+      "postId": "2",
+      "userId": 215,
+      "username": "사용자15",
+      "content": "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      "createdAt": "2024-07-20T18:00:00.000Z"
+    },
+    {
+      "id": "16",
+      "postId": "2",
+      "userId": 216,
+      "username": "사용자16",
+      "content": "도움이 많이 되었어요.",
+      "createdAt": "2024-07-20T19:00:00.000Z"
+    },
+    {
+      "id": "17",
+      "postId": "2",
+      "userId": 217,
+      "username": "사용자17",
+      "content": "추천해주셔서 감사해요.",
+      "createdAt": "2024-07-20T20:00:00.000Z"
+    },
+    {
+      "id": "18",
+      "postId": "2",
+      "userId": 218,
+      "username": "사용자18",
+      "content": "가족들과 함께 가봐야겠네요.",
+      "createdAt": "2024-07-20T21:00:00.000Z"
+    },
+    {
+      "id": "19",
+      "postId": "2",
+      "userId": 219,
+      "username": "사용자19",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-20T22:00:00.000Z"
+    },
+    {
+      "id": "20",
+      "postId": "2",
+      "userId": 220,
+      "username": "사용자20",
+      "content": "한적한 해변이 궁금해요.",
+      "createdAt": "2024-07-20T23:00:00.000Z"
+    },
+    {
+      "id": "21",
+      "postId": "2",
+      "userId": 221,
+      "username": "사용자21",
+      "content": "다음 주말에 가보려고요.",
+      "createdAt": "2024-07-21T00:00:00.000Z"
+    },
+    {
+      "id": "22",
+      "postId": "2",
+      "userId": 222,
+      "username": "사용자22",
+      "content": "추천 감사합니다.",
+      "createdAt": "2024-07-21T01:00:00.000Z"
+    }
+  ],
+  "comments3": [
+    {
+      "id": "23",
+      "postId": "3",
+      "userId": 223,
+      "username": "사용자23",
+      "content": "재택근무 팁 감사합니다!",
+      "createdAt": "2024-07-19T10:00:00.000Z"
+    },
+    {
+      "id": "24",
+      "postId": "3",
+      "userId": 224,
+      "username": "사용자24",
+      "content": "정말 유용한 정보네요.",
+      "createdAt": "2024-07-19T11:00:00.000Z"
+    },
+    {
+      "id": "25",
+      "postId": "3",
+      "userId": 225,
+      "username": "사용자25",
+      "content": "많이 배웠습니다.",
+      "createdAt": "2024-07-19T12:00:00.000Z"
+    },
+    {
+      "id": "26",
+      "postId": "3",
+      "userId": 226,
+      "username": "사용자26",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-19T13:00:00.000Z"
+    },
+    {
+      "id": "27",
+      "postId": "3",
+      "userId": 227,
+      "username": "사용자27",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-19T14:00:00.000Z"
+    },
+    {
+      "id": "28",
+      "postId": "3",
+      "userId": 228,
+      "username": "사용자28",
+      "content": "정말 유용해요.",
+      "createdAt": "2024-07-19T15:00:00.000Z"
+    },
+    {
+      "id": "29",
+      "postId": "3",
+      "userId": 229,
+      "username": "사용자29",
+      "content": "도움이 많이 되었어요.",
+      "createdAt": "2024-07-19T16:00:00.000Z"
+    },
+    {
+      "id": "30",
+      "postId": "3",
+      "userId": 230,
+      "username": "사용자30",
+      "content": "잘 읽었습니다.",
+      "createdAt": "2024-07-19T17:00:00.000Z"
+    },
+    {
+      "id": "31",
+      "postId": "3",
+      "userId": 231,
+      "username": "사용자31",
+      "content": "유용한 팁 감사합니다.",
+      "createdAt": "2024-07-19T18:00:00.000Z"
+    },
+    {
+      "id": "32",
+      "postId": "3",
+      "userId": 232,
+      "username": "사용자32",
+      "content": "다음 팁도 기대할게요.",
+      "createdAt": "2024-07-19T19:00:00.000Z"
+    },
+    {
+      "id": "33",
+      "postId": "3",
+      "userId": 233,
+      "username": "사용자33",
+      "content": "유익한 정보 감사합니다.",
+      "createdAt": "2024-07-19T20:00:00.000Z"
+    }
+  ],
+  "comments4": [
+    {
+      "id": "34",
+      "postId": "4",
+      "userId": 234,
+      "username": "사용자34",
+      "content": "경제 전망 글 잘 읽었습니다.",
+      "createdAt": "2024-07-18T17:00:00.000Z"
+    },
+    {
+      "id": "35",
+      "postId": "4",
+      "userId": 235,
+      "username": "사용자35",
+      "content": "앞으로가 기대되네요.",
+      "createdAt": "2024-07-18T18:00:00.000Z"
+    },
+    {
+      "id": "36",
+      "postId": "4",
+      "userId": 236,
+      "username": "사용자36",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-18T19:00:00.000Z"
+    },
+    {
+      "id": "37",
+      "postId": "4",
+      "userId": 237,
+      "username": "사용자37",
+      "content": "유용해요.",
+      "createdAt": "2024-07-18T20:00:00.000Z"
+    },
+    {
+      "id": "38",
+      "postId": "4",
+      "userId": 238,
+      "username": "사용자38",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-18T21:00:00.000Z"
+    },
+    {
+      "id": "39",
+      "postId": "4",
+      "userId": 239,
+      "username": "사용자39",
+      "content": "도움이 많이 되었어요.",
+      "createdAt": "2024-07-18T22:00:00.000Z"
+    },
+    {
+      "id": "40",
+      "postId": "4",
+      "userId": 240,
+      "username": "사용자40",
+      "content": "잘 읽었습니다.",
+      "createdAt": "2024-07-18T23:00:00.000Z"
+    },
+    {
+      "id": "41",
+      "postId": "4",
+      "userId": 241,
+      "username": "사용자41",
+      "content": "정말 유용해요.",
+      "createdAt": "2024-07-19T00:00:00.000Z"
+    },
+    {
+      "id": "42",
+      "postId": "4",
+      "userId": 242,
+      "username": "사용자42",
+      "content": "경제 공부에 큰 도움이 되었습니다.",
+      "createdAt": "2024-07-19T01:00:00.000Z"
+    },
+    {
+      "id": "43",
+      "postId": "4",
+      "userId": 243,
+      "username": "사용자43",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-19T02:00:00.000Z"
+    },
+    {
+      "id": "44",
+      "postId": "4",
+      "userId": 244,
+      "username": "사용자44",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-19T03:00:00.000Z"
+    },
+    {
+      "id": "45",
+      "postId": "4",
+      "userId": 245,
+      "username": "사용자45",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-19T04:00:00.000Z"
+    }
+  ],
+  "comments5": [
+    {
+      "id": "46",
+      "postId": "5",
+      "userId": 246,
+      "username": "사용자46",
+      "content": "초보 개발자를 위한 GitHub 사용법 좋아요!",
+      "createdAt": "2024-07-17T12:00:00.000Z"
+    },
+    {
+      "id": "47",
+      "postId": "5",
+      "userId": 247,
+      "username": "사용자47",
+      "content": "덕분에 GitHub 이해가 쉬워졌어요.",
+      "createdAt": "2024-07-17T13:00:00.000Z"
+    },
+    {
+      "id": "48",
+      "postId": "5",
+      "userId": 248,
+      "username": "사용자48",
+      "content": "좋은 가이드 감사합니다.",
+      "createdAt": "2024-07-17T14:00:00.000Z"
+    },
+    {
+      "id": "49",
+      "postId": "5",
+      "userId": 249,
+      "username": "사용자49",
+      "content": "초보자에게 큰 도움이 되었어요.",
+      "createdAt": "2024-07-17T15:00:00.000Z"
+    },
+    {
+      "id": "50",
+      "postId": "5",
+      "userId": 250,
+      "username": "사용자50",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-17T16:00:00.000Z"
+    },
+    {
+      "id": "51",
+      "postId": "5",
+      "userId": 251,
+      "username": "사용자51",
+      "content": "잘 읽었습니다.",
+      "createdAt": "2024-07-17T17:00:00.000Z"
+    },
+    {
+      "id": "52",
+      "postId": "5",
+      "userId": 252,
+      "username": "사용자52",
+      "content": "기초가 튼튼해지는 느낌이에요.",
+      "createdAt": "2024-07-17T18:00:00.000Z"
+    },
+    {
+      "id": "53",
+      "postId": "5",
+      "userId": 253,
+      "username": "사용자53",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-17T19:00:00.000Z"
+    },
+    {
+      "id": "54",
+      "postId": "5",
+      "userId": 254,
+      "username": "사용자54",
+      "content": "유익한 정보 잘 봤어요.",
+      "createdAt": "2024-07-17T20:00:00.000Z"
+    },
+    {
+      "id": "55",
+      "postId": "5",
+      "userId": 255,
+      "username": "사용자55",
+      "content": "이해하기 쉽게 잘 설명해주셨네요.",
+      "createdAt": "2024-07-17T21:00:00.000Z"
+    },
+    {
+      "id": "56",
+      "postId": "5",
+      "userId": 256,
+      "username": "사용자56",
+      "content": "다른 가이드도 기대됩니다.",
+      "createdAt": "2024-07-17T22:00:00.000Z"
+    }
+  ],
+  "comments6": [
+    {
+      "id": "57",
+      "postId": "6",
+      "userId": 257,
+      "username": "사용자57",
+      "content": "건강한 식단 구성하기 글 유익해요!",
+      "createdAt": "2024-07-16T14:00:00.000Z"
+    },
+    {
+      "id": "58",
+      "postId": "6",
+      "userId": 258,
+      "username": "사용자58",
+      "content": "식단 조절에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-16T15:00:00.000Z"
+    },
+    {
+      "id": "59",
+      "postId": "6",
+      "userId": 259,
+      "username": "사용자59",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-16T16:00:00.000Z"
+    },
+    {
+      "id": "60",
+      "postId": "6",
+      "userId": 260,
+      "username": "사용자60",
+      "content": "정말 유용한 글이네요.",
+      "createdAt": "2024-07-16T17:00:00.000Z"
+    },
+    {
+      "id": "61",
+      "postId": "6",
+      "userId": 261,
+      "username": "사용자61",
+      "content": "잘 읽었습니다.",
+      "createdAt": "2024-07-16T18:00:00.000Z"
+    },
+    {
+      "id": "62",
+      "postId": "6",
+      "userId": 262,
+      "username": "사용자62",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-16T19:00:00.000Z"
+    },
+    {
+      "id": "63",
+      "postId": "6",
+      "userId": 263,
+      "username": "사용자63",
+      "content": "유익한 정보 감사합니다.",
+      "createdAt": "2024-07-16T20:00:00.000Z"
+    },
+    {
+      "id": "64",
+      "postId": "6",
+      "userId": 264,
+      "username": "사용자64",
+      "content": "도움이 많이 되었습니다.",
+      "createdAt": "2024-07-16T21:00:00.000Z"
+    },
+    {
+      "id": "65",
+      "postId": "6",
+      "userId": 265,
+      "username": "사용자65",
+      "content": "정말 유용해요.",
+      "createdAt": "2024-07-16T22:00:00.000Z"
+    },
+    {
+      "id": "66",
+      "postId": "6",
+      "userId": 266,
+      "username": "사용자66",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-16T23:00:00.000Z"
+    },
+    {
+      "id": "67",
+      "postId": "6",
+      "userId": 267,
+      "username": "사용자67",
+      "content": "식단 조절에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-17T00:00:00.000Z"
+    }
+  ],
+  "comments7": [
+    {
+      "id": "68",
+      "postId": "7",
+      "userId": 268,
+      "username": "사용자68",
+      "content": "인공지능의 윤리적 문제 흥미로워요!",
+      "createdAt": "2024-07-15T09:00:00.000Z"
+    },
+    {
+      "id": "69",
+      "postId": "7",
+      "userId": 269,
+      "username": "사용자69",
+      "content": "AI 윤리에 대해 다시 생각해보게 되네요.",
+      "createdAt": "2024-07-15T10:00:00.000Z"
+    },
+    {
+      "id": "70",
+      "postId": "7",
+      "userId": 270,
+      "username": "사용자70",
+      "content": "유익한 정보 감사합니다.",
+      "createdAt": "2024-07-15T11:00:00.000Z"
+    },
+    {
+      "id": "71",
+      "postId": "7",
+      "userId": 271,
+      "username": "사용자71",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-15T12:00:00.000Z"
+    },
+    {
+      "id": "72",
+      "postId": "7",
+      "userId": 272,
+      "username": "사용자72",
+      "content": "정말 유용해요.",
+      "createdAt": "2024-07-15T13:00:00.000Z"
+    },
+    {
+      "id": "73",
+      "postId": "7",
+      "userId": 273,
+      "username": "사용자73",
+      "content": "도움이 많이 되었어요.",
+      "createdAt": "2024-07-15T14:00:00.000Z"
+    },
+    {
+      "id": "74",
+      "postId": "7",
+      "userId": 274,
+      "username": "사용자74",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-15T15:00:00.000Z"
+    },
+    {
+      "id": "75",
+      "postId": "7",
+      "userId": 275,
+      "username": "사용자75",
+      "content": "유익한 정보 잘 봤어요.",
+      "createdAt": "2024-07-15T16:00:00.000Z"
+    },
+    {
+      "id": "76",
+      "postId": "7",
+      "userId": 276,
+      "username": "사용자76",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-15T17:00:00.000Z"
+    },
+    {
+      "id": "77",
+      "postId": "7",
+      "userId": 277,
+      "username": "사용자77",
+      "content": "AI 윤리에 대해 많은 생각을 하게 됩니다.",
+      "createdAt": "2024-07-15T18:00:00.000Z"
+    },
+    {
+      "id": "78",
+      "postId": "7",
+      "userId": 278,
+      "username": "사용자78",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-15T19:00:00.000Z"
+    }
+  ],
+  "comments8": [
+    {
+      "id": "79",
+      "postId": "8",
+      "userId": 279,
+      "username": "사용자79",
+      "content": "스타트업 성공 전략 유익해요!",
+      "createdAt": "2024-07-14T16:00:00.000Z"
+    },
+    {
+      "id": "80",
+      "postId": "8",
+      "userId": 280,
+      "username": "사용자80",
+      "content": "스타트업 준비에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-14T17:00:00.000Z"
+    },
+    {
+      "id": "81",
+      "postId": "8",
+      "userId": 281,
+      "username": "사용자81",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-14T18:00:00.000Z"
+    },
+    {
+      "id": "82",
+      "postId": "8",
+      "userId": 282,
+      "username": "사용자82",
+      "content": "유익한 정보 잘 봤어요.",
+      "createdAt": "2024-07-14T19:00:00.000Z"
+    },
+    {
+      "id": "83",
+      "postId": "8",
+      "userId": 283,
+      "username": "사용자83",
+      "content": "스타트업 성공에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-14T20:00:00.000Z"
+    },
+    {
+      "id": "84",
+      "postId": "8",
+      "userId": 284,
+      "username": "사용자84",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-14T21:00:00.000Z"
+    },
+    {
+      "id": "85",
+      "postId": "8",
+      "userId": 285,
+      "username": "사용자85",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-14T22:00:00.000Z"
+    },
+    {
+      "id": "86",
+      "postId": "8",
+      "userId": 286,
+      "username": "사용자86",
+      "content": "정말 유용한 글이네요.",
+      "createdAt": "2024-07-14T23:00:00.000Z"
+    },
+    {
+      "id": "87",
+      "postId": "8",
+      "userId": 287,
+      "username": "사용자87",
+      "content": "스타트업에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-15T00:00:00.000Z"
+    },
+    {
+      "id": "88",
+      "postId": "8",
+      "userId": 288,
+      "username": "사용자88",
+      "content": "스타트업 성공을 응원합니다.",
+      "createdAt": "2024-07-15T01:00:00.000Z"
+    },
+    {
+      "id": "89",
+      "postId": "8",
+      "userId": 289,
+      "username": "사용자89",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-15T02:00:00.000Z"
+    }
+  ],
+  "comments9": [
+    {
+      "id": "90",
+      "postId": "9",
+      "userId": 290,
+      "username": "사용자90",
+      "content": "현대 미술의 이해 글 잘 봤어요!",
+      "createdAt": "2024-07-13T11:00:00.000Z"
+    },
+    {
+      "id": "91",
+      "postId": "9",
+      "userId": 291,
+      "username": "사용자91",
+      "content": "미술에 대해 다시 생각해보게 되네요.",
+      "createdAt": "2024-07-13T12:00:00.000Z"
+    },
+    {
+      "id": "92",
+      "postId": "9",
+      "userId": 292,
+      "username": "사용자92",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-13T13:00:00.000Z"
+    },
+    {
+      "id": "93",
+      "postId": "9",
+      "userId": 293,
+      "username": "사용자93",
+      "content": "정말 유용한 글이네요.",
+      "createdAt": "2024-07-13T14:00:00.000Z"
+    },
+    {
+      "id": "94",
+      "postId": "9",
+      "userId": 294,
+      "username": "사용자94",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-13T15:00:00.000Z"
+    },
+    {
+      "id": "95",
+      "postId": "9",
+      "userId": 295,
+      "username": "사용자95",
+      "content": "현대 미술에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-13T16:00:00.000Z"
+    },
+    {
+      "id": "96",
+      "postId": "9",
+      "userId": 296,
+      "username": "사용자96",
+      "content": "정말 유익한 글입니다.",
+      "createdAt": "2024-07-13T17:00:00.000Z"
+    },
+    {
+      "id": "97",
+      "postId": "9",
+      "userId": 297,
+      "username": "사용자97",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-13T18:00:00.000Z"
+    },
+    {
+      "id": "98",
+      "postId": "9",
+      "userId": 298,
+      "username": "사용자98",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-13T19:00:00.000Z"
+    },
+    {
+      "id": "99",
+      "postId": "9",
+      "userId": 299,
+      "username": "사용자99",
+      "content": "현대 미술을 더 공부해봐야겠어요.",
+      "createdAt": "2024-07-13T20:00:00.000Z"
+    },
+    {
+      "id": "100",
+      "postId": "9",
+      "userId": 300,
+      "username": "사용자100",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-13T21:00:00.000Z"
+    }
+  ],
+  "comments10": [
+    {
+      "id": "101",
+      "postId": "10",
+      "userId": 301,
+      "username": "사용자101",
+      "content": "스마트홈 구축 가이드 정말 유익해요!",
+      "createdAt": "2024-07-12T18:00:00.000Z"
+    },
+    {
+      "id": "102",
+      "postId": "10",
+      "userId": 302,
+      "username": "사용자102",
+      "content": "스마트홈을 이해하기 쉽게 설명해주셨네요.",
+      "createdAt": "2024-07-12T19:00:00.000Z"
+    },
+    {
+      "id": "103",
+      "postId": "10",
+      "userId": 303,
+      "username": "사용자103",
+      "content": "좋은 가이드 감사합니다.",
+      "createdAt": "2024-07-12T20:00:00.000Z"
+    },
+    {
+      "id": "104",
+      "postId": "10",
+      "userId": 304,
+      "username": "사용자104",
+      "content": "정말 유용한 글이네요.",
+      "createdAt": "2024-07-12T21:00:00.000Z"
+    },
+    {
+      "id": "105",
+      "postId": "10",
+      "userId": 305,
+      "username": "사용자105",
+      "content": "스마트홈 구축에 큰 도움이 되었습니다.",
+      "createdAt": "2024-07-12T22:00:00.000Z"
+    },
+    {
+      "id": "106",
+      "postId": "10",
+      "userId": 306,
+      "username": "사용자106",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-12T23:00:00.000Z"
+    },
+    {
+      "id": "107",
+      "postId": "10",
+      "userId": 307,
+      "username": "사용자107",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-13T00:00:00.000Z"
+    },
+    {
+      "id": "108",
+      "postId": "10",
+      "userId": 308,
+      "username": "사용자108",
+      "content": "정말 유익한 정보네요.",
+      "createdAt": "2024-07-13T01:00:00.000Z"
+    },
+    {
+      "id": "109",
+      "postId": "10",
+      "userId": 309,
+      "username": "사용자109",
+      "content": "스마트홈에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-13T02:00:00.000Z"
+    },
+    {
+      "id": "110",
+      "postId": "10",
+      "userId": 310,
+      "username": "사용자110",
+      "content": "스마트홈 구축을 응원합니다.",
+      "createdAt": "2024-07-13T03:00:00.000Z"
+    },
+    {
+      "id": "111",
+      "postId": "10",
+      "userId": 311,
+      "username": "사용자111",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-13T04:00:00.000Z"
+    }
+  ],
+  "comments11": [
+    {
+      "id": "112",
+      "postId": "11",
+      "userId": 312,
+      "username": "사용자112",
+      "content": "효과적인 시간 관리법 유익해요!",
+      "createdAt": "2024-07-11T13:00:00.000Z"
+    },
+    {
+      "id": "113",
+      "postId": "11",
+      "userId": 313,
+      "username": "사용자113",
+      "content": "시간 관리에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-11T14:00:00.000Z"
+    },
+    {
+      "id": "114",
+      "postId": "11",
+      "userId": 314,
+      "username": "사용자114",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-11T15:00:00.000Z"
+    },
+    {
+      "id": "115",
+      "postId": "11",
+      "userId": 315,
+      "username": "사용자115",
+      "content": "유익한 정보 잘 봤어요.",
+      "createdAt": "2024-07-11T16:00:00.000Z"
+    },
+    {
+      "id": "116",
+      "postId": "11",
+      "userId": 316,
+      "username": "사용자116",
+      "content": "정말 유용한 글이네요.",
+      "createdAt": "2024-07-11T17:00:00.000Z"
+    },
+    {
+      "id": "117",
+      "postId": "11",
+      "userId": 317,
+      "username": "사용자117",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-11T18:00:00.000Z"
+    },
+    {
+      "id": "118",
+      "postId": "11",
+      "userId": 318,
+      "username": "사용자118",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-11T19:00:00.000Z"
+    },
+    {
+      "id": "119",
+      "postId": "11",
+      "userId": 319,
+      "username": "사용자119",
+      "content": "시간 관리법에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-11T20:00:00.000Z"
+    },
+    {
+      "id": "120",
+      "postId": "11",
+      "userId": 320,
+      "username": "사용자120",
+      "content": "효과적인 시간 관리법을 응원합니다.",
+      "createdAt": "2024-07-11T21:00:00.000Z"
+    },
+    {
+      "id": "121",
+      "postId": "11",
+      "userId": 321,
+      "username": "사용자121",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-11T22:00:00.000Z"
+    },
+    {
+      "id": "122",
+      "postId": "11",
+      "userId": 322,
+      "username": "사용자122",
+      "content": "시간 관리에 대해 많은 생각을 하게 됩니다.",
+      "createdAt": "2024-07-11T23:00:00.000Z"
+    }
+  ],
+  "comments12": [
+    {
+      "id": "123",
+      "postId": "12",
+      "userId": 323,
+      "username": "사용자123",
+      "content": "클라우드 컴퓨팅의 미래 기대돼요!",
+      "createdAt": "2024-07-10T10:00:00.000Z"
+    },
+    {
+      "id": "124",
+      "postId": "12",
+      "userId": 324,
+      "username": "사용자124",
+      "content": "클라우드 컴퓨팅 이해가 쉬워졌어요.",
+      "createdAt": "2024-07-10T11:00:00.000Z"
+    },
+    {
+      "id": "125",
+      "postId": "12",
+      "userId": 325,
+      "username": "사용자125",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-10T12:00:00.000Z"
+    },
+    {
+      "id": "126",
+      "postId": "12",
+      "userId": 326,
+      "username": "사용자126",
+      "content": "정말 유용한 정보네요.",
+      "createdAt": "2024-07-10T13:00:00.000Z"
+    },
+    {
+      "id": "127",
+      "postId": "12",
+      "userId": 327,
+      "username": "사용자127",
+      "content": "클라우드 컴퓨팅의 미래가 밝아 보입니다.",
+      "createdAt": "2024-07-10T14:00:00.000Z"
+    },
+    {
+      "id": "128",
+      "postId": "12",
+      "userId": 328,
+      "username": "사용자128",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-10T15:00:00.000Z"
+    },
+    {
+      "id": "129",
+      "postId": "12",
+      "userId": 329,
+      "username": "사용자129",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-10T16:00:00.000Z"
+    },
+    {
+      "id": "130",
+      "postId": "12",
+      "userId": 330,
+      "username": "사용자130",
+      "content": "정말 유익한 정보네요.",
+      "createdAt": "2024-07-10T17:00:00.000Z"
+    },
+    {
+      "id": "131",
+      "postId": "12",
+      "userId": 331,
+      "username": "사용자131",
+      "content": "클라우드 컴퓨팅에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-10T18:00:00.000Z"
+    },
+    {
+      "id": "132",
+      "postId": "12",
+      "userId": 332,
+      "username": "사용자132",
+      "content": "클라우드 컴퓨팅의 미래를 응원합니다.",
+      "createdAt": "2024-07-10T19:00:00.000Z"
+    },
+    {
+      "id": "133",
+      "postId": "12",
+      "userId": 333,
+      "username": "사용자133",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-10T20:00:00.000Z"
+    }
+  ],
+  "comments13": [
+    {
+      "id": "134",
+      "postId": "13",
+      "userId": 334,
+      "username": "사용자134",
+      "content": "정신 건강 관리 팁 유익해요!",
+      "createdAt": "2024-07-09T15:00:00.000Z"
+    },
+    {
+      "id": "135",
+      "postId": "13",
+      "userId": 335,
+      "username": "사용자135",
+      "content": "정신 건강 관리에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-09T16:00:00.000Z"
+    },
+    {
+      "id": "136",
+      "postId": "13",
+      "userId": 336,
+      "username": "사용자136",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-09T17:00:00.000Z"
+    },
+    {
+      "id": "137",
+      "postId": "13",
+      "userId": 337,
+      "username": "사용자137",
+      "content": "유익한 정보 잘 봤어요.",
+      "createdAt": "2024-07-09T18:00:00.000Z"
+    },
+    {
+      "id": "138",
+      "postId": "13",
+      "userId": 338,
+      "username": "사용자138",
+      "content": "정신 건강 관리에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-09T19:00:00.000Z"
+    },
+    {
+      "id": "139",
+      "postId": "13",
+      "userId": 339,
+      "username": "사용자139",
+      "content": "정말 유익한 글이네요.",
+      "createdAt": "2024-07-09T20:00:00.000Z"
+    },
+    {
+      "id": "140",
+      "postId": "13",
+      "userId": 340,
+      "username": "사용자140",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-09T21:00:00.000Z"
+    },
+    {
+      "id": "141",
+      "postId": "13",
+      "userId": 341,
+      "username": "사용자141",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-09T22:00:00.000Z"
+    },
+    {
+      "id": "142",
+      "postId": "13",
+      "userId": 342,
+      "username": "사용자142",
+      "content": "정신 건강 관리에 대해 많은 생각을 하게 됩니다.",
+      "createdAt": "2024-07-09T23:00:00.000Z"
+    },
+    {
+      "id": "143",
+      "postId": "13",
+      "userId": 343,
+      "username": "사용자143",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-10T00:00:00.000Z"
+    },
+    {
+      "id": "144",
+      "postId": "13",
+      "userId": 344,
+      "username": "사용자144",
+      "content": "정신 건강 관리에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-10T01:00:00.000Z"
+    }
+  ],
+  "comments14": [
+    {
+      "id": "145",
+      "postId": "14",
+      "userId": 345,
+      "username": "사용자145",
+      "content": "친환경 생활 실천하기 글 유익해요!",
+      "createdAt": "2024-07-08T12:00:00.000Z"
+    },
+    {
+      "id": "146",
+      "postId": "14",
+      "userId": 346,
+      "username": "사용자146",
+      "content": "친환경 생활 습관에 큰 도움이 되었어요.",
+      "createdAt": "2024-07-08T13:00:00.000Z"
+    },
+    {
+      "id": "147",
+      "postId": "14",
+      "userId": 347,
+      "username": "사용자147",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-08T14:00:00.000Z"
+    },
+    {
+      "id": "148",
+      "postId": "14",
+      "userId": 348,
+      "username": "사용자148",
+      "content": "유익한 정보 잘 봤어요.",
+      "createdAt": "2024-07-08T15:00:00.000Z"
+    },
+    {
+      "id": "149",
+      "postId": "14",
+      "userId": 349,
+      "username": "사용자149",
+      "content": "정말 유익한 글이네요.",
+      "createdAt": "2024-07-08T16:00:00.000Z"
+    },
+    {
+      "id": "150",
+      "postId": "14",
+      "userId": 350,
+      "username": "사용자150",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-08T17:00:00.000Z"
+    },
+    {
+      "id": "151",
+      "postId": "14",
+      "userId": 351,
+      "username": "사용자151",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-08T18:00:00.000Z"
+    },
+    {
+      "id": "152",
+      "postId": "14",
+      "userId": 352,
+      "username": "사용자152",
+      "content": "친환경 생활에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-08T19:00:00.000Z"
+    },
+    {
+      "id": "153",
+      "postId": "14",
+      "userId": 353,
+      "username": "사용자153",
+      "content": "친환경 생활을 응원합니다.",
+      "createdAt": "2024-07-08T20:00:00.000Z"
+    },
+    {
+      "id": "154",
+      "postId": "14",
+      "userId": 354,
+      "username": "사용자154",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-08T21:00:00.000Z"
+    },
+    {
+      "id": "155",
+      "postId": "14",
+      "userId": 355,
+      "username": "사용자155",
+      "content": "친환경 생활 습관에 대해 많은 생각을 하게 됩니다.",
+      "createdAt": "2024-07-08T22:00:00.000Z"
+    },
+    {
+      "id": "156",
+      "postId": "14",
+      "userId": 356,
+      "username": "사용자156",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-08T23:00:00.000Z"
+    }
+  ],
+  "comments15": [
+    {
+      "id": "157",
+      "postId": "15",
+      "userId": 357,
+      "username": "사용자157",
+      "content": "블록체인 기술의 응용 글 잘 봤어요!",
+      "createdAt": "2024-07-07T17:00:00.000Z"
+    },
+    {
+      "id": "158",
+      "postId": "15",
+      "userId": 358,
+      "username": "사용자158",
+      "content": "블록체인 기술 이해가 쉬워졌어요.",
+      "createdAt": "2024-07-07T18:00:00.000Z"
+    },
+    {
+      "id": "159",
+      "postId": "15",
+      "userId": 359,
+      "username": "사용자159",
+      "content": "좋은 글 감사합니다.",
+      "createdAt": "2024-07-07T19:00:00.000Z"
+    },
+    {
+      "id": "160",
+      "postId": "15",
+      "userId": 360,
+      "username": "사용자160",
+      "content": "정말 유익한 정보네요.",
+      "createdAt": "2024-07-07T20:00:00.000Z"
+    },
+    {
+      "id": "161",
+      "postId": "15",
+      "userId": 361,
+      "username": "사용자161",
+      "content": "블록체인 기술 응용에 큰 도움이 되었습니다.",
+      "createdAt": "2024-07-07T21:00:00.000Z"
+    },
+    {
+      "id": "162",
+      "postId": "15",
+      "userId": 362,
+      "username": "사용자162",
+      "content": "다음 글도 기대할게요.",
+      "createdAt": "2024-07-07T22:00:00.000Z"
+    },
+    {
+      "id": "163",
+      "postId": "15",
+      "userId": 363,
+      "username": "사용자163",
+      "content": "감사합니다.",
+      "createdAt": "2024-07-07T23:00:00.000Z"
+    },
+    {
+      "id": "164",
+      "postId": "15",
+      "userId": 364,
+      "username": "사용자164",
+      "content": "정말 유익한 정보네요.",
+      "createdAt": "2024-07-08T00:00:00.000Z"
+    },
+    {
+      "id": "165",
+      "postId": "15",
+      "userId": 365,
+      "username": "사용자165",
+      "content": "블록체인 기술에 대해 더 알고 싶어요.",
+      "createdAt": "2024-07-08T01:00:00.000Z"
+    },
+    {
+      "id": "166",
+      "postId": "15",
+      "userId": 366,
+      "username": "사용자166",
+      "content": "블록체인 기술의 응용을 응원합니다.",
+      "createdAt": "2024-07-08T02:00:00.000Z"
+    },
+    {
+      "id": "167",
+      "postId": "15",
+      "userId": 367,
+      "username": "사용자167",
+      "content": "좋은 정보 감사합니다.",
+      "createdAt": "2024-07-08T03:00:00.000Z"
+    }
+  ],
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "React 학습 가이드",
       "content": "React를 처음 시작하는 분들을 위한 단계별 학습 가이드입니다. 컴포넌트, 상태 관리, 라우팅 등 핵심 개념을 다룹니다.",
-      "pictureUrl": "https://example.com/images/react-guide.jpg",
+      "pictureUrl": "http://placehold.it/320x400",
       "createdAt": "2024-07-21T10:30:00.000Z",
       "userId": 101,
       "userName": "김개발",
-      "profileUrl": "https://example.com/profiles/kim.jpg",
-      "categoryName": "프로그래밍",
-      "likes": 120,
-      "comments": 15
+      "profileUrl": "http://placehold.it/320x100",
+      "categoryName": "정보공유",
+      "likes": null
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "여름 휴가지 추천",
       "content": "올 여름 가기 좋은 국내 휴가지 TOP 5를 소개합니다. 한적한 해변부터 시원한 계곡까지, 다양한 옵션이 준비되어 있습니다.",
       "pictureUrl": "https://example.com/images/summer-vacation.jpg",
@@ -22,12 +1387,11 @@
       "userId": 102,
       "userName": "이여행",
       "profileUrl": "https://example.com/profiles/lee.jpg",
-      "categoryName": "여행",
-      "likes": 89,
-      "comments": 23
+      "categoryName": "자유게시판",
+      "likes": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "효과적인 재택근무 팁",
       "content": "재택근무의 생산성을 높이는 10가지 팁을 공유합니다. 업무 공간 설정부터 시간 관리 기술까지 상세히 다룹니다.",
       "pictureUrl": "https://example.com/images/remote-work.jpg",
@@ -35,12 +1399,11 @@
       "userId": 103,
       "userName": "박직장인",
       "profileUrl": "https://example.com/profiles/park.jpg",
-      "categoryName": "라이프스타일",
-      "likes": 56,
-      "comments": 8
+      "categoryName": "정보공유",
+      "likes": null
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "2024년 하반기 경제 전망",
       "content": "2024년 하반기 국내외 경제 동향을 분석하고 향후 전망을 제시합니다. 주요 경제 지표와 글로벌 이슈를 중심으로 살펴봅니다.",
       "pictureUrl": "https://example.com/images/economic-forecast.jpg",
@@ -48,12 +1411,10 @@
       "userId": 104,
       "userName": "최경제",
       "profileUrl": "https://example.com/profiles/choi.jpg",
-      "categoryName": "경제",
-      "likes": 102,
-      "comments": 31
+      "categoryName": "자유게시판"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "초보 개발자를 위한 GitHub 사용법",
       "content": "GitHub를 처음 사용하는 개발자를 위한 기초 가이드입니다. 저장소 생성, 커밋, 푸시, 풀 리퀘스트 등의 개념을 설명합니다.",
       "pictureUrl": "https://example.com/images/github-guide.jpg",
@@ -61,12 +1422,10 @@
       "userId": 105,
       "userName": "정깃허브",
       "profileUrl": "https://example.com/profiles/jung.jpg",
-      "categoryName": "프로그래밍",
-      "likes": 75,
-      "comments": 12
+      "categoryName": "정보공유"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "건강한 식단 구성하기",
       "content": "균형 잡힌 식단을 구성하는 방법을 소개합니다. 영양소별 주요 식품과 하루 권장 섭취량을 자세히 설명합니다.",
       "pictureUrl": "https://example.com/images/healthy-diet.jpg",
@@ -74,12 +1433,10 @@
       "userId": 106,
       "userName": "한영양사",
       "profileUrl": "https://example.com/profiles/han.jpg",
-      "categoryName": "건강",
-      "likes": 88,
-      "comments": 19
+      "categoryName": "자유게시판"
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "인공지능의 윤리적 문제",
       "content": "AI 기술 발전에 따른 윤리적 문제들을 탐구합니다. 개인정보 보호, 의사결정의 책임 소재 등 다양한 쟁점을 다룹니다.",
       "pictureUrl": "https://example.com/images/ai-ethics.jpg",
@@ -87,12 +1444,10 @@
       "userId": 107,
       "userName": "심철학",
       "profileUrl": "https://example.com/profiles/sim.jpg",
-      "categoryName": "기술",
-      "likes": 95,
-      "comments": 27
+      "categoryName": "정보공유"
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "스타트업 성공 전략",
       "content": "성공적인 스타트업을 위한 핵심 전략을 공유합니다. 아이디어 검증부터 투자 유치까지 단계별로 설명합니다.",
       "pictureUrl": "https://example.com/images/startup-strategy.jpg",
@@ -100,12 +1455,10 @@
       "userId": 108,
       "userName": "강사업가",
       "profileUrl": "https://example.com/profiles/kang.jpg",
-      "categoryName": "비즈니스",
-      "likes": 110,
-      "comments": 18
+      "categoryName": "자유게시판"
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "현대 미술의 이해",
       "content": "20세기 이후 현대 미술의 주요 흐름과 작가들을 소개합니다. 추상표현주의부터 개념미술까지 다양한 사조를 다룹니다.",
       "pictureUrl": "https://example.com/images/modern-art.jpg",
@@ -113,12 +1466,10 @@
       "userId": 109,
       "userName": "문예술",
       "profileUrl": "https://example.com/profiles/moon.jpg",
-      "categoryName": "예술",
-      "likes": 67,
-      "comments": 9
+      "categoryName": "정보공유"
     },
     {
-      "id": 10,
+      "id": "10",
       "title": "스마트홈 구축 가이드",
       "content": "집을 스마트홈으로 바꾸는 방법을 단계별로 안내합니다. IoT 기기 선택부터 설치, 연동 방법까지 자세히 설명합니다.",
       "pictureUrl": "https://example.com/images/smart-home.jpg",
@@ -126,12 +1477,10 @@
       "userId": 110,
       "userName": "이테크",
       "profileUrl": "https://example.com/profiles/lee_tech.jpg",
-      "categoryName": "기술",
-      "likes": 82,
-      "comments": 14
+      "categoryName": "자유게시판"
     },
     {
-      "id": 11,
+      "id": "11",
       "title": "효과적인 시간 관리법",
       "content": "개인과 업무 생활에서 시간을 효율적으로 관리하는 방법을 소개합니다. 우선순위 설정, 집중력 향상 기법 등을 다룹니다.",
       "pictureUrl": "https://example.com/images/time-management.jpg",
@@ -139,12 +1488,10 @@
       "userId": 111,
       "userName": "조매니저",
       "profileUrl": "https://example.com/profiles/cho.jpg",
-      "categoryName": "라이프스타일",
-      "likes": 73,
-      "comments": 11
+      "categoryName": "정보공유"
     },
     {
-      "id": 12,
+      "id": "12",
       "title": "클라우드 컴퓨팅의 미래",
       "content": "클라우드 컴퓨팅 기술의 현재와 미래를 전망합니다. 주요 서비스 모델과 산업별 활용 사례를 분석합니다.",
       "pictureUrl": "https://example.com/images/cloud-computing.jpg",
@@ -152,12 +1499,10 @@
       "userId": 112,
       "userName": "백클라우드",
       "profileUrl": "https://example.com/profiles/baek.jpg",
-      "categoryName": "기술",
-      "likes": 91,
-      "comments": 16
+      "categoryName": "자유게시판"
     },
     {
-      "id": 13,
+      "id": "13",
       "title": "정신 건강 관리 팁",
       "content": "일상에서 실천할 수 있는 정신 건강 관리 방법을 소개합니다. 스트레스 해소법, 명상 기법 등을 자세히 설명합니다.",
       "pictureUrl": "https://example.com/images/mental-health.jpg",
@@ -165,12 +1510,10 @@
       "userId": 113,
       "userName": "김상담사",
       "profileUrl": "https://example.com/profiles/kim_counselor.jpg",
-      "categoryName": "건강",
-      "likes": 105,
-      "comments": 22
+      "categoryName": "정보공유"
     },
     {
-      "id": 14,
+      "id": "14",
       "title": "친환경 생활 실천하기",
       "content": "일상에서 쉽게 실천할 수 있는 친환경 생활 습관을 소개합니다. 재활용, 에너지 절약 등 구체적인 방법을 제시합니다.",
       "pictureUrl": "https://example.com/images/eco-friendly.jpg",
@@ -178,12 +1521,10 @@
       "userId": 114,
       "userName": "정에코",
       "profileUrl": "https://example.com/profiles/jung_eco.jpg",
-      "categoryName": "환경",
-      "likes": 79,
-      "comments": 13
+      "categoryName": "자유게시판"
     },
     {
-      "id": 15,
+      "id": "15",
       "title": "블록체인 기술의 응용",
       "content": "블록체인 기술의 다양한 산업 응용 사례를 분석합니다. 금융, 물류, 헬스케어 등 여러 분야의 활용 방안을 소개합니다.",
       "pictureUrl": "https://example.com/images/blockchain.jpg",
@@ -191,9 +1532,8 @@
       "userId": 115,
       "userName": "양블록",
       "profileUrl": "https://example.com/profiles/yang.jpg",
-      "categoryName": "기술",
-      "likes": 87,
-      "comments": 20
+      "categoryName": "정보공유",
+      "likes": null
     }
   ]
 }
