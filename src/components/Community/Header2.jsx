@@ -10,17 +10,15 @@ export default function Header2() {
   const handleBack = () => {
     navigate(-1);
   };
+
+  const ResponsiveIcon = styled(IoIosArrowBack)`
+    cursor: pointer;
+    font-size: 25px;
+  `;
   return (
     <>
-      <RowContainer style={{padding:`${responsiveSize("20")}`}}>
-        <IoIosArrowBack
-          style={{
-            cursor: "pointer",
-            width: `${responsiveSize("20")}`,
-            height: "auto",
-          }}
-          onClick={handleBack}
-        />
+      <RowContainer style={{ padding: `${responsiveSize("20")}` }}>
+        <ResponsiveIcon onClick={handleBack} />
         <DropDown />
       </RowContainer>
     </>
