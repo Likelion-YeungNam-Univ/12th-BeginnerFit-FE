@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import axios from '../apis/axios';
 
 function Login() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('test@example.com')
+    const [password, setPassword] = useState('pw123')
 
     const navigate = useNavigate();
     const navigateToForgetID = () => {
@@ -24,25 +24,34 @@ function Login() {
             email,
             password
         }
+        console.log('로그인 요청 데이터:', data);
+        console.log('API 엔드포인트:', import.meta.env.VITE_SERVER_URL + "/auth/sign-in");
         try{
-            const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/sign-in`, data)
+            const res = await axios.post(import.meta.env.VITE_SERVER_URL + "/auth/sign-in", data,{
+                headers: {
+                    'Authorization' : `Bearer ${yourAccessToken}`
+                }
+            });
             console.log('로그인 성공',res.data);
+            // 토큰 저장
+            localStorage.setItem('access', res.data.accessToken);
+            localStorage.setItem('refresh', res.data.refreshToken);
+            //로그인 성공 시 홈화면으로 이동
+            navigate('/');
         } catch(error){
+            // console.error('로그인 실패:', error.response? error.response.data : error.message);
+            // alert(`로그인 실패: ${error.response?.data?.message || '서버 에러'}`);
+            console.error('로그인 실패:', error);
             if (error.response) {
-                // 서버가 에러 응답을 반환했을 때
-                console.error('로그인 실패:', error.response.data);
+                console.error('서버 응답:', error.response.data);
                 alert(`로그인 실패: ${error.response.data.message || '서버 에러'}`);
-              } else if (error.request) {
-                // 요청이 서버로 보내졌지만 응답을 받지 못했을 때
-                console.error('로그인 실패: 요청이 서버로 보내졌지만 응답이 없습니다.', error.request);
-                alert('로그인 실패: 서버 응답이 없습니다.');
-              } else {
-                // 요청을 설정하는 중에 문제가 발생했을 때
-                console.error('로그인 실패: 요청 설정 중 문제 발생', error.message);
+            } else {
+                console.error('오류 메시지:', error.message);
                 alert(`로그인 실패: ${error.message}`);
-              }
+            }
         }
-    }   
+    }
+
 
     return(
         <Wrapper>
