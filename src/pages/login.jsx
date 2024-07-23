@@ -97,11 +97,11 @@ const LoginBox = styled.div`
 `
 
 const Logo = styled.img.attrs({
-    src: "/src/BeginnerFitLogo.png",
+    src: "/src/images/logo.png",
     alt: "BeginnerFit"
 })`
     margin: 0px auto 50px auto;
-    width: 40%;
+    width: 60%;
 `
 
 const LoginForm = styled.form`
