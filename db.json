@@ -1532,7 +1532,8 @@
       "userId": 115,
       "userName": "양블록",
       "profileUrl": "https://example.com/profiles/yang.jpg",
-      "categoryName": "정보공유"
+      "categoryName": "정보공유",
+      "likes": null
     }
   ]
 }

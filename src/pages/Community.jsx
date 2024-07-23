@@ -7,23 +7,19 @@ import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
 
 export default function Community() {
-
   const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
 
   return (
     <Wrapper>
       <Container>
         <MainContent>
-          <PC>
-            <Header />
-            <RowContainer>
-              <Title>Community</Title>
-              <WriteImgBtn src={writebtn} alt="WriteBtn" />
-            </RowContainer>
-            <CommunityButtons buttonList={buttonList} />
-            <PostList />
-          </PC>
-        
+          <Header />
+          <RowContainer>
+            <Title>Community</Title>
+            <WriteImgBtn src={writebtn} alt="WriteBtn" />
+          </RowContainer>
+          <CommunityButtons buttonList={buttonList} />
+          <PostList />
         </MainContent>
       </Container>
     </Wrapper>
