@@ -3,6 +3,7 @@ import DropDown from "../../components/Community/DropDown";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { RowContainer } from "../../styles/GlobalStyle";
 
 export default function Header2() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function Header2() {
   };
   return (
     <>
-      <RowContainer>
+      <RowContainer style={{padding:`${responsiveSize("20")}`}}>
         <IoIosArrowBack
           style={{
             cursor: "pointer",
@@ -25,8 +26,3 @@ export default function Header2() {
     </>
   );
 }
-const RowContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;

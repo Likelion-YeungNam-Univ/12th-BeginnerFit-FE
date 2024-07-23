@@ -17,6 +17,7 @@ export const TitleText = styled.h3`
 `;
 export const Wrapper = styled.div`
   flex-direction: column;
+  border: solid 1px ${({ theme }) => theme.colors.gray04};
   align-items: center;
   justify-content: center;
 `;

@@ -37,7 +37,7 @@ export default function WriteBoardMain({ post }) {
   };
 
   return (
-    <>
+    <Container>
       <RowContainer style={{ marginTop: `${responsiveSize("50")}` }}>
         <ProfileImg src={post.profileUrl || profile} alt="Profile"></ProfileImg>
         <NickNameContainer>
@@ -72,11 +72,13 @@ export default function WriteBoardMain({ post }) {
         />
         <p>{likes}</p>
       </HeartContainer>
-      <RowLine />
       <Comment post={post} />
-    </>
+    </Container>
   );
 }
+const Container=styled.div`
+  padding: 20px;
+`
 const ProfileImg = styled.img`
   width: ${responsiveSize("60")};
   height: ${responsiveSize("60")};
@@ -114,7 +116,6 @@ const RowLine = styled.hr`
   border: none;
   left: 0;
   right: 0;
-  width: ${responsiveSize("600")};
   height: ${responsiveSize("18")};
   background-color: ${({ theme }) => theme.colors.gray01};
 `;
