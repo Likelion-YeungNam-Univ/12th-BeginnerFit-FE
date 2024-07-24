@@ -35,12 +35,12 @@ const Wrapper = styled.div`
 const Container = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
-  height: 100%;
+  height: 100vh;
 `;
 const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
-  border-bottom: none;
+  height: 100vh;
   padding: 20px;
 `;
 
