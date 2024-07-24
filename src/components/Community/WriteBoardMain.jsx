@@ -39,7 +39,7 @@ export default function WriteBoardMain({ post }) {
   return (
     <>
       <Container>
-        <RowContainer style={{ marginTop: `${responsiveSize("50")}` }}>
+        <RowContainer >
           <ProfileImg
             src={post.profileUrl || profile}
             alt="Profile"
@@ -85,7 +85,8 @@ export default function WriteBoardMain({ post }) {
   );
 }
 const Container = styled.div`
-  padding: 20px;
+
+  padding: 0px 20px;
 `;
 const ProfileImg = styled.img`
   width: ${responsiveSize("60")};
