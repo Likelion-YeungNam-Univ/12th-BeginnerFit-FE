@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy: {
       '/auth':{
-        target: "http://3.37.58.77:8080",
+        target: VITE_SERVER_URL,
         changeOrigin: true,
       },
     },
