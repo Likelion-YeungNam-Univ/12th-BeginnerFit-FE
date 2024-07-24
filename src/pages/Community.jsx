@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
 import writebtn from "../images/writebtn.png";
-import Header from "../components/Community/Header";
+import { Header } from "../layouts/header";
 import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
 import BottomNav from "../components/BottomNav";
@@ -14,7 +14,7 @@ export default function Community() {
     <Wrapper>
       <Container>
         <MainContent>
-          <Header />
+          <Header type={"option"} size={"30"} />
           <RowContainer>
             <Title>Community</Title>
             <WriteImgBtn src={writebtn} alt="WriteBtn" />
