@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from 'styled-components';
 
 function SignUp() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [emailValid, setEmailValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
-    const [pwCheck, setPwCheck] = useState(false);
+    const [pwCheck, setPwCheck] = useState('');
 
     const navigate = useNavigate();
 
@@ -106,12 +105,13 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     height: 100vh;
+    background-color: ${({ theme }) => theme.colors.white};
+    border: solid 1px ${({ theme }) => theme.colors.gray04};
 `
 
 const SignUpBox = styled.div`
     display: grid;
     justify-content: center;
-    
     width: 600px;
     margin: 0px auto 150px auto;
 `
