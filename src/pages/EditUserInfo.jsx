@@ -2,6 +2,9 @@ import styled from "styled-components";
 import Header2 from "../components/Community/Header2";
 import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
+import SetCategory from "../components/MyPage/SetCategory";
+
+
 export default function EditUserInfo() {
   //음수값 자릿수 제한
   const onInput = (e) => {
@@ -51,7 +54,6 @@ export default function EditUserInfo() {
             <P>기간</P>
             <SubContainer>
               <Input type="date"></Input>
-              
             </SubContainer>
           </TextInputContainer>
           <TextInputContainer>
@@ -68,6 +70,7 @@ export default function EditUserInfo() {
             <P>시간</P>
           </SubContainer>
         </TextInputContainer>
+        <SetCategory></SetCategory>
       </RootContainer>
     </Wrapper>
   );

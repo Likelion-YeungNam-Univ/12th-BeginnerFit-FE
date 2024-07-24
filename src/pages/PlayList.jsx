@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Wrapper, Container, MainContent } from "./Main";
+import { Wrapper, Container, MainContent } from "./main";
 import BackHeader from "../layouts/BackHeader";
 import styled from "styled-components";
 import { responsiveSize } from "../utils/Mediaquery";

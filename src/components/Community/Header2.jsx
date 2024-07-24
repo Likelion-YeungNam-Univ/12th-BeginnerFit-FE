@@ -20,14 +20,6 @@ export default function Header2({ isDrop }) {
       <RowContainer style={{ padding: `${responsiveSize("20")}` }}>
         <ResponsiveIcon onClick={handleBack} />
         {isDrop ? <DropDown /> : undefined}
-        <IoIosArrowBack
-          style={{
-            cursor: "pointer",
-            width: `${responsiveSize("20")}`,
-            height: "auto",
-          }}
-          onClick={handleBack}
-        />
       </RowContainer>
     </>
   );
