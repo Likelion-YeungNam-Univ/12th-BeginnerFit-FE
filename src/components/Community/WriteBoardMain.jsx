@@ -37,43 +37,51 @@ export default function WriteBoardMain({ post }) {
   };
 
   return (
-    <Container>
-      <RowContainer style={{ marginTop: `${responsiveSize("50")}` }}>
-        <ProfileImg src={post.profileUrl || profile} alt="Profile"></ProfileImg>
-        <NickNameContainer>
-          <TitleText>{post.userName}</TitleText>
-          <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
-        </NickNameContainer>
-        <IoPersonAddOutline
-          style={{
-            width: `${responsiveSize("20")}`,
-            height: "auto",
-            cursor: "pointer",
-          }}
-        />
-      </RowContainer>
-      <TitleContentContainer>
-        <Title>{post.title}</Title>
-        <ContentText>{post.content}</ContentText>
-      </TitleContentContainer>
-      {/* 통신해서 이미지가 있을 때만 띄우기 */}
-      {post.pictureUrl && (
-        <Image alt={post.pictureUrl} src={post.pictureUrl}></Image>
-      )}
-      {/* 하트 체크박스 */}
-      <HeartContainer>
-        <Checkbox
-          style={{ color: "red", border: "black" }}
-          {...label}
-          icon={<FavoriteBorder />}
-          checkedIcon={<Favorite />}
-          checked={clickLike}
-          onChange={toggleLike}
-        />
-        <p>{likes}</p>
-      </HeartContainer>
-      <Comment post={post} />
-    </Container>
+    <>
+      <Container>
+        <RowContainer style={{ marginTop: `${responsiveSize("50")}` }}>
+          <ProfileImg
+            src={post.profileUrl || profile}
+            alt="Profile"
+          ></ProfileImg>
+          <NickNameContainer>
+            <TitleText>{post.userName}</TitleText>
+            <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
+          </NickNameContainer>
+          <IoPersonAddOutline
+            style={{
+              width: `${responsiveSize("20")}`,
+              height: "auto",
+              cursor: "pointer",
+            }}
+          />
+        </RowContainer>
+        <TitleContentContainer>
+          <Title>{post.title}</Title>
+          <ContentText>{post.content}</ContentText>
+        </TitleContentContainer>
+        {/* 통신해서 이미지가 있을 때만 띄우기 */}
+        {post.pictureUrl && (
+          <Image alt={post.pictureUrl} src={post.pictureUrl}></Image>
+        )}
+        {/* 하트 체크박스 */}
+        <HeartContainer>
+          <Checkbox
+            style={{ color: "red", border: "black" }}
+            {...label}
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            checked={clickLike}
+            onChange={toggleLike}
+          />
+          <p>{likes}</p>
+        </HeartContainer>
+      </Container>
+      <RowLine />
+      <Container>
+        <Comment post={post} />
+      </Container>
+    </>
   );
 }
 const Container = styled.div`
@@ -112,10 +120,8 @@ const Image = styled.img`
 `;
 
 const RowLine = styled.hr`
-  position: absolute;
+  width: min(600px, 100%);
   border: none;
-  left: 0;
-  right: 0;
   height: ${responsiveSize("18")};
   background-color: ${({ theme }) => theme.colors.gray01};
 `;
