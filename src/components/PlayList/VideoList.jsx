@@ -1,12 +1,10 @@
 import Video from "./Video";
 
-const videoIds = ["08PZUqHAYEw", "vLU6yrn0WO8", "T15a7NclsZw", "YK3bzsZhPwI"];
-
-export default function VideoList() {
+export default function VideoList({ videoIds }) {
   return (
     <>
       {videoIds.map((item) => (
-        <Video id={item}></Video>
+        <Video id={item.videoYoutubeId} key={item.id} videoId={item.id}></Video>
       ))}
     </>
   );

@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { fetchVideoDetails } from "../../apis/youtubeApi";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { usePostData } from "../../hooks/usePostData";
 
-export default function Video({ id }) {
+export default function Video({ id, videoId }) {
   // 썸네일 주소
   const thumbnailurl = `https://img.youtube.com/vi/${id}/0.jpg`;
   // 영상 주소
   const videoUrl = `https://www.youtube.com/watch?v=${id}`;
+
+  const { postData } = usePostData(`/playlists/videos/${videoId}`);
 
   // 유튜브 영상 정보 저장할 state
   const [videoDetails, setVideoDetails] = useState(null);
@@ -21,8 +23,10 @@ export default function Video({ id }) {
   }, []);
 
   const handleThumClick = () => {
+    postData();
     window.open(videoUrl, "_blank");
   };
+
   return (
     <Container>
       <Wrap>

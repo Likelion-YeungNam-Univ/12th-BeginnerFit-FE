@@ -3,48 +3,24 @@ import styled from "styled-components";
 import PlayList from "./PlayList";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { GoDotFill } from "react-icons/go";
-
-const playList = [
-  {
-    id: "ohsMB2Whyf4",
-    title: "운동할때 듣는 신나는 음악",
-    time: "80:59",
-  },
-  {
-    id: "KlGaa6K0BsI",
-    title: "잔잔하게 듣고 싶을 때",
-    time: "10:59",
-  },
-  {
-    id: "yRkO1qS3ym8",
-    title: "울적한대 운동은 해야된다",
-    time: "30:59",
-  },
-  {
-    id: "5svlvTirzpg",
-    title: "운동 효율 X 100",
-    time: "10:59",
-  },
-  {
-    id: "MBXTxHQvju8",
-    title: "완전 시나는 노래 모음",
-    time: "70:59",
-  },
-];
+import useFetchData from "../../hooks/useFetchData";
 
 export default function PlayListList() {
   // 상태로 현재 슬라이드 인덱스를 관리
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoSliding, setIsAutoSliding] = useState(true);
 
+  // 플레이리스트 데이터 가져오기
+  const { data, isLoading, error } = useFetchData("/playlists/me");
+
   // 자동 슬라이드 효과
   useEffect(() => {
     if (!isAutoSliding) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % playList.length);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % 5);
     }, 1500); // 0.5초마다 슬라이드 이동
-
+    console.log(data);
     return () => clearInterval(interval);
   }, [isAutoSliding]);
 
@@ -57,18 +33,19 @@ export default function PlayListList() {
   return (
     <Container>
       <SlideContainer $currentSlide={currentSlide}>
-        {playList.map((item) => (
+        {data?.map((item) => (
           <PlayList
             key={item.id}
             id={item.id}
             title={item.title}
-            time={item.time}
+            time={item.totalTime}
+            videoYoutubeId={item.videos[0].videoYoutubeId}
           />
         ))}
       </SlideContainer>
       <Wrap>
         <ButtonWrap>
-          {playList.map((_, idx) => (
+          {data?.map((_, idx) => (
             <Button key={idx} onClick={() => handleButtonClick(idx)}>
               <GoDotFill color={currentSlide === idx ? "black" : "lightgrey"} />
             </Button>

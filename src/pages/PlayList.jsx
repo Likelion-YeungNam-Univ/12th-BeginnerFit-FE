@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Wrapper, Container, MainContent } from "./Main";
 import BackHeader from "../layouts/BackHeader";
@@ -7,6 +6,7 @@ import { responsiveSize } from "../utils/Mediaquery";
 import playButton2 from "../images/play button2.png";
 import { Image } from "../styles/GlobalStyle";
 import VideoList from "../components/PlayList/VideoList";
+import useFetchData from "../hooks/useFetchData";
 
 export default function PlayList() {
   let [query] = useSearchParams();
@@ -14,6 +14,10 @@ export default function PlayList() {
   const playListtitle = query.get("title");
   // 플레이 리스트 시간
   const time = query.get("time");
+  // 플레이 리스트 아이디
+  const id = query.get("id");
+
+  const { data, isLoading } = useFetchData(`/playlists/${id}`);
 
   return (
     <Wrapper>
@@ -29,7 +33,7 @@ export default function PlayList() {
               <Image src={playButton2} $width={80} $height={80}></Image>
             </TopWrapDiv>
           </TopWrap>
-          <VideoList />
+          {data && <VideoList videoIds={data.videos} />}
         </MainContent>
       </Container>
     </Wrapper>

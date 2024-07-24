@@ -3,19 +3,16 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import playButton from "../../images/play button.png";
 import { useNavigate } from "react-router-dom";
 
-export default function PlayList({ id, title, time }) {
+export default function PlayList({ videoYoutubeId, title, time, id }) {
   const nav = useNavigate();
-  // 썸네일 주소
-  const thumbnailurl = `https://img.youtube.com/vi/${id}/0.jpg`;
-  // 영상 주소
-  const videoUrl = `https://www.youtube.com/watch?v=${id}`;
 
+  const thumbnailurl = `https://img.youtube.com/vi/${videoYoutubeId}/0.jpg`;
   // 재생 버튼 클릭하면 플레이리스트 목록으로 이동 하는 함수
   const handleClick = () => {
     // 쿼리 스트링으로 플레이리스트 제목이랑 시간 전달
     nav({
       pathname: "/playlist",
-      search: `?title=${title}&time=${time}`,
+      search: `?title=${title}&time=${time}&id=${id}`,
     });
   };
   return (

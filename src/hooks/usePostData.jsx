@@ -6,11 +6,11 @@ export const usePostData = (url) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const postData = (payload) => {
+  const postData = async (payload = {}) => {
     setIsLoading(true);
 
     try {
-      const res = api.post(url, payload);
+      const res = await api.post(url, payload);
       setData(res.data);
     } catch (e) {
       setError(e);
