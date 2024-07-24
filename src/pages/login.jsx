@@ -99,11 +99,11 @@ const Logo = styled.img.attrs({
     alt: "BeginnerFit"
 })`
     margin: 0px auto 80px auto;
-    width: 40%;
+    width: 45%;
 `
 
 const LoginForm = styled.form`
-    width: 500px;
+    width: 100%;
     border-radius: 15px;
 `
 
