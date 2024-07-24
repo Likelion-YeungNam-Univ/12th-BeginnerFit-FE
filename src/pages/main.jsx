@@ -64,6 +64,7 @@ export const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;
+  box-sizing: border-box;
   min-height: 100vh;
 `;
 

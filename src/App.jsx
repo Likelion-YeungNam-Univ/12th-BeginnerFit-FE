@@ -8,6 +8,7 @@ import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
 import Main from "./pages/Main";
 import PlayList from "./pages/PlayList";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/posts/:idx" element={<DetailBoard />}></Route>
         <Route path="/main" element={<Main />}></Route>
         <Route path="/playlist" element={<PlayList />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
       </Routes>
     </>
   );

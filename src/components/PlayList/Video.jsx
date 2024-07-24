@@ -22,6 +22,7 @@ export default function Video({ id, videoId }) {
     getDetails();
   }, []);
 
+  // 영상 클릭시 영상 보러가기
   const handleThumClick = () => {
     postData();
     window.open(videoUrl, "_blank");

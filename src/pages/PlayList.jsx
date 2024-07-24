@@ -19,6 +19,8 @@ export default function PlayList() {
 
   const { data, isLoading } = useFetchData(`/playlists/${id}`);
 
+  if (isLoading) return "Loading...";
+
   return (
     <Wrapper>
       <Container>
