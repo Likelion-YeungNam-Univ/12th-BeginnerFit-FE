@@ -11,6 +11,7 @@ export const usePostData = (url) => {
 
     try {
       const res = await api.post(url, payload);
+      console.log(res);
       setData(res.data);
     } catch (e) {
       setError(e);

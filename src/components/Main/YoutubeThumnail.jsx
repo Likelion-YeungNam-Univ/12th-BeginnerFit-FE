@@ -9,20 +9,25 @@ const YouTubeThumbnail = ({ videoId }) => {
   // 썸네일 저장 state
   const [thumbnailurl, setThumbnailurl] = useState(null);
 
+  // 비디오 id 저장 state
+  const [id, setId] = useState(null);
+
   // 영상 정보 받아오는 코드
   const { data, isLoading } = useFetchData("/playlists/videos/next");
 
-  const { postData } = usePostData(`/playlists/videos/${videoId}`);
+  // 영상 클릭했을 때 봤던 영상이라고 체크하는 함수
+  const { postData } = usePostData(`/playlists/videos/${id}`);
 
   // videoId 뽑아내기 위한 코드
   useEffect(() => {
     const videoId = data?.url.match(/v=([^&]+)/)[1];
-    console.log(data);
+    setId(data?.id);
     setThumbnailurl(`https://img.youtube.com/vi/${videoId}/0.jpg`);
   }, [data]);
 
   // 실행 버튼 클릭하면 유튜브 영상으로 넘어가게 하는 함수
   const handleClick = () => {
+    postData();
     window.open(data?.url, "_blank");
   };
 
