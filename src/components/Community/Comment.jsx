@@ -6,10 +6,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import profile from "../../images/profile.png";
 import Button from "@mui/material/Button";
+import { getCommentApi } from "../../apis/communityApi/getCommentApi";
 
 export default function Comment({ post }) {
   //테스트 서버
-  const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
+  //const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
 
   //해당 게시글 댓글 불러오기
   const [comments, setComments] = useState([]);
@@ -20,53 +21,18 @@ export default function Comment({ post }) {
   //댓글 5개씩 페이지네이션 페이지번호
   const [page, setPage] = useState(1);
 
-  //댓글 불러오는 함수
-  const getComment = async () => {
-    if (isLoading || !hasMore) return;
-    setIsLoading(true);
-
-    try {
-      const response = await axios.get(
-        //실제 서버 주소
-        //${SERVER_URL}/posts/${post.id}/comments
-
-        //테스트용
-        `${TEST_SERVER_URL}/comments${post.id}`,
-        {
-          params: {
-            page: page,
-            size: 5,
-          },
-        }
-      );
-
-      const newComments = response.data;
-      if (Array.isArray(newComments) && newComments.length > 0) {
-        setComments((prevComments) => [...prevComments, ...newComments]);
-        setPage((prevPage) => prevPage + 1);
-        setHasMore(newComments.length == 5);
-      } else {
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.error("댓글을 불러오는 중 오류가 발생했습니다:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
     setComments([]);
     setPage(1);
     setHasMore(true);
-    getComment();
+    getCommentApi(post.id, page, setComments, setIsLoading, setHasMore);
   }, [post.id]);
 
-  //5개씩 더보기 함수
   const handleLoadMore = () => {
-    getComment();
+    if (isLoading || !hasMore) return;
+    setPage((prevPage) => prevPage + 1);
+    getCommentApi(post.id, page + 1, setComments, setIsLoading, setHasMore);
   };
-
   return (
     <>
       <CommentNum>댓글 {comments.length}개</CommentNum>
@@ -93,7 +59,6 @@ export default function Comment({ post }) {
             backgroundColor: "#7D7AFF",
           }}
           onClick={handleLoadMore}
-          disabled={isLoading}
         >
           {isLoading ? "불러오는 중..." : "더 보기"}
         </Button>
