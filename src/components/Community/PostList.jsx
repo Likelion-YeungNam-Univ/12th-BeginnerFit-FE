@@ -40,6 +40,7 @@ export default function PostList() {
       console.error("Error fetching posts:", error);
     }
   };
+  //apis 파일에 정리 필요
 
   useEffect(() => {
     getPost();
