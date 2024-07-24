@@ -9,7 +9,7 @@ import { BottomNavContainer } from "../components/BottomNav";
 import { responsiveSize } from "../utils/Mediaquery";
 import { FiChevronRight } from "react-icons/fi";
 import { commentApi } from "../apis/commentApi";
-import { getCommentApi } from "../apis/getCommentApi";
+import { getPostApi } from "../apis/getPostApi";
 
 export default function DetailBoard() {
   const { idx } = useParams();
@@ -20,16 +20,15 @@ export default function DetailBoard() {
   const handleGetPosts = async () => {
     try {
       //게시물 불러오는 함수 호출
-      await getCommentApi(idx, post, setPost, setLoading);
+      await getPostApi(idx, post, setPost, setLoading);
     } catch (error) {
       console.log("게시물 불러오기 실패", error);
     }
   };
 
   useEffect(() => {
-   handleGetPosts();
+    handleGetPosts();
   }, [idx]);
-
 
   //댓글 작성관리
   const [comment, setComment] = useState("");
