@@ -7,8 +7,8 @@ import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import { BottomNavContainer } from "../components/BottomNav";
 import { responsiveSize } from "../utils/Mediaquery";
 import { FiChevronRight } from "react-icons/fi";
-import { commentApi } from "../apis/commentApi";
-import { getPostApi } from "../apis/getPostApi";
+import { commentApi } from "../apis/communityApi/commentApi";
+import { getPostApi } from "../apis/communityApi/getPostApi";
 
 export default function DetailBoard() {
   const { idx } = useParams();

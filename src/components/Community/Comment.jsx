@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import profile from "../../images/profile.png";
 import Button from "@mui/material/Button";
-import { getCommentApi } from "../../apis/getCommentApi";
+import { getCommentApi } from "../../apis/communityApi/getCommentApi";
 
 export default function Comment({ post }) {
   //테스트 서버
