@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Header2 from "../components/Community/Header2";
 import WriteBoardMain from "../components/Community/WriteBoardMain";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
@@ -32,7 +31,6 @@ export default function DetailBoard() {
 
   //댓글 작성관리
   const [comment, setComment] = useState("");
-  const accessToken = "";
   const isCommentEmpty = comment.trim().length === 0;
 
   const handleCommentSubmit = async () => {
@@ -40,7 +38,7 @@ export default function DetailBoard() {
     if (isCommentEmpty) return;
 
     try {
-      await commentApi(idx, comment, accessToken);
+      await commentApi(idx, comment);
       //입력칸 초기화
       setComment("");
     } catch (error) {

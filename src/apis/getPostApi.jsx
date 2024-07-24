@@ -1,7 +1,7 @@
 import axios from "axios";
 export const getPostApi = async (idx, post, setPost, setLoading) => {
-  const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
-  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+  // const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
+  // const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
   //임시 토큰
   const TOKEN = import.meta.env.VITE_TOKEN;
