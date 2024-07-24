@@ -35,8 +35,6 @@ function Login() {
             //로그인 성공 시 홈화면으로 이동
             navigate('/');
         } catch(error){
-            // console.error('로그인 실패:', error.response? error.response.data : error.message);
-            // alert(`로그인 실패: ${error.response?.data?.message || '서버 에러'}`);
             console.error('로그인 실패:', error);
             if (error.response) {
                 console.error('서버 응답:', error.response.data);
@@ -100,12 +98,12 @@ const Logo = styled.img.attrs({
     src: "/src/images/logo.png",
     alt: "BeginnerFit"
 })`
-    margin: 0px auto 50px auto;
-    width: 60%;
+    margin: 0px auto 80px auto;
+    width: 40%;
 `
 
 const LoginForm = styled.form`
-    width: 100%;
+    width: 500px;
     border-radius: 15px;
 `
 
@@ -135,13 +133,13 @@ const LoginEtc = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-around;
-    color: #5c5c5c;
+    color: #9a9a9a;
 
 `
 
 const EtcButton = styled.button`
     background-color: transparent;
-    color: #5c5c5c;
+    color: #9a9a9a;
     border: none;
     outline: none;
     margin: 0px 10px;
