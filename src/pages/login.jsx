@@ -103,7 +103,7 @@ const Logo = styled.img.attrs({
 `
 
 const LoginForm = styled.form`
-    width: 100%;
+    width: 500px;
     border-radius: 15px;
 `
 
