@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "../components/Community/Header";
+import { Header } from "../layouts/header";
 import styled from "styled-components";
 import TagList from "../components/Main/TagList";
 import YouTubeThumbnail from "../components/Main/YoutubeThumnail";
 import PlayListList from "../components/Main/PlayListList";
 import ChallengeList from "../components/Main/ChallengeList";
+import UserList from "../components/Main/UserList";
 
 export default function Main() {
   const today = new Date();
@@ -14,7 +15,7 @@ export default function Main() {
       <Container>
         <MainContent>
           {/* 헤더 내비 게이션 */}
-          <Header />
+          <Header type={"alarm"} size={"30"} />
           <MainH2>
             사용자님!
             <br />
@@ -25,7 +26,7 @@ export default function Main() {
             title="`노력을 대신할 수 있는건 없다` 하체 박살 루틴"
           />
           <MainH3>
-            사용자 님을 위한 <br />
+            사용자님을 위한 <br />
             오늘의 홈트 플레이리스트
           </MainH3>
           <TagList />
@@ -36,27 +37,34 @@ export default function Main() {
             오늘의 챌린지
           </MainH3>
           <ChallengeList />
+          <MainH3>
+            친구와 함께하는
+            <br />
+            오늘의 챌린지 순위
+          </MainH3>
+          <UserList />
         </MainContent>
       </Container>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
   height: 100%;
 `;
 
-const MainContent = styled.div`
+export const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;
+  min-height: 100vh;
 `;
 
 const MainH2 = styled.h1`

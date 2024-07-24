@@ -2,28 +2,36 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import playButton from "../../images/play button.png";
 import { responsiveSize } from "../../utils/Mediaquery";
-import { fetchVideoTitle } from "../../apis/youtubeApi";
+import { usePostData } from "../../hooks/usePostData";
+import useFetchData from "../../hooks/useFetchData";
 
 const YouTubeThumbnail = ({ videoId }) => {
-  // 썸네일 주소
-  const thumbnailurl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
-  // 영상 주소
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+  // 썸네일 저장 state
+  const [thumbnailurl, setThumbnailurl] = useState(null);
 
-  // 유튜브 제목 저장할 state
-  const [title, setTitle] = useState("");
+  // 비디오 id 저장 state
+  const [id, setId] = useState(null);
+
+  // 영상 정보 받아오는 코드
+  const { data, isLoading } = useFetchData("/playlists/videos/next");
+
+  // 영상 클릭했을 때 봤던 영상이라고 체크하는 함수
+  const { postData } = usePostData(`/playlists/videos/${id}`);
+
+  // videoId 뽑아내기 위한 코드
+  useEffect(() => {
+    const videoId = data?.url.match(/v=([^&]+)/)[1];
+    setId(data?.id);
+    setThumbnailurl(`https://img.youtube.com/vi/${videoId}/0.jpg`);
+  }, [data]);
 
   // 실행 버튼 클릭하면 유튜브 영상으로 넘어가게 하는 함수
   const handleClick = () => {
-    window.open(videoUrl, "_blank");
+    postData();
+    window.open(data?.url, "_blank");
   };
 
-  // 유튜브 제목 가져오는 uesEffect
-  useEffect(() => {
-    fetchVideoTitle(videoId).then((title) => {
-      setTitle(title);
-    });
-  }, []);
+  if (isLoading) return "Loading...";
 
   return (
     <Container>
@@ -34,7 +42,7 @@ const YouTubeThumbnail = ({ videoId }) => {
               <H2>
                 보고 있던 트레이닝 영상 <br /> 마저 시청하기
               </H2>
-              <P>{title}</P>
+              <P>{data?.title}</P>
             </div>
             <Button onClick={handleClick}>
               <Image src={playButton}></Image>

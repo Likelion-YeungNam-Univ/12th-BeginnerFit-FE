@@ -1,25 +1,20 @@
-import { responsiveSize } from "../../utils/Mediaquery";
-import DropDown from "../../components/Community/DropDown";
+import { responsiveSize } from "../utils/Mediaquery";
+import DropDown from "../components/Community/DropDown";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { RowContainer } from "../../styles/GlobalStyle";
+import { RowContainer } from "../styles/GlobalStyle";
 
-export default function Header2({ isDrop }) {
+export default function BackHeader({ padding, option }) {
   const navigate = useNavigate();
+
+  // 뒤로 가기 버튼 눌렀을 때 실행할 함수
   const handleBack = () => {
     navigate(-1);
   };
-
-  const ResponsiveIcon = styled(IoIosArrowBack)`
-    cursor: pointer;
-    font-size: 25px;
-  `;
   return (
     <>
-      <RowContainer style={{ padding: `${responsiveSize("20")}` }}>
-        <ResponsiveIcon onClick={handleBack} />
-        {isDrop ? <DropDown /> : undefined}
+      <RowContainer style={{ padding: `${responsiveSize(padding)}` }}>
         <IoIosArrowBack
           style={{
             cursor: "pointer",
@@ -28,6 +23,7 @@ export default function Header2({ isDrop }) {
           }}
           onClick={handleBack}
         />
+        {option && <DropDown />}
       </RowContainer>
     </>
   );

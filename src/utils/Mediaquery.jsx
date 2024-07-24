@@ -1,7 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import PropTypes from "prop-types";
-import { css } from 'styled-components';
 const Mobile = ({ children }) => {
   const isMobile = useMediaQuery({
     query: "(max-width:600px)",
@@ -27,6 +26,7 @@ PC.propTypes = {
 // 반응형 크기 계산 함수
 // 반응형 크기 계산 함수
 const responsiveSize = (pixelValue) => `calc(${pixelValue}px + (100vw/1920))`;
+
 
 
 export { Mobile, PC, responsiveSize };
