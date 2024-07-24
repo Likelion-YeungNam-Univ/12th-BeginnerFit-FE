@@ -7,6 +7,8 @@ import SignUp from "./pages/SignUp";
 import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
 
+import Main from "./pages/main";
+
 function App() {
   return (
     <>
@@ -18,7 +20,9 @@ function App() {
         <Route path="/signup" element={<SignUp/>}></Route>
         <Route path="/community" element={<Community />}></Route>
         <Route path="/community/posts" element={<DetailBoard />}></Route>
-
+        <Route path="/posts" element={<Community />}></Route>
+        <Route path="/posts/:idx" element={<DetailBoard />}></Route>
+        <Route path="/main" element={<Main />}></Route>
       </Routes>
     </>
   );
