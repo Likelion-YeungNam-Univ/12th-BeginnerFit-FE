@@ -1,46 +1,101 @@
 import React from "react";
 import { useState } from "react";
-import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
+import styled, { css } from 'styled-components';
 
 function SignUp() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
+    
+    const [emailValid, setEmailValid] = useState(false);
+    const [pwValid, setPwValid] = useState(false);
+    const [pwCheck, setPwCheck] = useState(false);
 
-    const handleSubmit = async(e) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email);
-        console.log(password);
-        console.log(name);
+        if (emailValid && pwValid){
+            alert('회원가입 성공!');
+            navigate("/main");
+        }
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+        const regex = 
+        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        if (regex.test(e.target.value)){
+            // 정규표현식 통과 시
+            setEmailValid(true);
+        } else{
+            setEmailValid(false);
+        }
+    }
+    const handlePw = (e) => {
+        setPassword(e.target.value);
+        const regex = 
+        /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,14}$/;
+        if (regex.test(e.target.value)){
+            // 정규표현식 통과 시
+            setPwValid(true);
+        } else{
+            setPwValid(false);
+        }
     }
 
     return(
         <Wrapper>
             <SignUpBox>
-                <Logo></Logo>
+                <h2>회원 정보를 입력하세요.</h2>
                 <SignUpForm onSubmit={handleSubmit}>
-                    <div>아이디</div>
+                    <ItemName>이메일</ItemName>
                     <MyInput 
                         type='email'
                         placeholder="아이디를 입력하세요"
                         value={email}
-                        onChange={(e)=>{setEmail(e.target.value)}}
+                        onChange={handleEmail}
+                        emailInput
                     ></MyInput>
-                    <div>비밀번호</div>
-                    <MyInput 
-                        type='password'
-                        placeholder="비밀번호를 입력하세요"
-                        value={password}
-                        onChange={(e)=>{setPassword(e.target.value)}}
-                    ></MyInput>
-                    <div>닉네임</div>
+                    <ValidButton>인증번호 받기</ValidButton>
+                    <ErrorMsg>
+                        {!emailValid && email.length > 0 && (
+                            <div>형식이 올바르지 않습니다. 다시 입력해주세요.</div>
+                        )}
+                    </ErrorMsg>
+
+                    <ItemName>인증번호</ItemName>
                     <MyInput 
                         type='text'
-                        placeholder="이름을 입력하세요"
-                        value={name}
-                        onChange={(e)=>{setName(e.target.value)}}
-                    ></MyInput>
-                    <SignUpButton type="submit">회원가입</SignUpButton>
+                        placeholder="6자리 인증번호를 입력해주세요"
+                        // value={}
+                        // onChange={}
+                        ></MyInput>
+
+                    <ItemName>비밀번호</ItemName>
+                    <MyInput 
+                        type='password'
+                        placeholder="영어, 숫자, 특수문자를 포함한 8~14자리"
+                        value={password}
+                        onChange={handlePw}
+                        ></MyInput>
+                    <ErrorMsg>
+                        {!pwValid && password.length > 0 && (
+                            <div>영문, 숫자, 특수문자 포함 8자~14자 입력해주세요.</div>
+                        )}
+                    </ErrorMsg>
+                    <ItemName>비밀번호 확인</ItemName>
+                    <MyInput 
+                        type='password'
+                        placeholder="비밀번호 재입력"
+                        value={pwCheck}
+                        onChange={(e)=> setPwCheck(e.target.value)}
+                        ></MyInput>
+                    <ErrorMsg>
+                        {password != pwCheck && pwCheck.length > 0 && (
+                            <div>비밀번호가 일치하지 않습니다.</div>
+                        )}
+                    </ErrorMsg>
+                    <SignUpButton type="submit">다음으로</SignUpButton>
                 </SignUpForm>
             </SignUpBox>
         </Wrapper>
@@ -61,28 +116,46 @@ const SignUpBox = styled.div`
     margin: 0px auto 150px auto;
 `
 
-const Logo = styled.img.attrs({
-    src: "/src/images/logo.png",
-    alt: "BeginnerFit"
-})`
-    margin: 0px auto 50px auto;
-    width: 60%;
-`
 
 const SignUpForm = styled.form`
-    width: 100%;
+    width: 500px;
     border-radius: 15px;
+`
+
+const ItemName = styled.div`
+    margin-top: 15px;
 `
 
 const MyInput = styled.input`
     width: 100%;
     background-color: #f5f5f5;
     padding: 15px;
-    margin: 5px 0px 15px 0px;
+    margin: 5px 0px;
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
-    margin-bottom: 15px;
+
+    ${(props) =>
+    props.emailInput &&
+    css`
+      width: 74%;
+      `}
+`
+
+const ValidButton = styled.button`
+    width: 24%;
+    background-color: #653eff;
+    color: white;
+    padding: 15px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    box-sizing: border-box;
+`
+
+const ErrorMsg = styled.div`
+    color: red;
+    font-size: small;
 `
 
 const SignUpButton = styled.button`
