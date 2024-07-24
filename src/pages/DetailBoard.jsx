@@ -9,36 +9,31 @@ import { BottomNavContainer } from "../components/BottomNav";
 import { responsiveSize } from "../utils/Mediaquery";
 import { FiChevronRight } from "react-icons/fi";
 import { commentApi } from "../apis/commentApi";
+import { getCommentApi } from "../apis/getCommentApi";
 
 export default function DetailBoard() {
   const { idx } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //환경변수에서 테스트서버가져오기
-  const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
-
-  const getPost = async () => {
+  //게시물 불러오기
+  const handleGetPosts = async () => {
     try {
-      const url = `${TEST_SERVER_URL}/posts/${idx}`;
-      console.log("Request URL:", url); // 요청 URL 확인
-      const response = await axios.get(url);
-      console.log("Response data:", response.data); // 응답 데이터 로그
-      setPost(response.data);
-      setLoading(false);
+      //게시물 불러오는 함수 호출
+      await getCommentApi(idx, post, setPost, setLoading);
     } catch (error) {
-      console.error("Error fetching post:", error);
+      console.log("게시물 불러오기 실패", error);
     }
   };
 
   useEffect(() => {
-    getPost();
+   handleGetPosts();
   }, [idx]);
+
 
   //댓글 작성관리
   const [comment, setComment] = useState("");
   const accessToken = "";
-
   const isCommentEmpty = comment.trim().length === 0;
 
   const handleCommentSubmit = async () => {
