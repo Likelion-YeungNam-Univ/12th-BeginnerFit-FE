@@ -68,7 +68,7 @@ export const MainContent = styled.div`
   min-height: 100vh;
 `;
 
-const MainH2 = styled.h1`
+export const MainH2 = styled.h1`
   margin-top: 40px;
   margin-bottom: 20px;
 `;
