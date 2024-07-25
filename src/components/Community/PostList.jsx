@@ -12,31 +12,39 @@ import axios from "axios";
 export default function PostList() {
   //const [posts, setPosts] = useState([]);
   const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
-
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
+  //임시 토큰
+  const TOKEN = import.meta.env.VITE_TOKEN;
+
+  // axios 인스턴스 생성
+  const api = axios.create({
+    baseURL: "/api",
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
+
   //게시글 불러오기함수
   const getPost = async () => {
     try {
-      const response = await axios.get(`${TEST_SERVER_URL}/posts`);
+      const response = await api.get("/posts");
+      console.log("API Response:", response.data); // 응답 데이터 구조 확인
       setPosts(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   };
+  //apis 파일에 정리 필요
 
   useEffect(() => {
     getPost();
   }, []);
-  // useEffect(() => {
-  //   fetch(`${TEST_SERVER_URL}/posts`)
-  //     .then((response) => response.json())
-  //     .then((data) => setPosts(data))
-  //     .catch((error) => console.log(error));
-  // }, []);
 
   return (
     <>
@@ -52,23 +60,21 @@ export default function PostList() {
               color: "black",
             }}
           >
-            <ContentContaienr key={post.id}>
-              <TitleContainer>
-                <TitleAndTime>
-                  <TitleText>{post.title}</TitleText>
-                  <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
-                </TitleAndTime>
+            <ContentContaienr>
+              <LeftContent>
+                <TitleText>{post.title}</TitleText>
                 <ContentText>{post.content}</ContentText>
-                <RowContainer>
-                  <IdText>{post.author}</IdText>
-                  <HeartCommentContainer>
-                    <LuHeart />
-                    <HeartCommentText>{post.likes}</HeartCommentText>
-                    <GoComment />
-                    <HeartCommentText>{post.comments}</HeartCommentText>
-                  </HeartCommentContainer>
-                </RowContainer>
-              </TitleContainer>
+                <IdText>{post.author}</IdText>
+              </LeftContent>
+              <RightContent>
+                <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
+                <HeartCommentContainer>
+                  <LuHeart />
+                  <HeartCommentText>{post.likes}</HeartCommentText>
+                  <GoComment />
+                  <HeartCommentText>{post.comments}</HeartCommentText>
+                </HeartCommentContainer>
+              </RightContent>
             </ContentContaienr>
           </Link>
         ))
@@ -82,42 +88,38 @@ const ContentContaienr = styled.li`
   display: flex;
   cursor: pointer;
   padding: 10px 0;
-`;
-//제목 내용 아이디 컨테이너박스
-const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-//타이틀+시간 컨테이너 박스
-const TitleAndTime = styled.div`
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
-//좋아요,하트 컨테이너 박스
-const HeartCommentContainer = styled.div`
+const LeftContent = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 5px;
+  flex-direction: column;
+`;
+
+const RightContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 const ContentText = styled.div`
   font-size: ${responsiveSize("16")};
   font-weight: 400;
 `;
+
 const IdText = styled.span`
   font-size: ${responsiveSize("12")};
   font-weight: 400;
   color: ${({ theme }) => theme.colors.gray02};
 `;
 
-const HeartCommentText = styled.a`
-  font-size: ${responsiveSize("12")};
-  color: ${({ theme }) => theme.colors.gray02};
-`;
-const RowContainer = styled.div`
+const HeartCommentContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 5px;
+  margin-top: 5px;
+`;
+
+const HeartCommentText = styled.span`
+  font-size: ${responsiveSize("12")};
+  color: ${({ theme }) => theme.colors.gray02};
 `;

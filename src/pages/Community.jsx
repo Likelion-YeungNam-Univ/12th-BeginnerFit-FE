@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
 import { useEffect, useState } from "react";
 import writebtn from "../images/writebtn.png";
-import Header from "../components/Community/Header";
+import { Header } from "../layouts/header";
 import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
+import BottomNav from "../components/BottomNav";
 
 export default function Community() {
   const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
@@ -13,7 +14,7 @@ export default function Community() {
     <Wrapper>
       <Container>
         <MainContent>
-          <Header />
+          <Header type={"option"} size={"30"} />
           <RowContainer>
             <Title>Community</Title>
             <WriteImgBtn src={writebtn} alt="WriteBtn" />
@@ -22,6 +23,7 @@ export default function Community() {
           <PostList />
         </MainContent>
       </Container>
+      <BottomNav />
     </Wrapper>
   );
 }
@@ -33,11 +35,12 @@ const Wrapper = styled.div`
 const Container = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
-  height: 100%;
+  height: 100vh;
 `;
 const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
+  height: 100vh;
   padding: 20px;
 `;
 
