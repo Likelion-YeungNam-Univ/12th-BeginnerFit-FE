@@ -1,12 +1,21 @@
-import { MainH2, Wrapper, Container, MainContent } from "./Main";
+import {
+  MainWrapper,
+  MainContainer,
+  MainContent,
+  MainH2,
+  MainH3,
+} from "../styles/GlobalStyle";
 import { Header } from "../layouts/header";
 import TagList from "../components/Main/TagList";
 import Weight from "../components/MyPage/Weight";
 
 export default function MyPage() {
+  // 현재 달 구하는 코드
+  const todayMonth = new Date().getMonth() + 1;
+
   return (
-    <Wrapper>
-      <Container>
+    <MainWrapper>
+      <MainContainer>
         <MainContent>
           <Header type={"people"} size={30} />
           <MainH2>
@@ -16,8 +25,13 @@ export default function MyPage() {
           </MainH2>
           <TagList />
           <Weight />
+          <MainH3>
+            사용자님의
+            <br />
+            {todayMonth}월 출석 캘린더
+          </MainH3>
         </MainContent>
-      </Container>
-    </Wrapper>
+      </MainContainer>
+    </MainWrapper>
   );
 }

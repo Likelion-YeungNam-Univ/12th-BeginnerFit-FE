@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Wrapper, Container, MainContent } from "./Main";
+import { MainContainer, MainWrapper, MainContent } from "../styles/GlobalStyle";
 import BackHeader from "../layouts/BackHeader";
 import styled from "styled-components";
 import { responsiveSize } from "../utils/Mediaquery";
@@ -22,8 +22,8 @@ export default function PlayList() {
   if (isLoading) return "Loading...";
 
   return (
-    <Wrapper>
-      <Container>
+    <MainWrapper>
+      <MainContainer>
         <MainContent>
           <BackHeader option={false} padding={"0"} />
           <TopWrap>
@@ -37,8 +37,8 @@ export default function PlayList() {
           </TopWrap>
           {data && <VideoList videoIds={data.videos} />}
         </MainContent>
-      </Container>
-    </Wrapper>
+      </MainContainer>
+    </MainWrapper>
   );
 }
 
