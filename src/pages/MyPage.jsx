@@ -11,6 +11,7 @@ import Weight from "../components/MyPage/Weight";
 import Calendar from "../components/MyPage/Calendar";
 import styled from "styled-components";
 import Circle from "../components/MyPage/Circle";
+import { MyChallengeList } from "../components/MyPage/MyChallengeList";
 
 export default function MyPage() {
   // 현재 달 구하는 코드
@@ -36,16 +37,35 @@ export default function MyPage() {
           </MainH3>
           <Calendar />
           <Circle />
-          <MainH3>
-            {todayMonth}월 한달동안
-            <br />
-            23개의 챌린지를 성공했어요!
-          </MainH3>
+          <TextWrap>
+            <MainH3>
+              {todayMonth}월 한달동안
+              <br />
+              23개의 챌린지를 성공했어요!
+            </MainH3>
+            <Total>전체보기</Total>
+          </TextWrap>
+          <MyChallengeList />
         </MainContent>
       </MainContainer>
     </MainWrapper>
   );
 }
+
+const Total = styled.p`
+  cursor: pointer;
+  display: flex;
+  align-items: end;
+  color: ${({ theme }) => theme.colors.gray02};
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const TextWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const P = styled.p`
   cursor: pointer;
