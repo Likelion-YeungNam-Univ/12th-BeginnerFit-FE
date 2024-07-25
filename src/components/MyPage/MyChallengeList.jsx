@@ -7,7 +7,7 @@ const challengeList = [
   { content: "헬스장 가기" },
 ];
 
-export const MyChallengeList = () => {
+export default function MyChallengeList() {
   return (
     <div>
       {challengeList.map((item, idx) => (
@@ -21,4 +21,4 @@ export const MyChallengeList = () => {
       ))}
     </div>
   );
-};
+}

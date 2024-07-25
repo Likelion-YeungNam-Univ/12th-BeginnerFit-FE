@@ -11,7 +11,7 @@ import Weight from "../components/MyPage/Weight";
 import Calendar from "../components/MyPage/Calendar";
 import styled from "styled-components";
 import Circle from "../components/MyPage/Circle";
-import { MyChallengeList } from "../components/MyPage/MyChallengeList";
+import MyChallengeList from "../components/MyPage/MyChallengeList";
 import Setting from "../components/MyPage/Setting";
 import Videos from "../components/MyPage/Videos";
 
