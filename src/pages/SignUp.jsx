@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from 'styled-components';
@@ -9,6 +10,16 @@ function SignUp() {
     const [emailValid, setEmailValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
     const [pwCheck, setPwCheck] = useState('');
+    const [pwCheckValid, setPwCheckValid] = useState(false);
+    const [allow, setAllow] = useState(false);
+
+    useEffect(()=>{
+        if(emailValid && pwValid && pwCheck){
+            setAllow(true);
+            return;
+        }
+        setAllow(false);
+    },[ emailValid, pwValid, pwCheckValid ]);
 
     const navigate = useNavigate();
 
@@ -41,11 +52,23 @@ function SignUp() {
             setPwValid(false);
         }
     }
+    const handlePwCheck = (e) => {
+        setPwCheck(e.target.value);
+        if (password === pwCheck){
+            setPwCheckValid(true);
+        } else{
+            setPwCheckValid(false);
+        }
+    }
 
     return(
         <Wrapper>
             <SignUpBox>
-                <h2>회원 정보를 입력하세요.</h2>
+                <h2>
+                    회원 정보를 
+                    <br/>
+                    입력하세요.
+                </h2>
                 <SignUpForm onSubmit={handleSubmit}>
                     <ItemName>이메일</ItemName>
                     <MyInput 
@@ -59,7 +82,7 @@ function SignUp() {
                     <ErrorMsg>
                         {!emailValid && email.length > 0 && (
                             <div>형식이 올바르지 않습니다. 다시 입력해주세요.</div>
-                        )}
+                            )}
                     </ErrorMsg>
 
                     <ItemName>인증번호</ItemName>
@@ -68,7 +91,9 @@ function SignUp() {
                         placeholder="6자리 인증번호를 입력해주세요"
                         // value={}
                         // onChange={}
+                        emailInput
                         ></MyInput>
+                    <ValidButton>확인</ValidButton>
 
                     <ItemName>비밀번호</ItemName>
                     <MyInput 
@@ -87,14 +112,14 @@ function SignUp() {
                         type='password'
                         placeholder="비밀번호 재입력"
                         value={pwCheck}
-                        onChange={(e)=> setPwCheck(e.target.value)}
+                        onChange={handlePwCheck}
                         ></MyInput>
                     <ErrorMsg>
-                        {password != pwCheck && pwCheck.length > 0 && (
+                        {password != pwCheck && pwCheck.length > 0 (
                             <div>비밀번호가 일치하지 않습니다.</div>
                         )}
                     </ErrorMsg>
-                    <SignUpButton type="submit">다음으로</SignUpButton>
+                    <SignUpButton type="submit" disabled={!allow} >다음으로</SignUpButton>
                 </SignUpForm>
             </SignUpBox>
         </Wrapper>
@@ -144,7 +169,7 @@ const MyInput = styled.input`
 
 const ValidButton = styled.button`
     width: 24%;
-    background-color: #653eff;
+    background-color: #000000;
     color: white;
     padding: 15px;
     margin-left: 10px;
@@ -168,6 +193,10 @@ const SignUpButton = styled.button`
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
+    &:disabled{
+        cursor: pointer;
+        background-color: #9a9a9a;
+    }
 `
 
 export default SignUp;
