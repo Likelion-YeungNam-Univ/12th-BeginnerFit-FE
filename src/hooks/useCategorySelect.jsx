@@ -23,7 +23,7 @@ export const useCategorySelect = (list, onSubmit) => {
       //한 번 더 눌러서 취소시
       if (newSelected[key].includes(value)) {
         newSelected[key] = newSelected[key].filter(
-          (item) => item !== newSelected
+          (item) => item !== value
         );
       }
       //카테고리아이템을 담을때
@@ -37,7 +37,7 @@ export const useCategorySelect = (list, onSubmit) => {
   };
   useEffect(()=>{
     onSubmit(selectedItems);
-  },[]);
+  },[selectedItems]);
 
   return {selectedItems,handleSelectedItems};
 };

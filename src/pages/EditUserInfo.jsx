@@ -3,7 +3,7 @@ import Header2 from "../components/Community/Header2";
 import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function EditUserInfo() {
   //음수값 자릿수 제한
@@ -46,6 +46,36 @@ export default function EditUserInfo() {
   const handleCategorySubmit = (selectedCategories) => {
     setForm((prev) => ({ ...prev, categories: selectedCategories }));
   };
+
+  //입력창 모두 입력하면 버튼 활성화
+  //폼 유효성검사
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const {
+      height,
+      weight,
+      targetWeight,
+      date,
+      targetDate,
+      exerciseTime,
+      categories,
+    } = form;
+    //카테고리 유효성(각 카테고리별 1개이상은 선택)
+    const isCategoriesValid = Object.values(categories).some(
+      (arr) => arr.length > 0
+    );
+    //전체 유효성
+    const isValid =
+      height > 0 &&
+      weight > 0 &&
+      targetWeight > 0 &&
+      date &&
+      targetDate &&
+      exerciseTime &&
+      isCategoriesValid;
+    setIsFormValid(isValid);
+  }, [form]);
 
   return (
     <Wrapper>
@@ -103,6 +133,7 @@ export default function EditUserInfo() {
               <P>기간</P>
               <SubContainer>
                 <Input
+                  style={{ fontSize: "12px" }}
                   type="date"
                   name="date"
                   value={form.date}
@@ -114,6 +145,7 @@ export default function EditUserInfo() {
               <P hiddenText>x</P>
               <SubContainer>
                 <Input
+                  style={{ fontSize: "12px" }}
                   type="date"
                   name="targetDate"
                   value={form.targetDate}
@@ -138,7 +170,13 @@ export default function EditUserInfo() {
           <SetCategory onSubmit={handleCategorySubmit}></SetCategory>
         </RootContainer>
         <Div>
-          <SubmitButton type="submit">수정하기</SubmitButton>
+          <SubmitButton
+            $isFormValid={isFormValid}
+            disabled={!isFormValid}
+            type="submit"
+          >
+            수정하기
+          </SubmitButton>
         </Div>
       </form>
     </Wrapper>
@@ -204,13 +242,15 @@ const Div = styled.div`
 const SubmitButton = styled.button`
   margin-top: ${responsiveSize(30)};
   height: ${responsiveSize(77)};
-  font-size: ${responsiveSize(40)};
+  font-size: ${responsiveSize(30)};
   width: ${responsiveSize(550)};
   margin-bottom: ${responsiveSize(40)};
   border-radius: ${responsiveSize(12)};
   text-align: center;
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.purple};
+  color: ${({ theme, $isFormValid }) =>
+    $isFormValid ? theme.colors.white : theme.colors.gray01};
+  background-color: ${({ theme, $isFormValid }) =>
+    $isFormValid ? theme.colors.purple : theme.colors.gray02};
   border: none;
   cursor: pointer;
 
