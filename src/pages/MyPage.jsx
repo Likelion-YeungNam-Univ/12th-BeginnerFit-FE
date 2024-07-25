@@ -12,6 +12,8 @@ import Calendar from "../components/MyPage/Calendar";
 import styled from "styled-components";
 import Circle from "../components/MyPage/Circle";
 import { MyChallengeList } from "../components/MyPage/MyChallengeList";
+import Setting from "../components/MyPage/Setting";
+import Videos from "../components/MyPage/Videos";
 
 export default function MyPage() {
   // 현재 달 구하는 코드
@@ -46,6 +48,17 @@ export default function MyPage() {
             <Total>전체보기</Total>
           </TextWrap>
           <MyChallengeList />
+          <TextWrap>
+            <MainH3>
+              사용자님의
+              <br />
+              {todayMonth}월 홈트 내역
+            </MainH3>
+            <Total>전체보기</Total>
+          </TextWrap>
+          <Videos />
+          <EmptyDiv />
+          <Setting />
         </MainContent>
       </MainContainer>
     </MainWrapper>
@@ -75,4 +88,13 @@ const P = styled.p`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const EmptyDiv = styled.div`
+  width: 107.5%;
+  position: relative;
+  left: -21px;
+  height: 20px;
+  background-color: ${({ theme }) => theme.colors.gray01};
+  margin-bottom: 20px;
 `;
