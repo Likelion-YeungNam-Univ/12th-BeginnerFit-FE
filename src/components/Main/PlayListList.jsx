@@ -16,13 +16,11 @@ export default function PlayListList() {
   // 자동 슬라이드 효과
   useEffect(() => {
     if (!isAutoSliding) return;
-    console.log(data);
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % 5);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % data.length);
     }, 1500); // 0.5초마다 슬라이드 이동
-    console.log(data);
     return () => clearInterval(interval);
-  }, [isAutoSliding]);
+  }, [isAutoSliding, data]);
 
   // 버튼 클릭 핸들러
   const handleButtonClick = (index) => {
@@ -32,7 +30,7 @@ export default function PlayListList() {
 
   return (
     <Container>
-      <SlideContainer $currentSlide={currentSlide}>
+      <SlideContainer $currentSlide={currentSlide} $dataLength={data?.length}>
         {data?.map((item) => (
           <PlayList
             key={item.id}
@@ -63,9 +61,11 @@ const Container = styled.div`
 
 const SlideContainer = styled.div`
   display: flex;
-  width: 500%;
+  width: ${({ $dataLength }) => `${$dataLength * 100}%` ?? `500%`};
   height: ${responsiveSize("300")};
-  transform: translateX(-${(props) => props.$currentSlide * 20}%);
+  transform: translateX(
+    -${(props) => props.$currentSlide * (100 / (props.$dataLength ?? 20))}%
+  );
   transition: transform 0.3s ease-in-out;
   margin-bottom: 10px;
 `;
