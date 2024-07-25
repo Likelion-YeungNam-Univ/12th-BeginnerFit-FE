@@ -64,10 +64,11 @@ export const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
   padding: 20px;
+  box-sizing: border-box;
   min-height: 100vh;
 `;
 
-const MainH2 = styled.h1`
+export const MainH2 = styled.h1`
   margin-top: 40px;
   margin-bottom: 20px;
 `;

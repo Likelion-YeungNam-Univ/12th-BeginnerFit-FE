@@ -9,6 +9,7 @@ import DetailBoard from "./pages/DetailBoard";
 import Main from "./pages/main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/main" element={<Main />}></Route>
         <Route path="/mypage/editinfo" element={<EditUserInfo></EditUserInfo>}></Route>
         <Route path="/playlist" element={<PlayList />}></Route>
-
+        <Route path="/mypage" element={<MyPage />}></Route>
       </Routes>
     </>
   );
