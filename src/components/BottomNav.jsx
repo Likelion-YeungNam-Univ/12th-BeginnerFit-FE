@@ -17,7 +17,7 @@ export default function BottomNav() {
       </div>
       {/* 프로필 이동 */}
       <div>
-        <Link>
+        <Link to="/mypage">
           <StyledIcon as={FiUser} />
         </Link>
       </div>
