@@ -13,8 +13,9 @@ function SignUp() {
     const [pwCheckValid, setPwCheckValid] = useState(false);
     const [allow, setAllow] = useState(false);
 
+    // 버튼 활성화 (이메일 인증 과정도 거쳐야함)
     useEffect(()=>{
-        if(emailValid && pwValid && pwCheck){
+        if(emailValid && pwValid && pwCheckValid){
             setAllow(true);
             return;
         }
@@ -54,7 +55,7 @@ function SignUp() {
     }
     const handlePwCheck = (e) => {
         setPwCheck(e.target.value);
-        if (password === pwCheck){
+        if (password == e.target.value){
             setPwCheckValid(true);
         } else{
             setPwCheckValid(false);
@@ -76,7 +77,7 @@ function SignUp() {
                         placeholder="아이디를 입력하세요"
                         value={email}
                         onChange={handleEmail}
-                        emailInput
+                        validInput
                     ></MyInput>
                     <ValidButton>인증번호 받기</ValidButton>
                     <ErrorMsg>
@@ -88,10 +89,11 @@ function SignUp() {
                     <ItemName>인증번호</ItemName>
                     <MyInput 
                         type='text'
+                        maxLength={6}
                         placeholder="6자리 인증번호를 입력해주세요"
                         // value={}
                         // onChange={}
-                        emailInput
+                        validInput
                         ></MyInput>
                     <ValidButton>확인</ValidButton>
 
@@ -115,7 +117,7 @@ function SignUp() {
                         onChange={handlePwCheck}
                         ></MyInput>
                     <ErrorMsg>
-                        {password != pwCheck && pwCheck.length > 0 (
+                        {password !== pwCheck && pwCheck.length > 0 && (
                             <div>비밀번호가 일치하지 않습니다.</div>
                         )}
                     </ErrorMsg>
@@ -161,7 +163,7 @@ const MyInput = styled.input`
     box-sizing: border-box;
 
     ${(props) =>
-    props.emailInput &&
+    props.validInput &&
     css`
       width: 74%;
       `}
@@ -193,8 +195,9 @@ const SignUpButton = styled.button`
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
+    cursor: pointer;
     &:disabled{
-        cursor: pointer;
+        cursor: not-allowed;
         background-color: #9a9a9a;
     }
 `
