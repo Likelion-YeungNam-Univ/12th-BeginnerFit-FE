@@ -4,15 +4,10 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { LuHeart } from "react-icons/lu";
 import { GoComment } from "react-icons/go";
 import { TimeCalculator } from "../../utils/TimeCalculator.jsx";
-import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-import axios from "axios";
-import api from "../../apis/axios.jsx";
+import { Link } from "react-router-dom";
 import useFetchData from "../../hooks/useFetchData.jsx";
 
 export default function PostList() {
-
   const { arr, loading } = useFetchData("/posts");
 
   return (
@@ -39,7 +34,7 @@ export default function PostList() {
                 <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
                 <HeartCommentContainer>
                   <LuHeart />
-                  <HeartCommentText>{post.likes}</HeartCommentText>
+                  <HeartCommentText>{post.likeCnt}</HeartCommentText>
                   <GoComment />
                   <HeartCommentText>{post.comments}</HeartCommentText>
                 </HeartCommentContainer>
