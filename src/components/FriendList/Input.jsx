@@ -1,11 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import { useFriendSearchStore } from "../../store/useFriendSearchStore";
 
 export const Input = () => {
+  const { value, setValue } = useFriendSearchStore();
+
   return (
     <Container>
-      <CostomInput placeholder="친구 검색" />
+      <CostomInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="친구 검색"
+      />
       <IconWrap>
         <FaSearch color="#9A9A9A" size={20} />
       </IconWrap>
