@@ -10,6 +10,7 @@ import TagList from "../components/Main/TagList";
 import Weight from "../components/MyPage/Weight";
 import Calendar from "../components/MyPage/Calendar";
 import styled from "styled-components";
+import Circle from "../components/MyPage/Circle";
 
 export default function MyPage() {
   // 현재 달 구하는 코드
@@ -34,6 +35,12 @@ export default function MyPage() {
             {todayMonth}월 출석 캘린더
           </MainH3>
           <Calendar />
+          <Circle />
+          <MainH3>
+            {todayMonth}월 한달동안
+            <br />
+            23개의 챌린지를 성공했어요!
+          </MainH3>
         </MainContent>
       </MainContainer>
     </MainWrapper>
