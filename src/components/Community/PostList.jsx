@@ -6,10 +6,35 @@ import { GoComment } from "react-icons/go";
 import { TimeCalculator } from "../../utils/TimeCalculator.jsx";
 import { Link } from "react-router-dom";
 import useFetchData from "../../hooks/useFetchData.jsx";
+import useCommentStore from "../../store/commentStore.js";
+import { commentApi } from "../../apis/communityApi/commentApi.jsx";
+import { useEffect } from "react";
+import { getCommentApi } from "../../apis/communityApi/getCommentApi.jsx";
 
 export default function PostList() {
   const { arr, loading } = useFetchData("/posts");
 
+  //댓글 수 관리
+  const commentCounts = useCommentStore((state) => state.commentCounts);
+  const setCommentCount = useCommentStore((state) => state.setCommentCount);
+
+  useEffect(() => {
+    async function loadInitialCommentCounts() {
+      if (arr && arr.length > 0) {
+        for (const post of arr) {
+          await getCommentApi(
+            post.id,
+            1,
+            () => {},
+            null,
+            () => {}
+          );
+        }
+      }
+    }
+
+    loadInitialCommentCounts();
+  }, [arr, setCommentCount]);
   return (
     <>
       {loading ? (
@@ -36,7 +61,9 @@ export default function PostList() {
                   <LuHeart />
                   <HeartCommentText>{post.likeCnt}</HeartCommentText>
                   <GoComment />
-                  <HeartCommentText>{post.comments}</HeartCommentText>
+                  <HeartCommentText>
+                    {commentCounts[post.id] || 0}
+                  </HeartCommentText>
                 </HeartCommentContainer>
               </RightContent>
             </ContentContaienr>

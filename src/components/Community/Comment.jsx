@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import profile from "../../images/profile.png";
 import Button from "@mui/material/Button";
 import { getCommentApi } from "../../apis/communityApi/getCommentApi";
+import useCommentStore from "../../store/commentStore";
 
 export default function Comment({ post }) {
   //테스트 서버
@@ -21,6 +22,8 @@ export default function Comment({ post }) {
   //댓글 5개씩 페이지네이션 페이지번호
   const [page, setPage] = useState(1);
 
+  //Zustand이용한 댓글 수 관리
+  const setCommentCount = useCommentStore((state) => state.setCommentCount);
   useEffect(() => {
     setComments([]);
     setPage(1);
@@ -28,11 +31,16 @@ export default function Comment({ post }) {
     getCommentApi(post.id, page, setComments, setIsLoading, setHasMore);
   }, [post.id]);
 
+  useEffect(() => {
+    setCommentCount(post.id, comments.length);
+  }, [comments.length, post.id, setCommentCount]);
+
   const handleLoadMore = () => {
     if (isLoading || !hasMore) return;
     setPage((prevPage) => prevPage + 1);
     getCommentApi(post.id, page + 1, setComments, setIsLoading, setHasMore);
   };
+
   return (
     <>
       <CommentNum>댓글 {comments.length}개</CommentNum>
