@@ -1376,7 +1376,7 @@
       "userName": "김개발",
       "profileUrl": "http://placehold.it/320x100",
       "categoryName": "정보공유",
-      "likes": null
+      "likes": 1
     },
     {
       "id": "2",
@@ -1466,7 +1466,8 @@
       "userId": 109,
       "userName": "문예술",
       "profileUrl": "https://example.com/profiles/moon.jpg",
-      "categoryName": "정보공유"
+      "categoryName": "정보공유",
+      "likes": null
     },
     {
       "id": "10",
@@ -1533,7 +1534,7 @@
       "userName": "양블록",
       "profileUrl": "https://example.com/profiles/yang.jpg",
       "categoryName": "정보공유",
-      "likes": null
+      "likes": 0
     }
   ]
 }

@@ -1,6 +1,12 @@
 import React from "react";
-import Header from "../components/Community/Header";
-import styled from "styled-components";
+import { Header } from "../layouts/header";
+import {
+  MainWrapper,
+  MainContainer,
+  MainContent,
+  MainH2,
+  MainH3,
+} from "../styles/GlobalStyle";
 import TagList from "../components/Main/TagList";
 import YouTubeThumbnail from "../components/Main/YoutubeThumnail";
 import PlayListList from "../components/Main/PlayListList";
@@ -11,11 +17,11 @@ export default function Main() {
   const today = new Date();
 
   return (
-    <Wrapper>
-      <Container>
+    <MainWrapper>
+      <MainContainer>
         <MainContent>
           {/* 헤더 내비 게이션 */}
-          <Header />
+          <Header type={"alarm"} size={"30"} />
           <MainH2>
             사용자님!
             <br />
@@ -44,34 +50,7 @@ export default function Main() {
           </MainH3>
           <UserList />
         </MainContent>
-      </Container>
-    </Wrapper>
+      </MainContainer>
+    </MainWrapper>
   );
 }
-
-const Wrapper = styled.div`
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.white};
-  height: 100%;
-`;
-
-const MainContent = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
-  border: solid 1px ${({ theme }) => theme.colors.gray04};
-  padding: 20px;
-`;
-
-const MainH2 = styled.h1`
-  margin-top: 40px;
-  margin-bottom: 20px;
-`;
-
-const MainH3 = styled.h2`
-  margin-top: 40px;
-  margin-bottom: 10px;
-`;
