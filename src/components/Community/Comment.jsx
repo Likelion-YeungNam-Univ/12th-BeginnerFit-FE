@@ -8,7 +8,7 @@ import profile from "../../images/profile.png";
 import Button from "@mui/material/Button";
 import { getCommentApi } from "../../apis/communityApi/getCommentApi";
 
-export default function Comment({ post }) {
+export default function Comment({ post, setTotalComments }) {
   //테스트 서버
   //const TEST_SERVER_URL = import.meta.env.VITE_TEST_SERVER_URL;
 
@@ -20,22 +20,44 @@ export default function Comment({ post }) {
   const [hasMore, setHasMore] = useState(true);
   //댓글 5개씩 페이지네이션 페이지번호
   const [page, setPage] = useState(1);
+  //댓글 갯수
+  const [totalComment, setTotalComment] = useState(0);
 
   useEffect(() => {
     setComments([]);
     setPage(1);
     setHasMore(true);
-    getCommentApi(post.id, page, setComments, setIsLoading, setHasMore);
+    getCommentApi(
+      post.id,
+      page,
+      setComments,
+      setIsLoading,
+      setHasMore,
+      setTotalComments
+    );
+    setTotalComment(0);
   }, [post.id]);
+
+  const updateTotalComments = (total) => {
+    setTotalComments(total); // WriteBoardMain의 상태를 업데이트
+  };
 
   const handleLoadMore = () => {
     if (isLoading || !hasMore) return;
     setPage((prevPage) => prevPage + 1);
-    getCommentApi(post.id, page + 1, setComments, setIsLoading, setHasMore);
+
+    getCommentApi(
+      post.id,
+      page + 1,
+      setComments,
+      setIsLoading,
+      setHasMore,
+      updateTotalComments
+    );
   };
   return (
     <>
-      <CommentNum>댓글 {comments.length}개</CommentNum>
+      <CommentNum>댓글 {totalComment}개</CommentNum>
       {comments.map((comment, index) => (
         <CommentItem key={index}>
           <RowContainer>

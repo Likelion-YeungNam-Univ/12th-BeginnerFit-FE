@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Header2 from "../components/Community/Header2";
 import WriteBoardMain from "../components/Community/WriteBoardMain";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
-import { BottomNavContainer } from "../components/BottomNav";
+import { BottomNavContainer } from "../styles/GlobalStyle";
 import { responsiveSize } from "../utils/Mediaquery";
 import { FiChevronRight } from "react-icons/fi";
 import { commentApi } from "../apis/communityApi/commentApi";
@@ -46,17 +46,16 @@ export default function DetailBoard() {
     }
   };
   return (
-    <>
-      <Wrapper>
-        {loading ? (
-          <h2>Loading...</h2>
-        ) : (
-          <>
-            <Header2 />
-            <WriteBoardMain post={post} />
-          </>
-        )}
-      </Wrapper>
+    <Wrapper style={{ minHeight: "100vh" }}>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          <Header2 />
+          <WriteBoardMain post={post} />
+        </>
+      )}
+
       <BottomNavContainer>
         <RowContainer
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
@@ -74,7 +73,7 @@ export default function DetailBoard() {
           </SendButton>
         </RowContainer>
       </BottomNavContainer>
-    </>
+    </Wrapper>
   );
 }
 //============================================

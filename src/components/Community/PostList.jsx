@@ -70,7 +70,7 @@ export default function PostList() {
                 <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
                 <HeartCommentContainer>
                   <LuHeart />
-                  <HeartCommentText>{post.likes}</HeartCommentText>
+                  <HeartCommentText>{post.likeCnt}</HeartCommentText>
                   <GoComment />
                   <HeartCommentText>{post.comments}</HeartCommentText>
                 </HeartCommentContainer>

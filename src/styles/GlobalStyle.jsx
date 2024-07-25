@@ -21,3 +21,18 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const BottomNavContainer = styled.nav`
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.black};
+  height: ${responsiveSize("90")};
+  border-top-left-radius: ${responsiveSize("30")};
+  border-top-right-radius: ${responsiveSize("30")};
+  z-index: 1;
+`;

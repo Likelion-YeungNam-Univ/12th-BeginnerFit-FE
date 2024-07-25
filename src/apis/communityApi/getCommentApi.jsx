@@ -5,7 +5,8 @@ export const getCommentApi = async (
   page,
   setComments,
   setIsLoading,
-  setHasMore
+  setHasMore,
+  updateTotalComments
 ) => {
   //임시 토큰
   const TOKEN = import.meta.env.VITE_TOKEN;
@@ -31,6 +32,9 @@ export const getCommentApi = async (
       },
     });
     const newComments = response.data;
+    //댓글 갯수 설정
+    updateTotalComments(response.data.length);
+
     if (Array.isArray(newComments) && newComments.length > 0) {
       //새 댓있으면 업데이트
       setComments((prevComments) => [...prevComments, ...newComments]);

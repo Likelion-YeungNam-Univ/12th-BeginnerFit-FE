@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Mobile, PC, responsiveSize } from "../utils/Mediaquery";
-import { useEffect, useState } from "react";
+import { responsiveSize } from "../utils/Mediaquery";
 import writebtn from "../images/writebtn.png";
 import { Header } from "../layouts/header";
 import CommunityButtons from "../components/Community/CommunityButtons";

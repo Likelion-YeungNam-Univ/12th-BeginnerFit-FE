@@ -18,6 +18,7 @@ export default function WriteBoardMain({ post }) {
   //좋아요 기능함수
   const [clickLike, setClickLike] = useState(false);
   const [likes, setLikes] = useState(post.likes);
+  const [totalComments, setTotalComments] = useState(0);
   console.log(post.likes);
 
   const toggleLike = async () => {
@@ -39,7 +40,7 @@ export default function WriteBoardMain({ post }) {
   return (
     <>
       <Container>
-        <RowContainer >
+        <RowContainer>
           <ProfileImg
             src={post.profileUrl || profile}
             alt="Profile"
@@ -79,13 +80,12 @@ export default function WriteBoardMain({ post }) {
       </Container>
       <RowLine />
       <Container>
-        <Comment post={post} />
+        <Comment post={post} setTotalComments={setTotalComments} />
       </Container>
     </>
   );
 }
 const Container = styled.div`
-
   padding: 0px 20px;
 `;
 const ProfileImg = styled.img`
