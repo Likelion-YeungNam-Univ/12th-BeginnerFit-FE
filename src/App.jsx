@@ -10,6 +10,7 @@ import Main from "./pages/Main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
+import HomeTranList from "./pages/HomeTrainList";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         ></Route>
         <Route path="/playlist" element={<PlayList />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/myHomeTrainList" element={<HomeTranList />} />
       </Routes>
     </>
   );

@@ -28,6 +28,11 @@ export default function MyPage() {
     nav("/mypage/editinfo");
   };
 
+  // 홈트 내역 전체보기 누른 경우 실행할 함수
+  const onViewHomeTrainList = () => {
+    nav("/myHomeTrainList");
+  };
+
   return (
     <MainWrapper>
       <MainContainer>
@@ -63,7 +68,7 @@ export default function MyPage() {
               <br />
               {todayMonth}월 홈트 내역
             </MainH3>
-            <Total>전체보기</Total>
+            <Total onClick={onViewHomeTrainList}>전체보기</Total>
           </TextWrap>
           <Videos />
           <EmptyDiv />
