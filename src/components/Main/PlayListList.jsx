@@ -16,7 +16,7 @@ export default function PlayListList() {
   // 자동 슬라이드 효과
   useEffect(() => {
     if (!isAutoSliding) return;
-
+    console.log(data);
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % 5);
     }, 1500); // 0.5초마다 슬라이드 이동

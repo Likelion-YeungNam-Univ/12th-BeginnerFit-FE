@@ -30,6 +30,7 @@ export const Image = styled.img`
 
 // 메인이랑 마이페이지에서 사용되는 스타일
 export const MainWrapper = styled.div`
+  height: 100%;
   flex-direction: column;
   align-items: center;
 `;
@@ -37,12 +38,13 @@ export const MainWrapper = styled.div`
 export const MainContainer = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
+  border: solid 1px ${({ theme }) => theme.colors.gray04};
   height: 100%;
 `;
 
 export const MainContent = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  border: solid 1px ${({ theme }) => theme.colors.gray04};
+
   padding: 20px;
   box-sizing: border-box;
   min-height: 100vh;

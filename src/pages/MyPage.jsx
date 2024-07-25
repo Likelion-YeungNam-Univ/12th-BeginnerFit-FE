@@ -14,6 +14,7 @@ import Circle from "../components/MyPage/Circle";
 import MyChallengeList from "../components/MyPage/MyChallengeList";
 import Setting from "../components/MyPage/Setting";
 import Videos from "../components/MyPage/Videos";
+import BottomNav from "../components/BottomNav";
 import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
@@ -68,6 +69,7 @@ export default function MyPage() {
           <EmptyDiv />
           <Setting />
         </MainContent>
+        <BottomNav />
       </MainContainer>
     </MainWrapper>
   );
