@@ -8,17 +8,6 @@ export const getCommentApi = async (
   setIsLoading,
   setHasMore
 ) => {
-  // //임시 토큰
-  // const TOKEN = import.meta.env.VITE_TOKEN;
-
-  // // axios 인스턴스 생성
-  // const api = axios.create({
-  //   baseURL: "/api",
-  //   headers: {
-  //     Authorization: `Bearer ${TOKEN}`,
-  //     "Content-Type": "application/json",
-  //   },
-  // });
   const setCommentCount = useCommentStore.getState().setCommentCount;
   //로딩상태 true
   if (setIsLoading) setIsLoading(true);
@@ -39,7 +28,7 @@ export const getCommentApi = async (
 
       // 총 댓글 수 계산 및 저장
       if (page === 1) {
-        const totalCount = response.headers["x-total-count"]; 
+        const totalCount = response.headers["x-total-count"];
         setCommentCount(postIdx, parseInt(totalCount) || newComments.length);
       }
     } else {

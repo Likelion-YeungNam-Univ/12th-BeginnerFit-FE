@@ -57,7 +57,7 @@ export default function DetailBoard() {
           </>
         )}
       </Wrapper>
-      <BottomNavContainer>
+      {/* <BottomNavContainer>
         <RowContainer
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
         >
@@ -73,7 +73,7 @@ export default function DetailBoard() {
             />
           </SendButton>
         </RowContainer>
-      </BottomNavContainer>
+      </BottomNavContainer> */}
     </>
   );
 }
