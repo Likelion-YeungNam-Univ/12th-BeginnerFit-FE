@@ -37,8 +37,8 @@ export default function Page2 () {
         targetWeight: 0,
         date: "",
         targetDate: "",
-        exerciseTime: 0,
-        categories: {},
+        // exerciseTime: 0,
+        // categories: {},
     });
 
     //입력값 관리
@@ -56,15 +56,6 @@ export default function Page2 () {
         console.log(form);
     };
 
-    // // 버튼 활성화
-    // useEffect(()=>{
-    //     if(nameValid, isFormValid){
-    //         setAllow(true);
-    //         return;
-    //     }
-    //     setAllow(false);
-    // },[ nameValid, isFormValid ]);
-
     //입력창 모두 입력하면 버튼 활성화
     //폼 유효성검사
     const [isFormValid, setIsFormValid] = useState(false);
@@ -76,25 +67,34 @@ export default function Page2 () {
         targetWeight,
         date,
         targetDate,
-        exerciseTime,
-        categories,
+        // exerciseTime,
+        // categories,
         } = form;
-        //카테고리 유효성(각 카테고리별 1개이상은 선택)
-        const isCategoriesValid = Object.values(categories).some(
-        (arr) => arr.length > 0
-        );
+        // //카테고리 유효성(각 카테고리별 1개이상은 선택)
+        // const isCategoriesValid = Object.values(categories).some(
+        // (arr) => arr.length > 0
+        // );
         //전체 유효성
         const isValid =
         height > 0 &&
         weight > 0 &&
         targetWeight > 0 &&
         date &&
-        targetDate &&
-        exerciseTime &&
-        isCategoriesValid;
+        targetDate;
+        // &&
+        // exerciseTime &&
+        // isCategoriesValid;
         setIsFormValid(isValid);
     }, [form]);
 
+    // 버튼 활성화
+    useEffect(()=>{
+        if(nameValid && isFormValid){
+            setAllow(true);
+            return;
+        }
+        setAllow(false);
+    },[ nameValid, isFormValid ]);
 
     return(
         <Wrapper>
@@ -104,7 +104,7 @@ export default function Page2 () {
                     <br/>
                     입력하세요.
                 </H1>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <ItemName>닉네임</ItemName>
                     <MyInput 
                         type='text'
