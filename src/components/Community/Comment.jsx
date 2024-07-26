@@ -17,18 +17,13 @@ export default function Comment({ post }) {
   const [comments, setComments] = useState([]);
   //무한 스크롤 시 로딩
   const [isLoading, setIsLoading] = useState(false);
-  //더 불러올수 있는지 여부
-  const [hasMore, setHasMore] = useState(true);
-  //댓글 5개씩 페이지네이션 페이지번호
-  const [page, setPage] = useState(1);
+
 
   //Zustand이용한 댓글 수 관리
   const setCommentCount = useCommentStore((state) => state.setCommentCount);
   useEffect(() => {
-    setComments([]);
-    setPage(1);
-    setHasMore(true);
-    getCommentApi(post.id, page, setComments, setIsLoading, setHasMore);
+    setComments([])
+    getCommentApi(post.id, setComments, setIsLoading);
   }, [post.id]);
 
   useEffect(() => {
@@ -36,9 +31,8 @@ export default function Comment({ post }) {
   }, [comments.length, post.id, setCommentCount]);
 
   const handleLoadMore = () => {
-    if (isLoading || !hasMore) return;
-    setPage((prevPage) => prevPage + 1);
-    getCommentApi(post.id, page + 1, setComments, setIsLoading, setHasMore);
+    if (isLoading ) return;
+    getCommentApi(post.id,  setComments, setIsLoading);
   };
 
   return (
@@ -59,18 +53,7 @@ export default function Comment({ post }) {
           <CommentContent>{comment.content}</CommentContent>
         </CommentItem>
       ))}
-      {hasMore && (
-        <Button
-          variant="contained"
-          size="medium"
-          style={{
-            backgroundColor: "#7D7AFF",
-          }}
-          onClick={handleLoadMore}
-        >
-          {isLoading ? "불러오는 중..." : "더 보기"}
-        </Button>
-      )}
+      
     </>
   );
 }
