@@ -2,81 +2,41 @@ import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
 import DropDown from "./DropDown";
-import { useEffect, useState } from "react";
 import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../components/BottomNav";
-import { getCommentApi } from "../../apis/communityApi/getCommentApi";
-import useCommentStore from "../../store/commentStore";
-import { commentApi } from "../../apis/communityApi/commentApi";
-import api from "../../apis/axios";
+import { useComment } from "../../hooks/useComment";
 
 export default function Comment({ post }) {
-  // 해당 게시글 댓글 불러오기
-  const [comments, setComments] = useState([]);
-  // 무한 스크롤 시 로딩
-  const [isLoading, setIsLoading] = useState(false);
-  // 더 불러올수 있는지 여부
-  const [hasMore, setHasMore] = useState(true);
-  // 댓글 5개씩 페이지네이션 페이지번호
-  const [page, setPage] = useState(1);
+  
+  const { comments, comment, setComment, handleCommentSubmit, isCommentEmpty } =
+    useComment(post);
 
-  // 각 댓글 관리
-  const [comment, setComment] = useState("");
-  const isCommentEmpty = comment.trim().length === 0;
-
-  const handleCommentSubmit = async () => {
-    // 빈 댓글 작성 시 버튼 클릭 금지 및 비활성화
-    if (isCommentEmpty) return;
-
-    try {
-      //새 댓글 작성
-      await commentApi(post.id, comment);
-      // 입력칸 초기화
-      setComment("");
-
-      setPage(1);
-      //댓글 배열 초기화
-      setComments([]);
-      //새 댓글이 작성된 새로운 댓글 목록 불러오기.
-      await getCommentApi(post.id, 1, setComments, setIsLoading, setHasMore);
-    } catch (error) {
-      console.log("댓글 전송 실패", error);
-    }
-  };
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      setComments([]);
-      setPage(1);
-      setHasMore(true);
-      await getCommentApi(post.id, 1, setComments, setIsLoading, setHasMore);
-    };
-    fetchComments();
-  }, [post.id]);
   return (
     <>
-      <CommentNum>댓글 {comments.length}개</CommentNum>
-      {comments &&
-        comments.map((comment, index) => (
-          <CommentItem key={index}>
-            <RowContainer>
-              <UserContainer>
-                <Profile src={profile}></Profile>
-                <NickAndDate>
-                  <NickName>{comment.username}</NickName>
-                  <Date>
-                    {comment.createdAt
-                      ? comment.createdAt.substring(0, 10)
-                      : "날짜없음"}
-                  </Date>
-                </NickAndDate>
-              </UserContainer>
-              <DropDown></DropDown>
-            </RowContainer>
-            <CommentContent>{comment.content}</CommentContent>
-          </CommentItem>
-        ))}
+      <Container>
+        <CommentNum>댓글 {comments.length}개</CommentNum>
+        {comments &&
+          comments.map((comment, index) => (
+            <CommentItem key={index}>
+              <RowContainer>
+                <UserContainer>
+                  <Profile src={profile}></Profile>
+                  <NickAndDate>
+                    <NickName>{comment.username}</NickName>
+                    <Date>
+                      {comment.createdAt
+                        ? comment.createdAt.substring(0, 10)
+                        : "날짜없음"}
+                    </Date>
+                  </NickAndDate>
+                </UserContainer>
+                <DropDown></DropDown>
+              </RowContainer>
+              <CommentContent>{comment.content}</CommentContent>
+            </CommentItem>
+          ))}
+      </Container>
       <BottomNavContainer>
         <RowContainer
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
@@ -169,4 +129,7 @@ const SendButton = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+`;
+const Container = styled.div`
+  padding: 0px 20px;
 `;
