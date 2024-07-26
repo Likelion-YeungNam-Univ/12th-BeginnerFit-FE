@@ -2,7 +2,6 @@ import { responsiveSize } from "../utils/Mediaquery";
 import DropDown from "../components/Community/DropDown";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { RowContainer } from "../styles/GlobalStyle";
 
 export default function BackHeader({ padding, option }) {
