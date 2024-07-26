@@ -1,13 +1,15 @@
 import React from "react";
 import styled from 'styled-components';
 import Page1 from "../components/SignUp/Page1";
+import Page2 from "../components/SignUp/Page2";
 
 export default function SignUp() {
     
     return(
         <Wrapper>
             {/* <div>sign up page</div> */}
-            <Page1></Page1>
+            <Page1/>
+            <Page2/>
         </Wrapper>
     );
 }
