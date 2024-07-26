@@ -68,7 +68,7 @@ export const SpeechBubble = styled.div`
   &::after {
     content: "";
     position: absolute;
-    top: 38px;
+    top: 35px;
     bottom: 0;
     left: 90%;
     width: 0;

@@ -11,13 +11,22 @@ import Weight from "../components/MyPage/Weight";
 import Calendar from "../components/MyPage/Calendar";
 import styled from "styled-components";
 import Circle from "../components/MyPage/Circle";
-import { MyChallengeList } from "../components/MyPage/MyChallengeList";
+import MyChallengeList from "../components/MyPage/MyChallengeList";
 import Setting from "../components/MyPage/Setting";
 import Videos from "../components/MyPage/Videos";
+import BottomNav from "../components/BottomNav";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
   // 현재 달 구하는 코드
   const todayMonth = new Date().getMonth() + 1;
+
+  const nav = useNavigate();
+
+  // 내 정보 수정하기 누른 경우 실행할 함수
+  const onEditUserInfo = () => {
+    nav("/mypage/editinfo");
+  };
 
   return (
     <MainWrapper>
@@ -31,7 +40,7 @@ export default function MyPage() {
           </MainH2>
           <TagList />
           <Weight />
-          <P>내 정보 수정하기</P>
+          <P onClick={onEditUserInfo}>내 정보 수정하기</P>
           <MainH3>
             사용자님의
             <br />
@@ -60,6 +69,7 @@ export default function MyPage() {
           <EmptyDiv />
           <Setting />
         </MainContent>
+        <BottomNav />
       </MainContainer>
     </MainWrapper>
   );
