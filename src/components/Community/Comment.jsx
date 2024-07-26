@@ -30,21 +30,20 @@ export default function Comment({ post }) {
     if (isCommentEmpty) return;
 
     try {
+      //새 댓글 작성
       await commentApi(post.id, comment);
       // 입력칸 초기화
       setComment("");
 
       setPage(1);
+      //댓글 배열 초기화
       setComments([]);
+      //새 댓글이 작성된 새로운 댓글 목록 불러오기.
       await getCommentApi(post.id, 1, setComments, setIsLoading, setHasMore);
     } catch (error) {
       console.log("댓글 전송 실패", error);
     }
   };
-
-  // Zustand 이용한 댓글 수 관리
-  const setCommentCount = useCommentStore((state) => state.setCommentCount);
-
 
   useEffect(() => {
     const fetchComments = async () => {
