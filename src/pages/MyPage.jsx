@@ -28,11 +28,15 @@ export default function MyPage() {
     nav("/mypage/editinfo");
   };
 
+  const headerClick = () => {
+    nav("/friendList");
+  };
+
   return (
     <MainWrapper>
       <MainContainer>
         <MainContent>
-          <Header type={"people"} size={30} />
+          <Header type={"people"} size={30} onClick={headerClick} />
           <MainH2>
             사용자님의
             <br />

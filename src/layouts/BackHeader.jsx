@@ -2,10 +2,10 @@ import { responsiveSize } from "../utils/Mediaquery";
 import DropDown from "../components/Community/DropDown";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { RowContainer } from "../styles/GlobalStyle";
+import { FaPlus } from "react-icons/fa6";
 
-export default function BackHeader({ padding, option }) {
+export default function BackHeader({ padding, option, plus }) {
   const navigate = useNavigate();
 
   // 뒤로 가기 버튼 눌렀을 때 실행할 함수
@@ -24,6 +24,7 @@ export default function BackHeader({ padding, option }) {
           onClick={handleBack}
         />
         {option && <DropDown />}
+        {plus && <FaPlus cursor={"pointer"} size={20} />}
       </RowContainer>
     </>
   );
