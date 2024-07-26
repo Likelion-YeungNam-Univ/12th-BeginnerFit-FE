@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled, { css } from 'styled-components';
 
 export default function Page1() {
@@ -22,15 +21,12 @@ export default function Page1() {
         setAllow(false);
     },[ emailValid, pwValid, pwCheckValid ]);
 
-    const navigate = useNavigate();
-
+    //폼 제출
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (emailValid && pwValid){
-            alert('회원가입 성공!');
-            navigate("/main");
-        }
-    }
+        console.log(form);
+    };
+    
     const handleEmail = (e) => {
         setEmail(e.target.value);
         const regex = 
