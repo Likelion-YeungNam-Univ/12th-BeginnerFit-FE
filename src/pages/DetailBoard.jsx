@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header2 from "../components/Community/Header2";
 import WriteBoardMain from "../components/Community/WriteBoardMain";
-import {  Wrapper } from "../styles/GlobalStyle";
+import { Wrapper } from "../styles/GlobalStyle";
 import { getPostApi } from "../apis/communityApi/getPostApi";
 
 export default function DetailBoard() {
@@ -25,7 +25,7 @@ export default function DetailBoard() {
   }, [idx]);
 
   return (
-    <Wrapper style={{ minHeight: "100vh"}}>
+    <Wrapper style={{ minHeight: "100vh" }}>
       {loading ? (
         <h2>Loading...</h2>
       ) : (
@@ -38,4 +38,3 @@ export default function DetailBoard() {
   );
 }
 //============================================
-
