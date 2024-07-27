@@ -4,6 +4,7 @@ import styled from "styled-components";
 import BackHeader from "../layouts/BackHeader";
 import useFetchData from "../hooks/useFetchData";
 import VideoList from "../components/PlayList/VideoList";
+import BottomNav from "../components/BottomNav";
 
 export default function HomeTranList() {
   const month = new Date().getMonth() + 1;
@@ -38,6 +39,7 @@ export default function HomeTranList() {
           </H1>
           {videoIds && data && <VideoList videoIds={videoIds} />}
         </MainContent>
+        <BottomNav />
       </MainContainer>
     </MainWrapper>
   );

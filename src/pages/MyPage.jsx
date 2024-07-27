@@ -31,56 +31,56 @@ export default function MyPage() {
   // 홈트 내역 전체보기 누른 경우 실행할 함수
   const onViewHomeTrainList = () => {
     nav("/myHomeTrainList");
-    const headerClick = () => {
-      nav("/friendList");
-    };
+  };
+  const headerClick = () => {
+    nav("/friendList");
+  };
 
-    return (
-      <MainWrapper>
-        <MainContainer>
-          <MainContent>
-            <Header type={"people"} size={30} onClick={headerClick} />
-            <MainH2>
-              사용자님의
+  return (
+    <MainWrapper>
+      <MainContainer>
+        <MainContent>
+          <Header type={"people"} size={30} onClick={headerClick} />
+          <MainH2>
+            사용자님의
+            <br />
+            마이페이지
+          </MainH2>
+          <TagList />
+          <Weight />
+          <P onClick={onEditUserInfo}>내 정보 수정하기</P>
+          <MainH3>
+            사용자님의
+            <br />
+            {todayMonth}월 출석 캘린더
+          </MainH3>
+          <Calendar />
+          <Circle />
+          <TextWrap>
+            <MainH3>
+              {todayMonth}월 한달동안
               <br />
-              마이페이지
-            </MainH2>
-            <TagList />
-            <Weight />
-            <P onClick={onEditUserInfo}>내 정보 수정하기</P>
+              23개의 챌린지를 성공했어요!
+            </MainH3>
+            <Total>전체보기</Total>
+          </TextWrap>
+          <MyChallengeList />
+          <TextWrap>
             <MainH3>
               사용자님의
               <br />
-              {todayMonth}월 출석 캘린더
+              {todayMonth}월 홈트 내역
             </MainH3>
-            <Calendar />
-            <Circle />
-            <TextWrap>
-              <MainH3>
-                {todayMonth}월 한달동안
-                <br />
-                23개의 챌린지를 성공했어요!
-              </MainH3>
-              <Total>전체보기</Total>
-            </TextWrap>
-            <MyChallengeList />
-            <TextWrap>
-              <MainH3>
-                사용자님의
-                <br />
-                {todayMonth}월 홈트 내역
-              </MainH3>
-              <Total onClick={onViewHomeTrainList}>전체보기</Total>
-            </TextWrap>
-            <Videos />
-            <EmptyDiv />
-            <Setting />
-          </MainContent>
-          <BottomNav />
-        </MainContainer>
-      </MainWrapper>
-    );
-  };
+            <Total onClick={onViewHomeTrainList}>전체보기</Total>
+          </TextWrap>
+          <Videos />
+          <EmptyDiv />
+          <Setting />
+        </MainContent>
+        <BottomNav />
+      </MainContainer>
+    </MainWrapper>
+  );
 }
 
 const Total = styled.p`
