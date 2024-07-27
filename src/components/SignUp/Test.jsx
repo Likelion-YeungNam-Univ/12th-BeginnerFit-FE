@@ -9,13 +9,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
-import Page1 from "../components/SignUp/Page1";
-import Page2 from '../components/SignUp/Page2';
-import Page3 from '../components/SignUp/Page3';
+import Page1 from './Page1';
+import Page2 from './Page2';
+import Page3 from './Page3';
 import {useNavigate} from "react-router-dom";
-import { FormProvider } from '../components/SignUp/FormContext';
+import { FormProvider } from './FormContext';
 
-export default function SignUp() {
+export default function Test() {
   const swiperRef = useRef(null);
   const navigate = useNavigate();
 

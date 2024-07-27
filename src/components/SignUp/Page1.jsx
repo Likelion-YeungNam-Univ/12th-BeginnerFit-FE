@@ -1,17 +1,17 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
+import { FormContext } from './FormContext';
 
-export default function Page1() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+export default function Page1({swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
     const [pwCheck, setPwCheck] = useState('');
     const [pwCheckValid, setPwCheckValid] = useState(false);
     const [allow, setAllow] = useState(false);
+
+    // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
+    const {formData, setFormData} = useContext(FormContext);
 
     // 버튼 활성화 (이메일 인증 과정도 거쳐야함)
     useEffect(()=>{
@@ -21,18 +21,11 @@ export default function Page1() {
         }
         setAllow(false);
     },[ emailValid, pwValid, pwCheckValid ]);
-
-    const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (emailValid && pwValid){
-            alert('회원가입 성공!');
-            navigate("/main");
-        }
-    }
+    
     const handleEmail = (e) => {
-        setEmail(e.target.value);
+        // 전역 상태 함수에 데이터 값 받기
+        setFormData((prev)=>({...prev, email: e.target.value}));
+
         const regex = 
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         if (regex.test(e.target.value)){
@@ -43,7 +36,9 @@ export default function Page1() {
         }
     }
     const handlePw = (e) => {
-        setPassword(e.target.value);
+        // 전역 상태 함수에 데이터 값 받기
+        setFormData((prev)=>({...prev, password: e.target.value}));
+
         const regex = 
         /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,14}$/;
         if (regex.test(e.target.value)){
@@ -55,33 +50,39 @@ export default function Page1() {
     }
     const handlePwCheck = (e) => {
         setPwCheck(e.target.value);
-        if (password == e.target.value){
+        if (formData.password === e.target.value){
             setPwCheckValid(true);
         } else{
             setPwCheckValid(false);
         }
     }
 
+    //폼 값 확인용 submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    };
+
     return(
         <Wrapper>
             <SignUpBox>
-                <h2>
-                    회원 정보를 
+                <H1>
+                    로그인 정보를 
                     <br/>
                     입력하세요.
-                </h2>
+                </H1>
                 <SignUpForm onSubmit={handleSubmit}>
                     <ItemName>이메일</ItemName>
                     <MyInput 
                         type='email'
                         placeholder="아이디를 입력하세요"
-                        value={email}
+                        value={formData.email}
                         onChange={handleEmail}
                         validInput
                     ></MyInput>
                     <ValidButton>인증번호 받기</ValidButton>
                     <ErrorMsg>
-                        {!emailValid && email.length > 0 && (
+                        {!emailValid && formData.email.length > 0 && (
                             <div>형식이 올바르지 않습니다. 다시 입력해주세요.</div>
                             )}
                     </ErrorMsg>
@@ -101,11 +102,11 @@ export default function Page1() {
                     <MyInput 
                         type='password'
                         placeholder="영어, 숫자, 특수문자를 포함한 8~14자리"
-                        value={password}
+                        value={formData.password}
                         onChange={handlePw}
                         ></MyInput>
                     <ErrorMsg>
-                        {!pwValid && password.length > 0 && (
+                        {!pwValid && formData.password.length > 0 && (
                             <div>영문, 숫자, 특수문자 포함 8자~14자 입력해주세요.</div>
                         )}
                     </ErrorMsg>
@@ -117,12 +118,18 @@ export default function Page1() {
                         onChange={handlePwCheck}
                         ></MyInput>
                     <ErrorMsg>
-                        {password !== pwCheck && pwCheck.length > 0 && (
+                        {formData.password !== pwCheck && pwCheck.length > 0 && (
                             <div>비밀번호가 일치하지 않습니다.</div>
                         )}
                     </ErrorMsg>
-                    <SignUpButton type="submit" disabled={!allow} >다음으로</SignUpButton>
                 </SignUpForm>
+                <NextButton
+                    type="button" // 폼 제출 방지
+                    disabled={!allow}
+                    onClick={() => swiperRef.current.slideNext()} // 다음 페이지로 이동 (page2로)
+                >
+                    다음으로
+                </NextButton>
             </SignUpBox>
         </Wrapper>
     );
@@ -130,7 +137,7 @@ export default function Page1() {
 
 const Wrapper = styled.div`
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};
@@ -139,10 +146,17 @@ const Wrapper = styled.div`
 const SignUpBox = styled.div`
     display: grid;
     justify-content: center;
+    align-items: flex-start;
     width: 600px;
-    margin: 0px auto 150px auto;
+    margin: 0px auto;
 `
 
+const H1 = styled.h1`
+  margin-top: 80px;
+  @media (max-width: 480px) {
+    font-size: ${responsiveSize("24")};
+  }
+`;
 
 const SignUpForm = styled.form`
     width: 500px;
@@ -185,13 +199,14 @@ const ErrorMsg = styled.div`
     font-size: small;
 `
 
-const SignUpButton = styled.button`
+const NextButton = styled.button`
     width: 100%;
+    height: ${responsiveSize(60)};
     background-color: #653eff;
     color: white;
-    font-size: large;
+    font-size: ${responsiveSize("20")};
     padding: 15px;
-    margin: 30px 0px;
+    margin-top: 50px;
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
