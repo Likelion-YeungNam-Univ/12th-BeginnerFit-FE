@@ -2,16 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { useFriendSearchStore } from "../../store/useFriendSearchStore";
+import useInputFocus from "../../hooks/useInputFocus";
 
 export const Input = () => {
   const { value, setValue } = useFriendSearchStore();
 
+  // 처음 랜더링시 input 요소에 focus 주기위해 사용
+  const { inputRef } = useInputFocus();
+
   return (
     <Container>
       <CostomInput
+        ref={inputRef}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="친구 검색"
       />
       <IconWrap>
         <FaSearch color="#9A9A9A" size={20} />

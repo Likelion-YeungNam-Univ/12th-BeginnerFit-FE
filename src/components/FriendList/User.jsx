@@ -2,8 +2,10 @@ import React from "react";
 import { Image } from "../../styles/GlobalStyle";
 import styled from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
 
-export const User = ({ id, nickname, image }) => {
+// type으로 친구 추가할지 삭제할지 설정
+export const User = ({ id, nickname, image, type }) => {
   return (
     <RowContainer style={{ margin: "5px 0px" }}>
       <Item>
@@ -12,7 +14,11 @@ export const User = ({ id, nickname, image }) => {
       </Item>
       <Item>
         <IconHover>
-          <FaRegTrashAlt size={20} cursor={"pointer"} color="#9A9A9A" />
+          {type === "delete" ? (
+            <FaRegTrashAlt size={20} cursor={"pointer"} color="#9A9A9A" />
+          ) : (
+            <FaPlus size={20} cursor={"pointer"} />
+          )}
         </IconHover>
       </Item>
     </RowContainer>

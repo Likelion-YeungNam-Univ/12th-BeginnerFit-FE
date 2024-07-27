@@ -7,9 +7,9 @@ import {
 } from "../styles/GlobalStyle";
 import BackHeader from "../layouts/BackHeader";
 import { Input } from "../components/FriendList/Input";
-import { User } from "../components/FriendList/User";
 import { UserList } from "../components/FriendList/UserList";
 import { useNavigate } from "react-router-dom";
+
 export default function FriendList() {
   const nav = useNavigate();
 
