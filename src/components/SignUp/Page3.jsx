@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext } from "react";
-import Category from "./Category";
+import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from './FormContext';
 
 export default function Page3 ({swiperRef}) {
@@ -31,7 +31,7 @@ export default function Page3 ({swiperRef}) {
         }));
     };
 
-    //Category 컴포넌트에서 선택된 카테고리가져오기
+    //setCategory 컴포넌트에서 선택된 카테고리가져오기
     const handleCategorySubmit = (selectedCategories) => {
         setFormData((prev) => ({ ...prev, categories: selectedCategories }));
     };
@@ -98,7 +98,7 @@ export default function Page3 ({swiperRef}) {
                             <P>시간</P>
                         </SubContainer>
                     </TextInputContainer>
-                    <Category onSubmit={handleCategorySubmit}></Category>
+                    <SetCategory onSubmit={handleCategorySubmit} isSignUp={true}></SetCategory>
                 </Form>
                 <SignUpButton 
                     type="submit" 

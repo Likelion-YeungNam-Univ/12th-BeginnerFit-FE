@@ -167,7 +167,7 @@ export default function EditUserInfo() {
               <P>시간</P>
             </SubContainer>
           </TextInputContainer>
-          <SetCategory onSubmit={handleCategorySubmit}></SetCategory>
+          <SetCategory onSubmit={handleCategorySubmit} isSignUp={false}></SetCategory>
         </RootContainer>
         <Div>
           <SubmitButton
