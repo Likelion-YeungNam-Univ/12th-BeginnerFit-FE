@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
 
 export default function Page1() {
@@ -61,11 +62,11 @@ export default function Page1() {
     return(
         <Wrapper>
             <SignUpBox>
-                <h2>
-                    회원 정보를 
+                <h1>
+                    로그인 정보를 
                     <br/>
                     입력하세요.
-                </h2>
+                </h1>
                 <SignUpForm onSubmit={handleSubmit}>
                     <ItemName>이메일</ItemName>
                     <MyInput 
@@ -117,7 +118,7 @@ export default function Page1() {
                             <div>비밀번호가 일치하지 않습니다.</div>
                         )}
                     </ErrorMsg>
-                    <SignUpButton type="submit" disabled={!allow} >다음으로</SignUpButton>
+                    <NextButton type="submit" disabled={!allow} >다음으로</NextButton>
                 </SignUpForm>
             </SignUpBox>
         </Wrapper>
@@ -136,7 +137,7 @@ const SignUpBox = styled.div`
     display: grid;
     justify-content: center;
     width: 600px;
-    margin: 0px auto 150px auto;
+    margin: 0px auto;
 `
 
 
@@ -181,13 +182,14 @@ const ErrorMsg = styled.div`
     font-size: small;
 `
 
-const SignUpButton = styled.button`
+const NextButton = styled.button`
     width: 100%;
+    height: ${responsiveSize(60)};
     background-color: #653eff;
     color: white;
-    font-size: large;
+    font-size: ${responsiveSize("20")};
     padding: 15px;
-    margin: 30px 0px;
+    margin-top: 50px;
     border-radius: 10px;
     border: none;
     box-sizing: border-box;

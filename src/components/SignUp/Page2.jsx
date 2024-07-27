@@ -204,11 +204,12 @@ const H1 = styled.h1`
 `;
 const ItemName = styled.div`
     margin-top: 15px;
-`
+    `
 const P = styled.p`
+  margin-top: 15px;
   padding-left: 10px;
   /* font-size: ${responsiveSize("20")}; */
-  margin-bottom: ${responsiveSize(10)};
+  margin-bottom: ${responsiveSize(9)};
 
   //글씨 채우기용(화면 상에서는 안보이도록 )
   color: ${({ hiddenText }) => (hiddenText ? "transparent" : "black")};
@@ -260,7 +261,6 @@ const SubContainer = styled.div`
 
 
 const NextButton = styled.button`
-    align-items: flex-end;
     width: 100%;
     height: ${responsiveSize(60)};
     background-color: #653eff;
