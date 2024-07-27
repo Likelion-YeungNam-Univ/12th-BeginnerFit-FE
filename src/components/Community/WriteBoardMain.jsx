@@ -18,6 +18,7 @@ export default function WriteBoardMain({ post }) {
   //좋아요 기능함수
   const [clickLike, setClickLike] = useState(false);
   const [likes, setLikes] = useState(post.likes);
+  const [totalComments, setTotalComments] = useState(0);
   console.log(post.likes);
 
   const toggleLike = async () => {
@@ -78,7 +79,7 @@ export default function WriteBoardMain({ post }) {
         </HeartContainer>
       </Container>
       <RowLine />
-      <Comment post={post} />
+      <Comment post={post} setTotalComments={setTotalComments} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import api from "../apis/axios";
 
 export const usePostData = (url) => {

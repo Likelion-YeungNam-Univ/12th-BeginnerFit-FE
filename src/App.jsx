@@ -10,6 +10,7 @@ import Main from "./pages/main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
+import WritePost from "./pages/WritePost";
 import HomeTranList from "./pages/HomeTrainList";
 import FriendList from "./pages/FriendList";
 import AddFriend from "./pages/AddFriend";
