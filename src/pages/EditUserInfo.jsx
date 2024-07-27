@@ -4,7 +4,7 @@ import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
 import { useEffect, useState } from "react";
-import SubmitButton from "../styles/GlobalStyle";
+import {SubmitButton} from "../styles/GlobalStyle";
 export default function EditUserInfo() {
   //음수값 자릿수 제한
   const onInput = (e) => {

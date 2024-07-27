@@ -73,7 +73,7 @@ export const BottomNavContainer = styled.nav`
   z-index: 1;
 `;
 
-const SubmitButton = styled.button`
+export const SubmitButton = styled.button`
   margin-top: ${responsiveSize(30)};
   height: ${responsiveSize(77)};
   font-size: ${responsiveSize(30)};
@@ -90,7 +90,7 @@ const SubmitButton = styled.button`
 
   @media (max-width: 600px) {
     font-size: ${responsiveSize(20)};
-    width: min(${responsiveSize(280)});
-    height: ${responsiveSize(50)};
+    width: calc(100% - 20px);
+    height: ${responsiveSize(60)};
   }
 `;

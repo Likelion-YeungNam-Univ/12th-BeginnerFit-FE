@@ -5,10 +5,15 @@ import { Header } from "../layouts/header";
 import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
 import BottomNav from "../components/BottomNav";
+import { useNavigate } from "react-router-dom";
 
 export default function Community() {
   const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
-
+  //게시판 작성페이지 이동
+  const navigate = useNavigate();
+  const goToWritePost = () => {
+    navigate("/posts/write");
+  };
   return (
     <Wrapper>
       <Container>
@@ -16,7 +21,11 @@ export default function Community() {
           <Header type={"option"} size={"30"} />
           <RowContainer>
             <Title>Community</Title>
-            <WriteImgBtn src={writebtn} alt="WriteBtn" />
+            <WriteImgBtn
+              src={writebtn}
+              alt="WriteBtn"
+              onClick={goToWritePost}
+            />
           </RowContainer>
           <CommunityButtons buttonList={buttonList} />
           <PostList />

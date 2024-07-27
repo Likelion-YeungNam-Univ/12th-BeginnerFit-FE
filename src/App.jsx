@@ -10,6 +10,7 @@ import Main from "./pages/main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
+import WritePost from "./pages/WritePost";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/posts" element={<Community />}></Route>
         <Route path="/posts/:idx" element={<DetailBoard />}></Route>
+        <Route path="/posts/write" element={<WritePost />}></Route>
         <Route path="/main" element={<Main />}></Route>
         <Route
           path="/mypage/editinfo"
