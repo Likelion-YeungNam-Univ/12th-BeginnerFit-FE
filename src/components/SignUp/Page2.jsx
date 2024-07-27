@@ -241,8 +241,8 @@ const TextInputContainer = styled.div`
 `;
 const Input = styled.input`
   width: ${responsiveSize(120)};
-  padding: ${responsiveSize("10")};
-  padding: 15px;
+  padding: 13px;
+  font-size: ${responsiveSize("16")};
   border: none;
   font-weight: 400;
   border-radius: ${responsiveSize("12")};

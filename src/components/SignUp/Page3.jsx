@@ -53,7 +53,7 @@ export default function Page3 () {
         );
         //전체 유효성
         const isValid =
-        exerciseTime &&
+        exerciseTime>0 &&
         isCategoriesValid;
         setIsFormValid(isValid);
         
@@ -107,7 +107,7 @@ export default function Page3 () {
                         type="submit" 
                         disabled={!allow}
                     >
-                        다음으로
+                        시작하기
                     </SignUpButton>
 
                 </Form>
@@ -139,9 +139,10 @@ const H1 = styled.h1`
   }
 `
 const P = styled.p`
+  margin-top: 15px;
   padding-left: 10px;
-  font-size: ${responsiveSize("20")};
-  margin-bottom: ${responsiveSize(10)};
+  /* font-size: ${responsiveSize("20")}; */
+  margin-bottom: ${responsiveSize(9)};
 `
 const TextInputContainer = styled.div`
   display: flex;
@@ -154,9 +155,8 @@ const TextInputContainer = styled.div`
 `
 const Input = styled.input`
   width: ${responsiveSize(120)};
-  height: ${responsiveSize(40)};
-  padding: ${responsiveSize("10")};
-  font-size: ${responsiveSize("20")};
+  padding: 13px;
+  font-size: ${responsiveSize("16")};
   border: none;
   font-weight: 400;
   border-radius: ${responsiveSize("12")};
