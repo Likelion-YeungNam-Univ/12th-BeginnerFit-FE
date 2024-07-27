@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import user from "../../images/user.png";
 import { User } from "./User";
-import { useFriendSearchStore } from "../../store/useFriendSearchStore";
+import {
+  useFriendSearchStore,
+  useFriendNumStore,
+} from "../../store/useFriendSearchStore";
 import useFetchData from "../../hooks/useFetchData";
 
 // 서버로 부터 사용자 전체 받아오기
@@ -29,6 +32,9 @@ export const UserList = () => {
   // input값 가져오기
   const { value } = useFriendSearchStore();
 
+  // 친구 수 저장할 함수 가져오기
+  const { setNum } = useFriendNumStore();
+
   // 친구 목록 받아오는 코드 ( 현재 친구가 없어서 mock 데이터로 사용하겠습니다. )
   const { data, isLoading, error } = useFetchData("/friends");
 
@@ -41,7 +47,7 @@ export const UserList = () => {
         image: item.profilePictureUrl ?? user,
       };
     });
-
+    setNum(arr && arr.length); // 친구 수 저장
     setUsers(arr);
   }, [data]);
 
@@ -50,6 +56,7 @@ export const UserList = () => {
   const handleDelete = (id) => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       let arr = users.filter((item) => item.id !== id);
+      setNum(arr.length); // 친구 삭제후 숫자 저장
       setUsers(arr);
       // 서버에게 삭제 요청 보내기
     }
