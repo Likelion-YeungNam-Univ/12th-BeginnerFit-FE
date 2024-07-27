@@ -33,7 +33,7 @@ export const User = ({ id, nickname, image, type, onClick }) => {
           ) : !isPlused ? (
             <FaPlus size={20} cursor={"pointer"} onClick={handlePlusButton} />
           ) : (
-            <AnimationCheck size={20} color="#653EFF" />
+            <AnimationCheck size={20} />
           )}
         </IconHover>
       </Item>
