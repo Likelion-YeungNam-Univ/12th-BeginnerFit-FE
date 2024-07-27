@@ -103,14 +103,13 @@ export default function Page3 () {
                         </SubContainer>
                     </TextInputContainer>
                     <SetCategory onSubmit={handleCategorySubmit}></SetCategory>
-                    <SignUpButton 
-                        type="submit" 
-                        disabled={!allow}
-                    >
-                        시작하기
-                    </SignUpButton>
-
                 </Form>
+                <SignUpButton 
+                    type="submit" 
+                    disabled={!allow}
+                >
+                    시작하기
+                </SignUpButton>
             </Box>
         </Wrapper>
     );
@@ -118,7 +117,7 @@ export default function Page3 () {
 
 const Wrapper = styled.div`
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};
@@ -126,6 +125,7 @@ const Wrapper = styled.div`
 const Box = styled.form`
     display: grid;
     justify-content: center;
+    align-items: flex-start;
     width: 600px;
     margin: 0px auto;
 `

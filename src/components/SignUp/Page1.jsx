@@ -118,8 +118,8 @@ export default function Page1() {
                             <div>비밀번호가 일치하지 않습니다.</div>
                         )}
                     </ErrorMsg>
-                    <NextButton type="submit" disabled={!allow} >다음으로</NextButton>
                 </SignUpForm>
+                <NextButton type="submit" disabled={!allow} >다음으로</NextButton>
             </SignUpBox>
         </Wrapper>
     );
@@ -127,7 +127,7 @@ export default function Page1() {
 
 const Wrapper = styled.div`
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};
@@ -136,6 +136,7 @@ const Wrapper = styled.div`
 const SignUpBox = styled.div`
     display: grid;
     justify-content: center;
+    align-items: flex-start;
     width: 600px;
     margin: 0px auto;
 `
