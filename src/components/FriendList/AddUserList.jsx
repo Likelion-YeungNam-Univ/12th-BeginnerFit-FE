@@ -16,6 +16,8 @@ const userList = [
   { id: 11, nickname: "lymuo", image: user },
 ];
 export const AddUserList = () => {
+  // 친구 추가 버튼 눌렀을 때 실행할 함수
+
   return (
     <div>
       {userList?.map((item) => (

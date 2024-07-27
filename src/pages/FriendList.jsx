@@ -10,6 +10,7 @@ import { Input } from "../components/FriendList/Input";
 import { UserList } from "../components/FriendList/UserList";
 import { useNavigate } from "react-router-dom";
 import { useFriendNumStore } from "../store/useFriendSearchStore";
+import BottomNav from "../components/BottomNav";
 
 export default function FriendList() {
   const nav = useNavigate();
@@ -35,6 +36,7 @@ export default function FriendList() {
           <Input />
           <UserList />
         </MainContent>
+        <BottomNav />
       </MainContainer>
     </MainWrapper>
   );
