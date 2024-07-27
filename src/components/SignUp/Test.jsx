@@ -3,56 +3,57 @@ import React, { useRef } from 'react';
 import { IoIosArrowBack } from "react-icons/io";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
-
 import {useNavigate} from "react-router-dom";
+import { FormProvider } from './FormContext';
 
 export default function Test() {
   const swiperRef = useRef(null);
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <Swiper
-        pagination={{ clickable: false, el: '.custom-swiper-pagination' }} // 점 버튼 클릭 비활성화
-        navigation={false}
-        allowTouchMove={false} // (클릭 상태로)스와이프 비활성화
-        modules={[Pagination, Navigation]}
-        spaceBetween={50}
-        slidesPerView={1}
-        onSwiper={(swiper) => {
-            swiperRef.current = swiper; // Swiper 인스턴스를 swiperRef에 저장
-        }}
-      >
-        <SwiperSlide>
-          <PrevButton onClick={() => (navigate(-1))}></PrevButton>
-          <Page1 swiperRef={swiperRef}/>
-          {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */}
-        </SwiperSlide>
-        <SwiperSlide>
-          <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
-          <Page2 swiperRef={swiperRef}/>
-          {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */}
-        </SwiperSlide>
-        <SwiperSlide>
-          <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
-          <Page3 swiperRef={swiperRef}/>
-        </SwiperSlide>
-      </Swiper>
-      <PaginationContainer>
-        <PaginationDots className="custom-swiper-pagination" />
-      </PaginationContainer>
-    </Container>
+    // formData 전역 함수를 사용하기 위해 FormProvider로 감싸기
+    <FormProvider>
+        <Container>
+        <Swiper
+            pagination={{ clickable: false, el: '.custom-swiper-pagination' }} // 상단 점 리스트 클릭 비활성화
+            navigation={false}
+            allowTouchMove={false} // (클릭 상태로)스와이프 비활성화
+            modules={[Pagination, Navigation]}
+            spaceBetween={50}
+            slidesPerView={1}
+            onSwiper={(swiper) => {
+                swiperRef.current = swiper; // Swiper 인스턴스를 swiperRef에 저장 -> slidePrev,slideNext사용을 위함.
+            }}
+        >
+            <SwiperSlide>
+            <PrevButton onClick={() => (navigate(-1))}></PrevButton>
+            <Page1 swiperRef={swiperRef}/>
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
+            </SwiperSlide>
+            <SwiperSlide>
+            <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
+            <Page2 swiperRef={swiperRef}/>
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
+            </SwiperSlide>
+            <SwiperSlide>
+            <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
+            <Page3 swiperRef={swiperRef}/>
+            </SwiperSlide>
+        </Swiper>
+        <PaginationContainer>
+            <PaginationDots className="custom-swiper-pagination" />
+        </PaginationContainer>
+        </Container>
+    </FormProvider>
   );
 }
 
