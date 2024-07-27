@@ -1,17 +1,17 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
+import { FormContext } from './FormContext';
 
 export default function Page1({swiperRef}) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [emailValid, setEmailValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
     const [pwCheck, setPwCheck] = useState('');
     const [pwCheckValid, setPwCheckValid] = useState(false);
     const [allow, setAllow] = useState(false);
+
+    // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
+    const {formData, setFormData} = useContext(FormContext);
 
     // 버튼 활성화 (이메일 인증 과정도 거쳐야함)
     useEffect(()=>{
@@ -21,15 +21,11 @@ export default function Page1({swiperRef}) {
         }
         setAllow(false);
     },[ emailValid, pwValid, pwCheckValid ]);
-
-    //폼 제출
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(form);
-    };
     
     const handleEmail = (e) => {
-        setEmail(e.target.value);
+        // 전역 상태 함수에 데이터 값 받기
+        setFormData((prev)=>({...prev, email: e.target.value}));
+
         const regex = 
         /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         if (regex.test(e.target.value)){
@@ -40,7 +36,9 @@ export default function Page1({swiperRef}) {
         }
     }
     const handlePw = (e) => {
-        setPassword(e.target.value);
+        // 전역 상태 함수에 데이터 값 받기
+        setFormData((prev)=>({...prev, password: e.target.value}));
+
         const regex = 
         /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,14}$/;
         if (regex.test(e.target.value)){
@@ -52,12 +50,18 @@ export default function Page1({swiperRef}) {
     }
     const handlePwCheck = (e) => {
         setPwCheck(e.target.value);
-        if (password == e.target.value){
+        if (formData.password === e.target.value){
             setPwCheckValid(true);
         } else{
             setPwCheckValid(false);
         }
     }
+
+    //폼 값 확인
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    };
 
     return(
         <Wrapper>
@@ -72,13 +76,13 @@ export default function Page1({swiperRef}) {
                     <MyInput 
                         type='email'
                         placeholder="아이디를 입력하세요"
-                        value={email}
+                        value={formData.email}
                         onChange={handleEmail}
                         validInput
                     ></MyInput>
                     <ValidButton>인증번호 받기</ValidButton>
                     <ErrorMsg>
-                        {!emailValid && email.length > 0 && (
+                        {!emailValid && formData.email.length > 0 && (
                             <div>형식이 올바르지 않습니다. 다시 입력해주세요.</div>
                             )}
                     </ErrorMsg>
@@ -98,11 +102,11 @@ export default function Page1({swiperRef}) {
                     <MyInput 
                         type='password'
                         placeholder="영어, 숫자, 특수문자를 포함한 8~14자리"
-                        value={password}
+                        value={formData.password}
                         onChange={handlePw}
                         ></MyInput>
                     <ErrorMsg>
-                        {!pwValid && password.length > 0 && (
+                        {!pwValid && formData.password.length > 0 && (
                             <div>영문, 숫자, 특수문자 포함 8자~14자 입력해주세요.</div>
                         )}
                     </ErrorMsg>
@@ -114,13 +118,13 @@ export default function Page1({swiperRef}) {
                         onChange={handlePwCheck}
                         ></MyInput>
                     <ErrorMsg>
-                        {password !== pwCheck && pwCheck.length > 0 && (
+                        {formData.password !== pwCheck && pwCheck.length > 0 && (
                             <div>비밀번호가 일치하지 않습니다.</div>
                         )}
                     </ErrorMsg>
                 </SignUpForm>
                 <NextButton
-                    type="submit"
+                    type="button" // 폼 제출 방지
                     disabled={!allow}
                     onClick={() => swiperRef.current.slideNext()}
                 >

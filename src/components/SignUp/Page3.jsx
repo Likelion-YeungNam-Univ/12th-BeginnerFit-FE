@@ -2,10 +2,14 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { responsiveSize } from "../../utils/Mediaquery";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Category from "./Category";
+import { FormContext } from './FormContext';
 
 export default function Page3 ({swiperRef}) {
+
+    // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
+    const {formData, setFormData} = useContext(FormContext);
 
     //음수값 자릿수 제한
     const onInput = (e) => {
@@ -21,21 +25,15 @@ export default function Page3 ({swiperRef}) {
     //입력값 관리
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setForm((prev) => ({
+        setFormData((prev) => ({
         ...prev,
         [name]: value,
         }));
     };
 
-    //폼 관리상태
-    const [form, setForm] = useState({
-        exerciseTime: 0,
-        categories: {},
-    });
-
-    //setCategiry 컴포넌트에서 선택된 카테고리가져오기
+    //Categiry 컴포넌트에서 선택된 카테고리가져오기
     const handleCategorySubmit = (selectedCategories) => {
-        setForm((prev) => ({ ...prev, categories: selectedCategories }));
+        setFormData((prev) => ({ ...prev, categories: selectedCategories }));
     };
 
     // 버튼 활성화 & 유효성 검사
@@ -46,7 +44,7 @@ export default function Page3 ({swiperRef}) {
         const {
         exerciseTime,
         categories,
-        } = form;
+        } = formData;
         //카테고리 유효성(각 카테고리별 1개이상은 선택)
         const isCategoriesValid = Object.values(categories).some(
         (arr) => arr.length > 0
@@ -57,7 +55,7 @@ export default function Page3 ({swiperRef}) {
         isCategoriesValid;
         setIsFormValid(isValid);
         
-    }, [form, isFormValid]);
+    }, [formData]);
     // 버튼 활성화
     useEffect(()=>{
         if(isFormValid){
@@ -67,15 +65,13 @@ export default function Page3 ({swiperRef}) {
         setAllow(false);
     },[ isFormValid ]);
 
-
-    
     // 회원가입 성공 시 메인 화면으로 이동
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
-        if (setAllow){
+        console.log(formData);
+        if (allow){
             alert('회원가입 성공!');
             navigate("/main");
         }
@@ -96,7 +92,7 @@ export default function Page3 ({swiperRef}) {
                                 type="number"
                                 onInput={onInput}
                                 name="exerciseTime"
-                                value={form.exerciseTime}
+                                value={formData.exerciseTime}
                                 onChange={handleInputChange}
                             ></Input>
                             <P>시간</P>
@@ -107,7 +103,6 @@ export default function Page3 ({swiperRef}) {
                 <SignUpButton 
                     type="submit" 
                     disabled={!allow}
-                    onClick={() => swiperRef.current.slideNext()}
                 >
                     시작하기
                 </SignUpButton>

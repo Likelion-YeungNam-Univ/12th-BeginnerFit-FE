@@ -1,15 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
+import { FormContext } from './FormContext';
 
 export default function Page2 ({swiperRef}) {
-    const [name, setName] = useState('');
     const [nameValid, setNameValid] = useState('')
     const [allow, setAllow] = useState(false);
 
+    // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
+    const {formData, setFormData} = useContext(FormContext);
+    
     const handleName = (e) => {
-        setName(e.target.value);
+        // 전역 상태 함수에 데이터 값 받기
+        setFormData((prev)=>({...prev, name: e.target.value}));
+
         const regex = 
         /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{3,10}$/;
         if (regex.test(e.target.value)){
@@ -30,28 +35,20 @@ export default function Page2 ({swiperRef}) {
         alert("음수값은 입력할 수 없습니다.");
         }
     };
-    //폼 관리상태
-    const [form, setForm] = useState({
-        height: 0,
-        weight: 0,
-        targetWeight: 0,
-        date: "",
-        targetDate: "",
-    });
 
     //입력값 관리
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setForm((prev) => ({
+        setFormData((prev) => ({
         ...prev,
         [name]: value,
         }));
     };
 
-    //폼 제출
+    //폼 값 확인
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
+        console.log(formData);
     };
 
     //입력창 모두 입력하면 버튼 활성화
@@ -65,7 +62,7 @@ export default function Page2 ({swiperRef}) {
         targetWeight,
         date,
         targetDate,
-        } = form;
+        } = formData;
         //전체 유효성
         const isValid =
         height > 0 &&
@@ -74,7 +71,7 @@ export default function Page2 ({swiperRef}) {
         date &&
         targetDate;
         setIsFormValid(isValid);
-    }, [form]);
+    }, [formData]);
 
     // 버튼 활성화
     useEffect(()=>{
@@ -98,7 +95,7 @@ export default function Page2 ({swiperRef}) {
                     <MyInput 
                         type='text'
                         placeholder="영어, 숫자, 특수기호를 포함한 3~10자리"
-                        value={name}
+                        value={formData.name}
                         onChange={handleName}
                     ></MyInput>
                     <TextInputContainer>
@@ -108,7 +105,7 @@ export default function Page2 ({swiperRef}) {
                             type="number"
                             onInput={onInput}
                             name="height"
-                            value={form.height}
+                            value={formData.height}
                             onChange={handleInputChange}
                         ></Input>
                         <P>cm</P>
@@ -122,7 +119,7 @@ export default function Page2 ({swiperRef}) {
                                 type="number"
                                 onInput={onInput}
                                 name="weight"
-                                value={form.weight}
+                                value={formData.weight}
                                 onChange={handleInputChange}
                                 ></Input>
                                 <P>kg</P>
@@ -135,7 +132,7 @@ export default function Page2 ({swiperRef}) {
                                 type="number"
                                 onInput={onInput}
                                 name="targetWeight"
-                                value={form.targetWeight}
+                                value={formData.targetWeight}
                                 onChange={handleInputChange}
                                 ></Input>
                                 <P>kg</P>
@@ -150,7 +147,7 @@ export default function Page2 ({swiperRef}) {
                                 style={{ fontSize: "12px" }}
                                 type="date"
                                 name="date"
-                                value={form.date}
+                                value={formData.date}
                                 onChange={handleInputChange}
                                 ></Input>
                             </SubContainer>
@@ -162,7 +159,7 @@ export default function Page2 ({swiperRef}) {
                                 style={{ fontSize: "12px" }}
                                 type="date"
                                 name="targetDate"
-                                value={form.targetDate}
+                                value={formData.targetDate}
                                 onChange={handleInputChange}
                                 ></Input>
                             </SubContainer>
