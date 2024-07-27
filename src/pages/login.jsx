@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from "../apis/axios";
 import api from "../apis/axios";
 
 function Login() {
   const [email, setEmail] = useState("test@example.com");
   const [password, setPassword] = useState("pw123");
+
+  // 로그인 화면으로 오면 토큰들 삭제 -> 로그아웃
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
 
   const navigate = useNavigate();
   const navigateToForgetID = () => {
@@ -37,7 +40,7 @@ function Login() {
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
       //로그인 성공 시 홈화면으로 이동
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       // console.error('로그인 실패:', error.response? error.response.data : error.message);
       // alert(`로그인 실패: ${error.response?.data?.message || '서버 에러'}`);
