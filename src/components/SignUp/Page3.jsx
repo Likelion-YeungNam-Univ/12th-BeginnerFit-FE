@@ -1,9 +1,9 @@
 
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import SetCategory from "../MyPage/SetCategory";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect } from "react";
+import Category from "./Category";
 
 export default function Page3 () {
 
@@ -102,7 +102,7 @@ export default function Page3 () {
                             <P>시간</P>
                         </SubContainer>
                     </TextInputContainer>
-                    <SetCategory onSubmit={handleCategorySubmit}></SetCategory>
+                    <Category onSubmit={handleCategorySubmit}></Category>
                 </Form>
                 <SignUpButton 
                     type="submit" 
