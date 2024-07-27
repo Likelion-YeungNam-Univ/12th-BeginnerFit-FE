@@ -5,7 +5,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 
 // type으로 친구 추가할지 삭제할지 설정
-export const User = ({ id, nickname, image, type }) => {
+export const User = ({ id, nickname, image, type, onClick }) => {
   return (
     <RowContainer style={{ margin: "5px 0px" }}>
       <Item>
@@ -13,7 +13,7 @@ export const User = ({ id, nickname, image, type }) => {
         <Nickname>{nickname}</Nickname>
       </Item>
       <Item>
-        <IconHover>
+        <IconHover onClick={onClick}>
           {type === "delete" ? (
             <FaRegTrashAlt size={20} cursor={"pointer"} color="#9A9A9A" />
           ) : (
