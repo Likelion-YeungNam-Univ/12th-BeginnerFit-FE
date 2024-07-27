@@ -4,8 +4,8 @@ import styled from "styled-components";
 import api from "../apis/axios";
 
 function Login() {
-  const [email, setEmail] = useState("test@example.com");
-  const [password, setPassword] = useState("pw123");
+    const [email, setEmail] = useState("asdf@naver.com");
+    const [password, setPassword] = useState("password123");
 
   // 로그인 화면으로 오면 토큰들 삭제 -> 로그아웃
   localStorage.removeItem("accessToken");
@@ -101,7 +101,6 @@ const Wrapper = styled.div`
 `
 
 
-
 const LoginBox = styled.div`
   display: grid;
   justify-content: center;
@@ -111,18 +110,18 @@ const LoginBox = styled.div`
 `;
 
 const Logo = styled.img.attrs({
-  src: "/src/images/BeginnerFitLogo.png",
-  alt: "BeginnerFit",
+
+    src: "/src/images/logo.png",
+    alt: "BeginnerFit"
 })`
-  margin: 0px auto 50px auto;
-  width: 40%;
-`;
+    margin: 0px auto 80px auto;
+    width: 45%;
+`
 
 const LoginForm = styled.form`
-  width: 100%;
-  border-radius: 15px;
-`;
-
+    width: 500px;
+    border-radius: 15px;
+`
 
 
 const MyInput = styled.input`
@@ -148,19 +147,18 @@ const LoginButton = styled.button`
   box-sizing: border-box;
 `;
 const LoginEtc = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    color: #9a9a9a;
-`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  color: #9a9a9a;
+`;
 
 const EtcButton = styled.button`
-    background-color: transparent;
-    color: #9a9a9a;
-    border: none;
-    outline: none;
-    margin: 0px 10px;
-`
-
+  background-color: transparent;
+  color: #9a9a9a;
+  border: none;
+  outline: none;
+  margin: 0px 10px;
+`;
 
 export default Login;

@@ -9,6 +9,7 @@ import {
 import BackHeader from "../layouts/BackHeader";
 import { Input } from "../components/FriendList/Input";
 import { AddUserList } from "../components/FriendList/AddUserList";
+import BottomNav from "../components/BottomNav";
 export default function AddFriend() {
   return (
     <MainWrapper>
@@ -23,6 +24,7 @@ export default function AddFriend() {
           <Input />
           <AddUserList />
         </MainContent>
+        <BottomNav />
       </MainContainer>
     </MainWrapper>
   );
