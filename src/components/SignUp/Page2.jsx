@@ -39,17 +39,13 @@ export default function Page2 ({swiperRef}) {
     //입력값 관리
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        // 전역 상태 함수에 데이터 값 받기
         setFormData((prev) => ({
         ...prev,
         [name]: value,
         }));
     };
 
-    //폼 값 확인
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-    };
 
     //입력창 모두 입력하면 버튼 활성화
     //폼 유효성검사
@@ -82,6 +78,12 @@ export default function Page2 ({swiperRef}) {
         setAllow(false);
     },[ nameValid, isFormValid ]);
 
+    //폼 값 확인용 submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    };
+
     return(
         <Wrapper>
             <Box>
@@ -98,6 +100,7 @@ export default function Page2 ({swiperRef}) {
                         value={formData.name}
                         onChange={handleName}
                     ></MyInput>
+                    {/* 에러 메시지 필요 */}
                     <TextInputContainer>
                         <P>키</P>
                         <SubContainer>
@@ -171,7 +174,7 @@ export default function Page2 ({swiperRef}) {
                     disabled={!allow}
                     onClick={(e) => {
                         e.preventDefault();
-                        swiperRef.current.slideNext();} // 다음 슬라이드로 이동
+                        swiperRef.current.slideNext();} // 다음 페이지로 이동 (page3으로)
                     }
                 >
                     다음으로

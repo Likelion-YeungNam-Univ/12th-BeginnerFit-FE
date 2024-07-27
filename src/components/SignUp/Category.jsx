@@ -1,3 +1,6 @@
+// ./component/Mypage/SetCategory.jsx와 같은 파일입니다.
+// 데이터 입력 칸 간격 조절을 위해 새로 만들었습니다. (style만 다른 같은 파일)
+
 import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { useCategorySelect } from "../../hooks/useCategorySelect";

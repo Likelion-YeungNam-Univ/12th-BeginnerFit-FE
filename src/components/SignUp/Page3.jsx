@@ -31,7 +31,7 @@ export default function Page3 ({swiperRef}) {
         }));
     };
 
-    //Categiry 컴포넌트에서 선택된 카테고리가져오기
+    //Category 컴포넌트에서 선택된 카테고리가져오기
     const handleCategorySubmit = (selectedCategories) => {
         setFormData((prev) => ({ ...prev, categories: selectedCategories }));
     };
@@ -45,7 +45,7 @@ export default function Page3 ({swiperRef}) {
         exerciseTime,
         categories,
         } = formData;
-        //카테고리 유효성(각 카테고리별 1개이상은 선택)
+        //카테고리 유효성(각 카테고리별 1개이상은 선택) -> 제대로 작동 안되는 것 같음. 수정 필요.
         const isCategoriesValid = Object.values(categories).some(
         (arr) => arr.length > 0
         );

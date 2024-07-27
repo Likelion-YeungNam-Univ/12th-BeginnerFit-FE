@@ -57,7 +57,7 @@ export default function Page1({swiperRef}) {
         }
     }
 
-    //폼 값 확인
+    //폼 값 확인용 submit
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
@@ -126,7 +126,7 @@ export default function Page1({swiperRef}) {
                 <NextButton
                     type="button" // 폼 제출 방지
                     disabled={!allow}
-                    onClick={() => swiperRef.current.slideNext()}
+                    onClick={() => swiperRef.current.slideNext()} // 다음 페이지로 이동 (page2로)
                 >
                     다음으로
                 </NextButton>
