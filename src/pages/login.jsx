@@ -93,10 +93,14 @@ function Login() {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100vh;
-`;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: ${({ theme }) => theme.colors.white};
+    border: solid 1px ${({ theme }) => theme.colors.gray04};
+`
+
+
 
 const LoginBox = styled.div`
   display: grid;
@@ -118,6 +122,8 @@ const LoginForm = styled.form`
   width: 100%;
   border-radius: 15px;
 `;
+
+
 
 const MyInput = styled.input`
   width: 100%;
@@ -142,18 +148,19 @@ const LoginButton = styled.button`
   box-sizing: border-box;
 `;
 const LoginEtc = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  color: #5c5c5c;
-`;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #9a9a9a;
+`
 
 const EtcButton = styled.button`
-  background-color: transparent;
-  color: #5c5c5c;
-  border: none;
-  outline: none;
-  margin: 0px 10px;
-`;
+    background-color: transparent;
+    color: #9a9a9a;
+    border: none;
+    outline: none;
+    margin: 0px 10px;
+`
+
 
 export default Login;

@@ -17,7 +17,7 @@ export default function BottomNav() {
       </div>
       {/* 프로필 이동 */}
       <div>
-        <Link>
+        <Link to="/mypage">
           <StyledIcon as={FiUser} />
         </Link>
       </div>
@@ -35,8 +35,8 @@ export default function BottomNav() {
 
 
 const StyledIcon = styled.div`
-  width: ${responsiveSize("48")};
-  height: ${responsiveSize("48")};
+  width: ${responsiveSize("38")};
+  height: ${responsiveSize("38")};
   color: gray;
   transition: color 0.3s;
 
