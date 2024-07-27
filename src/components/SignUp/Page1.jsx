@@ -62,11 +62,11 @@ export default function Page1({swiperRef}) {
     return(
         <Wrapper>
             <SignUpBox>
-                <h1>
+                <H1>
                     로그인 정보를 
                     <br/>
                     입력하세요.
-                </h1>
+                </H1>
                 <SignUpForm onSubmit={handleSubmit}>
                     <ItemName>이메일</ItemName>
                     <MyInput 
@@ -147,6 +147,12 @@ const SignUpBox = styled.div`
     margin: 0px auto;
 `
 
+const H1 = styled.h1`
+  margin-top: 80px;
+  @media (max-width: 480px) {
+    font-size: ${responsiveSize("24")};
+  }
+`;
 
 const SignUpForm = styled.form`
     width: 500px;

@@ -135,6 +135,7 @@ const Form = styled.form`
     border-radius: 15px;
 `
 const H1 = styled.h1`
+  margin-top: 80px;
   @media (max-width: 480px) {
     font-size: ${responsiveSize("24")};
   }
