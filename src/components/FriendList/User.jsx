@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image } from "../../styles/GlobalStyle";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
 
 // type으로 친구 추가할지 삭제할지 설정
-export const User = ({ id, nickname, image, type }) => {
+export const User = ({ id, nickname, image, type, onClick }) => {
+  // 친구 추가 버튼을 눌렀는지 확인하는 state (친구 추가 버튼을 누르면 + 버튼이 안 보여야됨)
+  const [isPlused, setIsPlused] = useState(false);
+
+  // 친구 추가 버튼 눌렀을 때 실행할 함수
+  const handlePlusButton = () => {
+    // 이미 친구 추가됐으면 state 변경 없음
+    if (isPlused) {
+      return;
+    }
+    setIsPlused(true);
+    // 서버에게 친구 추가 api 요청
+  };
+
   return (
     <RowContainer style={{ margin: "5px 0px" }}>
       <Item>
@@ -13,17 +27,33 @@ export const User = ({ id, nickname, image, type }) => {
         <Nickname>{nickname}</Nickname>
       </Item>
       <Item>
-        <IconHover>
+        <IconHover onClick={onClick ?? handlePlusButton}>
           {type === "delete" ? (
             <FaRegTrashAlt size={20} cursor={"pointer"} color="#9A9A9A" />
+          ) : !isPlused ? (
+            <FaPlus size={20} cursor={"pointer"} onClick={handlePlusButton} />
           ) : (
-            <FaPlus size={20} cursor={"pointer"} />
+            <AnimationCheck size={20} />
           )}
         </IconHover>
       </Item>
     </RowContainer>
   );
 };
+
+// 체크 버튼으로 변경될 때 애니메이션 적용
+const fadeIn = keyframes`
+  from{
+    transform: scale(0);
+  }
+  to{
+    transform: scale(1);
+  }
+`;
+// 체크 버튼으로 변경될 때 애니메이션 적용
+const AnimationCheck = styled(FaCheck)`
+  animation: ${fadeIn} 0.5s ease;
+`;
 
 const RowContainer = styled.div`
   box-sizing: border-box;
