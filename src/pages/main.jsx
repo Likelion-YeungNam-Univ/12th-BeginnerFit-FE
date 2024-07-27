@@ -12,6 +12,7 @@ import YouTubeThumbnail from "../components/Main/YoutubeThumnail";
 import PlayListList from "../components/Main/PlayListList";
 import ChallengeList from "../components/Main/ChallengeList";
 import UserList from "../components/Main/UserList";
+import BottomNav from "../components/BottomNav";
 
 export default function Main() {
   const today = new Date();
@@ -50,6 +51,7 @@ export default function Main() {
           </MainH3>
           <UserList />
         </MainContent>
+        <BottomNav />
       </MainContainer>
     </MainWrapper>
   );

@@ -7,7 +7,7 @@ import { responsiveSize } from "../utils/Mediaquery";
 import { TbUsers } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ type, size }) => {
+export const Header = ({ type, size, onClick }) => {
   const nav = useNavigate();
   // 로고 클릭했을 때 main화면으로 이동
   const handleLogoClick = () => {
@@ -20,12 +20,16 @@ export const Header = ({ type, size }) => {
       </ImgWrap>
       {type === "option" ? <DropDown /> : null}
       {type === "alarm" ? (
-        <IconWrap>
+        <IconWrap onClick={onClick}>
           <FaRegBell size={responsiveSize(size)} cursor={"pointer"} />
         </IconWrap>
       ) : null}
       {type === "people" ? (
-        <TbUsers size={responsiveSize(size)} cursor={"pointer"} />
+        <TbUsers
+          size={responsiveSize(size)}
+          cursor={"pointer"}
+          onClick={onClick}
+        />
       ) : null}
     </RowContainer>
   );

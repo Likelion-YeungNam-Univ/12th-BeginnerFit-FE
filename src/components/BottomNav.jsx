@@ -17,7 +17,7 @@ export default function BottomNav() {
       </div>
       {/* 프로필 이동 */}
       <div>
-        <Link>
+        <Link to="/mypage">
           <StyledIcon as={FiUser} />
         </Link>
       </div>
@@ -42,7 +42,7 @@ export const BottomNavContainer = styled.nav`
   justify-content: space-around;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.black};
-  height: ${responsiveSize("90")};
+  height: ${responsiveSize("60")};
   bottom: 0;
   border-top-left-radius: ${responsiveSize("30")};
   border-top-right-radius: ${responsiveSize("30")};
@@ -50,8 +50,8 @@ export const BottomNavContainer = styled.nav`
 `;
 
 const StyledIcon = styled.div`
-  width: ${responsiveSize("48")};
-  height: ${responsiveSize("48")};
+  width: ${responsiveSize("38")};
+  height: ${responsiveSize("38")};
   color: gray;
   transition: color 0.3s;
 
