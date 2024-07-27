@@ -27,7 +27,7 @@ export const useWritePost = (url) => {
       reader.onloadend = () => {
         setFileUrl(reader.result);
       };
-      reader.readAsDataURL(uploadFile);
+     reader.readAsDataURL(uploadFile);
     }
   };
   //제출
@@ -71,7 +71,8 @@ export const useWritePost = (url) => {
       //입력칸 초기화
       setTitle("");
       setContent("");
-
+      setFileUrl("");
+      
       navigate("/posts"); //커뮤니티 페이지 이동
     } catch (error) {
       console.error("게시물 등록 중 오류가 발생", error);

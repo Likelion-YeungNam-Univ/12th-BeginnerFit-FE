@@ -110,5 +110,5 @@ const Photo = styled.img`
   margin-top: ${responsiveSize("20")};
   padding: 0 20px;
   height: auto;
-  border-radius: ${responsiveSize("30")};
+  border-radius: 10%;
 `;
