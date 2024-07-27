@@ -57,3 +57,40 @@ export const MainH3 = styled.h2`
   margin-top: 40px;
   margin-bottom: 10px;
 `;
+
+export const BottomNavContainer = styled.nav`
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.black};
+  height: ${responsiveSize("90")};
+  border-top-left-radius: ${responsiveSize("30")};
+  border-top-right-radius: ${responsiveSize("30")};
+  z-index: 1;
+`;
+
+const SubmitButton = styled.button`
+  margin-top: ${responsiveSize(30)};
+  height: ${responsiveSize(77)};
+  font-size: ${responsiveSize(30)};
+  width: ${responsiveSize(550)};
+  margin-bottom: ${responsiveSize(40)};
+  border-radius: ${responsiveSize(12)};
+  text-align: center;
+  color: ${({ theme, $isFormValid }) =>
+    $isFormValid ? theme.colors.white : theme.colors.gray01};
+  background-color: ${({ theme, $isFormValid }) =>
+    $isFormValid ? theme.colors.purple : theme.colors.gray02};
+  border: none;
+  cursor: pointer;
+
+  @media (max-width: 600px) {
+    font-size: ${responsiveSize(20)};
+    width: min(${responsiveSize(280)});
+    height: ${responsiveSize(50)};
+  }
+`;

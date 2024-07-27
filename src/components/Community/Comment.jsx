@@ -4,11 +4,10 @@ import { RowContainer } from "../../styles/GlobalStyle";
 import DropDown from "./DropDown";
 import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
-import { BottomNavContainer } from "../../components/BottomNav";
+import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
 
 export default function Comment({ post }) {
-  
   const { comments, comment, setComment, handleCommentSubmit, isCommentEmpty } =
     useComment(post);
 
