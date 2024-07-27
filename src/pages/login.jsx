@@ -4,8 +4,8 @@ import styled from "styled-components";
 import api from "../apis/axios";
 
 function Login() {
-  const [email, setEmail] = useState("test@example.com");
-  const [password, setPassword] = useState("pw123");
+  const [email, setEmail] = useState("asdf@naver.com");
+  const [password, setPassword] = useState("password123");
 
   // 로그인 화면으로 오면 토큰들 삭제 -> 로그아웃
   localStorage.removeItem("accessToken");
