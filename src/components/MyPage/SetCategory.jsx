@@ -3,7 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState } from "react";
 import { useCategorySelect } from "../../hooks/useCategorySelect";
 
-export default function SetCategory({ onSubmit }) {
+export default function SetCategory({ onSubmit, isSignUp }) {
   // 카테고리 제목 및 아이템
   const list = {
     "운동 강도": ["저강도", "중강도", "고강도"],
@@ -38,7 +38,7 @@ export default function SetCategory({ onSubmit }) {
   return (
     <Container>
       {Object.entries(list).map(([key, values]) => (
-        <CategoryContainer key={key}>
+        <CategoryContainer key={key} isSignUp={isSignUp}>
           <CategoryTitle>{key}</CategoryTitle>
           <ItemContainer>
             {values.map((value) => (
@@ -65,7 +65,7 @@ const Container = styled.div`
 `;
 
 const CategoryContainer = styled.div`
-  padding: 20px 0;
+  padding: ${({isSignUp}) => isSignUp ? "5px 0" : "20px 0"};
   display: flex;
   flex-direction: column;
   gap: ${responsiveSize(10)};
