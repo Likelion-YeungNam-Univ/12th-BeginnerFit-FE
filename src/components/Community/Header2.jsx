@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { RowContainer } from "../../styles/GlobalStyle";
 
-export default function Header2() {
+export default function Header2({ isDrop }) {
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
@@ -19,7 +19,7 @@ export default function Header2() {
     <>
       <RowContainer style={{ padding: `${responsiveSize("20")}` }}>
         <ResponsiveIcon onClick={handleBack} />
-        <DropDown />
+        {isDrop ? <DropDown /> : undefined}
       </RowContainer>
     </>
   );

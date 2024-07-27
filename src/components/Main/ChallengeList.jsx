@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Challenge from "./Challenge";
 import styled from "styled-components";
+import { keyframes } from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 
 const challengeList = [
@@ -41,7 +42,19 @@ const Container = styled.div`
   position: relative;
 `;
 
-const SpeechBubble = styled.div`
+export const bounce = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+`;
+
+export const SpeechBubble = styled.div`
   position: absolute;
   background: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.white};
@@ -51,7 +64,7 @@ const SpeechBubble = styled.div`
   right: 0px;
   padding: 10px;
   font-size: ${responsiveSize("14")};
-
+  animation: ${bounce} 2s infinite;
   &::after {
     content: "";
     position: absolute;

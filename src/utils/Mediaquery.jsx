@@ -27,4 +27,6 @@ PC.propTypes = {
 // 반응형 크기 계산 함수
 const responsiveSize = (pixelValue) => `calc(${pixelValue}px + (100vw/1920))`;
 
+
+
 export { Mobile, PC, responsiveSize };
