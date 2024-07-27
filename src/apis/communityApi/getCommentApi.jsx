@@ -7,7 +7,6 @@ export const getCommentApi = async (
   setComments,
   setIsLoading,
   setHasMore,
-  updateTotalComments
 ) => {
   const setCommentCount = useCommentStore.getState().setCommentCount;
   //로딩상태 true
@@ -17,8 +16,6 @@ export const getCommentApi = async (
     //댓글 요청 GET
     const response = await api.get(`/posts/${postIdx}/comments`);
     const newComments = response.data;
-    //댓글 갯수 설정
-    updateTotalComments(response.data.length);
 
     if (Array.isArray(newComments) && newComments.length > 0) {
       //새 댓있으면 업데이트
