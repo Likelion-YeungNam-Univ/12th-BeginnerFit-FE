@@ -12,46 +12,6 @@ function Login() {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
 
-    const navigate = useNavigate();
-    const navigateToForgetID = () => {
-        navigate("/ForgetID");
-    }
-    const navigateToForgetPW = () => {
-        navigate("/ForgetPW");
-    }
-    const navigateToSignUp = () => {
-        navigate("/signup");
-    }
-
-    const handleSubmit = async(e) => {
-        e.preventDefault();
-        const data = {
-            email,
-            password
-        }
-        console.log('로그인 요청 데이터:', data);
-        console.log('API 엔드포인트:', import.meta.env.VITE_SERVER_URL + "/auth/sign-in");
-        try{
-            const res = await axios.post("/auth/sign-in", data);
-            console.log('로그인 성공',res.data);
-            // 토큰 저장
-            localStorage.setItem('access', res.data.accessToken);
-            localStorage.setItem('refresh', res.data.refreshToken);
-            //로그인 성공 시 홈화면으로 이동
-            navigate('/');
-        } catch(error){
-            console.error('로그인 실패:', error);
-            if (error.response) {
-                console.error('서버 응답:', error.response.data);
-                alert(`로그인 실패: ${error.response.data.message || '서버 에러'}`);
-            } else {
-                console.error('오류 메시지:', error.message);
-                alert(`로그인 실패: ${error.message}`);
-            }
-        }
-    }
-
-
   const navigate = useNavigate();
   const navigateToForgetID = () => {
     navigate("/ForgetID");
