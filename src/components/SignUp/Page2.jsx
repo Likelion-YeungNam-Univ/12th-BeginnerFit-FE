@@ -127,56 +127,56 @@ export default function Page2 () {
                     </TextInputContainer>
                     <RowContainer>
                         <TextInputContainer>
-                        <P>몸무게</P>
-                        <SubContainer>
-                            <Input
-                            type="number"
-                            onInput={onInput}
-                            name="weight"
-                            value={form.weight}
-                            onChange={handleInputChange}
-                            ></Input>
-                            <P>kg</P>
-                        </SubContainer>
+                            <P>몸무게</P>
+                            <SubContainer>
+                                <Input
+                                type="number"
+                                onInput={onInput}
+                                name="weight"
+                                value={form.weight}
+                                onChange={handleInputChange}
+                                ></Input>
+                                <P>kg</P>
+                            </SubContainer>
                         </TextInputContainer>
                         <TextInputContainer>
-                        <P>목표 몸무게</P>
-                        <SubContainer>
-                            <Input
-                            type="number"
-                            onInput={onInput}
-                            name="targetWeight"
-                            value={form.targetWeight}
-                            onChange={handleInputChange}
-                            ></Input>
-                            <P>kg</P>
-                        </SubContainer>
+                            <P>목표 몸무게</P>
+                            <SubContainer>
+                                <Input
+                                type="number"
+                                onInput={onInput}
+                                name="targetWeight"
+                                value={form.targetWeight}
+                                onChange={handleInputChange}
+                                ></Input>
+                                <P>kg</P>
+                            </SubContainer>
                         </TextInputContainer>
                     </RowContainer>
                     <RowContainer>
                         <TextInputContainer>
-                        <P>기간</P>
-                        <SubContainer>
-                            <Input
-                            style={{ fontSize: "12px" }}
-                            type="date"
-                            name="date"
-                            value={form.date}
-                            onChange={handleInputChange}
-                            ></Input>
-                        </SubContainer>
+                            <P>기간</P>
+                            <SubContainer>
+                                <Input
+                                style={{ fontSize: "12px" }}
+                                type="date"
+                                name="date"
+                                value={form.date}
+                                onChange={handleInputChange}
+                                ></Input>
+                            </SubContainer>
                         </TextInputContainer>
                         <TextInputContainer>
-                        <P hiddenText>x</P>
-                        <SubContainer>
-                            <Input
-                            style={{ fontSize: "12px" }}
-                            type="date"
-                            name="targetDate"
-                            value={form.targetDate}
-                            onChange={handleInputChange}
-                            ></Input>
-                        </SubContainer>
+                            <P hiddenText>x</P>
+                            <SubContainer>
+                                <Input
+                                style={{ fontSize: "12px" }}
+                                type="date"
+                                name="targetDate"
+                                value={form.targetDate}
+                                onChange={handleInputChange}
+                                ></Input>
+                            </SubContainer>
                         </TextInputContainer>
                     </RowContainer>
                     <NextButton 
@@ -218,7 +218,7 @@ const ItemName = styled.div`
 `
 const P = styled.p`
   padding-left: 10px;
-  font-size: ${responsiveSize("20")};
+  /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(10)};
 
   //글씨 채우기용(화면 상에서는 안보이도록 )
@@ -230,8 +230,8 @@ const P = styled.p`
 
 const MyInput = styled.input`
     width: 100%;
-    height: ${responsiveSize(60)};
-    font-size: ${responsiveSize("20")};
+    /* height: ${responsiveSize(40)}; */
+    /* font-size: ${responsiveSize("17")}; */
     font-weight: 400;
     border-radius: ${responsiveSize("12")};
     background-color: ${({ theme }) => theme.colors.gray01};
@@ -251,9 +251,8 @@ const TextInputContainer = styled.div`
 `;
 const Input = styled.input`
   width: ${responsiveSize(120)};
-  height: ${responsiveSize(40)};
   padding: ${responsiveSize("10")};
-  font-size: ${responsiveSize("20")};
+  padding: 15px;
   border: none;
   font-weight: 400;
   border-radius: ${responsiveSize("12")};
