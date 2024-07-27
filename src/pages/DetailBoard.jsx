@@ -25,7 +25,7 @@ export default function DetailBoard() {
   }, [idx]);
 
   return (
-    <Wrapper style={{ minHeight: "100vh" }}>
+    <Wrapper style={{ minHeight: "100vh"}}>
       {loading ? (
         <h2>Loading...</h2>
       ) : (

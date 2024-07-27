@@ -36,7 +36,7 @@ export default function Comment({ post }) {
   );
 
   return (
-    <PageContainer>
+    <>
       <Container>
         <CommentNum>댓글 {comments.length}개</CommentNum>
         {comments &&
@@ -80,15 +80,10 @@ export default function Comment({ post }) {
           </SendButton>
         </RowContainer>
       </BottomNavContainer>
-    </PageContainer>
+    </>
   );
 }
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-`;
 const CommentNum = styled.h6`
   font-size: ${responsiveSize("20")};
   text-align: start;

@@ -27,8 +27,8 @@ export default function WritePost() {
     formState: { errors },
   } = useForm();
 
-  //파일 올리기
-  const [files, setFiles] = useState(null);
+  //파일 올리기-1개
+  const [file, setFile] = useState(null);
 
   //카테고리 선택 기본값자자유게시판
   const [selectCategory, setSelectCategory] = useState(selectList[0]);
@@ -39,32 +39,45 @@ export default function WritePost() {
   //파일 업로드 핸들러
   const handleUpload = (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFiles(reader.result);
-      };
-      reader.readAsDataURL(file);
+    const uploadFile = e.target.files[0];
+    if (uploadFile) {
+      setFile(uploadFile);
     }
   };
 
   const onSubmit = async (data) => {
-    const postData = {
-      title: data.title,
-      content: data.content,
-      categoryName: selectCategory,
-      postPicture: files || null, // 파일이 없으면 null
-    };
-    //console.log(localStorage.getItem("accessToken"));
+    const formData = new FormData();
+
+    formData.append(
+      "createDto",
+      new Blob(
+        [
+          JSON.stringify({
+            title: data.title,
+            content: data.content,
+            categoryName: selectCategory,
+          }),
+        ],
+        { type: "application/json" }
+      )
+    );
+
+    if (file) {
+      formData.append("postPicture", file);
+    }
+
+    // FormData 확인
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/posts`,
-        postData,
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            //  "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
           },
         }
       );
