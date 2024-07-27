@@ -7,10 +7,10 @@ function Login() {
   const [email, setEmail] = useState("test@example.com");
   const [password, setPassword] = useState("pw123");
 
-
   // 로그인 화면으로 오면 토큰들 삭제 -> 로그아웃
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+  localStorage.removeItem("login");
 
   const navigate = useNavigate();
   const navigateToForgetID = () => {
@@ -40,6 +40,7 @@ function Login() {
       // 토큰 저장
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
+      localStorage.setItem("login", true);
       //로그인 성공 시 홈화면으로 이동
       navigate("/main");
     } catch (error) {
@@ -94,13 +95,12 @@ function Login() {
 }
 
 const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    background-color: ${({ theme }) => theme.colors.white};
-    border: solid 1px ${({ theme }) => theme.colors.gray04};
-`
-
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: solid 1px ${({ theme }) => theme.colors.gray04};
+`;
 
 const LoginBox = styled.div`
   display: grid;
@@ -111,19 +111,17 @@ const LoginBox = styled.div`
 `;
 
 const Logo = styled.img.attrs({
-
-    src: "/src/images/logo.png",
-    alt: "BeginnerFit"
+  src: "/src/images/logo.png",
+  alt: "BeginnerFit",
 })`
-    margin: 0px auto 80px auto;
-    width: 45%;
-`
+  margin: 0px auto 80px auto;
+  width: 45%;
+`;
 
 const LoginForm = styled.form`
-    width: 500px;
-    border-radius: 15px;
-`
-
+  width: 500px;
+  border-radius: 15px;
+`;
 
 const MyInput = styled.input`
   width: 100%;
@@ -148,19 +146,18 @@ const LoginButton = styled.button`
   box-sizing: border-box;
 `;
 const LoginEtc = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    color: #9a9a9a;
-`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  color: #9a9a9a;
+`;
 
 const EtcButton = styled.button`
-    background-color: transparent;
-    color: #9a9a9a;
-    border: none;
-    outline: none;
-    margin: 0px 10px;
-`
-
+  background-color: transparent;
+  color: #9a9a9a;
+  border: none;
+  outline: none;
+  margin: 0px 10px;
+`;
 
 export default Login;

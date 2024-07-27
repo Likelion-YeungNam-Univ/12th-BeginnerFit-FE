@@ -63,7 +63,14 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
+        <Route
+          path="/mypage"
+          element={
+            <ProtectedRouter>
+              <MyPage />
+            </ProtectedRouter>
+          }
+        ></Route>
         <Route
           path="/myHomeTrainList"
           element={
