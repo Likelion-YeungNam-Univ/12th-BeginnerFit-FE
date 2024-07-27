@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import Page1 from "../components/SignUp/Page1";
 import Page2 from "../components/SignUp/Page2";
+import Page3 from "../components/SignUp/Page3";
 
 export default function SignUp() {
     
@@ -10,6 +11,7 @@ export default function SignUp() {
             {/* <div>sign up page</div> */}
             <Page1/>
             <Page2/>
+            <Page3/>
         </Wrapper>
     );
 }
