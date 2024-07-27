@@ -5,7 +5,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect } from "react";
 import Category from "./Category";
 
-export default function Page3 () {
+export default function Page3 ({swiperRef}) {
 
     //음수값 자릿수 제한
     const onInput = (e) => {
@@ -107,6 +107,7 @@ export default function Page3 () {
                 <SignUpButton 
                     type="submit" 
                     disabled={!allow}
+                    onClick={() => swiperRef.current.slideNext()}
                 >
                     시작하기
                 </SignUpButton>

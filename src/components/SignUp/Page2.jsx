@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
 
-export default function Page2 () {
+export default function Page2 ({swiperRef}) {
     const [name, setName] = useState('');
     const [nameValid, setNameValid] = useState('')
     const [allow, setAllow] = useState(false);
@@ -172,6 +172,7 @@ export default function Page2 () {
                 <NextButton 
                     type="submit" 
                     disabled={!allow}
+                    onClick={() => swiperRef.current.slideNext()}
                 >
                     다음으로
                 </NextButton>

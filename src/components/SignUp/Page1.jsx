@@ -4,7 +4,7 @@ import { useState } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
 
-export default function Page1() {
+export default function Page1({swiperRef}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailValid, setEmailValid] = useState(false);
@@ -119,7 +119,13 @@ export default function Page1() {
                         )}
                     </ErrorMsg>
                 </SignUpForm>
-                <NextButton type="submit" disabled={!allow} >다음으로</NextButton>
+                <NextButton
+                    type="submit"
+                    disabled={!allow}
+                    onClick={() => swiperRef.current.slideNext()}
+                >
+                    다음으로
+                </NextButton>
             </SignUpBox>
         </Wrapper>
     );
