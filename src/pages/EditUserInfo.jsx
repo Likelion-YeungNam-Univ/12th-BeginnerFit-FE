@@ -4,7 +4,7 @@ import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
 import { useEffect, useState } from "react";
-
+import {SubmitButton} from "../styles/GlobalStyle";
 export default function EditUserInfo() {
   //음수값 자릿수 제한
   const onInput = (e) => {
@@ -239,24 +239,4 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
 `;
-const SubmitButton = styled.button`
-  margin-top: ${responsiveSize(30)};
-  height: ${responsiveSize(77)};
-  font-size: ${responsiveSize(30)};
-  width: ${responsiveSize(550)};
-  margin-bottom: ${responsiveSize(40)};
-  border-radius: ${responsiveSize(12)};
-  text-align: center;
-  color: ${({ theme, $isFormValid }) =>
-    $isFormValid ? theme.colors.white : theme.colors.gray01};
-  background-color: ${({ theme, $isFormValid }) =>
-    $isFormValid ? theme.colors.purple : theme.colors.gray02};
-  border: none;
-  cursor: pointer;
 
-  @media (max-width: 600px) {
-    font-size: ${responsiveSize(20)};
-    width: min(${responsiveSize(280)});
-    height: ${responsiveSize(50)};
-  }
-`;

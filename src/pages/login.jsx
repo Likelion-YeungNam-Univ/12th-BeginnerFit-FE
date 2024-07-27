@@ -4,12 +4,13 @@ import styled from "styled-components";
 import api from "../apis/axios";
 
 function Login() {
-  const [email, setEmail] = useState("asdf@naver.com");
-  const [password, setPassword] = useState("password123");
+    const [email, setEmail] = useState("asdf@naver.com");
+    const [password, setPassword] = useState("password123");
 
   // 로그인 화면으로 오면 토큰들 삭제 -> 로그아웃
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+  localStorage.removeItem("login");
 
   const navigate = useNavigate();
   const navigateToForgetID = () => {
@@ -39,6 +40,7 @@ function Login() {
       // 토큰 저장
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
+      localStorage.setItem("login", true);
       //로그인 성공 시 홈화면으로 이동
       navigate("/main");
     } catch (error) {
@@ -93,12 +95,13 @@ function Login() {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: solid 1px ${({ theme }) => theme.colors.gray04};
-`;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: ${({ theme }) => theme.colors.white};
+    border: solid 1px ${({ theme }) => theme.colors.gray04};
+`
+
 
 const LoginBox = styled.div`
   display: grid;
@@ -109,17 +112,19 @@ const LoginBox = styled.div`
 `;
 
 const Logo = styled.img.attrs({
-  src: "/src/images/logo.png",
-  alt: "BeginnerFit",
+
+    src: "/src/images/logo.png",
+    alt: "BeginnerFit"
 })`
-  margin: 0px auto 80px auto;
-  width: 45%;
-`;
+    margin: 0px auto 80px auto;
+    width: 45%;
+`
 
 const LoginForm = styled.form`
-  width: 500px;
-  border-radius: 15px;
-`;
+    width: 500px;
+    border-radius: 15px;
+`
+
 
 const MyInput = styled.input`
   width: 100%;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Challenge from "./Challenge";
 import styled from "styled-components";
 import { keyframes } from "styled-components";
@@ -11,22 +11,39 @@ const challengeList = [
 ];
 
 export default function ChallengeList() {
-  // 챌린지 완료했는지 체크함수
+  // 챌린지 완료했는지 체크할 state
   const [complete, setComplete] = useState({
     1: true,
     2: false,
     3: false,
   });
 
-  //
+  // 모든 챌린지 완료 했는지 체크할 state
+  const [allComplete, setAllComplete] = useState(false);
+
+  // 챌린지 완료 모양 눌럿을 때 실행할 함수
   const handleCheck = (idx) => {
+    // 모든 챌린지 완료했으면 챌린지 완료 표시 수정 불가능
+    if (allComplete) {
+      return;
+    }
+
     setComplete({ ...complete, [idx]: !complete[idx] });
   };
+
+  useEffect(() => {
+    if (allComplete) return;
+    if (!Object.values(complete).includes(false)) {
+      setAllComplete(true);
+    }
+  }, [complete]);
+
   return (
     <Container>
       <SpeechBubble>친구 27명이 성공했어요!</SpeechBubble>
       {challengeList.map((item, idx) => (
         <Challenge
+          allComplete={allComplete}
           key={idx}
           index={idx + 1}
           content={item.content}

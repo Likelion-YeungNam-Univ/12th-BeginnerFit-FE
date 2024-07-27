@@ -37,6 +37,32 @@ export const useComment = (post) => {
     }
   };
 
+  //스크롤 관리
+  const loadComments = async () => {
+    if (isLoading || !hasMore) return;
+
+    setIsLoading(true);
+    try {
+      const newComments = await getCommentApi(
+        post.id,
+        page + 1,
+        setComments,
+        setIsLoading,
+        setHasMore
+      );
+      if (newComments.length > 0) {
+        setComments((prevComments) => [...prevComments, ...newComments]);
+        setPage((prevPage) => prevPage + 1);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.log("댓글 로딩 실패", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchComments = async () => {
       setComments([]);
@@ -47,5 +73,14 @@ export const useComment = (post) => {
     fetchComments();
   }, [post.id]);
 
-  return {comments,comment,setComment,handleCommentSubmit,isCommentEmpty};
+  return {
+    comments,
+    comment,
+    setComment,
+    handleCommentSubmit,
+    isCommentEmpty,
+    loadComments,
+    isLoading,
+    hasMore,
+  };
 };
