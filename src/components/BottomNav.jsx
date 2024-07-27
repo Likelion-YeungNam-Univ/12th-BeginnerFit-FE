@@ -6,7 +6,6 @@ import { MdOutlineChat } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { responsiveSize } from "../utils/Mediaquery";
 import { BottomNavContainer } from "../styles/GlobalStyle";
-
 export default function BottomNav() {
   return (
     <BottomNavContainer>

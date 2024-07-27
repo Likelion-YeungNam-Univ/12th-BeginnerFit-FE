@@ -7,6 +7,9 @@ import { responsiveSize } from "../utils/Mediaquery";
 import photoIcon from "../images/photoIcon.png";
 import CommunityButtons from "../components/Community/CommunityButtons";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { Watch } from "@mui/icons-material";
 
 export default function WritePost() {
   const navigate = useNavigate();
@@ -16,37 +19,140 @@ export default function WritePost() {
 
   const selectList = ["자유게시판", "정보공유"];
 
-  //제목
-  const [title, setTitle] = useState("");
-  //내용
-  const [content, setContent] = useState("");
+  //React Hoopk Form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  //파일 올리기
+  const [files, setFiles] = useState(null);
+
+  //카테고리 선택 기본값자자유게시판
+  const [selectCategory, setSelectCategory] = useState(selectList[0]);
+
+  //제목 내용입력확인
+  const title = watch("title");
+  const content = watch("content");
+  //파일 업로드 핸들러
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFiles(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    const postData = {
+      title: data.title,
+      content: data.content,
+      categoryName: selectCategory,
+      postPicture: files || null, // 파일이 없으면 null
+    };
+    //console.log(localStorage.getItem("accessToken"));
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/posts`,
+        postData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      //게시물 작성 성공
+      alert("게시물이 등록되었습니다.");
+      console.log("게시물 등록", response.data);
+      navigate("/posts"); //커뮤니티 페이지 이동
+    } catch (error) {
+      console.error("게시물 등록 중 오류가 발생", error);
+      if (error.response) {
+        // 서버가 응답한 경우
+        console.error("서버 응답 데이터:", error.response.data);
+        console.error("서버 응답 상태:", error.response.status);
+        console.error("서버 응답 헤더:", error.response.headers);
+      } else if (error.request) {
+        // 요청이 만들어졌지만 응답이 없는 경우
+        console.error("요청 데이터:", error.request);
+      } else {
+        // 요청을 설정하는 중에 오류가 발생한 경우
+        console.error("오류 메시지:", error.message);
+      }
+      console.error("전체 오류 설정:", error.config);
+    }
+  };
+
+  //카테고리 선택
+  const handleCategorySelect = (category) => {
+    setSelectCategory(category);
+  };
 
   return (
     <Wrapper style={{ minHeight: "100vh", flexDirection: "column" }}>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <RowContainer style={{ padding: `${responsiveSize("20")}` }}>
           <ResponsiveIcon onClick={handleBack} />
-          <PhotoIcon
-            src={photoIcon}
-            alt="photoicon"
+          <input
             type="file"
             name="photo"
-            accept="image/*,audio/*,video/mp4,video/x-m4v,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,.csv"
-          ></PhotoIcon>
+            accept="image/*,audio/*,video/mp4,video/x-m4v"
+            onChange={handleUpload}
+            style={{ display: "none" }}
+            id="file-upload"
+          />
+          <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
+            <img src={photoIcon} alt="photoicon" />
+          </label>
         </RowContainer>
         <Div>
-          <CommunityButtons buttonList={selectList}></CommunityButtons>
+          {selectList.map((category, index) => (
+            <Button
+              key={index}
+              type="button"
+              onClick={() => handleCategorySelect(category)}
+              $selected={selectCategory === category}
+            >
+              {category}
+            </Button>
+          ))}
         </Div>
         <MainContainer>
-          <InputTitle type="text" placeholder="제목을 입력하세요"></InputTitle>
+          <InputTitle
+            type="text"
+            placeholder="제목을 입력하세요"
+            {...register("title", {
+              required: true,
+              maxLength: 30,
+              minLength: 1,
+            })}
+          ></InputTitle>
           <InputContent
             type="text"
             placeholder="본문을 입력하세요"
+            {...register("content", {
+              required: true,
+              maxLength: 500,
+              minLength: 1,
+            })}
           ></InputContent>
         </MainContainer>
         <Spacer />
         <ButtonWrapper>
-          <SubmitButton>등록하기</SubmitButton>
+          <SubmitButton
+            type="submit"
+            $isFormValid={title && content}
+            disabled={!title || !content}
+          >
+            등록하기
+          </SubmitButton>
         </ButtonWrapper>
       </StyledForm>
     </Wrapper>
@@ -115,6 +221,9 @@ const ButtonWrapper = styled.div`
 
 const Div = styled.div`
   padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 `;
 const Spacer = styled.div`
   flex-grow: 1;
@@ -123,4 +232,18 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+`;
+
+const Button = styled.button`
+  width: fit-content;
+  padding: 0 1rem;
+  color: ${({ theme, $selected }) =>
+    $selected ? theme.colors.white : theme.colors.gray02};
+  background-color: ${({ theme, $selected }) =>
+    $selected ? theme.colors.black : theme.colors.gray01};
+  border: none;
+  border-radius: ${responsiveSize("18")};
+  height: ${responsiveSize("28")};
+  font-size: ${responsiveSize("14")};
+  cursor: pointer;
 `;

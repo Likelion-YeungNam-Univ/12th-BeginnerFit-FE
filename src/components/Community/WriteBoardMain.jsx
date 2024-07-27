@@ -79,9 +79,7 @@ export default function WriteBoardMain({ post }) {
         </HeartContainer>
       </Container>
       <RowLine />
-      <Container>
-        <Comment post={post} setTotalComments={setTotalComments} />
-      </Container>
+      <Comment post={post} setTotalComments={setTotalComments} />
     </>
   );
 }
