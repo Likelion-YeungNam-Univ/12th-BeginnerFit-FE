@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import user from "../../images/user.png";
 import { User } from "./User";
 import { useFriendSearchStore } from "../../store/useFriendSearchStore";
+import useFetchData from "../../hooks/useFetchData";
 
 // 서버로 부터 사용자 전체 받아오기
 const userList = [
@@ -21,6 +22,13 @@ const userList = [
 export const UserList = () => {
   // input값 가져오기
   const { value } = useFriendSearchStore();
+
+  // 친구 목록 받아오는 코드 ( 현재 친구가 없어서 mock 데이터로 사용하겠습니다. )
+  const { data, isLoading, error } = useFetchData("/friends");
+
+  useEffect(() => {
+    console.log(data, error);
+  }, [data]);
 
   const [searchUser, setSearchUser] = useState(null);
 
@@ -45,6 +53,7 @@ export const UserList = () => {
     <div>
       {searchUser?.map((item) => (
         <User
+          type="delete"
           key={item.id}
           id={item.id}
           nickname={item.nickname}
