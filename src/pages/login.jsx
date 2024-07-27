@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../apis/axios";
+import api from "../apis/axios";
 
 function Login() {
   const [email, setEmail] = useState("test@example.com");
@@ -30,11 +31,11 @@ function Login() {
       import.meta.env.VITE_SERVER_URL + "/auth/sign-in"
     );
     try {
-      const res = await axios.post("/auth/sign-in", data);
+      const res = await api.post("/auth/sign-in", data);
       console.log("로그인 성공", res.data);
       // 토큰 저장
-      localStorage.setItem("access", res.data.accessToken);
-      localStorage.setItem("refresh", res.data.refreshToken);
+      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
       //로그인 성공 시 홈화면으로 이동
       navigate("/");
     } catch (error) {

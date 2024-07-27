@@ -1,3 +1,17 @@
+// 친구 추가 화면
+import {
+  MainWrapper,
+  MainContainer,
+  MainContent,
+  MainH2,
+  MainH3,
+} from "../styles/GlobalStyle";
 export default function AddFriend() {
-  return <>하이요</>;
+  return (
+    <MainWrapper>
+      <MainContainer>
+        <MainContent>fff</MainContent>
+      </MainContainer>
+    </MainWrapper>
+  );
 }

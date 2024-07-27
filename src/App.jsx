@@ -11,6 +11,7 @@ import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
 import FriendList from "./pages/FriendList";
+import AddFriend from "./pages/AddFriend";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/playlist" element={<PlayList />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/friendList" element={<FriendList />}></Route>
+        <Route path="/addFriend" element={<AddFriend />}></Route>
       </Routes>
     </>
   );
