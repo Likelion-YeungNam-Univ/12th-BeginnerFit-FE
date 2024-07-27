@@ -11,13 +11,14 @@ import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
 import HomeTranList from "./pages/HomeTrainList";
+import FriendList from "./pages/FriendList";
+import AddFriend from "./pages/AddFriend";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Login />}></Route>
         <Route path="/ForgetID" element={<ForgetID />}></Route>
         <Route path="/ForgetPW" element={<ForgetPW />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
@@ -31,6 +32,8 @@ function App() {
         <Route path="/playlist" element={<PlayList />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/myHomeTrainList" element={<HomeTranList />} />
+        <Route path="/friendList" element={<FriendList />}></Route>
+        <Route path="/addFriend" element={<AddFriend />}></Route>
       </Routes>
     </>
   );

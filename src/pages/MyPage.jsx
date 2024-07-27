@@ -31,13 +31,15 @@ export default function MyPage() {
   // 홈트 내역 전체보기 누른 경우 실행할 함수
   const onViewHomeTrainList = () => {
     nav("/myHomeTrainList");
+  const headerClick = () => {
+    nav("/friendList");
   };
 
   return (
     <MainWrapper>
       <MainContainer>
         <MainContent>
-          <Header type={"people"} size={30} />
+          <Header type={"people"} size={30} onClick={headerClick} />
           <MainH2>
             사용자님의
             <br />
