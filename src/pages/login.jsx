@@ -10,6 +10,7 @@ function Login() {
   // 로그인 화면으로 오면 토큰들 삭제 -> 로그아웃
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+  localStorage.removeItem("login");
 
   const navigate = useNavigate();
   const navigateToForgetID = () => {
@@ -39,6 +40,7 @@ function Login() {
       // 토큰 저장
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
+      localStorage.setItem("login", true);
       //로그인 성공 시 홈화면으로 이동
       navigate("/main");
     } catch (error) {
