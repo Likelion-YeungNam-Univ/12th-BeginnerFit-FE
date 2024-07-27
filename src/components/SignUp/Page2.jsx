@@ -170,9 +170,12 @@ export default function Page2 ({swiperRef}) {
                     </RowContainer>
                 </Form>
                 <NextButton 
-                    type="submit" 
+                    type="button" // 폼 제출 방지
                     disabled={!allow}
-                    onClick={() => swiperRef.current.slideNext()}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        swiperRef.current.slideNext();} // 다음 슬라이드로 이동
+                    }
                 >
                     다음으로
                 </NextButton>
