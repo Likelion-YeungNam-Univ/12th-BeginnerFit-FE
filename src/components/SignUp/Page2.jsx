@@ -37,8 +37,6 @@ export default function Page2 () {
         targetWeight: 0,
         date: "",
         targetDate: "",
-        // exerciseTime: 0,
-        // categories: {},
     });
 
     //입력값 관리
@@ -67,13 +65,7 @@ export default function Page2 () {
         targetWeight,
         date,
         targetDate,
-        // exerciseTime,
-        // categories,
         } = form;
-        // //카테고리 유효성(각 카테고리별 1개이상은 선택)
-        // const isCategoriesValid = Object.values(categories).some(
-        // (arr) => arr.length > 0
-        // );
         //전체 유효성
         const isValid =
         height > 0 &&
@@ -81,9 +73,6 @@ export default function Page2 () {
         targetWeight > 0 &&
         date &&
         targetDate;
-        // &&
-        // exerciseTime &&
-        // isCategoriesValid;
         setIsFormValid(isValid);
     }, [form]);
 
