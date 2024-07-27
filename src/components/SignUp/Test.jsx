@@ -24,8 +24,9 @@ export default function Test() {
   return (
     <Container>
       <Swiper
-        pagination={{ clickable: true, el: '.custom-swiper-pagination' }}
+        pagination={{ clickable: false, el: '.custom-swiper-pagination' }} // 점 버튼 클릭 비활성화
         navigation={false}
+        allowTouchMove={false} // (클릭 상태로)스와이프 비활성화
         modules={[Pagination, Navigation]}
         spaceBetween={50}
         slidesPerView={1}
