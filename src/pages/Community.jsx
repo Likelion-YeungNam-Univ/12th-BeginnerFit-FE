@@ -39,6 +39,7 @@ export default function Community() {
 const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 `;
 const Container = styled.div`
   justify-content: center;

@@ -6,18 +6,45 @@ import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
+import { useRef, useCallback } from "react";
 
 export default function Comment({ post }) {
-  const { comments, comment, setComment, handleCommentSubmit, isCommentEmpty } =
-    useComment(post);
+  const {
+    comments,
+    comment,
+    setComment,
+    handleCommentSubmit,
+    isCommentEmpty,
+    loadComments,
+    isLoading,
+    hasMore,
+  } = useComment(post);
+
+  const observer = useRef();
+  const lastCommentElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          loadComments();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore, loadComments]
+  );
 
   return (
-    <>
+    <PageContainer>
       <Container>
         <CommentNum>댓글 {comments.length}개</CommentNum>
         {comments &&
           comments.map((comment, index) => (
-            <CommentItem key={index}>
+            <CommentItem
+              key={index}
+              ref={index === comments.length - 1 ? lastCommentElementRef : null}
+            >
               <RowContainer>
                 <UserContainer>
                   <Profile src={profile}></Profile>
@@ -53,10 +80,15 @@ export default function Comment({ post }) {
           </SendButton>
         </RowContainer>
       </BottomNavContainer>
-    </>
+    </PageContainer>
   );
 }
 
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
 const CommentNum = styled.h6`
   font-size: ${responsiveSize("20")};
   text-align: start;
@@ -132,4 +164,5 @@ const SendButton = styled.button`
 const Container = styled.div`
   padding: 0px 20px;
   height: 100vh;
+  overflow-y: auto;
 `;
