@@ -96,6 +96,7 @@ export default function Page2 ({swiperRef}) {
                     <ItemName>닉네임</ItemName>
                     <MyInput 
                         type='text'
+                        maxLength={10}
                         placeholder="영어, 숫자, 특수기호를 포함한 3~10자리"
                         value={formData.name}
                         onChange={handleName}

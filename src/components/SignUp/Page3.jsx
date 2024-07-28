@@ -5,6 +5,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from './FormContext';
+import api from "../../apis/axios";
 
 export default function Page3 ({swiperRef}) {
 
@@ -68,12 +69,18 @@ export default function Page3 ({swiperRef}) {
     // 회원가입 성공 시 메인 화면으로 이동
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
         if (allow){
-            alert('회원가입 성공!');
-            navigate("/main");
+            try{
+                const res = await api.post("/auth/signup", formData);
+                alert('회원가입 성공!');
+                navigate("/main");
+            } catch(error){
+                console.error("회원가입 실패")
+                alert("회원가입 실패")
+            }
         }
     }
     return(
