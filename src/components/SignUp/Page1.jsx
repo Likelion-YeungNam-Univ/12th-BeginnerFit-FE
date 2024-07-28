@@ -47,6 +47,12 @@ export default function Page1({swiperRef}) {
         } else{
             setPwValid(false);
         }
+        // 비밀번호 칸 변경 시 버튼 활성화 에러 수정
+        if (formData.password === e.target.value){
+            setPwCheckValid(true);
+        } else{
+            setPwCheckValid(false);
+        }
     }
     const handlePwCheck = (e) => {
         setPwCheck(e.target.value);
@@ -57,10 +63,9 @@ export default function Page1({swiperRef}) {
         }
     }
 
-    //폼 값 확인용 submit
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
+    //폼 값 확인용
+    const handleFormCheck = () => {
+        console.log("formData: ",formData);
     };
 
     return(
@@ -71,7 +76,7 @@ export default function Page1({swiperRef}) {
                     <br/>
                     입력하세요.
                 </H1>
-                <SignUpForm onSubmit={handleSubmit}>
+                <SignUpForm>
                     <ItemName>이메일</ItemName>
                     <MyInput 
                         type='email'
@@ -124,9 +129,12 @@ export default function Page1({swiperRef}) {
                     </ErrorMsg>
                 </SignUpForm>
                 <NextButton
-                    type="button" // 폼 제출 방지
+                    type="button"
                     disabled={!allow}
-                    onClick={() => swiperRef.current.slideNext()} // 다음 페이지로 이동 (page2로)
+                    onClick={() => {
+                        handleFormCheck();
+                        swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
+                    }} 
                 >
                     다음으로
                 </NextButton>

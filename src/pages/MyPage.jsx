@@ -28,6 +28,13 @@ export default function MyPage() {
     nav("/mypage/editinfo");
   };
 
+  // 챌린지 전체보기 버튼 누른 경우 실행할 함수
+  const onViewAllChallenge = () => {
+    nav("/myChallengeList");
+
+  };
+
+
   // 홈트 내역 전체보기 누른 경우 실행할 함수
   const onViewHomeTrainList = () => {
     nav("/myHomeTrainList");
@@ -62,7 +69,7 @@ export default function MyPage() {
               <br />
               23개의 챌린지를 성공했어요!
             </MainH3>
-            <Total>전체보기</Total>
+            <Total onClick={onViewAllChallenge}>전체보기</Total>
           </TextWrap>
           <MyChallengeList />
           <TextWrap>

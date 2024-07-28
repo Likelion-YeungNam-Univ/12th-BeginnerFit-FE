@@ -6,10 +6,11 @@ import ForgetPW from "./pages/ForgetPW";
 import SignUp from "./pages/SignUp";
 import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
-import Main from "./pages/main";
+import Main from "./pages/Main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
+import MyChallengeList from "./pages/MyChallengeList";
 import WritePost from "./pages/WritePost";
 import HomeTranList from "./pages/HomeTrainList";
 import FriendList from "./pages/FriendList";
@@ -112,6 +113,14 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
+        <Route
+          path="/myChallengeList"
+          element={
+            <ProtectedRouter>
+              <MyChallengeList />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </>
   );
