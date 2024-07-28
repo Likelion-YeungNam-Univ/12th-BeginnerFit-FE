@@ -14,9 +14,9 @@ export default function Page3 ({swiperRef}) {
 
     //음수값 자릿수 제한
     const onInput = (e) => {
-        if (e.target.value.length > 3) {
+        if (e.target.value > 24) {
         e.target.value = 0;
-        alert("3자리까지만 입력가능합니다.");
+        alert("하루 이내의 시간만 입력가능합니다.");
         } else if (e.target.value < 0) {
         e.target.value = 0;
         alert("음수값은 입력할 수 없습니다.");
@@ -112,6 +112,7 @@ export default function Page3 ({swiperRef}) {
                     type="submit" 
                     disabled={!allow}
                     onClick={()=>{
+                        console.log(formData);
                         document.getElementById("page3").submit(); //폼 제출 트리거
                     }}
                 >
