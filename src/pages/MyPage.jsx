@@ -31,7 +31,10 @@ export default function MyPage() {
   // 챌린지 전체보기 버튼 누른 경우 실행할 함수
   const onViewAllChallenge = () => {
     nav("/myChallengeList");
+
   };
+
+
   // 홈트 내역 전체보기 누른 경우 실행할 함수
   const onViewHomeTrainList = () => {
     nav("/myHomeTrainList");
