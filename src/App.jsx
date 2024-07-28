@@ -17,7 +17,6 @@ import FriendList from "./pages/FriendList";
 import AddFriend from "./pages/AddFriend";
 import { ProtectedRouter } from "./components/ProtectedRouter";
 
-
 function App() {
   return (
     <>
@@ -98,9 +97,30 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
-        <Route path="/playlist" element={<PlayList />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/myChallengeList" element={<MyChallengeList />} />
+        <Route
+          path="/playlist"
+          element={
+            <ProtectedRouter>
+              <PlayList />
+            </ProtectedRouter>
+          }
+        ></Route>
+        <Route
+          path="/mypage"
+          element={
+            <ProtectedRouter>
+              <MyPage />
+            </ProtectedRouter>
+          }
+        ></Route>
+        <Route
+          path="/myChallengeList"
+          element={
+            <ProtectedRouter>
+              <MyChallengeList />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </>
   );
