@@ -47,6 +47,12 @@ export default function Page1({swiperRef}) {
         } else{
             setPwValid(false);
         }
+        // 비밀번호 칸 변경 시 버튼 활성화 에러 수정
+        if (formData.password === e.target.value){
+            setPwCheckValid(true);
+        } else{
+            setPwCheckValid(false);
+        }
     }
     const handlePwCheck = (e) => {
         setPwCheck(e.target.value);
