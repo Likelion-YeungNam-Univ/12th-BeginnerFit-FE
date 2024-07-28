@@ -3,8 +3,8 @@ import Header2 from "../components/Community/Header2";
 import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
-
-
+import { useEffect, useState } from "react";
+import {SubmitButton} from "../styles/GlobalStyle";
 export default function EditUserInfo() {
   //음수값 자릿수 제한
   const onInput = (e) => {
@@ -16,62 +16,169 @@ export default function EditUserInfo() {
       alert("음수값은 입력할 수 없습니다.");
     }
   };
+  //폼 관리상태
+  const [form, setForm] = useState({
+    height: 0,
+    weight: 0,
+    targetWeight: 0,
+    date: "",
+    targetDate: "",
+    exerciseTime: 0,
+    categories: {},
+  });
+
+  //입력값 관리
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  //폼 제출
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+  };
+
+  //setCategiry 컴포넌트에서 선택된 카테고리가져오기
+  const handleCategorySubmit = (selectedCategories) => {
+    setForm((prev) => ({ ...prev, categories: selectedCategories }));
+  };
+
+  //입력창 모두 입력하면 버튼 활성화
+  //폼 유효성검사
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const {
+      height,
+      weight,
+      targetWeight,
+      date,
+      targetDate,
+      exerciseTime,
+      categories,
+    } = form;
+    //카테고리 유효성(각 카테고리별 1개이상은 선택)
+    const isCategoriesValid = Object.values(categories).some(
+      (arr) => arr.length > 0
+    );
+    //전체 유효성
+    const isValid =
+      height > 0 &&
+      weight > 0 &&
+      targetWeight > 0 &&
+      date &&
+      targetDate &&
+      exerciseTime &&
+      isCategoriesValid;
+    setIsFormValid(isValid);
+  }, [form]);
 
   return (
     <Wrapper>
-      <Header2 isDrop={false} />
-      <RootContainer style={{ padding: "20px" }}>
-        <H1>
-          사용자 정보를
-          <br />
-          입력하세요
-        </H1>
-        <TextInputContainer>
-          <P>키</P>
-          <SubContainer>
-            <Input type="number" onInput={onInput}></Input>
-            <P>cm</P>
-          </SubContainer>
-        </TextInputContainer>
-        <RowContainer>
+      <form onSubmit={handleSubmit}>
+        <Header2 isDrop={false} />
+        <RootContainer style={{ padding: "20px" }}>
+          <H1>
+            사용자 정보를
+            <br />
+            입력하세요
+          </H1>
           <TextInputContainer>
-            <P>몸무게</P>
+            <P>키</P>
             <SubContainer>
-              <Input type="number" onInput={onInput}></Input>
-              <P>kg</P>
+              <Input
+                type="number"
+                onInput={onInput}
+                name="height"
+                value={form.height}
+                onChange={handleInputChange}
+              ></Input>
+              <P>cm</P>
             </SubContainer>
           </TextInputContainer>
+          <RowContainer>
+            <TextInputContainer>
+              <P>몸무게</P>
+              <SubContainer>
+                <Input
+                  type="number"
+                  onInput={onInput}
+                  name="weight"
+                  value={form.weight}
+                  onChange={handleInputChange}
+                ></Input>
+                <P>kg</P>
+              </SubContainer>
+            </TextInputContainer>
+            <TextInputContainer>
+              <P>목표 몸무게</P>
+              <SubContainer>
+                <Input
+                  type="number"
+                  onInput={onInput}
+                  name="targetWeight"
+                  value={form.targetWeight}
+                  onChange={handleInputChange}
+                ></Input>
+                <P>kg</P>
+              </SubContainer>
+            </TextInputContainer>
+          </RowContainer>
+          <RowContainer>
+            <TextInputContainer>
+              <P>기간</P>
+              <SubContainer>
+                <Input
+                  style={{ fontSize: "12px" }}
+                  type="date"
+                  name="date"
+                  value={form.date}
+                  onChange={handleInputChange}
+                ></Input>
+              </SubContainer>
+            </TextInputContainer>
+            <TextInputContainer>
+              <P hiddenText>x</P>
+              <SubContainer>
+                <Input
+                  style={{ fontSize: "12px" }}
+                  type="date"
+                  name="targetDate"
+                  value={form.targetDate}
+                  onChange={handleInputChange}
+                ></Input>
+              </SubContainer>
+            </TextInputContainer>
+          </RowContainer>
           <TextInputContainer>
-            <P>목표 몸무게</P>
+            <P>운동시간</P>
             <SubContainer>
-              <Input type="number" onInput={onInput}></Input>
-              <P>kg</P>
+              <Input
+                type="number"
+                onInput={onInput}
+                name="exerciseTime"
+                value={form.exerciseTime}
+                onChange={handleInputChange}
+              ></Input>
+              <P>시간</P>
             </SubContainer>
           </TextInputContainer>
-        </RowContainer>
-        <RowContainer>
-          <TextInputContainer>
-            <P>기간</P>
-            <SubContainer>
-              <Input type="date"></Input>
-            </SubContainer>
-          </TextInputContainer>
-          <TextInputContainer>
-            <P hiddenText>x</P>
-            <SubContainer>
-              <Input type="date"></Input>
-            </SubContainer>
-          </TextInputContainer>
-        </RowContainer>
-        <TextInputContainer>
-          <P>운동시간</P>
-          <SubContainer>
-            <Input type="number" onInput={onInput}></Input>
-            <P>시간</P>
-          </SubContainer>
-        </TextInputContainer>
-        <SetCategory></SetCategory>
-      </RootContainer>
+          <SetCategory onSubmit={handleCategorySubmit} isSignUp={false}></SetCategory>
+        </RootContainer>
+        <Div>
+          <SubmitButton
+            $isFormValid={isFormValid}
+            disabled={!isFormValid}
+            type="submit"
+          >
+            수정하기
+          </SubmitButton>
+        </Div>
+      </form>
     </Wrapper>
   );
 }
@@ -128,3 +235,8 @@ const RootContainer = styled.div`
   flex-direction: column;
   align-items: start;
 `;
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+

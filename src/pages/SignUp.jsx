@@ -1,100 +1,114 @@
-import React from "react";
-import { useState } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
+import React, { useRef } from 'react';
+import { IoIosArrowBack } from "react-icons/io";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+// import required modules
+import { Pagination, Navigation } from 'swiper/modules';
+import Page1 from "../components/SignUp/Page1";
+import Page2 from '../components/SignUp/Page2';
+import Page3 from '../components/SignUp/Page3';
+import {useNavigate} from "react-router-dom";
+import { FormProvider } from '../components/SignUp/FormContext';
 
-function SignUp() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
+export default function SignUp() {
+  const swiperRef = useRef(null);
+  const navigate = useNavigate();
 
-    const handleSubmit = async(e) => {
-        e.preventDefault();
-        console.log(email);
-        console.log(password);
-        console.log(name);
-    }
-
-    return(
-        <Wrapper>
-            <SignUpBox>
-                <Logo></Logo>
-                <SignUpForm onSubmit={handleSubmit}>
-                    <div>아이디</div>
-                    <MyInput 
-                        type='email'
-                        placeholder="아이디를 입력하세요"
-                        value={email}
-                        onChange={(e)=>{setEmail(e.target.value)}}
-                    ></MyInput>
-                    <div>비밀번호</div>
-                    <MyInput 
-                        type='password'
-                        placeholder="비밀번호를 입력하세요"
-                        value={password}
-                        onChange={(e)=>{setPassword(e.target.value)}}
-                    ></MyInput>
-                    <div>닉네임</div>
-                    <MyInput 
-                        type='text'
-                        placeholder="이름을 입력하세요"
-                        value={name}
-                        onChange={(e)=>{setName(e.target.value)}}
-                    ></MyInput>
-                    <SignUpButton type="submit">회원가입</SignUpButton>
-                </SignUpForm>
-            </SignUpBox>
-        </Wrapper>
-    );
+  return (
+    // formData 전역 함수를 사용하기 위해 FormProvider로 감싸기
+    <FormProvider>
+        <Container>
+        <Swiper
+            pagination={{ clickable: false, el: '.custom-swiper-pagination' }} // 상단 점 리스트 클릭 비활성화
+            navigation={false}
+            allowTouchMove={false} // (클릭 상태로)스와이프 비활성화
+            modules={[Pagination, Navigation]}
+            spaceBetween={50}
+            slidesPerView={1}
+            onSwiper={(swiper) => {
+                swiperRef.current = swiper; // Swiper 인스턴스를 swiperRef에 저장 -> slidePrev,slideNext사용을 위함.
+            }}
+        >
+            <SwiperSlide>
+            <PrevButton onClick={() => (navigate(-1))}></PrevButton>
+            <Page1 swiperRef={swiperRef}/>
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
+            </SwiperSlide>
+            <SwiperSlide>
+            <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
+            <Page2 swiperRef={swiperRef}/>
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
+            </SwiperSlide>
+            <SwiperSlide>
+            <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
+            <Page3 swiperRef={swiperRef}/>
+            </SwiperSlide>
+        </Swiper>
+        <PaginationContainer>
+            <PaginationDots className="custom-swiper-pagination" />
+        </PaginationContainer>
+        </Container>
+    </FormProvider>
+  );
 }
 
-const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    height: 100vh;
-`
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* .swiper-pagination {
+    top: 20px; // 페이지 인디케이터를 상단으로 이동
+  } */
+`;
 
-const SignUpBox = styled.div`
-    display: grid;
-    justify-content: center;
-    
-    width: 600px;
-    margin: 0px auto 150px auto;
-`
+const PrevButton = styled(IoIosArrowBack)`
+  position: absolute;
+  top: 20px; /* 화살표를 상단에 위치시킴 */
+  left: 10px;
+  z-index: 10;
+  font-size: 24px;
+  cursor: pointer;
+`;
 
-const Logo = styled.img.attrs({
-    src: "/src/BeginnerFitLogo.png",
-    alt: "BeginnerFit"
-})`
-    margin: 0px auto 50px auto;
-    width: 40%;
-`
+const NextButton = styled.div`
+  position: absolute;
+  bottom: 20px; /* "다음으로" 버튼을 하단에 위치시킴 */
+  right: 10px;
+  z-index: 10;
+  font-size: 24px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+`;
 
-const SignUpForm = styled.form`
-    width: 100%;
-    border-radius: 15px;
-`
+const PaginationContainer = styled.div`
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+`;
 
-const MyInput = styled.input`
-    width: 100%;
-    background-color: #f5f5f5;
-    padding: 15px;
-    margin: 5px 0px 15px 0px;
-    border-radius: 10px;
-    border: none;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-`
+const PaginationDots = styled.div`
+  display: flex;
+  justify-content: center;
+  flex: 1;
 
-const SignUpButton = styled.button`
-    width: 100%;
-    background-color: #653eff;
-    color: white;
-    font-size: large;
-    padding: 15px;
-    margin: 30px 0px;
-    border-radius: 10px;
-    border: none;
-    box-sizing: border-box;
-`
+  .swiper-pagination-bullet {
+    background-color: #d9d9d9; // 인디케이터 색상 설정
+    opacity: 1;
+  }
 
-export default SignUp;
+  .swiper-pagination-bullet-active {
+    background-color: #653eff; // 활성화된 인디케이터 색상 설정
+  }
+`;

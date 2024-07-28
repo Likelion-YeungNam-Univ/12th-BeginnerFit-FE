@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
+import { useState } from "react";
+import { useCategorySelect } from "../../hooks/useCategorySelect";
 
-export default function SetCategory() {
+export default function SetCategory({ onSubmit, isSignUp }) {
   // 카테고리 제목 및 아이템
   const list = {
     "운동 강도": ["저강도", "중강도", "고강도"],
@@ -28,28 +30,33 @@ export default function SetCategory() {
     ],
   };
 
+  //카테고리 선택 훅 호출
+  const { selectedItems, handleSelectedItems } = useCategorySelect(
+    list,
+    onSubmit
+  );
   return (
     <Container>
       {Object.entries(list).map(([key, values]) => (
-        <CategoryContainer key={key}>
+        <CategoryContainer key={key} isSignUp={isSignUp}>
           <CategoryTitle>{key}</CategoryTitle>
           <ItemContainer>
-            {values.map((value, index) => (
-              <Item key={index}>{value}</Item>
+            {values.map((value) => (
+              <Item
+                key={value}
+                $selected={selectedItems[key]?.includes(value)}
+                onClick={() => handleSelectedItems(key, value)}
+              >
+                {value}
+              </Item>
             ))}
           </ItemContainer>
         </CategoryContainer>
       ))}
-      <Div>
-        <SubmitButton>수정하기</SubmitButton>
-      </Div>
     </Container>
   );
 }
-const Div=styled.div`
-    display: flex;
-    justify-content: center;
-`
+
 const Container = styled.div`
   margin-top: ${responsiveSize(35)};
   display: flex;
@@ -58,7 +65,7 @@ const Container = styled.div`
 `;
 
 const CategoryContainer = styled.div`
-  padding: 20px 0;
+  padding: ${({isSignUp}) => isSignUp ? "5px 0" : "20px 0"};
   display: flex;
   flex-direction: column;
   gap: ${responsiveSize(10)};
@@ -83,32 +90,13 @@ const Item = styled.li`
   align-items: center;
   justify-content: center;
   padding: 0 ${responsiveSize(15)};
-  color: ${({ theme }) => theme.colors.gray02};
-  background-color: ${({ theme }) => theme.colors.gray01};
   cursor: pointer;
   white-space: nowrap;
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.purple};
-  }
-`;
+  //선택된 카테고리 배경색 및 텍스트색깔 변경
+  color: ${({ theme, $selected }) =>
+    $selected ? theme.colors.white : theme.colors.gray02};
 
-const SubmitButton = styled.button`
-  margin-top: ${responsiveSize(30)};
-  height: ${responsiveSize(77)};
-  font-size: ${responsiveSize(40)};
-  width: ${responsiveSize(550)};
-  border-radius: ${responsiveSize(12)};
-  text-align: center;
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.purple};
-  border: none;
-  cursor: pointer;
-
-  @media (max-width: 600px) {
-    font-size: ${responsiveSize(20)};
-    width: min(${responsiveSize(280)});
-    height: ${responsiveSize(50)};
-  }
+  background-color: ${({ theme, $selected }) =>
+    $selected ? theme.colors.purple : theme.colors.gray01};
 `;

@@ -5,7 +5,7 @@ import { GoHome } from "react-icons/go";
 import { MdOutlineChat } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { responsiveSize } from "../utils/Mediaquery";
-
+import { BottomNavContainer } from "../styles/GlobalStyle";
 export default function BottomNav() {
   return (
     <BottomNavContainer>
@@ -17,7 +17,7 @@ export default function BottomNav() {
       </div>
       {/* 프로필 이동 */}
       <div>
-        <Link>
+        <Link to="/mypage">
           <StyledIcon as={FiUser} />
         </Link>
       </div>
@@ -33,25 +33,10 @@ export default function BottomNav() {
 
 //================================================================================
 
-export const BottomNavContainer = styled.nav`
-  width: 100%;
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.black};
-  height: ${responsiveSize("90")};
-  bottom: 0;
-  border-top-left-radius: ${responsiveSize("30")};
-  border-top-right-radius: ${responsiveSize("30")};
-  z-index: 1;
-`;
 
 const StyledIcon = styled.div`
-  width: ${responsiveSize("48")};
-  height: ${responsiveSize("48")};
+  width: ${responsiveSize("38")};
+  height: ${responsiveSize("38")};
   color: gray;
   transition: color 0.3s;
 
