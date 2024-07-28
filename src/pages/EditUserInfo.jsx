@@ -5,8 +5,12 @@ import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
 import { useEffect, useState } from "react";
 import { SubmitButton } from "../styles/GlobalStyle";
-import { useEditUserInfo } from "../apis/useEditUserInfo";
+import { useUserInfo } from "../store/useUserInfo.js";
+import { updateEditUserInfo } from "../apis/updateEditUserInfo";
+import { useNavigate } from "react-router-dom";
 export default function EditUserInfo() {
+  const user = useUserInfo((state) => state.user);
+  const navigate = useNavigate();
   //음수값 자릿수 제한
   const onInput = (e) => {
     if (e.target.value.length > 3) {
@@ -25,7 +29,7 @@ export default function EditUserInfo() {
     date: "",
     targetDate: "",
     exerciseTime: 0,
-    categories: {},
+    categories: { "운동 강도": [], "운동 목표": [], "고민 부위": [] },
   });
 
   //입력값 관리
@@ -76,7 +80,9 @@ export default function EditUserInfo() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await useEditUserInfo(form);
+      await updateEditUserInfo(form, user.email);
+      //마이페이지로 이동
+      navigate("/mypage");
     } catch (error) {
       console.log("건강정보 게시 오류", error);
     }

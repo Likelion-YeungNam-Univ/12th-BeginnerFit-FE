@@ -1,2 +1,9 @@
 import { create } from "zustand";
-import{persist,createJSONStorage} from "zustand/middleware";
+//유저정보 
+export const useUserInfo = create((set) => ({
+  user: {
+    email: null,
+    userId:0,
+  },
+  setUser: (user) => set({ user }),
+}));
