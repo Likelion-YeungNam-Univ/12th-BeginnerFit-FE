@@ -7,12 +7,11 @@ import { TimeCalculator } from "../../utils/TimeCalculator.jsx";
 import { Link } from "react-router-dom";
 import useFetchData from "../../hooks/useFetchData.jsx";
 import useCommentStore from "../../store/commentStore.js";
-import { commentApi } from "../../apis/communityApi/commentApi.jsx";
 import { useEffect } from "react";
 import { getCommentApi } from "../../apis/communityApi/getCommentApi.jsx";
 
-export default function PostList() {
-  const { arr, loading } = useFetchData("/posts");
+export default function PostList({category}) {
+  const { arr, loading } = useFetchData(`/posts/categories/${category}`);
 
   //댓글 수 관리
   const commentCounts = useCommentStore((state) => state.commentCounts);
