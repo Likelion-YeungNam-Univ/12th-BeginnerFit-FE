@@ -4,17 +4,40 @@ import CategorySelect from "./CategorySelect";
 import Header2 from "./Header2";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { SubmitButton } from "../../styles/GlobalStyle";
+import { useEffect } from "react";
 export default function Form({
   handleSubmit,
-  onSubmit,
   handleUpload,
   categories,
+  isEdit,
+  post,
 }) {
   //Zustand에서 상태가져오기
-  const { fileUrl, file, title, content, setTitle, setContent } = postStore();
+  const {
+    fileUrl,
+    file,
+    title,
+    content,
+    setTitle,
+    setContent,
+    setSelectCategory,
+    setFileUrl,
+  } = postStore();
+
+  // 수정 게시판인 경우 상태를 설정
+  useEffect(() => {
+    if (isEdit && post) {
+      setTitle(post.title);
+      setContent(post.content);
+      setSelectCategory(post.categoryName);
+      if (post.pictureUrl) {
+        setFileUrl(post.pictureUrl);
+      }
+    }
+  }, [isEdit, post, setTitle, setContent, setSelectCategory, setFileUrl]);
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit}>
       <Header2 isPictureIcon={true} handleUpload={handleUpload} />
       <CategorySelect categories={categories} />
       <MainContainer>

@@ -98,18 +98,18 @@ function App() {
           }
         ></Route>
         <Route
-          path="/playlist"
+          path="/posts/write"
           element={
             <ProtectedRouter>
-              <PlayList />
+              <WritePost />
             </ProtectedRouter>
           }
         ></Route>
         <Route
-          path="/mypage"
+          path="/posts/edit"
           element={
             <ProtectedRouter>
-              <MyPage />
+              <WritePost />
             </ProtectedRouter>
           }
         ></Route>
