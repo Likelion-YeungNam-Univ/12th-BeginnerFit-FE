@@ -10,8 +10,16 @@ import useCommentStore from "../../store/commentStore.js";
 import { useEffect } from "react";
 import { getCommentApi } from "../../apis/communityApi/getCommentApi.jsx";
 
-export default function PostList({category}) {
-  const { arr, loading } = useFetchData(`/posts/categories/${category}`);
+export default function PostList({ category }) {
+  let setUrl;
+  if (category === "내가 쓴 글") {
+    setUrl = "/posts/me";
+  } else if (category === "저장한 글") {
+    //
+  } else {
+    setUrl = `/posts/categories/${category}`;
+  }
+  const { arr, loading } = useFetchData(setUrl);
 
   //댓글 수 관리
   const commentCounts = useCommentStore((state) => state.commentCounts);
