@@ -4,7 +4,8 @@ import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
 import { useEffect, useState } from "react";
-import {SubmitButton} from "../styles/GlobalStyle";
+import { SubmitButton } from "../styles/GlobalStyle";
+import { useEditUserInfo } from "../apis/useEditUserInfo";
 export default function EditUserInfo() {
   //음수값 자릿수 제한
   const onInput = (e) => {
@@ -34,12 +35,6 @@ export default function EditUserInfo() {
       ...prev,
       [name]: value,
     }));
-  };
-
-  //폼 제출
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
   };
 
   //setCategiry 컴포넌트에서 선택된 카테고리가져오기
@@ -77,6 +72,15 @@ export default function EditUserInfo() {
     setIsFormValid(isValid);
   }, [form]);
 
+  //폼 API통신 수정
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await useEditUserInfo(form);
+    } catch (error) {
+      console.log("건강정보 게시 오류", error);
+    }
+  };
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
@@ -167,7 +171,10 @@ export default function EditUserInfo() {
               <P>시간</P>
             </SubContainer>
           </TextInputContainer>
-          <SetCategory onSubmit={handleCategorySubmit} isSignUp={false}></SetCategory>
+          <SetCategory
+            onSubmit={handleCategorySubmit}
+            isSignUp={false}
+          ></SetCategory>
         </RootContainer>
         <Div>
           <SubmitButton
@@ -239,4 +246,3 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
 `;
-

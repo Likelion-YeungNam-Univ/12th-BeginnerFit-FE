@@ -4,8 +4,10 @@ import { responsiveSize } from "../../utils/Mediaquery";
 export default function CategorySelect() {
   const selectList = ["자유게시판", "정보공유"];
   //Zustand store에서 상태값 가져오기
-  const { setSelectCategory, selectCategory } = postStore();
-
+  //리렌더링 방지
+  const setSelectCategory=postStore((state)=>state.setSelectCategory);
+  const selectCategory=postStore((state)=>state.selectCategory);
+  
   return (
     <Div>
       {selectList.map((category, index) => (

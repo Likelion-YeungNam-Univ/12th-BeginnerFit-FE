@@ -8,8 +8,7 @@ export default function WritePost() {
   //React Hoopk Form
   const { handleSubmit } = useForm();
   //Zustand 상태 가져오기
-  const { selectCategory} =
-    postStore();
+  const selectCategory = postStore((state) => state.selectCategory);
 
   //useWritePost에서 가져오기
   const { onSubmit, handleUpload } = useWritePost("/posts");
