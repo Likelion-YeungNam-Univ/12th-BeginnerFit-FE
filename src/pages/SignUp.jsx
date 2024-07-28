@@ -37,12 +37,12 @@ export default function SignUp() {
             <SwiperSlide>
             <PrevButton onClick={() => (navigate(-1))}></PrevButton>
             <Page1 swiperRef={swiperRef}/>
-            <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> {/* 테스트용 */}
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
             <Page2 swiperRef={swiperRef}/>
-            <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> {/* 테스트용 */}
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
