@@ -10,11 +10,13 @@ import Main from "./pages/main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
+import MyChallengeList from "./pages/MyChallengeList";
 import WritePost from "./pages/WritePost";
 import HomeTranList from "./pages/HomeTrainList";
 import FriendList from "./pages/FriendList";
 import AddFriend from "./pages/AddFriend";
 import { ProtectedRouter } from "./components/ProtectedRouter";
+
 
 function App() {
   return (
@@ -96,6 +98,9 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
+        <Route path="/playlist" element={<PlayList />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/myChallengeList" element={<MyChallengeList />} />
       </Routes>
     </>
   );
