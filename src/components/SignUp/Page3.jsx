@@ -14,7 +14,7 @@ export default function Page3 ({swiperRef}) {
 
     //음수값 자릿수 제한
     const onInput = (e) => {
-        if (e.target.value > 24) {
+        if (Number(e.target.value) > 24) {
         e.target.value = 0;
         alert("하루 이내의 시간만 입력가능합니다.");
         } else if (e.target.value < 0) {
