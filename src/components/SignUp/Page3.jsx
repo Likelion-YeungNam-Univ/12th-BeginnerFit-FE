@@ -74,12 +74,13 @@ export default function Page3 ({swiperRef}) {
         console.log(formData);
         if (allow){
             try{
-                const res = await api.post("/auth/signup", formData);
+                const res = await api.post("/auth/sign-up", formData);
+                console.log("회원가입 성공:", res.data);
                 alert('회원가입 성공!');
                 navigate("/main");
             } catch(error){
-                console.error("회원가입 실패")
-                alert("회원가입 실패")
+                console.error("회원가입 실패:", error.response ? error.response.data : error.message);
+                alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
             }
         }
     }
@@ -91,7 +92,7 @@ export default function Page3 ({swiperRef}) {
                     <br/>
                     운동 목표를 설정해주세요.
                 </H1>
-                <Form onSubmit={handleSubmit}>
+                <Form id="page3" onSubmit={handleSubmit}>
                     <TextInputContainer>
                         <P>운동시간</P>
                         <SubContainer>
@@ -110,6 +111,9 @@ export default function Page3 ({swiperRef}) {
                 <SignUpButton 
                     type="submit" 
                     disabled={!allow}
+                    onClick={()=>{
+                        document.getElementById("page3").submit(); //폼 제출 트리거
+                    }}
                 >
                     시작하기
                 </SignUpButton>

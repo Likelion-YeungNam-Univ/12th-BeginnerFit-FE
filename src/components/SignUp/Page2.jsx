@@ -78,10 +78,9 @@ export default function Page2 ({swiperRef}) {
         setAllow(false);
     },[ nameValid, isFormValid ]);
 
-    //폼 값 확인용 submit
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
+    //폼 값 확인용
+    const handleFormCheck = () => {
+        console.log("formData: ",formData);
     };
 
     return(
@@ -92,7 +91,7 @@ export default function Page2 ({swiperRef}) {
                     <br/>
                     입력하세요.
                 </H1>
-                <Form onSubmit={handleSubmit}>
+                <Form>
                     <ItemName>닉네임</ItemName>
                     <MyInput 
                         type='text'
@@ -171,12 +170,12 @@ export default function Page2 ({swiperRef}) {
                     </RowContainer>
                 </Form>
                 <NextButton 
-                    type="button" // 폼 제출 방지
+                    type="button"
                     disabled={!allow}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        swiperRef.current.slideNext();} // 다음 페이지로 이동 (page3으로)
-                    }
+                    onClick={() => {
+                        handleFormCheck();
+                        swiperRef.current.slideNext(); // 다음 페이지로 이동 (page3으로)
+                    }}
                 >
                     다음으로
                 </NextButton>
