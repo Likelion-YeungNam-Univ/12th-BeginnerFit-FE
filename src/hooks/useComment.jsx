@@ -63,6 +63,20 @@ export const useComment = (post) => {
     }
   };
 
+  // 댓글 수정 함수 
+  const updateComment = async (post, updatedContent) => {
+    try {
+      await updateCommentApi(post.id, updatedContent);
+      setComments((prevComments) =>
+        prevComments.map((comment) =>
+          comment.id === postId ? { ...comment, content: updatedContent } : comment
+        )
+      );
+    } catch (error) {
+      console.log("댓글 수정 실패", error);
+    }
+  };
+
   useEffect(() => {
     const fetchComments = async () => {
       setComments([]);

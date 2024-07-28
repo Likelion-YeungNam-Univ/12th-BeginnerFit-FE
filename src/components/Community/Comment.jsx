@@ -6,7 +6,8 @@ import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
+import CommentDropDown from "./CommentDropDown";
 
 export default function Comment({ post }) {
   const {
@@ -35,6 +36,29 @@ export default function Comment({ post }) {
     [isLoading, hasMore, loadComments]
   );
 
+  //댓글 수정 텍스트입력
+  const [editCommentText, setEditCommentText] = useState("");
+  //수정 상태인가
+  const [isEditMode, setIsEditMode] = useState(false);
+  //수정할 댓글 id
+  const [commentId,setCommentId]=useState(null);
+  //수정하기 버튼 눌렀을 때
+  const handleOnEditComment = (comment) => {
+    setIsEditMode(() => !isEditMode);
+    //댓글 내용으로 채우기
+    setEditCommentText(comment.content);
+    setCommentId(comment.id);
+  };
+  // 수정 제출 핸들러
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    updateComment(commentId, editCommentText);
+    setIsEditMode(()=>!isEditMode);
+    setEditCommentText("");
+    setEditCommentText(null);
+  };
+
+  
   return (
     <>
       <Container>
@@ -43,7 +67,11 @@ export default function Comment({ post }) {
           comments.map((comment) => (
             <CommentItem
               key={comment.id}
-              ref={comment.id === comments.length - 1 ? lastCommentElementRef : null}
+              ref={
+                comment.id === comments.length - 1
+                  ? lastCommentElementRef
+                  : null
+              }
             >
               <RowContainer>
                 <UserContainer>
@@ -57,7 +85,10 @@ export default function Comment({ post }) {
                     </Date>
                   </NickAndDate>
                 </UserContainer>
-                <DropDown post={post}></DropDown>
+                <CommentDropDown
+                  comment={comment}
+                  onEditClick={() => handleOnEditComment(comment)}
+                />
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
             </CommentItem>
@@ -67,17 +98,41 @@ export default function Comment({ post }) {
         <RowContainer
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
         >
-          <TextInput
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="댓글을 입력하세요."
-          ></TextInput>
-          <SendButton onClick={handleCommentSubmit} disabled={isCommentEmpty}>
-            <FiChevronRight
-              style={{ height: "30px", width: "30px", color: "white" }}
-            />
-          </SendButton>
+          {isEditMode ? (
+            // 수정모드
+            <form onSubmit={handleUpdateSubmit}>
+              <TextInput
+                type="text"
+                value={editCommentText}
+                onChange={(e) => setEditCommentText(e.target.value)}
+              ></TextInput>
+              <SendButton
+                onClick={handleCommentSubmit}
+                disabled={isCommentEmpty}
+              >
+                <FiChevronRight
+                  style={{ height: "30px", width: "30px", color: "white" }}
+                />
+              </SendButton>
+            </form>
+          ) : (
+            <>
+              <TextInput
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="댓글을 입력하세요."
+              ></TextInput>
+              <SendButton
+                onClick={handleCommentSubmit}
+                disabled={isCommentEmpty}
+              >
+                <FiChevronRight
+                  style={{ height: "30px", width: "30px", color: "white" }}
+                />
+              </SendButton>
+            </>
+          )}
         </RowContainer>
       </BottomNavContainer>
     </>
