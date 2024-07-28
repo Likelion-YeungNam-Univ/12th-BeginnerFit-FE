@@ -25,7 +25,7 @@ const useFetchData = (url) => {
     };
 
     getData();
-  }, []);
+  }, [url]);
 
   return { data, isLoading, error,arr };
 };

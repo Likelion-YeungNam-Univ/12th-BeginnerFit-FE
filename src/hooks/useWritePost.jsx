@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { postStore } from "../store/postStore";
 import axios from "axios";
-export const useWritePost = (url) => {
+import api from "../apis/axios";
+export const useWritePost = () => {
   //Zustand 상태 가져오기
   const {
     file,
@@ -27,15 +28,17 @@ export const useWritePost = (url) => {
       reader.onloadend = () => {
         setFileUrl(reader.result);
       };
-     reader.readAsDataURL(uploadFile);
+      reader.readAsDataURL(uploadFile);
     }
   };
   //제출
-  const onSubmit = async () => {
+  const onSubmit = async (isEdit, postId = null) => {
     const formData = new FormData();
+    //DTO이름 구별
+    const dtoName = isEdit ? "updateDto" : "createDto";
 
     formData.append(
-      "createDto",
+      dtoName,
       new Blob(
         [
           JSON.stringify({
@@ -56,23 +59,39 @@ export const useWritePost = (url) => {
     for (let pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    const SEVER_URL = import.meta.env.VITE_SERVER_URL + url;
+
+    //수정과 작성서버 주소
+    const SERVER_URL =
+      import.meta.env.VITE_SERVER_URL +
+      (isEdit && postId ? `/posts/${postId}` : `/posts`);
+    console.log("Server URL:", SERVER_URL);
+    //게시글 수정이면 put,게시물 작성이면 post
+    const method = isEdit ? "PUT" : "POST";
+    console.log("HTTP Method:", method);
     try {
-      const response = await axios.post(SEVER_URL, formData, {
+      const response = await axios({
+        method: method,
+        url: SERVER_URL,
+        data: formData,
         headers: {
-          //  "Content-Type": "multipart/form-data",
+          //"Content-Type": "multipart/form-data",
           Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       });
       //게시물 작성 성공
-      alert("게시물이 등록되었습니다.");
-      console.log("게시물 등록", response.data);
+      if (method === "put") {
+        alert("게시물이 수정되었습니다.");
+        console.log("게시물 수정", response.data);
+      } else if (method === "post") {
+        alert("게시물이 등록되었습니다.");
+        console.log("게시물 등록", response.data);
+      }
 
       //입력칸 초기화
       setTitle("");
       setContent("");
       setFileUrl("");
-      
+
       navigate("/posts"); //커뮤니티 페이지 이동
     } catch (error) {
       console.error("게시물 등록 중 오류가 발생", error);

@@ -96,6 +96,22 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
+        <Route
+          path="/posts/write"
+          element={
+            <ProtectedRouter>
+              <WritePost />
+            </ProtectedRouter>
+          }
+        ></Route>
+        <Route
+          path="/posts/edit"
+          element={
+            <ProtectedRouter>
+              <WritePost />
+            </ProtectedRouter>
+          }
+        ></Route>
       </Routes>
     </>
   );

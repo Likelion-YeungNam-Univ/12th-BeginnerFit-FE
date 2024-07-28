@@ -71,7 +71,7 @@ export const useComment = (post) => {
       await getCommentApi(post.id, 1, setComments, setIsLoading, setHasMore);
     };
     fetchComments();
-  }, [post.id]);
+  }, [post?.id]);
 
   return {
     comments,

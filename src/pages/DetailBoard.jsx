@@ -9,14 +9,19 @@ export default function DetailBoard() {
   const { idx } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  //Zustand에서 데이터 가져오기
+  
 
   //게시물 불러오기
   const handleGetPosts = async () => {
+    setLoading(true);
     try {
       //게시물 불러오는 함수 호출
-      await getPostApi(idx, post, setPost, setLoading);
+      await getPostApi(idx,setPost, setLoading);
     } catch (error) {
       console.log("게시물 불러오기 실패", error);
+      setLoading(false);
     }
   };
 
@@ -30,8 +35,8 @@ export default function DetailBoard() {
         <h2>Loading...</h2>
       ) : (
         <>
-          <Header2 />
-          <WriteBoardMain post={post} />
+          <Header2 isDrop={true} post={post} />
+          <WriteBoardMain post={post}/>
         </>
       )}
     </Wrapper>

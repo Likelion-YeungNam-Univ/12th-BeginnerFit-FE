@@ -23,7 +23,7 @@ export default function BackHeader({ padding, option, plus, onClick }) {
           }}
           onClick={handleBack}
         />
-        {option && <DropDown />}
+        {option && <DropDown post={post}/>}
         {plus && <FaPlus cursor={"pointer"} size={20} onClick={onClick} />}
       </RowContainer>
     </>

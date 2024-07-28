@@ -5,7 +5,7 @@ import DropDown from "./DropDown";
 export default function Header() {
   return (
     <RowContainer>
-      <HeaderImg src={logo} />
+      <HeaderImg />
       <DropDown />
     </RowContainer>
   );
