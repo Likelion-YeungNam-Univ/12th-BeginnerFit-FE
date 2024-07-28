@@ -161,6 +161,7 @@ const EtcButton = styled.button`
   border: none;
   outline: none;
   margin: 0px 10px;
+  cursor: pointer;
 `;
 
 export default Login;
