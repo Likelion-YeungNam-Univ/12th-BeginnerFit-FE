@@ -5,6 +5,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from './FormContext';
+import api from "../../apis/axios";
 
 export default function Page3 ({swiperRef}) {
 
@@ -13,9 +14,9 @@ export default function Page3 ({swiperRef}) {
 
     //음수값 자릿수 제한
     const onInput = (e) => {
-        if (e.target.value.length > 3) {
+        if (e.target.value > 24) {
         e.target.value = 0;
-        alert("3자리까지만 입력가능합니다.");
+        alert("하루 이내의 시간만 입력가능합니다.");
         } else if (e.target.value < 0) {
         e.target.value = 0;
         alert("음수값은 입력할 수 없습니다.");
@@ -68,12 +69,19 @@ export default function Page3 ({swiperRef}) {
     // 회원가입 성공 시 메인 화면으로 이동
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
         if (allow){
-            alert('회원가입 성공!');
-            navigate("/main");
+            try{
+                const res = await api.post("/auth/sign-up", formData);
+                console.log("회원가입 성공:", res.data);
+                alert('회원가입 성공!');
+                navigate("/main");
+            } catch(error){
+                console.error("회원가입 실패:", error.response ? error.response.data : error.message);
+                alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
+            }
         }
     }
     return(
@@ -84,7 +92,7 @@ export default function Page3 ({swiperRef}) {
                     <br/>
                     운동 목표를 설정해주세요.
                 </H1>
-                <Form onSubmit={handleSubmit}>
+                <Form id="page3" onSubmit={handleSubmit}>
                     <TextInputContainer>
                         <P>운동시간</P>
                         <SubContainer>
@@ -103,6 +111,10 @@ export default function Page3 ({swiperRef}) {
                 <SignUpButton 
                     type="submit" 
                     disabled={!allow}
+                    onClick={()=>{
+                        console.log(formData);
+                        document.getElementById("page3").submit(); //폼 제출 트리거
+                    }}
                 >
                     시작하기
                 </SignUpButton>
