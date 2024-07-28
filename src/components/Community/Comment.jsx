@@ -8,6 +8,7 @@ import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
 import { useRef, useCallback, useState } from "react";
 import CommentDropDown from "./CommentDropDown";
+import api from "../../apis/axios";
 
 export default function Comment({ post }) {
   const {
@@ -19,6 +20,7 @@ export default function Comment({ post }) {
     loadComments,
     isLoading,
     hasMore,
+    reloadComments
   } = useComment(post);
 
   const observer = useRef();
@@ -41,24 +43,33 @@ export default function Comment({ post }) {
   //수정 상태인가
   const [isEditMode, setIsEditMode] = useState(false);
   //수정할 댓글 id
-  const [commentId,setCommentId]=useState(null);
-  //수정하기 버튼 눌렀을 때
-  const handleOnEditComment = (comment) => {
-    setIsEditMode(() => !isEditMode);
-    //댓글 내용으로 채우기
+  const [commentId, setCommentId] = useState(null);
+
+  //댓글 수정 함수
+  const handleOnEditClick = (comment) => {
+    setIsEditMode(true);
     setEditCommentText(comment.content);
     setCommentId(comment.id);
   };
-  // 수정 제출 핸들러
-  const handleUpdateSubmit = (e) => {
+
+  const editComment = async (e) => {
     e.preventDefault();
-    updateComment(commentId, editCommentText);
-    setIsEditMode(()=>!isEditMode);
-    setEditCommentText("");
-    setEditCommentText(null);
+    try {
+      const response = await api.put(`/posts/comments/${commentId}`, {
+        content: editCommentText,
+      });
+      const message = response.data?.message || "댓글이 수정되었습니다.";
+      alert(message);
+      setIsEditMode(false);
+      setEditCommentText("");
+      setCommentId(null);
+      reloadComments();
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "댓글 수정 오류";
+      alert(errorMessage);
+    }
   };
 
-  
   return (
     <>
       <Container>
@@ -87,7 +98,9 @@ export default function Comment({ post }) {
                 </UserContainer>
                 <CommentDropDown
                   comment={comment}
-                  onEditClick={() => handleOnEditComment(comment)}
+                  onEditClick={handleOnEditClick}
+                  loadComments={loadComments}
+                  reloadComments={reloadComments}
                 />
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
@@ -99,22 +112,18 @@ export default function Comment({ post }) {
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
         >
           {isEditMode ? (
-            // 수정모드
-            <form onSubmit={handleUpdateSubmit}>
+            <Form onSubmit={editComment}>
               <TextInput
                 type="text"
                 value={editCommentText}
                 onChange={(e) => setEditCommentText(e.target.value)}
-              ></TextInput>
-              <SendButton
-                onClick={handleCommentSubmit}
-                disabled={isCommentEmpty}
-              >
+              />
+              <SendButton type="submit" disabled={!editCommentText.trim()}>
                 <FiChevronRight
                   style={{ height: "30px", width: "30px", color: "white" }}
                 />
               </SendButton>
-            </form>
+            </Form>
           ) : (
             <>
               <TextInput
@@ -215,4 +224,9 @@ const Container = styled.div`
   padding: 0px 20px;
   height: 100vh;
   overflow-y: auto;
+`;
+
+const Form = styled.form`
+  display: flex;
+  width: 100%;
 `;

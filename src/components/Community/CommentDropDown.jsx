@@ -1,4 +1,3 @@
-
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,7 +8,12 @@ import { useUserInfo } from "../../store/useUserInfo";
 
 const ITEM_HEIGHT = 48;
 
-export default function CommentDropDown({ comment=null,onEditClick }) {
+export default function CommentDropDown({
+  comment = null,
+  onEditClick,
+  loadComments,
+  reloadComments,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -19,9 +23,9 @@ export default function CommentDropDown({ comment=null,onEditClick }) {
     setAnchorEl(null);
   };
 
-  const user=useUserInfo((state)=>state.user);
+  const user = useUserInfo((state) => state.user);
   console.log(user);
-  const myInfo=user?.userId;
+  const myInfo = user?.userId;
   // post가 없을 경우 기본 UI만 렌더링
   if (!comment) {
     return (
@@ -72,50 +76,31 @@ export default function CommentDropDown({ comment=null,onEditClick }) {
         const message = response.data?.message || "댓글이 삭제되었습니다.";
         console.log(message);
         alert("댓글이 삭제되었습니다.");
-        
+        //댓글 리랜더링
+        reloadComments();
       } catch (error) {
-        const errorMessage =
-          error.response?.data?.message || "댓글 삭제 오류";
+        const errorMessage = error.response?.data?.message || "댓글 삭제 오류";
         console.log(errorMessage, error);
         alert(errorMessage);
       }
     }
   };
 
-  // 댓글 신고 함수(API가 존재하지 않음)
-//   const reportPost = async () => {
-//     if (comment?.id === undefined) {
-//       alert("댓글 ID가 유효하지 않습니다.");
-//       return;
-//     }
-//     if (window.confirm("정말로 이 댓글을 신고하시겠습니까?")) {
-//       try {
-//         const response = await api.post(`/posts/${post.id}/declarations`);
-//         console.log(response);
-//         alert("게시물이 신고되었습니다.");
-//         // 게시물 목록으로 이동
-//         navigate("/posts");
-//       } catch (error) {
-//         console.log("게시물 신고 오류", error);
-//       }
-//     }
-//   };
-
   // 각 옵션별 수행 함수
   const handleAction = (action) => {
     switch (action) {
       case "edit":
-        // 댓글 수정 
-        onEditClick();
+        // 댓글 수정
+        onEditClick(comment);
         break;
       //댓글 삭제
       case "delete":
         deleteComment();
         break;
-    //   // 게시물 신고
-    //   case "report":
-    //     reportPost();
-    //     break;
+      //   // 게시물 신고
+      //   case "report":
+      //     reportPost();
+      //     break;
       default:
         break;
     }
