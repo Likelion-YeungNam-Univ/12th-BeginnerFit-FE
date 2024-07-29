@@ -57,7 +57,7 @@ export default function Comment({ post }) {
                     </Date>
                   </NickAndDate>
                 </UserContainer>
-                <DropDown></DropDown>
+                <DropDown post={post}></DropDown>
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
             </CommentItem>

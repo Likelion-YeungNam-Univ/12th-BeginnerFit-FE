@@ -6,7 +6,12 @@ import styled from "styled-components";
 import { RowContainer } from "../../styles/GlobalStyle";
 import photoIcon from "../../images/photoIcon.png";
 
-export default function Header2({ isDrop, handleUpload, isPictureIcon }) {
+export default function Header2({
+  isDrop,
+  handleUpload,
+  isPictureIcon,
+  post = null,
+}) {
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
@@ -20,7 +25,7 @@ export default function Header2({ isDrop, handleUpload, isPictureIcon }) {
     <>
       <RowContainer style={{ padding: `${responsiveSize("20")}` }}>
         <ResponsiveIcon onClick={handleBack} />
-        {isDrop ? <DropDown /> : undefined}
+        {isDrop ? <DropDown post={post} /> : undefined}
         {/* 사진 올리는 상단바 */}
         {isPictureIcon ? (
           <RowContainer style={{ padding: `${responsiveSize("20")}` }}>

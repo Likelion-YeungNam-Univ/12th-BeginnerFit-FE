@@ -6,7 +6,7 @@ import ForgetPW from "./pages/ForgetPW";
 import SignUp from "./pages/SignUp";
 import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
-import Main from "./pages/main";
+import Main from "./pages/Main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
@@ -16,7 +16,6 @@ import HomeTranList from "./pages/HomeTrainList";
 import FriendList from "./pages/FriendList";
 import AddFriend from "./pages/AddFriend";
 import { ProtectedRouter } from "./components/ProtectedRouter";
-
 
 function App() {
   return (
@@ -98,9 +97,30 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
-        <Route path="/playlist" element={<PlayList />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/myChallengeList" element={<MyChallengeList />} />
+        <Route
+          path="/posts/write"
+          element={
+            <ProtectedRouter>
+              <WritePost />
+            </ProtectedRouter>
+          }
+        ></Route>
+        <Route
+          path="/posts/edit"
+          element={
+            <ProtectedRouter>
+              <WritePost />
+            </ProtectedRouter>
+          }
+        ></Route>
+        <Route
+          path="/myChallengeList"
+          element={
+            <ProtectedRouter>
+              <MyChallengeList />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </>
   );

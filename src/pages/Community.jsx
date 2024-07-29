@@ -12,7 +12,8 @@ export default function Community() {
   //게시판 작성페이지 이동
   const navigate = useNavigate();
   const goToWritePost = () => {
-    navigate("/posts/write");
+    //useLocation으로 받기
+    navigate("/posts/write", { state: { isEdit: false, post: null } });
   };
   return (
     <Wrapper>

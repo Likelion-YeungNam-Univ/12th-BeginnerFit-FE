@@ -1,6 +1,4 @@
 import { create } from "zustand";
-import SetCategory from "../components/MyPage/SetCategory";
-import { Category } from "@mui/icons-material";
 export const postStore = create((set) => ({
   //사진
   file: null,

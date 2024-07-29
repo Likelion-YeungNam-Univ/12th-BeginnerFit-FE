@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -7,29 +7,6 @@ import {
   LabelList,
   YAxis,
 } from "recharts";
-
-const data = [
-  {
-    name: "2024년 1월 10일",
-    몸무게: 56.1,
-  },
-  {
-    name: "2024년 2월 28일",
-    몸무게: 53.5,
-  },
-  {
-    name: "2024년 3월 10일",
-    몸무게: 54.7,
-  },
-  {
-    name: "2024년 5월 20일",
-    몸무게: 57.0,
-  },
-  {
-    name: "2024년 6월 1일",
-    몸무게: 53.0,
-  },
-];
 
 // 포인트에 마우스 올렸을 때 표시할 컴포넌트
 const CustomTooltip = ({ active = false, payload = [], label = "" }) => {
@@ -61,7 +38,7 @@ const CustomLabel = (props) => {
   return (
     <text
       x={x}
-      y={y + 20}
+      y={y + 15}
       fill="#fff"
       textAnchor="middle"
       dominantBaseline="middle"
@@ -82,7 +59,7 @@ const CustomDot = (props) => {
   );
 };
 
-export default function WeightChart() {
+export default function WeightChart({ data, isLoading }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -100,12 +77,12 @@ export default function WeightChart() {
         <Tooltip content={<CustomTooltip />} />
         <Line
           type="vertical"
-          dataKey="몸무게"
+          dataKey="weight"
           stroke="#fff"
           activeDot={{ r: 8 }}
           dot={<CustomDot />}
         >
-          <LabelList dataKey="몸무게" content={<CustomLabel />} />
+          <LabelList dataKey="weight" content={<CustomLabel />} />
         </Line>
       </LineChart>
     </ResponsiveContainer>
