@@ -1,5 +1,5 @@
 import { RowContainer, TimeText, TitleText } from "../../styles/GlobalStyle";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { IoPersonAddOutline } from "react-icons/io5";
 import profile from "../../images/profile.png";
 import { responsiveSize } from "../../utils/Mediaquery";
@@ -7,35 +7,68 @@ import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { TimeCalculator } from "../../utils/TimeCalculator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Comment from "./Comment";
+import { FaCheck } from "react-icons/fa";
+import useFetchData from "../../hooks/useFetchData";
+import { useUserInfo } from "../../store/useUserInfo";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-export default function WriteBoardMain({post}) {
+export default function WriteBoardMain({ post }) {
   //좋아요 기능함수
   const [clickLike, setClickLike] = useState(false);
   //const [likes, setLikes] = useState(post.likes);
   const [totalComments, setTotalComments] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
+  //내 게시물인가
+  const [isMyPost, setIsMyPost] = useState(false);
+  //친구인가 
+  const [isMyFriend,setIsMyFriend]=useState(false);
+  const { data, isLoading, error } = useFetchData(`/posts/${post.id}`);
+  const user = useUserInfo((state) => state.user);
+  
+  //내 게시물인지 판단.
+  useEffect(() => {
+    if (data && user) {
+      setIsMyPost(Number(user.userId) == Number(data?.userId));
+    }
+  }, [data, user]);
+  //친구 확인 API구현
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading user info</div>;
+
+  const handleClicked = () => {
+    //친구요청을 보낸 상태유지(체크표시유지)
+    setIsClicked(true);
+  };
 
   return (
     <>
       <Container>
         <RowContainer>
-          <ProfileImg
-            src={ profile}
-            alt="Profile"
-          ></ProfileImg>
+          <ProfileImg src={profile} alt="Profile"></ProfileImg>
           <NickNameContainer>
             <TitleText>{post?.userName}</TitleText>
             <TimeText>{TimeCalculator(post?.createdAt)}</TimeText>
           </NickNameContainer>
-          <IoPersonAddOutline
-            style={{
-              width: `${responsiveSize("20")}`,
-              height: "auto",
-              cursor: "pointer",
-            }}
-          />
+          {/* 이미 친구이면 체크표시 */}
+          {/* 친구가 아니면 +표시 */}
+          {/* 내 게시물이면 친구 추가 버튼 없애기 */}
+          {isMyPost ? undefined : (
+            <IconHover onClick={isMyPost && handleClicked}>
+              {isClicked ? (
+                <AnimationCheck size={20} />
+              ) : (
+                <IoPersonAddOutline
+                  style={{
+                    width: `${responsiveSize("20")}`,
+                    height: "auto",
+                    cursor: "pointer",
+                  }}
+                />
+              )}
+            </IconHover>
+          )}
         </RowContainer>
         <TitleContentContainer>
           <Title>{post?.title}</Title>
@@ -109,4 +142,25 @@ const HeartContainer = styled.div`
   display: flex;
   justify-content: end;
   padding: 0 ${responsiveSize("10")};
+`;
+const fadeIn = keyframes`
+  from{
+    transform: scale(0);
+  }
+  to{
+    transform: scale(1);
+  }
+`;
+// 체크 버튼으로 변경될 때 애니메이션 적용
+const AnimationCheck = styled(FaCheck)`
+  animation: ${fadeIn} 0.5s ease;
+`;
+const IconHover = styled.div`
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgba(217, 217, 217, 0.5);
+  }
 `;

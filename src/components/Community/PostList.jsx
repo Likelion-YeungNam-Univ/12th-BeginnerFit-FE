@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { getCommentApi } from "../../apis/communityApi/getCommentApi.jsx";
 
 export default function PostList({ category }) {
+
   let setUrl;
   if (category === "내가 쓴 글") {
     setUrl = "/posts/me";
@@ -85,12 +86,20 @@ const ContentContaienr = styled.li`
   width: 100%;
   display: flex;
   cursor: pointer;
+  margin-top: 10px;
   padding: 10px 0;
+  border-radius:${responsiveSize(15)};
   justify-content: space-between;
+  transition: all 0.5s ease;
+  &:hover{
+    scale: calc(105%);
+    background-color: ${({theme})=>theme.colors.gray01};
+  }
 `;
 const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: start;
 `;
 
 const RightContent = styled.div`
