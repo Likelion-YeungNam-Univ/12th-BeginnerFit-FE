@@ -15,7 +15,6 @@ export default function Form({
   //Zustand에서 상태가져오기
   const {
     fileUrl,
-    file,
     title,
     content,
     setTitle,

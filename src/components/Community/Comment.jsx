@@ -40,10 +40,10 @@ export default function Comment({ post }) {
       <Container>
         <CommentNum>댓글 {comments.length}개</CommentNum>
         {comments &&
-          comments.map((comment, index) => (
+          comments.map((comment) => (
             <CommentItem
-              key={index}
-              ref={index === comments.length - 1 ? lastCommentElementRef : null}
+              key={comment.id}
+              ref={comment.id === comments.length - 1 ? lastCommentElementRef : null}
             >
               <RowContainer>
                 <UserContainer>
