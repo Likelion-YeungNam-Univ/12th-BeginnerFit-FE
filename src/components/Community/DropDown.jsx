@@ -6,6 +6,7 @@ import api from "../../apis/axios";
 import useFetchData from "../../hooks/useFetchData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { AlarmDialog } from "./AlarmDialog";
 
 const ITEM_HEIGHT = 48;
 
@@ -97,19 +98,40 @@ export default function DropDown({ post = null }) {
   // 게시물 신고 함수
   const reportPost = async () => {
     if (post?.id === undefined) {
-      alert("게시물 ID가 유효하지 않습니다.");
-      return;
+      AlarmDialog({
+        title: "오류",
+        content: "게시글이 존재하지 않습니다.",
+        type: "warning",
+      });
     }
-    if (window.confirm("정말로 이 게시물을 신고하시겠습니까?")) {
-      try {
-        const response = await api.post(`/posts/${post.id}/declarations`);
-        console.log(response);
-        alert("게시물이 신고되었습니다.");
-        // 게시물 목록으로 이동
-        navigate("/posts");
-      } catch (error) {
-        console.log("게시물 신고 오류", error);
-      }
+    const selectReason = await AlarmDialog({
+      title: "신고 사유",
+      content: "해당 게시글의 신고 사유를 선택해주세요.",
+      type: "question",
+      isOptions: true,
+      inputOptions: {
+        마음에들지않아요: "마음에 들지 않아요",
+        선정적이에요: "선정적이에요",
+        부적절해요: "부적절해요",
+        스팸이에요: "스팸이에요",
+        혐오발언이에요: "혐오 발언이에요",
+        공격적인내용이있어요: "공격적인 내용이 있어요",
+        거짓정보가포함돼있어요: "거짓 정보가 포함돼 있어요",
+        기타사유: "기타 사유",
+      },
+    });
+    console.log("게시물 신고", selectReason);
+
+    try {
+      const response = await api.post(`/posts/${post.id}/declarations`, {
+        reason: selectReason,
+      });
+      console.log(response);
+      alert("게시물이 신고되었습니다.");
+      // 게시물 목록으로 이동
+      navigate("/posts");
+    } catch (error) {
+      console.log("게시물 신고 오류", error);
     }
   };
 
@@ -142,7 +164,7 @@ export default function DropDown({ post = null }) {
       case "report":
         reportPost();
         break;
-        //게시물 저장
+      //게시물 저장
       case "save":
         scrapPost();
         break;
