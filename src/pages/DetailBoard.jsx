@@ -4,8 +4,8 @@ import Header2 from "../components/Community/Header2";
 import WriteBoardMain from "../components/Community/WriteBoardMain";
 import { Wrapper } from "../styles/GlobalStyle";
 import { getPostApi } from "../apis/communityApi/getPostApi";
-import { QueryClient, QueryClientProvider } from "react-query";
-const queryClient = new QueryClient();
+import { QueryClientProvider } from "react-query";
+
 export default function DetailBoard() {
   const { idx } = useParams();
   const [post, setPost] = useState(null);
@@ -28,20 +28,17 @@ export default function DetailBoard() {
   useEffect(() => {
     handleGetPosts();
   }, [idx]);
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <Wrapper style={{ minHeight: "100vh" }}>
-        {loading ? (
-          <h2>Loading...</h2>
-        ) : (
-          <>
-            <Header2 isDrop={true} post={post} />
-            <WriteBoardMain post={post} />
-          </>
-        )}
-      </Wrapper>
-    </QueryClientProvider>
+    <Wrapper style={{ minHeight: "100vh" }}>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          <Header2 isDrop={true} post={post} />
+          <WriteBoardMain post={post} />
+        </>
+      )}
+    </Wrapper>
   );
 }
 //============================================
