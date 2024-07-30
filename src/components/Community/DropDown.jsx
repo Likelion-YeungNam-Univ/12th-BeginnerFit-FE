@@ -1,4 +1,3 @@
-
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -28,8 +27,6 @@ export default function DropDown({ post = null }) {
     isLoading: isMyInfoLoading,
     error: myInfoError,
   } = useFetchData("/users/me");
-
-  
 
   if (isMyInfoLoading) return <div>Loading...</div>;
   if (myInfoError) return <div>Error loading user info</div>;
@@ -116,6 +113,20 @@ export default function DropDown({ post = null }) {
     }
   };
 
+  //게시물 저장함수
+  const scrapPost = async () => {
+    if (post?.id === undefined) {
+      alert("게시물 ID가 유효하지 않습니다.");
+      return;
+    }
+    try {
+      const response = await api.post(`/posts/${post.id}/scraps`);
+      console.log(response);
+      alert("게시물이 저장되었습니다.");
+    } catch (error) {
+      console.log("게시물 저장 오류", error);
+    }
+  };
   // 각 옵션별 수행 함수
   const handleAction = (action) => {
     switch (action) {
@@ -131,7 +142,9 @@ export default function DropDown({ post = null }) {
       case "report":
         reportPost();
         break;
-      default:
+        //게시물 저장
+      case "save":
+        scrapPost();
         break;
     }
   };

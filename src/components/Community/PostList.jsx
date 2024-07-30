@@ -16,7 +16,8 @@ export default function PostList({ category }) {
   if (category === "내가 쓴 글") {
     setUrl = "/posts/me";
   } else if (category === "저장한 글") {
-    //
+    //저장되는 지 확인해야 할 듯.
+    setUrl="/posts/scraps/me"
   } else {
     setUrl = `/posts/categories/${category}`;
   }
