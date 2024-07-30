@@ -46,6 +46,7 @@ function Login() {
       localStorage.setItem("login", true);
       //로그인 성공 시 넘겨받은 데이터의 회원번호와 이메일 저장
       setUser({ email: data.email, userId: res.data.userId });
+      console.log(setUser);
       //로그인 성공 시 홈화면으로 이동
       navigate("/main");
     } catch (error) {

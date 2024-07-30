@@ -62,6 +62,12 @@ export const useComment = (post) => {
       setIsLoading(false);
     }
   };
+  const reloadComments = async () => {
+    setComments([]);
+    setPage(1);
+    setHasMore(true);
+    await getCommentApi(post.id, 1, setComments, setIsLoading, setHasMore);
+  };
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -82,5 +88,6 @@ export const useComment = (post) => {
     loadComments,
     isLoading,
     hasMore,
+    reloadComments
   };
 };
