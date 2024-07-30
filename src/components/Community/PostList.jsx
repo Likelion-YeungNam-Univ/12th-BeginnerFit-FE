@@ -10,7 +10,7 @@ import useCommentStore from "../../store/commentStore.js";
 import { useEffect, useState } from "react";
 import { getCommentApi } from "../../apis/communityApi/getCommentApi.jsx";
 import Pagination from "./Pagination.jsx";
-
+import { motion } from "framer-motion";
 export default function PostList({ category }) {
   //페이지네이션
   //한 페이지당 보여줄 게시물의 개수
@@ -52,7 +52,11 @@ export default function PostList({ category }) {
     loadInitialCommentCounts();
   }, [arr, setCommentCount]);
   return (
-    <>
+    <motion.div
+      key={page}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 1 } }}
+    >
       {loading ? (
         <h2>Loading...</h2>
       ) : (
@@ -94,7 +98,7 @@ export default function PostList({ category }) {
           setPage={setPage}
         />
       </Page>
-    </>
+    </motion.div>
   );
 }
 const Page = styled.div`

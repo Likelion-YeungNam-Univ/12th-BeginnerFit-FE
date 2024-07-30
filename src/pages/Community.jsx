@@ -6,8 +6,9 @@ import CommunityButtons from "../components/Community/CommunityButtons";
 import PostList from "../components/Community/PostList";
 import BottomNav from "../components/BottomNav";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 export default function Community() {
   const buttonList = ["자유게시판", "정보공유", "내가 쓴 글", "저장한 글"];
   //자유게시판을 디폴트값으로
@@ -15,10 +16,14 @@ export default function Community() {
 
   //게시판 작성페이지 이동
   const navigate = useNavigate();
+  const [key, setKey] = useState(selectCategory);
   const goToWritePost = () => {
     //useLocation으로 받기
     navigate("/posts/write", { state: { isEdit: false, post: null } });
   };
+  useEffect(() => {
+    setKey(selectCategory);
+  }, [selectCategory]);
 
   return (
     <Wrapper>
@@ -38,7 +43,15 @@ export default function Community() {
             setSelectCategory={setSelectCategory}
             selectCategory={selectCategory}
           />
-          <PostList category={selectCategory} />
+          <AnimatePresence>
+            <motion.div
+              key={key}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.5 } }}
+            >
+              <PostList category={selectCategory} />
+            </motion.div>
+          </AnimatePresence>
         </MainContent>
       </Container>
       <BottomNav />
