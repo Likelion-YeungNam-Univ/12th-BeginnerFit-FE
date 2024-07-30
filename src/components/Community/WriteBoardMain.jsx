@@ -57,7 +57,7 @@ export default function WriteBoardMain({ post }) {
           {/* 이미 친구이면 체크표시 */}
           {/* 친구가 아니면 +표시 */}
           {/* 내 게시물이면 친구 추가 버튼 없애기 */}
-          {isMyPost &&(
+          {isMyPost && (
             <IconHover onClick={isMyPost && handleClicked}>
               {isClicked ? (
                 <AnimationCheck size={20} />
@@ -91,7 +91,7 @@ export default function WriteBoardMain({ post }) {
             checked={!!isLiked}
             onChange={toggleLikes}
           />
-          <p>{likeCnt??0}</p>
+          <p>{likeCnt ?? 0}</p>
         </HeartContainer>
       </Container>
       <RowLine />
