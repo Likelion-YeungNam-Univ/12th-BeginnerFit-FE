@@ -8,7 +8,7 @@ export const useLikeApi = (post) => {
     queryKey: ["likesCnt", post.id],
     queryFn: async () => {
       const response = await api.get(`/posts/${post.id}`);
-      console.log("좋아요", response.data.likeCnt);
+      //console.log("좋아요", response.data.likeCnt);
       return response.data.likeCnt;
     },
   });
@@ -19,7 +19,7 @@ export const useLikeApi = (post) => {
     queryFn: async () => {
       const response = await api.get(`/posts/${post.id}/likes/check`);
       //좋아요 되어 있으면 true
-      console.log(response);
+      //console.log(response);
       return response.data;
     },
     //refetchInterval: 1000, //1초마다 한 번씩 수동 통신

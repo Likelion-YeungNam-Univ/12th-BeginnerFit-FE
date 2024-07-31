@@ -6,7 +6,7 @@ import api from "../../apis/axios";
 import useFetchData from "../../hooks/useFetchData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AlarmDialog } from "./AlarmDialog";
+import { AlarmDialog } from "../../styles/AlarmDialog";
 
 const ITEM_HEIGHT = 48;
 
@@ -50,8 +50,8 @@ export default function DropDown({ post = null }) {
   if (!myInfo) {
     return <div>Loading user info...</div>;
   }
-  console.log("내정보 id:", myInfo[0].id);
-  console.log("게시물정보 id:", post.userId);
+  //console.log("내정보 id:", myInfo[0].id);
+  //console.log("게시물정보 id:", post.userId);
   const isMyPost = myInfo[0]?.id === post?.userId ? "mypost" : "notmypost";
 
   // 옵션 구성 함수
@@ -82,14 +82,14 @@ export default function DropDown({ post = null }) {
       try {
         const response = await api.delete(`/posts/${post.id}`);
         const message = response.data?.message || "게시물이 삭제되었습니다.";
-        console.log(message);
+        //console.log(message);
         alert("게시물이 삭제되었습니다.");
         // 게시물 목록으로 이동
         navigate("/posts");
       } catch (error) {
         const errorMessage =
           error.response?.data?.message || "게시물 삭제 오류";
-        console.log(errorMessage, error);
+        //console.log(errorMessage, error);
         alert(errorMessage);
       }
     }
@@ -109,6 +109,7 @@ export default function DropDown({ post = null }) {
       content: "해당 게시글의 신고 사유를 선택해주세요.",
       type: "question",
       isOptions: true,
+      //서버에 키값 전달
       inputOptions: {
         마음에들지않아요: "마음에 들지 않아요",
         선정적이에요: "선정적이에요",
@@ -120,18 +121,18 @@ export default function DropDown({ post = null }) {
         기타사유: "기타 사유",
       },
     });
-    console.log("게시물 신고", selectReason);
+    //console.log("게시물 신고", selectReason);
 
     try {
-      const response = await api.post(`/posts/${post.id}/declarations`, {
+      await api.post(`/posts/${post.id}/declarations`, {
         reason: selectReason,
       });
-      console.log(response);
+      //console.log(response);
       alert("게시물이 신고되었습니다.");
       // 게시물 목록으로 이동
       navigate("/posts");
     } catch (error) {
-      console.log("게시물 신고 오류", error);
+      //console.log("게시물 신고 오류", error);
     }
   };
 
@@ -142,11 +143,11 @@ export default function DropDown({ post = null }) {
       return;
     }
     try {
-      const response = await api.post(`/posts/${post.id}/scraps`);
-      console.log(response);
+      await api.post(`/posts/${post.id}/scraps`);
+      //console.log(response);
       alert("게시물이 저장되었습니다.");
     } catch (error) {
-      console.log("게시물 저장 오류", error);
+      //console.log("게시물 저장 오류", error);
     }
   };
   // 각 옵션별 수행 함수
