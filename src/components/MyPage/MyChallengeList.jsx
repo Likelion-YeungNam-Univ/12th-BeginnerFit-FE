@@ -9,6 +9,12 @@ const challengeList = [
 ];
 
 export default function MyChallengeList() {
+  // const { data, isLoading, error } = useFecthData(
+  //   "/challengeparticipant/completed-month-challenges"
+  // );
+
+  // console.log(data, error);
+
   return (
     <div>
       {challengeList.map((item, idx) => (
