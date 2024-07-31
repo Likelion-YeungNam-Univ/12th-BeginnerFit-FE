@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
 import { FormContext } from './FormContext';
+import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
 
 export default function Page1({swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);
@@ -13,14 +14,18 @@ export default function Page1({swiperRef}) {
     // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
     const {formData, setFormData} = useContext(FormContext);
 
+    const [authCode, setAuthCode] = useState('');
+    const [authCodeValid, setAuthCodeValid] = useState(false);
+    const [emailSent, setEmailSent] = useState(false);
+
     // 버튼 활성화 (이메일 인증 과정도 거쳐야함)
     useEffect(()=>{
-        if(emailValid && pwValid && pwCheckValid){
+        if(emailValid && pwValid && pwCheckValid && authCodeValid){
             setAllow(true);
             return;
         }
         setAllow(false);
-    },[ emailValid, pwValid, pwCheckValid ]);
+    },[ emailValid, pwValid, pwCheckValid, authCodeValid ]);
     
     const handleEmail = (e) => {
         // 전역 상태 함수에 데이터 값 받기
@@ -68,6 +73,32 @@ export default function Page1({swiperRef}) {
         console.log("formData: ",formData);
     };
 
+    const handleAuthCodeRequest = async (e) => {
+        e.preventDefault();
+        console.log('인증번호버튼이 클릭됨.');
+        try {
+            await sendAuthCode(formData.email);
+            setEmailSent(true);
+            alert('인증 번호가 이메일로 전송되었습니다.');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('인증 번호 전송에 실패했습니다. 다시 시도해주세요. | alert:',error.message);
+        }
+    };
+
+    const handleAuthCodeCheck = async (e) => {
+        e.preventDefault();
+        try {
+            await verifyAuthCode(formData.email, authCode);
+            setAuthCodeValid(true);
+            alert('인증 번호가 확인되었습니다.');
+        } catch (error) {
+            console.error('Error:', error);
+            setAuthCodeValid(false);
+            alert('인증 번호가 유효하지 않습니다. 다시 시도해주세요.');
+        }
+    };
+
     return(
         <Wrapper>
             <SignUpBox>
@@ -85,7 +116,12 @@ export default function Page1({swiperRef}) {
                         onChange={handleEmail}
                         validInput
                     ></MyInput>
-                    <ValidButton>인증번호 받기</ValidButton>
+                    <ValidButton
+                        onClick={handleAuthCodeRequest}
+                        disabled={!emailValid || emailSent}
+                    >
+                        인증번호 받기
+                    </ValidButton>
                     <ErrorMsg>
                         {!emailValid && formData.email.length > 0 && (
                             <div>형식이 올바르지 않습니다. 다시 입력해주세요.</div>
@@ -97,11 +133,16 @@ export default function Page1({swiperRef}) {
                         type='text'
                         maxLength={6}
                         placeholder="6자리 인증번호를 입력해주세요"
-                        // value={}
-                        // onChange={}
+                        value={authCode}
+                        onChange={(e) => setAuthCode(e.target.value)}
                         validInput
                         ></MyInput>
-                    <ValidButton>확인</ValidButton>
+                    <ValidButton
+                        onClick={handleAuthCodeCheck}
+                        disabled={!authCode}
+                    >
+                        확인
+                    </ValidButton>
 
                     <ItemName>비밀번호</ItemName>
                     <MyInput 
@@ -200,6 +241,10 @@ const ValidButton = styled.button`
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
+    &:disabled{
+        cursor: not-allowed;
+        background-color: #9a9a9a;
+    }
 `
 
 const ErrorMsg = styled.div`
