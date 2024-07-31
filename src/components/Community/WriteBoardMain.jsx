@@ -25,14 +25,25 @@ export default function WriteBoardMain({ post }) {
   const [isMyFriend, setIsMyFriend] = useState(false);
   const { data, isLoading, error } = useFetchData(`/posts/${post.id}`);
   const user = useUserInfo((state) => state.user);
+  //친구 확인 API구현
+  //1.게시글을 쓴 유저정보(유저아이디)가져오기
+  // const userId= data.userId;
+  // //2.유저 아이디로 유저 이메일 가져오기
 
+  // const response = async () => {
+  //   try {
+  //     const response = await api.post("/friends/request",post.);
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   //내 게시물인지 판단.
   useEffect(() => {
     if (data && user) {
       setIsMyPost(Number(user.userId) == Number(data?.userId));
     }
   }, [data, user]);
-  //친구 확인 API구현
 
   //리액트 쿼리 - 옵티미스틱 업데이트
   const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);

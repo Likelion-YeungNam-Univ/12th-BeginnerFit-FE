@@ -6,7 +6,7 @@ import api from "../../apis/axios";
 import useFetchData from "../../hooks/useFetchData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AlarmDialog } from "../../styles/AlarmDialog";
+
 
 const ITEM_HEIGHT = 48;
 
@@ -109,7 +109,7 @@ export default function DropDown({ post = null }) {
       content: "해당 게시글의 신고 사유를 선택해주세요.",
       type: "question",
       isOptions: true,
-      //서버에 키값 전달
+      //서버에 키값 전달s
       inputOptions: {
         마음에들지않아요: "마음에 들지 않아요",
         선정적이에요: "선정적이에요",

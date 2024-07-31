@@ -59,7 +59,7 @@ export default function Comment({ post }) {
         content: editCommentText,
       });
       const message = response.data?.message || "댓글이 수정되었습니다.";
-      alert(message);
+     // alert(message);
       setIsEditMode(false);
       setEditCommentText("");
       setCommentId(null);

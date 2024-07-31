@@ -35,11 +35,13 @@ export default function PostList({ category }) {
   const setCommentCount = useCommentStore((state) => state.setCommentCount);
 
   useEffect(() => {
+    console.log("Fetched data: ", arr);
     async function loadInitialCommentCounts() {
       if (arr && arr.length > 0) {
         for (const post of arr) {
+          const postId = category === "저장한 글" ? post.postInfo?.id : post.id;
           await getCommentApi(
-            post.id,
+            postId,
             1,
             () => {},
             null,
@@ -50,7 +52,7 @@ export default function PostList({ category }) {
     }
 
     loadInitialCommentCounts();
-  }, [arr, setCommentCount]);
+  }, [arr, setCommentCount, category]);
   return (
     <motion.div
       key={page}
@@ -60,35 +62,40 @@ export default function PostList({ category }) {
       {loading ? (
         <h2>Loading...</h2>
       ) : (
-        arr.slice(offset, offset + limitPage).map((post) => (
-          <Link
-            key={post.id}
-            to={`/posts/${post.id}`}
-            style={{
-              textDecoration: "none",
-              color: "black",
-            }}
-          >
-            <ContentContaienr>
-              <LeftContent>
-                <TitleText>{post.title}</TitleText>
-                <ContentText>{post.content}</ContentText>
-                <IdText>{post.author}</IdText>
-              </LeftContent>
-              <RightContent>
-                <TimeText>{TimeCalculator(post.createdAt)}</TimeText>
-                <HeartCommentContainer>
-                  <LuHeart />
-                  <HeartCommentText>{post.likeCnt}</HeartCommentText>
-                  <GoComment />
-                  <HeartCommentText>
-                    {commentCounts[post.id] || 0}
-                  </HeartCommentText>
-                </HeartCommentContainer>
-              </RightContent>
-            </ContentContaienr>
-          </Link>
-        ))
+        arr.slice(offset, offset + limitPage).map((post) => {
+          const currentPost = category === "저장한 글" ? post.postInfo : post;
+          //예외처리
+          if (!currentPost) return null;
+          return (
+            <Link
+              key={currentPost.id}
+              to={`/posts/${currentPost.id}`}
+              style={{
+                textDecoration: "none",
+                color: "black",
+              }}
+            >
+              <ContentContaienr>
+                <LeftContent>
+                  <TitleText>{currentPost.title}</TitleText>
+                  <ContentText>{currentPost.content}</ContentText>
+                  <IdText>{currentPost.author}</IdText>
+                </LeftContent>
+                <RightContent>
+                  <TimeText>{TimeCalculator(currentPost.createdAt)}</TimeText>
+                  <HeartCommentContainer>
+                    <LuHeart />
+                    <HeartCommentText>{currentPost.likeCnt}</HeartCommentText>
+                    <GoComment />
+                    <HeartCommentText>
+                      {commentCounts[currentPost.id] || 0}
+                    </HeartCommentText>
+                  </HeartCommentContainer>
+                </RightContent>
+              </ContentContaienr>
+            </Link>
+          );
+        })
       )}
       <Page>
         <Pagination
