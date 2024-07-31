@@ -4,17 +4,32 @@ import {
   StyledToday,
   StyledDot,
 } from "../../styles/CalendarStyle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import useFetchData from "../../hooks/useFetchData";
 
 export default function Challender() {
   const today = new Date();
   const [date, setDate] = useState(today);
 
-  const attendDay = ["2024-07-03", "2024-07-02"]; // 출석한 날짜 예시
+  // 출석한 날짜 저장할 state
+  const [attendDay, setAttendDay] = useState([]);
+
+  // 출석한 날짜 데이터 가져오기
+  const { data, isLoading } = useFetchData("/attendance/dates");
+
   const handleDateChange = (newDate) => {
     setDate(newDate);
   };
+
+  // 출석한 날짜 저장
+  useEffect(() => {
+    if (data) {
+      setAttendDay(data.map((item) => item.presentDate));
+    }
+  }, [data]);
+
+  if (isLoading) return "Loading...";
 
   return (
     <StyledCalendarWrapper>
