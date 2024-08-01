@@ -12,29 +12,43 @@ import Comment from "./Comment";
 import { FaCheck } from "react-icons/fa";
 import useFetchData from "../../hooks/useFetchData";
 import { useUserInfo } from "../../store/useUserInfo";
+import api from "../../apis/axios";
+import { useLikeApi } from "../../apis/communityApi/useLikeApi";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function WriteBoardMain({ post }) {
-  //좋아요 기능함수
-  const [clickLike, setClickLike] = useState(false);
-  //const [likes, setLikes] = useState(post.likes);
   const [totalComments, setTotalComments] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   //내 게시물인가
   const [isMyPost, setIsMyPost] = useState(false);
-  //친구인가 
-  const [isMyFriend,setIsMyFriend]=useState(false);
+  //친구인가
+  const [isMyFriend, setIsMyFriend] = useState(false);
   const { data, isLoading, error } = useFetchData(`/posts/${post.id}`);
   const user = useUserInfo((state) => state.user);
-  
+  //친구 확인 API구현
+  //1.게시글을 쓴 유저정보(유저아이디)가져오기
+  // const userId= data.userId;
+  // //2.유저 아이디로 유저 이메일 가져오기
+
+  // const response = async () => {
+  //   try {
+  //     const response = await api.post("/friends/request",post.);
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   //내 게시물인지 판단.
   useEffect(() => {
     if (data && user) {
       setIsMyPost(Number(user.userId) == Number(data?.userId));
     }
   }, [data, user]);
-  //친구 확인 API구현
-  if (isLoading) return <div>Loading...</div>;
+
+  //리액트 쿼리 - 옵티미스틱 업데이트
+  const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);
+
+  if (isLoading || isLikeLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading user info</div>;
 
   const handleClicked = () => {
@@ -54,7 +68,7 @@ export default function WriteBoardMain({ post }) {
           {/* 이미 친구이면 체크표시 */}
           {/* 친구가 아니면 +표시 */}
           {/* 내 게시물이면 친구 추가 버튼 없애기 */}
-          {isMyPost ? undefined : (
+          {isMyPost && (
             <IconHover onClick={isMyPost && handleClicked}>
               {isClicked ? (
                 <AnimationCheck size={20} />
@@ -81,14 +95,14 @@ export default function WriteBoardMain({ post }) {
         {/* 하트 체크박스 */}
         <HeartContainer>
           <Checkbox
-            style={{ color: "red", border: "black" }}
+            style={{ color: "red" }}
             {...label}
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
-            checked={clickLike}
-            //onChange={toggleLike}
+            checked={!!isLiked}
+            onChange={toggleLikes}
           />
-          <p>{}</p>
+          <p>{likeCnt ?? 0}</p>
         </HeartContainer>
       </Container>
       <RowLine />
@@ -143,6 +157,7 @@ const HeartContainer = styled.div`
   justify-content: end;
   padding: 0 ${responsiveSize("10")};
 `;
+
 const fadeIn = keyframes`
   from{
     transform: scale(0);
