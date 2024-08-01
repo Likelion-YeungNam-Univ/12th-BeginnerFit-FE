@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components';
 import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
 
 export default function ForgetPwP1({swiperRef}) {
-    const [email, setEmail] = useState('test@gmail.');
+    const [email, setEmail] = useState('');
     const [emailValid, setEmailValid] = useState(false);
     const [allow, setAllow] = useState(false);
 
