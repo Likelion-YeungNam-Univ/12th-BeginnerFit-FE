@@ -23,11 +23,15 @@ export default function WriteBoardMain({ post }) {
   //친구인가
   const [isMyFriend, setIsMyFriend] = useState(false);
   const { data, isLoading, error } = useFetchData(`/posts/${post.id}`);
+  //친구 판단 API
+  // const {
+  //   data: friendData,
+  //   isLoading: friendLoading,
+  //   error: friendError,
+  // } = useFetchData(``);
   const user = useUserInfo((state) => state.user);
   //친구 확인 API구현
   //1.게시글을 쓴 유저정보(유저아이디)가져오기
-  // const userId= data.userId;
-  // //2.유저 아이디로 유저 이메일 가져오기
 
   // const response = async () => {
   //   try {
@@ -40,10 +44,12 @@ export default function WriteBoardMain({ post }) {
   //내 게시물인지 판단.
   useEffect(() => {
     if (data && user) {
-      setIsMyPost(Number(user.userId) == Number(data?.userId));
+      setIsMyPost(Number(user.userId) === Number(data?.userId));
     }
   }, [data, user]);
 
+  //내 친구인지 판단
+  useEffect(() => {});
   //리액트 쿼리 - 옵티미스틱 업데이트
   const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);
 
@@ -67,8 +73,8 @@ export default function WriteBoardMain({ post }) {
           {/* 이미 친구이면 체크표시 */}
           {/* 친구가 아니면 +표시 */}
           {/* 내 게시물이면 친구 추가 버튼 없애기 */}
-          {isMyPost && (
-            <IconHover onClick={isMyPost && handleClicked}>
+          {!isMyPost && (
+            <IconHover onClick={handleClicked}>
               {isClicked ? (
                 <AnimationCheck size={20} />
               ) : (
