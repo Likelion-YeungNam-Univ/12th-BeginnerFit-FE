@@ -3,7 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 
-export default function ForgetIdP2() {
+export default function ForgetIdP2(name) {
     const navigate = useNavigate();
 
     return(
@@ -15,7 +15,7 @@ export default function ForgetIdP2() {
                         <br/>
                         아이디 정보입니다
                     </H1>
-                    <UserEmail>asdf@naver.com</UserEmail>
+                    <UserEmail>{'asdf@naver.com'}</UserEmail>
                 </Container>
                 <ConfirmButton
                     type="button"

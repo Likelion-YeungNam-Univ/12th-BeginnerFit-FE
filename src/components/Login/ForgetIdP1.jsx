@@ -3,7 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled from 'styled-components';
 
 export default function ForgetIdP1({swiperRef}) {
-    const [name, setName] = useState('닉네임');
+    const [name, setName] = useState('');
     const [allow, setAllow] = useState(false);
 
     // 버튼 활성화
