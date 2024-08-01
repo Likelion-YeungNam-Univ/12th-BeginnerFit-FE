@@ -12,6 +12,7 @@ export const usePostData = (url) => {
     try {
       const res = await api.post(url, payload);
       setData(res.data);
+      return res.data;
     } catch (e) {
       setError(e);
     } finally {
