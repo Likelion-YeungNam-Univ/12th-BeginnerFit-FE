@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import api from "../apis/axios";
 
 export const usePostData = (url) => {
@@ -11,7 +11,6 @@ export const usePostData = (url) => {
 
     try {
       const res = await api.post(url, payload);
-      console.log(res);
       setData(res.data);
     } catch (e) {
       setError(e);
