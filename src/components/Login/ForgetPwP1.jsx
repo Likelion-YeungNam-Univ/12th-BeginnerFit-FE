@@ -53,14 +53,6 @@ export default function ForgetPwP1({swiperRef}) {
             setEmailValid(false);
         }
     }
-    // const handleVerifyNum = (e) => {
-    //     setVerifyNum(e.target.value);
-    //     if (e.target.value.length == 6){
-    //         setVerifyNumValid(true);
-    //     }else{
-    //         setVerifyNumValid(false);
-    //     }
-    // }
 
     const handleNext = () => {
         localStorage.setItem('findEmail', email); // 이메일을 로컬 스토리지에 저장
@@ -100,8 +92,8 @@ export default function ForgetPwP1({swiperRef}) {
                         <ItemName>인증번호</ItemName>
                         <MyInput 
                             type='text'
-                            maxLength={6}
-                            placeholder="6자리 인증번호를 입력해주세요"
+                            maxLength={8}
+                            placeholder="8자리 인증번호를 입력해주세요"
                             value={authCode}
                             onChange={(e) => setAuthCode(e.target.value)}
                             validInput

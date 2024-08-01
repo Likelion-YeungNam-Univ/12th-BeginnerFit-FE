@@ -18,7 +18,7 @@ export default function Page1({swiperRef}) {
     const [authCodeValid, setAuthCodeValid] = useState(false);
     const [emailSent, setEmailSent] = useState(false);
 
-    // 버튼 활성화 (이메일 인증 과정도 거쳐야함)
+    // 버튼 활성화
     useEffect(()=>{
         if(emailValid && pwValid && pwCheckValid && authCodeValid){
             setAllow(true);
@@ -127,8 +127,8 @@ export default function Page1({swiperRef}) {
                     <ItemName>인증번호</ItemName>
                     <MyInput 
                         type='text'
-                        maxLength={6}
-                        placeholder="6자리 인증번호를 입력해주세요"
+                        maxLength={8}
+                        placeholder="8자리 인증번호를 입력해주세요"
                         value={authCode}
                         onChange={(e) => setAuthCode(e.target.value)}
                         validInput
