@@ -12,9 +12,8 @@ import Comment from "./Comment";
 import { FaCheck } from "react-icons/fa";
 import useFetchData from "../../hooks/useFetchData";
 import { useUserInfo } from "../../store/useUserInfo";
-import api from "../../apis/axios";
 import { useLikeApi } from "../../apis/communityApi/useLikeApi";
-
+import { motion } from "framer-motion";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function WriteBoardMain({ post }) {
   const [totalComments, setTotalComments] = useState(0);
@@ -94,14 +93,20 @@ export default function WriteBoardMain({ post }) {
         )}
         {/* 하트 체크박스 */}
         <HeartContainer>
-          <Checkbox
-            style={{ color: "red" }}
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            checked={!!isLiked}
-            onChange={toggleLikes}
-          />
+          <motion.div
+            className="box"
+            whileHover={{ scale: 1.3 }}
+            transition={{ type: "spring", damping: 1 }}
+          >
+            <Checkbox
+              style={{ color: "red" }}
+              {...label}
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              checked={!!isLiked}
+              onChange={toggleLikes}
+            />
+          </motion.div>
           <p>{likeCnt ?? 0}</p>
         </HeartContainer>
       </Container>
