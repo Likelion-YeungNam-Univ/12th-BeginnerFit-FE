@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
-import DropDown from "./DropDown";
 import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../styles/GlobalStyle";
@@ -59,7 +58,7 @@ export default function Comment({ post }) {
         content: editCommentText,
       });
       const message = response.data?.message || "댓글이 수정되었습니다.";
-     // alert(message);
+      // alert(message);
       setIsEditMode(false);
       setEditCommentText("");
       setCommentId(null);
@@ -72,14 +71,15 @@ export default function Comment({ post }) {
 
   //자신의 댓글인지 확인
   const user = useUserInfo((state) => state.user);
-  const myInfo = user?.userId;
-  const isMyInfo = myInfo === comment?.userId;
+
   return (
     <>
       <Container>
         <CommentNum>댓글 {comments.length}개</CommentNum>
         {comments &&
           comments.map((comment) => (
+            // 내 댓글인가
+
             <CommentItem
               key={comment.id}
               ref={
@@ -101,14 +101,12 @@ export default function Comment({ post }) {
                   </NickAndDate>
                 </UserContainer>
                 {/* 내 댓글이면 드롭메뉴 안보이기 */}
-                {isMyInfo ? (
-                  <CommentDropDown
-                    comment={comment}
-                    onEditClick={handleOnEditClick}
-                    loadComments={loadComments}
-                    reloadComments={reloadComments}
-                  />
-                ) : undefined}
+                <CommentDropDown
+                  comment={comment}
+                  onEditClick={handleOnEditClick}
+                  loadComments={loadComments}
+                  reloadComments={reloadComments}
+                />
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
             </CommentItem>
