@@ -13,16 +13,25 @@ import PlayListList from "../components/Main/PlayListList";
 import ChallengeList from "../components/Main/ChallengeList";
 import UserList from "../components/Main/UserList";
 import BottomNav from "../components/BottomNav";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
   const today = new Date();
+
+  const nav = useNavigate();
 
   return (
     <MainWrapper>
       <MainContainer>
         <MainContent>
           {/* 헤더 내비 게이션 */}
-          <Header type={"alarm"} size={"30"} />
+          <Header
+            type={"alarm"}
+            size={"30"}
+            onClick={() => {
+              nav("/alarm");
+            }}
+          />
           <MainH2>
             사용자님!
             <br />

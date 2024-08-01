@@ -16,8 +16,8 @@ export default function ChallengeList() {
   // 챌린지 3개 가져오기
   const { data } = useFetchData("/challengeparticipant/today-challenges");
 
-  // const { data: total } = useFetchData("/completed-friend-count");
-  // console.log(total);
+  const { data: total } = useFetchData("/completed-friend-count");
+  console.log(total);
 
   // 챌린지 완료 모양 눌럿을 때 실행할 함수
   const handleCheck = async (idx, id) => {

@@ -122,7 +122,14 @@ function App() {
             </ProtectedRouter>
           }
         />
-        <Route path="/alarm" element={<Alaram />} />
+        <Route
+          path="/alarm"
+          element={
+            <ProtectedRouter>
+              <Alaram />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </>
   );
