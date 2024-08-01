@@ -16,14 +16,9 @@ export default function ForgetPwP1({swiperRef}) {
     const handleAuthCodeRequest = async (e) => {
         e.preventDefault();
         console.log('인증번호버튼이 클릭됨.');
-        try {
-            await sendAuthCode(email);
-            setEmailSent(true);
-            alert('인증 번호가 이메일로 전송되었습니다.');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('인증 번호 전송에 실패했습니다. 다시 시도해주세요. | alert:',error.message);
-        }
+        await sendAuthCode(email);
+        setEmailSent(true);
+        alert('인증 번호가 이메일로 전송되었습니다.');
     };
     const handleAuthCodeCheck = async (e) => {
         e.preventDefault();
