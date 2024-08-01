@@ -5,7 +5,7 @@ import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import CommentDropDown from "./CommentDropDown";
 import api from "../../apis/axios";
 import { useUserInfo } from "../../store/useUserInfo";
@@ -22,6 +22,7 @@ export default function Comment({ post }) {
     hasMore,
     reloadComments,
   } = useComment(post);
+  const [sortedComment, setSortedComment] = useState([]);
 
   const observer = useRef();
   const lastCommentElementRef = useCallback(
@@ -68,6 +69,13 @@ export default function Comment({ post }) {
       alert(errorMessage);
     }
   };
+  //댓글 최신순 정리
+  useEffect(() => {
+    if (comments) {
+      const sortedComment = [...comments].sort((a, b) => b.id - a.id);
+      setSortedComment(sortedComment);
+    }
+  }, [comments]);
 
   //자신의 댓글인지 확인
   const user = useUserInfo((state) => state.user);
@@ -75,15 +83,15 @@ export default function Comment({ post }) {
   return (
     <>
       <Container>
-        <CommentNum>댓글 {comments.length}개</CommentNum>
-        {comments &&
-          comments.map((comment) => (
+        <CommentNum>댓글 {sortedComment.length}개</CommentNum>
+        {sortedComment &&
+          sortedComment.map((comment) => (
             // 내 댓글인가
 
             <CommentItem
               key={comment.id}
               ref={
-                comment.id === comments.length - 1
+                comment.id === sortedComment.length - 1
                   ? lastCommentElementRef
                   : null
               }
