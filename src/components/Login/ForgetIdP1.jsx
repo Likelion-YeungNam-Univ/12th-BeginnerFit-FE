@@ -3,7 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled from 'styled-components';
 
 export default function ForgetIdP1({swiperRef}) {
-    const [name, setName] = useState('닉네임');
+    const [name, setName] = useState('');
     const [allow, setAllow] = useState(false);
 
     // 버튼 활성화
@@ -14,6 +14,13 @@ export default function ForgetIdP1({swiperRef}) {
         }
         setAllow(false);
     },[ name ]);
+
+    const handleNext = () => {
+        if (allow) {
+            localStorage.setItem('findName', name);
+            swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
+        }
+    }
     
     return(
         <Wrapper>
@@ -39,9 +46,7 @@ export default function ForgetIdP1({swiperRef}) {
                 <NextButton
                     type="button"
                     disabled={!allow}
-                    onClick={() => {
-                        swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
-                    }} 
+                    onClick={handleNext} 
                 >
                     다음으로
                 </NextButton>
