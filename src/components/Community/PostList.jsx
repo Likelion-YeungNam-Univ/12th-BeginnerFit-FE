@@ -156,7 +156,12 @@ const RightContent = styled.div`
 
 const ContentText = styled.div`
   font-size: ${responsiveSize("16")};
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
   font-weight: 400;
+  -webkit-box-orient: vertical
 `;
 
 const IdText = styled.span`
