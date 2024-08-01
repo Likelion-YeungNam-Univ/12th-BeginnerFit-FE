@@ -3,6 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
+import { resetPassword } from "../../apis/findPw";
 
 export default function ForgetPwP2() {
     const navigate = useNavigate();
@@ -47,6 +48,15 @@ export default function ForgetPwP2() {
             setPwCheckValid(false);
         }
     }
+    const handleResetPassword = async () => {
+        try {
+            await resetPassword(email, password);
+            alert("비밀번호가 성공적으로 변경되었습니다.");
+            setTimeout(() => navigate('/'), 2000); // 2초 후 로그인 페이지로 이동
+        } catch (error) {
+            alert("비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
+        }
+    };
 
     return(
         <Wrapper>
@@ -87,8 +97,7 @@ export default function ForgetPwP2() {
                 <ConfirmButton
                     type="button"
                     disabled={!allow}
-                    onClick={() => {(navigate('/'))
-                    }} 
+                    onClick={handleResetPassword} 
                 >
                     확인하기
                 </ConfirmButton>
