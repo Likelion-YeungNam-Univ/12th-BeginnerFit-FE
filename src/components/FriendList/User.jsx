@@ -4,11 +4,17 @@ import styled, { keyframes } from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
+import { usePostData } from "../../hooks/usePostData";
 
 // type으로 친구 추가할지 삭제할지 설정
 export const User = ({ id, nickname, image, type, onClick }) => {
   // 친구 추가 버튼을 눌렀는지 확인하는 state (친구 추가 버튼을 누르면 + 버튼이 안 보여야됨)
   const [isPlused, setIsPlused] = useState(false);
+
+  //
+  const { data, isLoading, error, postData } = usePostData(
+    `/friends/request/${id}`
+  );
 
   // 친구 추가 버튼 눌렀을 때 실행할 함수
   const handlePlusButton = () => {
@@ -18,6 +24,7 @@ export const User = ({ id, nickname, image, type, onClick }) => {
     }
     setIsPlused(true);
     // 서버에게 친구 추가 api 요청
+    postData();
   };
 
   return (

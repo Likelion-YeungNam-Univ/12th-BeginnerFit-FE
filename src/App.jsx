@@ -6,7 +6,7 @@ import ForgetPW from "./pages/ForgetPW";
 import SignUp from "./pages/SignUp";
 import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
-import Main from "./pages/main";
+import Main from "./pages/Main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
@@ -122,7 +122,14 @@ function App() {
             </ProtectedRouter>
           }
         />
-        <Route path="/alarm" element={<Alaram />} />
+        <Route
+          path="/alarm"
+          element={
+            <ProtectedRouter>
+              <Alaram />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </>
   );
