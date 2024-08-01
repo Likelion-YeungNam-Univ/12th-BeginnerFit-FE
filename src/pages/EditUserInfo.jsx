@@ -4,8 +4,13 @@ import { responsiveSize } from "../utils/Mediaquery";
 import { RowContainer, Wrapper } from "../styles/GlobalStyle";
 import SetCategory from "../components/MyPage/SetCategory";
 import { useEffect, useState } from "react";
-import {SubmitButton} from "../styles/GlobalStyle";
+import { SubmitButton } from "../styles/GlobalStyle";
+import { useUserInfo } from "../store/useUserInfo.js";
+import { updateEditUserInfo } from "../apis/updateEditUserInfo";
+import { useNavigate } from "react-router-dom";
 export default function EditUserInfo() {
+  const user = useUserInfo((state) => state.user);
+  const navigate = useNavigate();
   //음수값 자릿수 제한
   const onInput = (e) => {
     if (e.target.value.length > 3) {
@@ -24,7 +29,7 @@ export default function EditUserInfo() {
     date: "",
     targetDate: "",
     exerciseTime: 0,
-    categories: {},
+    categories: { "운동 강도": [], "운동 목표": [], "고민 부위": [] },
   });
 
   //입력값 관리
@@ -34,12 +39,6 @@ export default function EditUserInfo() {
       ...prev,
       [name]: value,
     }));
-  };
-
-  //폼 제출
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
   };
 
   //setCategiry 컴포넌트에서 선택된 카테고리가져오기
@@ -77,6 +76,17 @@ export default function EditUserInfo() {
     setIsFormValid(isValid);
   }, [form]);
 
+  //폼 API통신 수정
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await updateEditUserInfo(form, user.email);
+      //마이페이지로 이동
+      navigate("/mypage");
+    } catch (error) {
+      console.log("건강정보 게시 오류", error);
+    }
+  };
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
@@ -167,7 +177,10 @@ export default function EditUserInfo() {
               <P>시간</P>
             </SubContainer>
           </TextInputContainer>
-          <SetCategory onSubmit={handleCategorySubmit} isSignUp={false}></SetCategory>
+          <SetCategory
+            onSubmit={handleCategorySubmit}
+            isSignUp={false}
+          ></SetCategory>
         </RootContainer>
         <Div>
           <SubmitButton
@@ -239,4 +252,3 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
 `;
-

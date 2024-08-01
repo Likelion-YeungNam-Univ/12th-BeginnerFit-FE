@@ -6,21 +6,7 @@ import {
   useFriendNumStore,
 } from "../../store/useFriendSearchStore";
 import useFetchData from "../../hooks/useFetchData";
-
-// 서버로 부터 사용자 전체 받아오기
-const userList = [
-  { id: 1, nickname: "zoedhj", image: user },
-  { id: 2, nickname: "ywamcgj", image: user },
-  { id: 3, nickname: "qmbvsz", image: user },
-  { id: 4, nickname: "xpjaf", image: user },
-  { id: 5, nickname: "gftrwb", image: user },
-  { id: 6, nickname: "utdjlg", image: user },
-  { id: 7, nickname: "ekzn", image: user },
-  { id: 8, nickname: "bnqozga", image: user },
-  { id: 9, nickname: "vjocb", image: user },
-  { id: 10, nickname: "hwxdp", image: user },
-  { id: 11, nickname: "lymuo", image: user },
-];
+import api from "../../apis/axios";
 
 export const UserList = () => {
   // 서버에서 받아올 유저 리스트
@@ -35,7 +21,7 @@ export const UserList = () => {
   // 친구 수 저장할 함수 가져오기
   const { setNum } = useFriendNumStore();
 
-  // 친구 목록 받아오는 코드 ( 현재 친구가 없어서 mock 데이터로 사용하겠습니다. )
+  // 친구 목록 받아오는 코드
   const { data, isLoading, error } = useFetchData("/friends");
 
   // 받아온 데이터 users state에 저장
@@ -59,6 +45,7 @@ export const UserList = () => {
       setNum(arr.length); // 친구 삭제후 숫자 저장
       setUsers(arr);
       // 서버에게 삭제 요청 보내기
+      api.delete(`/friends/${id}`);
     }
   };
 

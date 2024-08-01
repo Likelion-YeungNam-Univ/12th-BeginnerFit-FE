@@ -1,5 +1,6 @@
 import React from "react";
 import Challenge from "../Main/Challenge";
+import useFecthData from "../../hooks/useFetchData";
 
 const challengeList = [
   { content: "30분 이상 운동하기" },
@@ -8,6 +9,12 @@ const challengeList = [
 ];
 
 export default function MyChallengeList() {
+  // const { data, isLoading, error } = useFecthData(
+  //   "/challengeparticipant/completed-month-challenges"
+  // );
+
+  // console.log(data, error);
+
   return (
     <div>
       {challengeList.map((item, idx) => (

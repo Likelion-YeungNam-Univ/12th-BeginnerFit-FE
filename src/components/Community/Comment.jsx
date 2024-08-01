@@ -6,7 +6,9 @@ import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
+import CommentDropDown from "./CommentDropDown";
+import api from "../../apis/axios";
 
 export default function Comment({ post }) {
   const {
@@ -18,6 +20,7 @@ export default function Comment({ post }) {
     loadComments,
     isLoading,
     hasMore,
+    reloadComments
   } = useComment(post);
 
   const observer = useRef();
@@ -35,15 +38,51 @@ export default function Comment({ post }) {
     [isLoading, hasMore, loadComments]
   );
 
+  //댓글 수정 텍스트입력
+  const [editCommentText, setEditCommentText] = useState("");
+  //수정 상태인가
+  const [isEditMode, setIsEditMode] = useState(false);
+  //수정할 댓글 id
+  const [commentId, setCommentId] = useState(null);
+
+  //댓글 수정 함수
+  const handleOnEditClick = (comment) => {
+    setIsEditMode(true);
+    setEditCommentText(comment.content);
+    setCommentId(comment.id);
+  };
+
+  const editComment = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.put(`/posts/comments/${commentId}`, {
+        content: editCommentText,
+      });
+      const message = response.data?.message || "댓글이 수정되었습니다.";
+      alert(message);
+      setIsEditMode(false);
+      setEditCommentText("");
+      setCommentId(null);
+      reloadComments();
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "댓글 수정 오류";
+      alert(errorMessage);
+    }
+  };
+
   return (
     <>
       <Container>
         <CommentNum>댓글 {comments.length}개</CommentNum>
         {comments &&
-          comments.map((comment, index) => (
+          comments.map((comment) => (
             <CommentItem
-              key={index}
-              ref={index === comments.length - 1 ? lastCommentElementRef : null}
+              key={comment.id}
+              ref={
+                comment.id === comments.length - 1
+                  ? lastCommentElementRef
+                  : null
+              }
             >
               <RowContainer>
                 <UserContainer>
@@ -57,7 +96,12 @@ export default function Comment({ post }) {
                     </Date>
                   </NickAndDate>
                 </UserContainer>
-                <DropDown post={post}></DropDown>
+                <CommentDropDown
+                  comment={comment}
+                  onEditClick={handleOnEditClick}
+                  loadComments={loadComments}
+                  reloadComments={reloadComments}
+                />
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
             </CommentItem>
@@ -67,17 +111,37 @@ export default function Comment({ post }) {
         <RowContainer
           style={{ width: "100%", padding: `${responsiveSize("10")}` }}
         >
-          <TextInput
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="댓글을 입력하세요."
-          ></TextInput>
-          <SendButton onClick={handleCommentSubmit} disabled={isCommentEmpty}>
-            <FiChevronRight
-              style={{ height: "30px", width: "30px", color: "white" }}
-            />
-          </SendButton>
+          {isEditMode ? (
+            <Form onSubmit={editComment}>
+              <TextInput
+                type="text"
+                value={editCommentText}
+                onChange={(e) => setEditCommentText(e.target.value)}
+              />
+              <SendButton type="submit" disabled={!editCommentText.trim()}>
+                <FiChevronRight
+                  style={{ height: "30px", width: "30px", color: "white" }}
+                />
+              </SendButton>
+            </Form>
+          ) : (
+            <>
+              <TextInput
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="댓글을 입력하세요."
+              ></TextInput>
+              <SendButton
+                onClick={handleCommentSubmit}
+                disabled={isCommentEmpty}
+              >
+                <FiChevronRight
+                  style={{ height: "30px", width: "30px", color: "white" }}
+                />
+              </SendButton>
+            </>
+          )}
         </RowContainer>
       </BottomNavContainer>
     </>
@@ -160,4 +224,9 @@ const Container = styled.div`
   padding: 0px 20px;
   height: 100vh;
   overflow-y: auto;
+`;
+
+const Form = styled.form`
+  display: flex;
+  width: 100%;
 `;
