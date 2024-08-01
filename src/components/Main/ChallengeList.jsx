@@ -16,8 +16,10 @@ export default function ChallengeList() {
   // 챌린지 3개 가져오기
   const { data } = useFetchData("/challengeparticipant/today-challenges");
 
-  const { data: total } = useFetchData("/completed-friend-count");
-  console.log(total);
+  // 오늘의 챌린지 완료한 친구 수 가져오기
+  const { data: total } = useFetchData(
+    "/challengeparticipant/completed-friend-count"
+  );
 
   // 챌린지 완료 모양 눌럿을 때 실행할 함수
   const handleCheck = async (idx, id) => {
@@ -68,7 +70,7 @@ export default function ChallengeList() {
 
   return (
     <Container>
-      <SpeechBubble>친구 27명이 성공했어요!</SpeechBubble>
+      <SpeechBubble>친구 {total ?? 0}명이 성공했어요!</SpeechBubble>
       {challengeList?.map((item, idx) => (
         <Challenge
           allComplete={allComplete}
