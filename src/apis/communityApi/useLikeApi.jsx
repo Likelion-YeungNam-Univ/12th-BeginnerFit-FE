@@ -1,7 +1,8 @@
+import { queryClient } from "../../main";
 import api from "../axios";
 
-import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
-export const queryClient = new QueryClient();
+import { useQuery, useMutation } from "react-query";
+
 export const useLikeApi = (post) => {
   //게시물 좋아요 개수
   const { data: likesCnt, refetch: likeCnt } = useQuery({

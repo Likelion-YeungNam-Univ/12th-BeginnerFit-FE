@@ -8,9 +8,32 @@ import { SubmitButton } from "../styles/GlobalStyle";
 import { useUserInfo } from "../store/useUserInfo.js";
 import { updateEditUserInfo } from "../apis/updateEditUserInfo";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+
+import api from "../apis/axios.jsx";
 export default function EditUserInfo() {
   const user = useUserInfo((state) => state.user);
   const navigate = useNavigate();
+
+  // 폼 상태 관리
+  const [form, setForm] = useState({
+    height: "",
+    weight: "",
+    targetWeight: "",
+    date: "",
+    targetDate: "",
+    exerciseTime: "",
+    categories: {
+      "운동 강도": [],
+      "운동 목표": [],
+      "고민 부위": [],
+    },
+  });
+
+  //입력창 모두 입력하면 버튼 활성화
+  //폼 유효성검사
+  const [isFormValid, setIsFormValid] = useState(false);
+
   //음수값 자릿수 제한
   const onInput = (e) => {
     if (e.target.value.length > 3) {
@@ -21,15 +44,45 @@ export default function EditUserInfo() {
       alert("음수값은 입력할 수 없습니다.");
     }
   };
-  //폼 관리상태
-  const [form, setForm] = useState({
-    height: 0,
-    weight: 0,
-    targetWeight: 0,
-    date: "",
-    targetDate: "",
-    exerciseTime: 0,
-    categories: { "운동 강도": [], "운동 목표": [], "고민 부위": [] },
+
+  const {
+    data: userInfo,
+    isLoading: myInfoLoading,
+    isError: myInfoError,
+  } = useQuery({
+    queryKey: ["myinfo"],
+    //회원 건강정보 불러오기
+    queryFn: async () => {
+      const response = await api.get("/users/me");
+      return response.data[0];
+    },
+    //회원정보 불러오기 성공 시
+    onSuccess: (data) => {
+      console.log(userInfo);
+      setForm({
+        height: data.height,
+        weight: data.weight,
+        targetWeight: data.targetWeight,
+        date: data.date,
+        targetDate: data.targetDate,
+        exerciseTime: data.exerciseTime,
+        categories: {
+          "운동 강도": data.exerciseIntensity,
+          "운동 목표": data.exerciseGoals,
+          "고민 부위": data.concernedAreas,
+        },
+      });
+    },
+  });
+
+  const { mutate, error } = useMutation({
+    mutationFn: (form) => updateEditUserInfo(form, user.email),
+    onError: () => {
+      console.log(error);
+    },
+    onSuccess: () => {
+      navigate("/mypage");
+    },
   });
 
   //입력값 관리
@@ -46,10 +99,7 @@ export default function EditUserInfo() {
     setForm((prev) => ({ ...prev, categories: selectedCategories }));
   };
 
-  //입력창 모두 입력하면 버튼 활성화
-  //폼 유효성검사
-  const [isFormValid, setIsFormValid] = useState(false);
-
+  // 폼 유효성 검사
   useEffect(() => {
     const {
       height,
@@ -60,11 +110,13 @@ export default function EditUserInfo() {
       exerciseTime,
       categories,
     } = form;
-    //카테고리 유효성(각 카테고리별 1개이상은 선택)
-    const isCategoriesValid = Object.values(categories).some(
-      (arr) => arr.length > 0
+
+    // 카테고리 유효성 (각 카테고리별 1개 이상은 선택)
+    const isCategoriesValid = Object.values(categories).every(
+      (arr) => arr?.length > 0
     );
-    //전체 유효성
+
+    // 전체 유효성
     const isValid =
       height > 0 &&
       weight > 0 &&
@@ -73,20 +125,24 @@ export default function EditUserInfo() {
       targetDate &&
       exerciseTime &&
       isCategoriesValid;
+
     setIsFormValid(isValid);
   }, [form]);
 
-  //폼 API통신 수정
-  const handleSubmit = async (e) => {
+  //폼 제출
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await updateEditUserInfo(form, user.email);
-      //마이페이지로 이동
-      navigate("/mypage");
-    } catch (error) {
-      console.log("건강정보 게시 오류", error);
-    }
+    mutate(form);
   };
+  //내 정보불러오기 오류
+  if (myInfoError) {
+    return <h1>Error...다시 시도</h1>;
+  }
+  //내 정보 불러오기 로딩
+  if (myInfoLoading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
@@ -178,6 +234,7 @@ export default function EditUserInfo() {
             </SubContainer>
           </TextInputContainer>
           <SetCategory
+            initialCategories={form.categories}
             onSubmit={handleCategorySubmit}
             isSignUp={false}
           ></SetCategory>
