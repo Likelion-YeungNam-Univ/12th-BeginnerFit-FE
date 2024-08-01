@@ -9,6 +9,7 @@ import { useComment } from "../../hooks/useComment";
 import { useRef, useCallback, useState } from "react";
 import CommentDropDown from "./CommentDropDown";
 import api from "../../apis/axios";
+import { useUserInfo } from "../../store/useUserInfo";
 
 export default function Comment({ post }) {
   const {
@@ -20,7 +21,7 @@ export default function Comment({ post }) {
     loadComments,
     isLoading,
     hasMore,
-    reloadComments
+    reloadComments,
   } = useComment(post);
 
   const observer = useRef();
@@ -51,7 +52,6 @@ export default function Comment({ post }) {
     setEditCommentText(comment.content);
     setCommentId(comment.id);
   };
-
   const editComment = async (e) => {
     e.preventDefault();
     try {
@@ -59,7 +59,7 @@ export default function Comment({ post }) {
         content: editCommentText,
       });
       const message = response.data?.message || "댓글이 수정되었습니다.";
-      alert(message);
+     // alert(message);
       setIsEditMode(false);
       setEditCommentText("");
       setCommentId(null);
@@ -70,6 +70,10 @@ export default function Comment({ post }) {
     }
   };
 
+  //자신의 댓글인지 확인
+  const user = useUserInfo((state) => state.user);
+  const myInfo = user?.userId;
+  const isMyInfo = myInfo === comment?.userId;
   return (
     <>
       <Container>
@@ -96,12 +100,15 @@ export default function Comment({ post }) {
                     </Date>
                   </NickAndDate>
                 </UserContainer>
-                <CommentDropDown
-                  comment={comment}
-                  onEditClick={handleOnEditClick}
-                  loadComments={loadComments}
-                  reloadComments={reloadComments}
-                />
+                {/* 내 댓글이면 드롭메뉴 안보이기 */}
+                {isMyInfo ? (
+                  <CommentDropDown
+                    comment={comment}
+                    onEditClick={handleOnEditClick}
+                    loadComments={loadComments}
+                    reloadComments={reloadComments}
+                  />
+                ) : undefined}
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
             </CommentItem>

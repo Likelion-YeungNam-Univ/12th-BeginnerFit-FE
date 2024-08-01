@@ -68,6 +68,8 @@ export const useWritePost = () => {
     //게시글 수정이면 put,게시물 작성이면 post
     const method = isEdit ? "PUT" : "POST";
     console.log("HTTP Method:", method);
+
+    const accessToken=localStorage.getItem("accessToken");
     try {
       const response = await axios({
         method: method,
@@ -75,7 +77,7 @@ export const useWritePost = () => {
         data: formData,
         headers: {
           //"Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       //게시물 작성 성공

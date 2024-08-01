@@ -6,7 +6,7 @@ import ForgetPW from "./pages/ForgetPW";
 import SignUp from "./pages/SignUp";
 import Community from "./pages/Community";
 import DetailBoard from "./pages/DetailBoard";
-import Main from "./pages/Main";
+import Main from "./pages/main";
 import EditUserInfo from "./pages/EditUserInfo";
 import PlayList from "./pages/PlayList";
 import MyPage from "./pages/MyPage";
@@ -15,6 +15,7 @@ import WritePost from "./pages/WritePost";
 import HomeTranList from "./pages/HomeTrainList";
 import FriendList from "./pages/FriendList";
 import AddFriend from "./pages/AddFriend";
+import Alaram from "./pages/Alarm";
 import { ProtectedRouter } from "./components/ProtectedRouter";
 
 function App() {
@@ -121,6 +122,7 @@ function App() {
             </ProtectedRouter>
           }
         />
+        <Route path="/alarm" element={<Alaram />} />
       </Routes>
     </>
   );
