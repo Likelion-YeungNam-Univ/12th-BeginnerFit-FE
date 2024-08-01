@@ -15,6 +15,7 @@ import WritePost from "./pages/WritePost";
 import HomeTranList from "./pages/HomeTrainList";
 import FriendList from "./pages/FriendList";
 import AddFriend from "./pages/AddFriend";
+import Alaram from "./pages/Alarm";
 import { ProtectedRouter } from "./components/ProtectedRouter";
 
 function App() {
@@ -121,6 +122,7 @@ function App() {
             </ProtectedRouter>
           }
         />
+        <Route path="/alarm" element={<Alaram />} />
       </Routes>
     </>
   );
