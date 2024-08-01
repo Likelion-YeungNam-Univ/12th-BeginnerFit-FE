@@ -48,9 +48,6 @@ export default function WriteBoardMain({ post }) {
     }
   }, [data, user]);
 
-  //내 친구인지 판단
-  useEffect(() => {});
-  //리액트 쿼리 - 옵티미스틱 업데이트
   const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);
 
   if (isLoading || isLikeLoading) return <div>Loading...</div>;
