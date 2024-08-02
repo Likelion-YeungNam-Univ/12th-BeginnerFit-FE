@@ -69,6 +69,27 @@ export default function Page3 () {
     // 회원가입 성공 시 메인 화면으로 이동
     const navigate = useNavigate();
 
+    const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
+    // formData.categories의 값을 categoryName 배열과 매핑
+    const setCategory = categoryName.reduce((acc, key, idx) => {
+        const formKey = Object.keys(formData.categories)[idx]; // formData.categories의 키 값을 가져옴
+        acc[key] = formData.categories[formKey] || [];
+        return acc;
+    }, {});
+    //폼 가공하기
+    const initialForm = {
+        email: formData.email,
+        height: parseFloat(formData.height),
+        weight: parseFloat(formData.weight),
+        targetWeight: parseFloat(formData.targetWeight),
+        date: formData.date,
+        targetDate: formData.targetDate,
+        exerciseTime: parseInt(formData.exerciseTime),
+        exerciseIntensity: setCategory["exerciseIntensity"],
+        exerciseGoals: setCategory["exerciseGoals"],
+        concernedAreas: setCategory["concernedAreas"],
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
@@ -81,26 +102,22 @@ export default function Page3 () {
                 });
                 console.log("유저 로그인 정보 등록 성공:", userLoginResponse.data);
 
-                const userHealthResponse = await api.put("/users/health-info", {
-                    email: formData.email,
-                    height: Number(formData.height),
-                    weight: Number(formData.weight),
-                    targetWeight: Number(formData.targetWeight),
-                    date: formData.date,
-                    targetDate: formData.targetDate,
-                    exerciseTime: Number(formData.exerciseTime),
-                    exerciseIntensity: formData.exerciseIntensity,
-                    exerciseGoals: formData.exerciseGoals,
-                    concernedAreas: formData.concernedAreas,
-                });
-                console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
+                //유저 정보 등록 후 건강 정보 등록 기능 실행되도록 함.
+                try{
+                    console.log(initialForm);
 
-                console.log("회원가입 성공:", formData);
-                alert('회원가입 성공!');
-                navigate("/"); //로그인 페이지로 이동
+                    const userHealthResponse = await api.put("/users/health-info", initialForm);
+                    console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
+                    
+                    console.log("회원가입 성공:", formData);
+                    alert('회원가입 성공!');
+                    navigate("/"); //로그인 페이지로 이동
+                } catch (error){
+                    console.error("건강 정보 등록 실패:", error.response ? error.response.data : error.message);
+                }
             } catch(error){
-                // console.error("회원가입 실패:", error.response ? error.response.data : error.message);
-                // alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
+                console.error("회원가입 실패:", error.response ? error.response.data : error.message);
+                alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
             }
         }
     };
