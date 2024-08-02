@@ -52,7 +52,7 @@ export default function ForgetPwP2({email}) {
         try {
             await resetPassword(email, password);
             alert("비밀번호가 성공적으로 변경되었습니다.");
-            setTimeout(() => navigate('/'), 2000); // 2초 후 로그인 페이지로 이동
+            navigate('/'); // 로그인 페이지로 이동
         } catch (error) {
             console.error(error)
             alert("비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
