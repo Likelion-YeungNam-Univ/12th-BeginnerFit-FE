@@ -12,7 +12,6 @@ export default function SetCategory({ onSubmit, isSignUp, initialCategories }) {
       "유연성향상",
       "기분개선",
       "체중조절",
-
       "체력증진",
       "재활",
       "기타",

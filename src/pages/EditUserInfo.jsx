@@ -58,7 +58,7 @@ export default function EditUserInfo() {
     },
     //회원정보 불러오기 성공 시
     onSuccess: (data) => {
-      console.log(userInfo);
+      //console.log(userInfo);
       setForm({
         height: data.height,
         weight: data.weight,
@@ -112,9 +112,17 @@ export default function EditUserInfo() {
     } = form;
 
     // 카테고리 유효성 (각 카테고리별 1개 이상은 선택)
-    const isCategoriesValid = Object.values(categories).every(
-      (arr) => arr?.length > 0
-    );
+    let isValuesValid = (value) => {
+      //빈문자열 판단.
+      return value !== "" && value !== null;
+    };
+    console.log("Current form state:", form);
+    // 카테고리 유효성 (각 카테고리별 1개 이상은 선택)
+    let isCategoriesValid = Object.values(categories).every((arr) => {
+      let isValid = arr.length > 0 && arr.some((value) => isValuesValid(value));
+      console.log(`Category validity: ${isValid}`, arr);
+      return isValid;
+    });
 
     // 전체 유효성
     const isValid =
@@ -133,6 +141,7 @@ export default function EditUserInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate(form);
+    console.log(" form state:", form);
   };
   //내 정보불러오기 오류
   if (myInfoError) {
