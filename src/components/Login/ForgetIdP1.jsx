@@ -2,22 +2,24 @@ import React, { useState, useEffect, useContext } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled from 'styled-components';
 
-export default function ForgetIdP1({swiperRef}) {
-    const [name, setName] = useState('');
+export default function ForgetIdP1({name, setName, swiperRef}) {
+    const [value, setValue] = useState('');
+    // const [name, setName] = useState('');
     const [allow, setAllow] = useState(false);
 
     // 버튼 활성화
     useEffect(()=>{
-        if( name.length >= 3 ){
+        if( value.length >= 3 ){
             setAllow(true);
             return;
         }
         setAllow(false);
-    },[ name ]);
+    },[ value ]);
 
     const handleNext = () => {
         if (allow) {
-            localStorage.setItem('findName', name);
+            // localStorage.setItem('findName', name);
+            setName(value);
             swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
         }
     }
@@ -37,8 +39,8 @@ export default function ForgetIdP1({swiperRef}) {
                             type='text'
                             maxLength={10}
                             placeholder="닉네임"
-                            value={name}
-                            onChange={(e)=>setName(e.target.value)}
+                            value={value}
+                            onChange={(e)=>setValue(e.target.value)}
                         ></MyInput>
                         <HelpMsg>영어, 숫자, 특수기호를 포함한 3~10자리</HelpMsg>
                     </InputForm>

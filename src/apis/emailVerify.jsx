@@ -8,7 +8,7 @@ export const sendAuthCode = async (email) => {
     try {
         console.log('Server URL:', SERVER_URL); // SERVER_URL이 올바르게 설정되었는지 확인
         console.log('Sending auth code to email:', email);
-        const response = await api.post(`${SERVER_URL}/auth/email-send`, { email });
+        const response = await api.post(`${SERVER_URL}/auth/email-send`,null, {params: { email }});
         console.log('Response from server:', response.data);
         return response.data;
     } catch (error) {
@@ -30,10 +30,10 @@ export const sendAuthCode = async (email) => {
     }
 };
 
-export const verifyAuthCode = async (email, authCode) => {
+export const verifyAuthCode = async (email, code) => {
 
     try {
-        const response = await api.post(`${SERVER_URL}/auth/email-verify`, { email, authCode });
+        const response = await api.post(`${SERVER_URL}/auth/email-verify`, { email, code });
         return response.data;
     } catch (error) {
         if (error.response) {
