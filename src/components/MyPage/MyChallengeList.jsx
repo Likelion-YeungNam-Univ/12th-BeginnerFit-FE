@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Challenge from "../Main/Challenge";
-
-const challengeList = [
-  { content: "30분 이상 운동하기" },
-  { content: "물 2L 이상 마시기" },
-  { content: "헬스장 가기" },
-];
+import { useChallenge } from "../../store/useChallenge";
+import { usePostData } from "../../hooks/usePostData";
 
 export default function MyChallengeList() {
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth() + 1;
+
+  const { list3, setList, setCount, setList3 } = useChallenge();
+
+  const { data, isLoading, error, postData } = usePostData(
+    "/challengeparticipant/completed-month-challenges"
+  );
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      let arr = data.challenges.filter((item, idx) => idx <= 2);
+      console.log(arr);
+
+      setList(data.challenges);
+      setCount(data.challenges.length);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    postData({ year, month });
+  }, []);
+
   return (
     <div>
-      {challengeList.map((item, idx) => (
-        <Challenge
-          key={idx}
-          index={idx + 1}
-          content={item.content}
-          complete={true}
-          handleCheck={() => {}}
-        />
-      ))}
+      {list3.length === 0
+        ? "완료한 챌린지가 없습니다!"
+        : list3.map((item) => (
+            <Challenge
+              key={item.challengeId}
+              index={item.challengeId}
+              content={item.challengeContent}
+              complete={true}
+              handleCheck={() => {}}
+            />
+          ))}
     </div>
   );
 }

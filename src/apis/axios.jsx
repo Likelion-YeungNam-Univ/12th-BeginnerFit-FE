@@ -10,6 +10,7 @@ const api = axios.create({
 //임시토큰 사용
 //const initialAccessToken = import.meta.env.VITE_TOKEN;
 //localStorage.setItem("accessToken", initialAccessToken);
+
 // 요청 인터셉터
 api.interceptors.request.use(
   (config) => {
@@ -38,7 +39,7 @@ api.interceptors.response.use(
         localStorage.setItem("accessToken", newAccessToken);
         // 새로 발급받은 토큰을 원래 요청의 헤더에 추가
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-        return apiClient(originalRequest);
+        return api(originalRequest);
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
         localStorage.removeItem("accessToken");
@@ -55,11 +56,14 @@ api.interceptors.response.use(
 const refreshToken = async () => {
   try {
     const refreshToken = localStorage.getItem("refreshToken");
-    const data = await api.post("/refresh-token", { token: refreshToken });
-    return data.accessToken;
-  } catch (e) {
-    console.log(e);
-    throw e;
+    if (!refreshToken) {
+      throw new Error("No refresh token available");
+    }
+    const response = await api.post("/refresh-token", { token: refreshToken });
+    return response.data.accessToken;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
 

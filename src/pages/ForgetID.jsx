@@ -17,6 +17,7 @@ import ForgetIdP2 from "../components/Login/ForgetIdP2";
 export default function ForgetID() {
   const swiperRef = useRef(null);
   const navigate = useNavigate();
+  localStorage.removeItem('findName'); // 이전 값 삭제
 
   return (
     <Container>

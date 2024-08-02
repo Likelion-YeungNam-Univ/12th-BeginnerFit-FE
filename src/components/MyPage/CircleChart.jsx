@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 import styled from "styled-components";
 
-const data = [
-  {
-    uv: 100,
-    fill: "black",
-  },
-  {
-    uv: 70, // 원하는 퍼센트 값으로 설정
-    fill: "#7D7AFF",
-  },
-];
+export default function CircleChart({ rate }) {
+  // 도넛 모양 차트에 표현하기 위한 기본적인 데이터로 초기화
+  const [data, setData] = useState([{ uv: 100, fill: "black" }]);
 
-export default function CircleChart() {
+  // 부모 컴포넌트에서 받은 rate를 이용하여 차트에 표시하기
+  useEffect(() => {
+    if (rate) {
+      let arr = [...data];
+      arr[1] = { uv: rate, fill: "#7D7AFF" };
+      setData(arr);
+    }
+  }, [rate]);
+
   return (
     <CircleWrap>
       <ResponsiveContainer width="100%" height="100%">

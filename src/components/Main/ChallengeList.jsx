@@ -3,51 +3,82 @@ import Challenge from "./Challenge";
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
-
-const challengeList = [
-  { content: "30분 이상 운동하기" },
-  { content: "물 2L 이상 마시기" },
-  { content: "헬스장 가기" },
-];
+import useFetchData from "../../hooks/useFetchData";
+import api from "../../apis/axios";
 
 export default function ChallengeList() {
-  // 챌린지 완료했는지 체크할 state
-  const [complete, setComplete] = useState({
-    1: true,
-    2: false,
-    3: false,
-  });
+  // 챌린지 정보 담을 state
+  const [challengeList, setChallengeList] = useState([]);
 
   // 모든 챌린지 완료 했는지 체크할 state
   const [allComplete, setAllComplete] = useState(false);
 
+  // 챌린지 3개 가져오기
+  const { data } = useFetchData("/challengeparticipant/today-challenges");
+
+  // 오늘의 챌린지 완료한 친구 수 가져오기
+  const { data: total } = useFetchData(
+    "/challengeparticipant/completed-friend-count"
+  );
+
   // 챌린지 완료 모양 눌럿을 때 실행할 함수
-  const handleCheck = (idx) => {
+  const handleCheck = async (idx, id) => {
     // 모든 챌린지 완료했으면 챌린지 완료 표시 수정 불가능
     if (allComplete) {
       return;
     }
+    // 체크 모양 눌렀을 때 해당 챌린지 취소, 완료 표시하기
+    let arr = [...challengeList];
 
-    setComplete({ ...complete, [idx]: !complete[idx] });
-  };
+    // 해당 챌린지가 완료인 경우 false로 바꾸기
+    if (arr[idx].completed) {
+      // 사용자에게 미리 업데이트
+      arr[idx].completed = false;
+      // 서버로 데이터 전송
+      try {
+        await api.put(`/challengeparticipant/notcomplete/${id}`);
+      } catch (e) {
+        console.error("에러 발생 " + e);
+      }
+    } else {
+      // 미완료 챌린지를 클릭한 경우 true로 변경
+      arr[idx].completed = true;
+      try {
+        await api.put(`/challengeparticipant/complete/${id}`);
+      } catch (e) {
+        console.error("에러 발생: ", e);
+      }
+    }
 
-  useEffect(() => {
-    if (allComplete) return;
-    if (!Object.values(complete).includes(false)) {
+    //상태 업데이트
+    setChallengeList(arr);
+
+    // 챌린지가 모두 완료되었으면 allComplete 상태 변경
+    if (arr.every((item) => item.completed)) {
       setAllComplete(true);
     }
-  }, [complete]);
+  };
+
+  // 챌린지 가져오고 state에 저장
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      setChallengeList(data);
+      setAllComplete(data.length === 3 && data.every((item) => item.completed));
+    }
+  }, [data]);
 
   return (
     <Container>
-      <SpeechBubble>친구 27명이 성공했어요!</SpeechBubble>
-      {challengeList.map((item, idx) => (
+      <SpeechBubble>친구 {total ?? 0}명이 성공했어요!</SpeechBubble>
+      {challengeList?.map((item, idx) => (
         <Challenge
           allComplete={allComplete}
-          key={idx}
-          index={idx + 1}
-          content={item.content}
-          complete={complete[idx + 1]}
+          key={item.challengeId}
+          id={item.challengeId}
+          index={idx}
+          content={item.challengeContent}
+          complete={item.completed}
           handleCheck={handleCheck}
         />
       ))}

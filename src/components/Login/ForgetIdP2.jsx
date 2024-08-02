@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled from 'styled-components';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { findId } from '../../apis/findID';
 
 export default function ForgetIdP2() {
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
+    const storedName = localStorage.getItem('findName');
+
+    // const email = 'example@example.com'; //test
+
+    useEffect(()=>{
+        async function fetchEmail() {
+            if (storedName) {
+                try {
+                    const data = await findId(storedName);
+                    setEmail(data.email);
+                } catch (error) {
+                    console.error('Error fetching email:', error);
+                    setError('서버 오류');
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                setError('닉네임이 저장되어 있지 않습니다.');
+                setLoading(false);
+            }
+        }
+        fetchEmail();
+    },[storedName])
 
     return(
         <Wrapper>
@@ -15,7 +42,13 @@ export default function ForgetIdP2() {
                         <br/>
                         아이디 정보입니다
                     </H1>
-                    <UserEmail>asdf@naver.com</UserEmail>
+                    {loading ? (
+                        <UserEmail>Loading...</UserEmail>
+                    ) : error ? (
+                        <UserEmail>{error}</UserEmail>
+                    ) : (
+                        <UserEmail>{email}</UserEmail>
+                    )}
                 </Container>
                 <ConfirmButton
                     type="button"

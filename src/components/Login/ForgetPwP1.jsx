@@ -1,22 +1,46 @@
 import React, { useState, useEffect, useContext } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled, {css} from 'styled-components';
+import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
 
 export default function ForgetPwP1({swiperRef}) {
-    const [email, setEmail] = useState('test@gmail.');
+    const [email, setEmail] = useState('');
     const [emailValid, setEmailValid] = useState(false);
-    const [verifyNum, setVerifyNum] = useState('123123');
-    const [verifyNumValid, setVerifyNumValid] = useState(false);
     const [allow, setAllow] = useState(false);
 
-    // 버튼 활성화 (이메일 인증 과정도 거쳐야함)
+
+    const [authCode, setAuthCode] = useState('');
+    const [authCodeValid, setAuthCodeValid] = useState(false);
+    const [emailSent, setEmailSent] = useState(false);
+    
+    const handleAuthCodeRequest = async (e) => {
+        e.preventDefault();
+        console.log('인증번호버튼이 클릭됨.');
+        await sendAuthCode(email);
+        setEmailSent(true);
+        alert('인증 번호가 이메일로 전송되었습니다.');
+    };
+    const handleAuthCodeCheck = async (e) => {
+        e.preventDefault();
+        try {
+            await verifyAuthCode(email, verifyNum);
+            setAuthCodeValid(true);
+            alert('인증 번호가 확인되었습니다.');
+        } catch (error) {
+            console.error('Error:', error);
+            setAuthCodeValid(false);
+            alert('인증 번호가 유효하지 않습니다. 다시 시도해주세요.');
+        }
+    };
+
+    // 버튼 활성화
     useEffect(()=>{
-        if(emailValid && verifyNumValid){
+        if(emailValid && authCodeValid){
             setAllow(true);
             return;
         }
         setAllow(false);
-    },[ emailValid, verifyNumValid ]);
+    },[ emailValid, authCodeValid ]);
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -29,14 +53,19 @@ export default function ForgetPwP1({swiperRef}) {
             setEmailValid(false);
         }
     }
-    const handleVerifyNum = (e) => {
-        setVerifyNum(e.target.value);
-        if (e.target.value.length == 6){
-            setVerifyNumValid(true);
-        }else{
-            setVerifyNumValid(false);
-        }
-    }
+    // const handleVerifyNum = (e) => {
+    //     setVerifyNum(e.target.value);
+    //     if (e.target.value.length == 6){
+    //         setVerifyNumValid(true);
+    //     }else{
+    //         setVerifyNumValid(false);
+    //     }
+    // }
+
+    const handleNext = () => {
+        localStorage.setItem('findEmail', email); // 이메일을 로컬 스토리지에 저장
+        swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
+    };
 
     return(
         <Wrapper>
@@ -56,7 +85,12 @@ export default function ForgetPwP1({swiperRef}) {
                             onChange={handleEmail}
                             validInput
                         ></MyInput>
-                        <ValidButton>인증번호 받기</ValidButton>
+                        <ValidButton
+                            onClick={handleAuthCodeRequest}
+                            disabled={!emailValid || emailSent}
+                        >
+                            인증번호 받기
+                        </ValidButton>
                         <ErrorMsg>
                             {!emailValid && email.length > 0 && (
                                 <div>형식이 올바르지 않습니다. 다시 입력해주세요.</div>
@@ -68,19 +102,22 @@ export default function ForgetPwP1({swiperRef}) {
                             type='text'
                             maxLength={6}
                             placeholder="6자리 인증번호를 입력해주세요"
-                            value={verifyNum}
-                            onChange={handleVerifyNum}
+                            value={authCode}
+                            onChange={(e) => setAuthCode(e.target.value)}
                             validInput
                             ></MyInput>
-                        <ValidButton>확인</ValidButton>
+                        <ValidButton
+                            onClick={handleAuthCodeCheck}
+                            disabled={!authCode}
+                        >
+                            확인
+                        </ValidButton>
                     </InputForm>
                 </Container>
                 <NextButton
                     type="button"
                     disabled={!allow}
-                    onClick={() => {
-                        swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
-                    }} 
+                    onClick={handleNext} 
                 >
                     다음으로
                 </NextButton>
@@ -148,6 +185,10 @@ const ValidButton = styled.button`
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
+    &:disabled{
+        cursor: not-allowed;
+        background-color: #9a9a9a;
+    }
 `
 
 const ErrorMsg = styled.div`
