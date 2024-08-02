@@ -8,8 +8,9 @@ const api = axios.create({
   },
 });
 //임시토큰 사용
-// const initialAccessToken = import.meta.env.VITE_TOKEN;
-// localStorage.setItem("accessToken", initialAccessToken);
+//const initialAccessToken = import.meta.env.VITE_TOKEN;
+//localStorage.setItem("accessToken", initialAccessToken);
+
 // 요청 인터셉터
 api.interceptors.request.use(
   (config) => {

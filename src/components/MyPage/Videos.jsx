@@ -20,5 +20,6 @@ export default function Videos() {
     });
     setVideoIds(arr);
   }, [data]);
+
   return <div>{videoIds && data && <VideoList videoIds={videoIds} />}</div>;
 }

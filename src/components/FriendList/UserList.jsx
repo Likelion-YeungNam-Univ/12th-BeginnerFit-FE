@@ -16,7 +16,7 @@ export const UserList = () => {
   const [searchUser, setSearchUser] = useState(null);
 
   // input값 가져오기
-  const { value } = useFriendSearchStore();
+  const { value, setValue } = useFriendSearchStore();
 
   // 친구 수 저장할 함수 가져오기
   const { setNum } = useFriendNumStore();
@@ -66,6 +66,10 @@ export const UserList = () => {
 
     return () => clearTimeout(timer);
   }, [value, data, users]);
+
+  useEffect(() => {
+    setValue("");
+  }, []);
 
   // 서버에서 데이터 받아오는 중이면 Loading 출력
   if (isLoading) return "Loading...";

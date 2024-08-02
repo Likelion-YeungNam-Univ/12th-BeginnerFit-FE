@@ -1,4 +1,3 @@
-
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +6,7 @@ import api from "../../apis/axios";
 import useFetchData from "../../hooks/useFetchData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 
 const ITEM_HEIGHT = 48;
 
@@ -29,8 +29,6 @@ export default function DropDown({ post = null }) {
     error: myInfoError,
   } = useFetchData("/users/me");
 
-  
-
   if (isMyInfoLoading) return <div>Loading...</div>;
   if (myInfoError) return <div>Error loading user info</div>;
 
@@ -52,8 +50,8 @@ export default function DropDown({ post = null }) {
   if (!myInfo) {
     return <div>Loading user info...</div>;
   }
-  console.log("내정보 id:", myInfo[0].id);
-  console.log("게시물정보 id:", post.userId);
+  //console.log("내정보 id:", myInfo[0].id);
+  //console.log("게시물정보 id:", post.userId);
   const isMyPost = myInfo[0]?.id === post?.userId ? "mypost" : "notmypost";
 
   // 옵션 구성 함수
@@ -84,14 +82,14 @@ export default function DropDown({ post = null }) {
       try {
         const response = await api.delete(`/posts/${post.id}`);
         const message = response.data?.message || "게시물이 삭제되었습니다.";
-        console.log(message);
+        //console.log(message);
         alert("게시물이 삭제되었습니다.");
         // 게시물 목록으로 이동
         navigate("/posts");
       } catch (error) {
         const errorMessage =
           error.response?.data?.message || "게시물 삭제 오류";
-        console.log(errorMessage, error);
+        //console.log(errorMessage, error);
         alert(errorMessage);
       }
     }
@@ -100,22 +98,58 @@ export default function DropDown({ post = null }) {
   // 게시물 신고 함수
   const reportPost = async () => {
     if (post?.id === undefined) {
-      alert("게시물 ID가 유효하지 않습니다.");
-      return;
+      AlarmDialog({
+        title: "오류",
+        content: "게시글이 존재하지 않습니다.",
+        type: "warning",
+      });
     }
-    if (window.confirm("정말로 이 게시물을 신고하시겠습니까?")) {
-      try {
-        const response = await api.post(`/posts/${post.id}/declarations`);
-        console.log(response);
-        alert("게시물이 신고되었습니다.");
-        // 게시물 목록으로 이동
-        navigate("/posts");
-      } catch (error) {
-        console.log("게시물 신고 오류", error);
-      }
+    const selectReason = await AlarmDialog({
+      title: "신고 사유",
+      content: "해당 게시글의 신고 사유를 선택해주세요.",
+      type: "question",
+      isOptions: true,
+      //서버에 키값 전달s
+      inputOptions: {
+        마음에들지않아요: "마음에 들지 않아요",
+        선정적이에요: "선정적이에요",
+        부적절해요: "부적절해요",
+        스팸이에요: "스팸이에요",
+        혐오발언이에요: "혐오 발언이에요",
+        공격적인내용이있어요: "공격적인 내용이 있어요",
+        거짓정보가포함돼있어요: "거짓 정보가 포함돼 있어요",
+        기타사유: "기타 사유",
+      },
+    });
+    //console.log("게시물 신고", selectReason);
+
+    try {
+      await api.post(`/posts/${post.id}/declarations`, {
+        reason: selectReason,
+      });
+      //console.log(response);
+      alert("게시물이 신고되었습니다.");
+      // 게시물 목록으로 이동
+      navigate("/posts");
+    } catch (error) {
+      //console.log("게시물 신고 오류", error);
     }
   };
 
+  //게시물 저장함수
+  const scrapPost = async () => {
+    if (post?.id === undefined) {
+      alert("게시물 ID가 유효하지 않습니다.");
+      return;
+    }
+    try {
+      await api.post(`/posts/${post.id}/scraps`);
+      //console.log(response);
+      alert("게시물이 저장되었습니다.");
+    } catch (error) {
+      //console.log("게시물 저장 오류", error);
+    }
+  };
   // 각 옵션별 수행 함수
   const handleAction = (action) => {
     switch (action) {
@@ -131,7 +165,9 @@ export default function DropDown({ post = null }) {
       case "report":
         reportPost();
         break;
-      default:
+      //게시물 저장
+      case "save":
+        scrapPost();
         break;
     }
   };

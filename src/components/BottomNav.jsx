@@ -23,7 +23,7 @@ export default function BottomNav() {
       </div>
       {/* 채팅이동 */}
       <div>
-        <Link>
+        <Link to="/posts">
           <StyledIcon as={MdOutlineChat} />
         </Link>
       </div>
@@ -32,7 +32,6 @@ export default function BottomNav() {
 }
 
 //================================================================================
-
 
 const StyledIcon = styled.div`
   width: ${responsiveSize("38")};
