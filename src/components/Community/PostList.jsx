@@ -33,7 +33,17 @@ export default function PostList({ category }) {
   //댓글 수 관리
   const commentCounts = useCommentStore((state) => state.commentCounts);
   const setCommentCount = useCommentStore((state) => state.setCommentCount);
-
+  //게시글 날짜순 정렬(최신순이 더 위에 오도록)
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    if (arr) {
+      const sortedPosts = [...arr].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      //console.log(sortedPosts);
+      setPosts(sortedPosts);
+    }
+  }, [arr]);
   useEffect(() => {
     console.log("Fetched data: ", arr);
     async function loadInitialCommentCounts() {
@@ -62,7 +72,7 @@ export default function PostList({ category }) {
       {loading ? (
         <h2>Loading...</h2>
       ) : (
-        arr.slice(offset, offset + limitPage).map((post) => {
+        posts.slice(offset, offset + limitPage).map((post) => {
           const currentPost = category === "저장한 글" ? post.postInfo : post;
           //예외처리
           if (!currentPost) return null;
@@ -146,7 +156,12 @@ const RightContent = styled.div`
 
 const ContentText = styled.div`
   font-size: ${responsiveSize("16")};
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
   font-weight: 400;
+  -webkit-box-orient: vertical
 `;
 
 const IdText = styled.span`

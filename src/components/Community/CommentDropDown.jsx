@@ -29,7 +29,10 @@ export default function CommentDropDown({
   const myInfo = user?.userId;
   const isMyComment = myInfo === comment?.userId ? "mycomment" : "notmycomment";
   // post가 없을 경우 기본 UI만 렌더링
-  if (!comment ) {
+  if (isMyComment==="notmycomment") {
+    return <></>;
+  }
+  if (!comment) {
     return (
       <IconButton
         aria-label="more"
@@ -46,7 +49,6 @@ export default function CommentDropDown({
   if (!myInfo) {
     return <div>Loading user info...</div>;
   }
-  
 
   // 옵션 구성 함수
   const setOptions = () => {
@@ -83,7 +85,6 @@ export default function CommentDropDown({
     }
   };
 
-
   // 각 옵션별 수행 함수
   const handleAction = (action) => {
     switch (action) {
@@ -95,7 +96,6 @@ export default function CommentDropDown({
       case "delete":
         deleteComment();
         break;
-      
     }
   };
 

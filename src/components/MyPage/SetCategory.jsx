@@ -3,7 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState } from "react";
 import { useCategorySelect } from "../../hooks/useCategorySelect";
 
-export default function SetCategory({ onSubmit, isSignUp }) {
+export default function SetCategory({ onSubmit, isSignUp, initialCategories }) {
   // 카테고리 제목 및 아이템
   const list = {
     "운동 강도": ["저강도", "중강도", "고강도"],
@@ -12,7 +12,6 @@ export default function SetCategory({ onSubmit, isSignUp }) {
       "유연성향상",
       "기분개선",
       "체중조절",
-
       "체력증진",
       "재활",
       "기타",
@@ -29,12 +28,14 @@ export default function SetCategory({ onSubmit, isSignUp }) {
       "등",
     ],
   };
-
+  initialCategories;
   //카테고리 선택 훅 호출
   const { selectedItems, handleSelectedItems } = useCategorySelect(
     list,
-    onSubmit
+    onSubmit,
+    initialCategories
   );
+  console.log('셀렉카테고리'+selectedItems);
   return (
     <Container>
       {Object.entries(list).map(([key, values]) => (
@@ -65,7 +66,7 @@ const Container = styled.div`
 `;
 
 const CategoryContainer = styled.div`
-  padding: ${({isSignUp}) => isSignUp ? "5px 0" : "20px 0"};
+  padding: ${({ isSignUp }) => (isSignUp ? "5px 0" : "20px 0")};
   display: flex;
   flex-direction: column;
   gap: ${responsiveSize(10)};

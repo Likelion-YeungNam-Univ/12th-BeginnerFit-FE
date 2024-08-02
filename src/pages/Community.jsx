@@ -29,13 +29,16 @@ export default function Community() {
     <Wrapper>
       <Container>
         <MainContent>
-          <Header type={"option"} size={"30"} />
+          <Header type={false} size={"30"} />
           <RowContainer>
             <Title>Community</Title>
             <WriteImgBtn
               src={writebtn}
               alt="WriteBtn"
               onClick={goToWritePost}
+              whileTap={{ scale: 0.8 }}
+              whileHover={{ scale: 1.2 }}
+              transition={{ duration: 0.3 }}
             />
           </RowContainer>
           <CommunityButtons
@@ -86,7 +89,7 @@ const Title = styled.h1`
   font-weight: 600;
   text-align: left;
 `;
-const WriteImgBtn = styled.img`
+const WriteImgBtn = styled(motion.img)`
   width: ${responsiveSize("60")};
   height: ${responsiveSize("60")};
   margin-top: ${responsiveSize("20")};

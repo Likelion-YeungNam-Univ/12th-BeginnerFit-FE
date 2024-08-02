@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
-import DropDown from "./DropDown";
 import profile from "../../images/profile.png";
 import { FiChevronRight } from "react-icons/fi";
 import { BottomNavContainer } from "../../styles/GlobalStyle";
 import { useComment } from "../../hooks/useComment";
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import CommentDropDown from "./CommentDropDown";
 import api from "../../apis/axios";
 import { useUserInfo } from "../../store/useUserInfo";
@@ -23,6 +22,7 @@ export default function Comment({ post }) {
     hasMore,
     reloadComments,
   } = useComment(post);
+  const [sortedComment, setSortedComment] = useState([]);
 
   const observer = useRef();
   const lastCommentElementRef = useCallback(
@@ -59,7 +59,7 @@ export default function Comment({ post }) {
         content: editCommentText,
       });
       const message = response.data?.message || "댓글이 수정되었습니다.";
-     // alert(message);
+      // alert(message);
       setIsEditMode(false);
       setEditCommentText("");
       setCommentId(null);
@@ -69,21 +69,29 @@ export default function Comment({ post }) {
       alert(errorMessage);
     }
   };
+  //댓글 최신순 정리
+  useEffect(() => {
+    if (comments) {
+      const sortedComment = [...comments].sort((a, b) => b.id - a.id);
+      setSortedComment(sortedComment);
+    }
+  }, [comments]);
 
   //자신의 댓글인지 확인
   const user = useUserInfo((state) => state.user);
-  const myInfo = user?.userId;
-  const isMyInfo = myInfo === comment?.userId;
+
   return (
     <>
       <Container>
-        <CommentNum>댓글 {comments.length}개</CommentNum>
-        {comments &&
-          comments.map((comment) => (
+        <CommentNum>댓글 {sortedComment.length}개</CommentNum>
+        {sortedComment &&
+          sortedComment.map((comment) => (
+            // 내 댓글인가
+
             <CommentItem
               key={comment.id}
               ref={
-                comment.id === comments.length - 1
+                comment.id === sortedComment.length - 1
                   ? lastCommentElementRef
                   : null
               }
@@ -101,14 +109,12 @@ export default function Comment({ post }) {
                   </NickAndDate>
                 </UserContainer>
                 {/* 내 댓글이면 드롭메뉴 안보이기 */}
-                {isMyInfo ? (
-                  <CommentDropDown
-                    comment={comment}
-                    onEditClick={handleOnEditClick}
-                    loadComments={loadComments}
-                    reloadComments={reloadComments}
-                  />
-                ) : undefined}
+                <CommentDropDown
+                  comment={comment}
+                  onEditClick={handleOnEditClick}
+                  loadComments={loadComments}
+                  reloadComments={reloadComments}
+                />
               </RowContainer>
               <CommentContent>{comment.content}</CommentContent>
             </CommentItem>
