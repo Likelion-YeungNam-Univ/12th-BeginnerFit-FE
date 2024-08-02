@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { IoIosArrowBack } from "react-icons/io";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,9 +15,10 @@ import ForgetIdP1 from "../components/Login/ForgetIdP1";
 import ForgetIdP2 from "../components/Login/ForgetIdP2";
 
 export default function ForgetID() {
+  const [name, setName] = useState('');
   const swiperRef = useRef(null);
   const navigate = useNavigate();
-  localStorage.removeItem('findName'); // 이전 값 삭제
+  // localStorage.removeItem('findName'); // 이전 값 삭제
 
   return (
     <Container>
@@ -33,13 +34,13 @@ export default function ForgetID() {
         >
             <SwiperSlide>
             <PrevButton onClick={() => (navigate(-1))}></PrevButton>
-            <ForgetIdP1 swiperRef={swiperRef}/>
+            <ForgetIdP1 name={name} setName={setName} swiperRef={swiperRef}/>
             {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
 
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
-            <ForgetIdP2/>
+            <ForgetIdP2 name={name} />
             </SwiperSlide>
             
         </Swiper>
