@@ -88,10 +88,10 @@ export default function Page3 () {
                     targetWeight: Number(formData.targetWeight),
                     date: formData.date,
                     targetDate: formData.targetDate,
-                    exerciseTime: Number(formData.categories.exerciseTime),
-                    exerciseIntensity: formData.categories.exerciseIntensity,
-                    exerciseGoals: formData.categories.exerciseGoals,
-                    concernedAreas: formData.categories.concernedAreas,
+                    exerciseTime: Number(formData.exerciseTime),
+                    exerciseIntensity: formData.exerciseIntensity,
+                    exerciseGoals: formData.exerciseGoals,
+                    concernedAreas: formData.concernedAreas,
                 });
                 console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
 
