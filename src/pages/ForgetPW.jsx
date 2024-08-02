@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { IoIosArrowBack } from "react-icons/io";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,6 +17,7 @@ import ForgetPwP2 from "../components/Login/ForgetPwP2";
 export default function ForgetPW() {
   const swiperRef = useRef(null);
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
 
   return (
     <Container>
@@ -32,13 +33,13 @@ export default function ForgetPW() {
         >
             <SwiperSlide>
             <PrevButton onClick={() => (navigate(-1))}></PrevButton>
-            <ForgetPwP1 swiperRef={swiperRef}/>
+            <ForgetPwP1 email={email} setEmail={setEmail} swiperRef={swiperRef}/>
             {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
 
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
-            <ForgetPwP2/>
+            <ForgetPwP2 email={email}/>
             </SwiperSlide>
             
         </Swiper>

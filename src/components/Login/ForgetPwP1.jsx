@@ -3,8 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled, {css} from 'styled-components';
 import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
 
-export default function ForgetPwP1({swiperRef}) {
-    const [email, setEmail] = useState('');
+export default function ForgetPwP1({email, setEmail, swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);
     const [allow, setAllow] = useState(false);
 
@@ -23,7 +22,7 @@ export default function ForgetPwP1({swiperRef}) {
     const handleAuthCodeCheck = async (e) => {
         e.preventDefault();
         try {
-            await verifyAuthCode(email, verifyNum);
+            await verifyAuthCode(email, authCode);
             setAuthCodeValid(true);
             alert('인증 번호가 확인되었습니다.');
         } catch (error) {

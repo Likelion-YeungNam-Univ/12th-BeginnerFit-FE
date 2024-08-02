@@ -74,16 +74,36 @@ export default function Page3 ({swiperRef}) {
         console.log(formData);
         if (allow){
             try{
-                const res = await api.post("/auth/sign-up", formData);
-                console.log("회원가입 성공:", res.data);
+                const userLoginResponse = await api.post("/auth/sign-up", {
+                    email: formData.email,
+                    name: formData.name,
+                    password: formData.password
+                });
+                console.log("유저 로그인 정보 등록 성공:", userLoginResponse.data);
+
+                const userHealthResponse = await api.put("/users/health-info", {
+                    email: formData.email,
+                    height: formData.height,
+                    weight: formData.weight,
+                    targetWeight: formData.targetWeight,
+                    date: formData.date,
+                    targetDate: formData.targetDate,
+                    exerciseTime: formData.categories.exerciseTime,
+                    exerciseIntensity: formData.categories.exerciseIntensity,
+                    exerciseGoals: formData.categories.exerciseGoals,
+                    concernedAreas: formData.categories.concernedAreas,
+                });
+                console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
+
+                console.log("회원가입 성공:", formData);
                 alert('회원가입 성공!');
-                navigate("/main");
+                navigate("/"); //로그인 페이지로 이동
             } catch(error){
                 console.error("회원가입 실패:", error.response ? error.response.data : error.message);
                 alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
             }
         }
-    }
+    };
     return(
         <Wrapper>
             <Box>
@@ -92,7 +112,7 @@ export default function Page3 ({swiperRef}) {
                     <br/>
                     운동 목표를 설정해주세요.
                 </H1>
-                <Form id="page3" onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
                     <TextInputContainer>
                         <P>운동시간</P>
                         <SubContainer>
@@ -111,10 +131,7 @@ export default function Page3 ({swiperRef}) {
                 <SignUpButton 
                     type="submit" 
                     disabled={!allow}
-                    onClick={()=>{
-                        console.log(formData);
-                        document.getElementById("page3").submit(); //폼 제출 트리거
-                    }}
+                    
                 >
                     시작하기
                 </SignUpButton>
