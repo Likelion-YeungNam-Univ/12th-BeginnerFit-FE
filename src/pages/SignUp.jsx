@@ -46,7 +46,7 @@ export default function SignUp() {
             </SwiperSlide>
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
-            <Page3 swiperRef={swiperRef}/>
+            <Page3/>
             </SwiperSlide>
         </Swiper>
         <PaginationContainer>

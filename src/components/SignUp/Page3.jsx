@@ -2,12 +2,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { responsiveSize } from "../../utils/Mediaquery";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from './FormContext';
 import api from "../../apis/axios";
 
-export default function Page3 ({swiperRef}) {
+export default function Page3 () {
 
     // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
     const {formData, setFormData} = useContext(FormContext);
@@ -15,11 +15,11 @@ export default function Page3 ({swiperRef}) {
     //음수값 자릿수 제한
     const onInput = (e) => {
         if (Number(e.target.value) > 24) {
-        e.target.value = 0;
-        alert("하루 이내의 시간만 입력가능합니다.");
+            e.target.value = 0;
+            alert("하루 이내의 시간만 입력가능합니다.");
         } else if (e.target.value < 0) {
-        e.target.value = 0;
-        alert("음수값은 입력할 수 없습니다.");
+            e.target.value = 0;
+            alert("음수값은 입력할 수 없습니다.");
         }
     };
 
@@ -27,8 +27,8 @@ export default function Page3 ({swiperRef}) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
-        ...prev,
-        [name]: value,
+            ...prev,
+            [name]: value,
         }));
     };
 
@@ -48,7 +48,7 @@ export default function Page3 ({swiperRef}) {
         } = formData;
         //카테고리 유효성(각 카테고리별 1개이상은 선택) -> 제대로 작동 안되는 것 같음. 수정 필요.
         const isCategoriesValid = Object.values(categories).some(
-        (arr) => arr.length > 0
+            (arr) => arr.length > 0
         );
         //전체 유효성
         const isValid =
@@ -83,12 +83,12 @@ export default function Page3 ({swiperRef}) {
 
                 const userHealthResponse = await api.put("/users/health-info", {
                     email: formData.email,
-                    height: formData.height,
-                    weight: formData.weight,
-                    targetWeight: formData.targetWeight,
+                    height: Number(formData.height),
+                    weight: Number(formData.weight),
+                    targetWeight: Number(formData.targetWeight),
                     date: formData.date,
                     targetDate: formData.targetDate,
-                    exerciseTime: formData.categories.exerciseTime,
+                    exerciseTime: Number(formData.categories.exerciseTime),
                     exerciseIntensity: formData.categories.exerciseIntensity,
                     exerciseGoals: formData.categories.exerciseGoals,
                     concernedAreas: formData.categories.concernedAreas,
@@ -99,9 +99,19 @@ export default function Page3 ({swiperRef}) {
                 alert('회원가입 성공!');
                 navigate("/"); //로그인 페이지로 이동
             } catch(error){
-                console.error("회원가입 실패:", error.response ? error.response.data : error.message);
-                alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
+                // console.error("회원가입 실패:", error.response ? error.response.data : error.message);
+                // alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
             }
+        }
+    };
+
+    const formRef = useRef(null);
+    const handleButtonClick = (e) => {
+        e.preventDefault();
+        console.log(formData);
+        // 폼 수동 제출
+        if (isFormValid) {
+            handleSubmit(e);
         }
     };
     return(
@@ -112,7 +122,10 @@ export default function Page3 ({swiperRef}) {
                     <br/>
                     운동 목표를 설정해주세요.
                 </H1>
-                <Form onSubmit={handleSubmit}>
+                <Form 
+                ref={formRef} 
+                onSubmit={handleSubmit}
+                >
                     <TextInputContainer>
                         <P>운동시간</P>
                         <SubContainer>
@@ -129,9 +142,9 @@ export default function Page3 ({swiperRef}) {
                     <SetCategory onSubmit={handleCategorySubmit} isSignUp={true}></SetCategory>
                 </Form>
                 <SignUpButton 
-                    type="submit" 
+                    type="button" 
                     disabled={!allow}
-                    
+                    onClick={handleButtonClick}
                 >
                     시작하기
                 </SignUpButton>

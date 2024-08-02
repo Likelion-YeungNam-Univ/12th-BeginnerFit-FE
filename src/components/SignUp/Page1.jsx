@@ -135,7 +135,7 @@ export default function Page1({swiperRef}) {
                         ></MyInput>
                     <ValidButton
                         onClick={handleAuthCodeCheck}
-                        disabled={!authCode}
+                        disabled={!authCode || authCodeValid}
                     >
                         확인
                     </ValidButton>
