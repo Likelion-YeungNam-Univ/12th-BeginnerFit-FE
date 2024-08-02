@@ -99,7 +99,7 @@ export default function ForgetPwP1({email, setEmail, swiperRef}) {
                             ></MyInput>
                         <ValidButton
                             onClick={handleAuthCodeCheck}
-                            disabled={!authCode}
+                            disabled={!authCode || authCodeValid}
                         >
                             확인
                         </ValidButton>
