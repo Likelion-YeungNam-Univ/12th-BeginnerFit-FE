@@ -5,6 +5,7 @@ import remainChallenge from "../../images/남은챌린지.png";
 import completedChallenge from "../../images/챌린지.png";
 import add from "../../images/친구요청.png";
 import styled from "styled-components";
+import { NotRead } from "./NotRead";
 import {
   handleFriendRequest,
   handleAlarmClick,
@@ -99,7 +100,9 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   }, [type, time]);
 
   return (
-    <Wrap $check={alarmCheck}>
+    <Wrap>
+      {/*  안 읽은 알람일 때 빨간색 점 모양 보여주기 */}
+      {!alarmCheck && <NotRead />}
       <Container>
         <RowContainer>
           <Image
@@ -224,6 +227,7 @@ function detailDate(time) {
 }
 
 const Wrap = styled.div`
+  position: relative;
   border-radius: 10px;
   padding: 10px;
   background-color: ${({ $check }) => ($check ? "lightgray" : null)};
