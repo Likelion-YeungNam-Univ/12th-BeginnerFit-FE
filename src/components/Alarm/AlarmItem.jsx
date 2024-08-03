@@ -32,7 +32,7 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   const [postId, setPostId] = useState(null);
 
   // 알람을 확인했는지 확인하는 state
-  const [alarmCheck, setAlarmCheck] = useState(false);
+  const [alarmCheck, setAlarmCheck] = useState(check);
 
   // 친구 요청 수락 거절 버튼 눌렀을 때 실행할 함수
   const handleOnFriend = (text, userId) => {
