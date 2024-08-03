@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { resetPassword } from "../../apis/findPW";
 
-export default function ForgetPwP2() {
+export default function ForgetPwP2({email}) {
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [pwValid, setPwValid] = useState(false);
@@ -52,8 +52,9 @@ export default function ForgetPwP2() {
         try {
             await resetPassword(email, password);
             alert("비밀번호가 성공적으로 변경되었습니다.");
-            setTimeout(() => navigate('/'), 2000); // 2초 후 로그인 페이지로 이동
+            navigate('/'); // 로그인 페이지로 이동
         } catch (error) {
+            console.error(error)
             alert("비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
         }
     };

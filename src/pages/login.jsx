@@ -5,7 +5,7 @@ import api from "../apis/axios";
 import { useUserInfo } from "../store/useUserInfo";
 
 function Login() {
-  const [email, setEmail] = useState("asdf@naver.com");
+  const [email, setEmail] = useState("dusrl123@naver.com");
   const [password, setPassword] = useState("password123");
 
   //유저정보를 로컬에 담아 사용하기 위해 Zustand에 유저정보를 저장

@@ -1,10 +1,11 @@
+import { queryClient } from "../../main";
 import api from "../axios";
 
-import { useQuery, useMutation, QueryClient } from "@tanstack/react-query";
-export const queryClient = new QueryClient();
+import { useQuery, useMutation } from "react-query";
+
 export const useLikeApi = (post) => {
   //게시물 좋아요 개수
-  const { data: likesCnt, refetch: likeCnt } = useQuery({
+  const { data: likesCnt } = useQuery({
     queryKey: ["likesCnt", post.id],
     queryFn: async () => {
       const response = await api.get(`/posts/${post.id}`);
@@ -14,7 +15,7 @@ export const useLikeApi = (post) => {
   });
 
   //게시글 좋아요 여부 확인
-  const { data: isLiked, refetch: likeStatus } = useQuery({
+  const { data: isLiked } = useQuery({
     queryKey: ["likeStatus", post.id],
     queryFn: async () => {
       const response = await api.get(`/posts/${post.id}/likes/check`);
@@ -61,7 +62,7 @@ export const useLikeApi = (post) => {
         return { prevLikeCnt, prevLikeStatus };
       },
     //에러시
-    onError: (err, variables, context) => {
+    onError: (context) => {
       queryClient.setQueryData(["likesCnt", post.id], context.prevLikeCnt);
       queryClient.setQueryData(["likeStatus", post.id], context.prevLikeStatus);
     },

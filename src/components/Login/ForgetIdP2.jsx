@@ -4,21 +4,21 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { findId } from '../../apis/findID';
 
-export default function ForgetIdP2() {
+export default function ForgetIdP2({name}) {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const storedName = localStorage.getItem('findName');
+    // const storedName = localStorage.getItem('findName');
 
-    // const email = 'example@example.com'; //test
 
     useEffect(()=>{
         async function fetchEmail() {
-            if (storedName) {
+            if (name) {
                 try {
-                    const data = await findId(storedName);
-                    setEmail(data.email);
+                    const data = await findId(name);
+                    console.log(data);
+                    setEmail(data);
                 } catch (error) {
                     console.error('Error fetching email:', error);
                     setError('서버 오류');
@@ -31,7 +31,7 @@ export default function ForgetIdP2() {
             }
         }
         fetchEmail();
-    },[storedName])
+    },[name])
 
     return(
         <Wrapper>
@@ -44,10 +44,10 @@ export default function ForgetIdP2() {
                     </H1>
                     {loading ? (
                         <UserEmail>Loading...</UserEmail>
-                    ) : error ? (
-                        <UserEmail>{error}</UserEmail>
-                    ) : (
+                    ) : email ? (
                         <UserEmail>{email}</UserEmail>
+                    ) : (
+                        <UserEmail>{error}</UserEmail>
                     )}
                 </Container>
                 <ConfirmButton

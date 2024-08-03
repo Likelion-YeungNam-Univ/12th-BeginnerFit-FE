@@ -4,7 +4,8 @@ import api from "./axios";
 export const updateEditUserInfo = async (form, email) => {
   //이메일 Zustand에서 가져오기
 
-  const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"];
+  const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
+  //const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"];
 
   // form.categories의 값을 categoryName 배열과 매핑
   const setCategory = categoryName.reduce((acc, key, idx) => {

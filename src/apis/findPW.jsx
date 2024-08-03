@@ -1,10 +1,10 @@
 import api from "./axios";
 
-export const resetPassword = async (email, newPassword) => {
+export const resetPassword = async (email, password) => {
     try {
         const response = await api.post('/auth/find-password', {
             email,
-            newPassword
+            password
         });
         return response.data;
     } catch (error) {
