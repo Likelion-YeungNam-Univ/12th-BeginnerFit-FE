@@ -13,10 +13,14 @@ export default function Circle() {
 
   useEffect(() => {
     if (data) {
+      // 서버에서 받아오는 데이터는 각 월별로 데이터가 와서 현재 달의 데이터만 추출하는 과정
+      let currentMonth = data.filter(
+        (item) => item.month === new Date().getMonth() + 1
+      );
       // 해당 달의 총 일수 구하기
       let totalDay = new Date().getDate();
       // 비율 구하기 (소수점 버림)
-      setRate(Math.floor((data[0].count / totalDay) * 100));
+      setRate(Math.floor((currentMonth[0].count / totalDay) * 100));
     }
   }, [data]);
 

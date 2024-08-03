@@ -70,7 +70,7 @@ export default function WeightChart({ data, isLoading }) {
           top: 10,
           right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 15,
         }}
       >
         <YAxis domain={["dataMin - 1", "dataMax + 1"]} hide="true" />
