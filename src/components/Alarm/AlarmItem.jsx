@@ -5,13 +5,13 @@ import remainChallenge from "../../images/남은챌린지.png";
 import completedChallenge from "../../images/챌린지.png";
 import add from "../../images/친구요청.png";
 import styled from "styled-components";
-import { NotRead } from "./NotRead";
 import {
   handleFriendRequest,
   handleAlarmClick,
 } from "../../apis/alram/alramApi";
 import { useNavigate } from "react-router-dom";
 import { useAlarmStore } from "../../store/useAlarmStore";
+import { TimeCalculator } from "../../utils/TimeCalculator";
 
 export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   const nav = useNavigate();
@@ -28,14 +28,11 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   // 알림이 온 시간을 계산할 state
   const [clock, setClock] = useState(0);
 
-  // 친구 요청 알림일 때 수락했으면 true 거절 했으면 false로 설정하여 텍스트 보여주기
-  const [sure, setSure] = useState(null);
-
   // 게시물 번호 저장할 state
   const [postId, setPostId] = useState(null);
 
   // 알람을 확인했는지 확인하는 state
-  const [alarmCheck, setAlarmCheck] = useState(check);
+  const [alarmCheck, setAlarmCheck] = useState(false);
 
   // 친구 요청 수락 거절 버튼 눌렀을 때 실행할 함수
   const handleOnFriend = (text, userId) => {
@@ -89,7 +86,7 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
     let splitData = data.split(" ");
     let imageUrl = setImgUrl(type);
     let data2 = set(type, splitData[0]);
-    let processedClock = detailDate(new Date(time));
+    let processedClock = TimeCalculator(time);
     setClock(processedClock);
     setUrl(imageUrl);
     setText(data2);
@@ -102,7 +99,7 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   return (
     <Wrap>
       {/*  안 읽은 알람일 때 빨간색 점 모양 보여주기 */}
-      {!alarmCheck && <NotRead />}
+      {!alarmCheck && <NotRead></NotRead>}
       <Container>
         <RowContainer>
           <Image
@@ -207,25 +204,6 @@ function set(type, data) {
   return text;
 }
 
-// 얼마 전에 도착한 알림인지 출력할 함수
-function detailDate(time) {
-  const milliSeconds = new Date() - time;
-  const seconds = milliSeconds / 1000;
-  if (seconds < 60) return `방금 전`;
-  const minutes = seconds / 60;
-  if (minutes < 60) return `${Math.floor(minutes)}분 전`;
-  const hours = minutes / 60;
-  if (hours < 24) return `${Math.floor(hours)}시간 전`;
-  const days = hours / 24;
-  if (days < 7) return `${Math.floor(days)}일 전`;
-  const weeks = days / 7;
-  if (weeks < 5) return `${Math.floor(weeks)}주 전`;
-  const months = days / 30;
-  if (months < 12) return `${Math.floor(months)}개월 전`;
-  const years = days / 365;
-  return `${Math.floor(years)}년 전`;
-}
-
 const Wrap = styled.div`
   position: relative;
   border-radius: 10px;
@@ -271,4 +249,13 @@ const Button = styled.button`
   &:hover {
     background-color: gray;
   }
+`;
+
+const NotRead = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  left: 70px;
 `;
