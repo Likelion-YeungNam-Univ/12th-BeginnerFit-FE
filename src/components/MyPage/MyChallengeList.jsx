@@ -7,7 +7,7 @@ export default function MyChallengeList() {
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
 
-  const { list3, setList, setCount, setList3 } = useChallenge();
+  const { list3, setList, setCount, setList3, count } = useChallenge();
 
   const { data, isLoading, error, postData } = usePostData(
     "/challengeparticipant/completed-month-challenges"
@@ -15,10 +15,8 @@ export default function MyChallengeList() {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       let arr = data.challenges.filter((item, idx) => idx <= 2);
-      console.log(arr);
-
+      setList3(arr);
       setList(data.challenges);
       setCount(data.challenges.length);
     }
