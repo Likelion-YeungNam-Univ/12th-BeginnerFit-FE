@@ -77,7 +77,14 @@ export default function DropDown({ post = null }) {
 
   // 게시물 삭제 함수
   const deletePost = async () => {
-    if (window.confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
+    const confirmed = await AlarmDialog({
+      title: "게시물 삭제",
+      text: "정말로 이 게시물을 삭제하시겠습니까?",
+      type: "warning",
+      showCancel: true,
+    });
+
+    if (confirmed) {
       try {
         const response = await api.delete(`/posts/${post.id}`);
         const message = response.data?.message || "게시물이 삭제되었습니다.";
