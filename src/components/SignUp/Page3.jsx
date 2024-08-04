@@ -1,41 +1,40 @@
-
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
-import { FormContext } from './FormContext';
+import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
 
 export default function Page3 () {
     const navigate = useNavigate();
 
     // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
-    const {formData, setFormData} = useContext(FormContext);
+    const { formData, setFormData } = useContext(FormContext);
 
     //음수값 자릿수 제한
     const onInput = (e) => {
-        if (Number(e.target.value) > 24) {
-            e.target.value = 0;
-            alert("하루 이내의 시간만 입력가능합니다.");
-        } else if (e.target.value < 0) {
-            e.target.value = 0;
-            alert("음수값은 입력할 수 없습니다.");
-        }
+      if (Number(e.target.value) > 24) {
+        e.target.value = 0;
+        alert("하루 이내의 시간만 입력가능합니다.");
+      } else if (e.target.value < 0) {
+        e.target.value = 0;
+        alert("음수값은 입력할 수 없습니다.");
+      }
     };
 
     //입력값 관리
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     };
 
     //setCategory 컴포넌트에서 선택된 카테고리가져오기
     const handleCategorySubmit = (selectedCategories) => {
-        setFormData((prev) => ({ ...prev, categories: selectedCategories }));
+      setFormData((prev) => ({ ...prev, categories: selectedCategories }));
     };
 
     // 버튼 활성화 & 유효성 검사
@@ -43,28 +42,28 @@ export default function Page3 () {
     const [isFormValid, setIsFormValid] = useState(false);
     // 폼 유효성 검사
     useEffect(() => {
-        const {
-        exerciseTime,
-        categories,
-        } = formData;
-        //카테고리 유효성(각 카테고리별 1개이상은 선택) -> 제대로 작동 안되는 것 같음. 수정 필요.
-        const isCategoriesValid = Object.values(categories).some(
-            (arr) => arr.length > 0
-        );
-        //전체 유효성
-        const isValid =
-        exerciseTime>0 &&
-        isCategoriesValid;
-        setIsFormValid(isValid);
-        
+      const {
+      exerciseTime,
+      categories,
+      } = formData;
+      //카테고리 유효성(각 카테고리별 1개이상은 선택) -> 제대로 작동 안되는 것 같음. 수정 필요.
+      const isCategoriesValid = Object.values(categories).some(
+        (arr) => arr.length > 0
+      );
+      //전체 유효성
+      const isValid =
+      exerciseTime>0 &&
+      isCategoriesValid;
+      setIsFormValid(isValid);      
     }, [formData]);
+
     // 버튼 활성화
     useEffect(()=>{
-        if(isFormValid){
-            setAllow(true);
-            return;
-        }
-        setAllow(false);
+      if(isFormValid){
+        setAllow(true);
+        return;
+      }
+      setAllow(false);
     },[ isFormValid ]);
 
     const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
@@ -175,27 +174,27 @@ const Wrapper = styled.div`
     border: solid 1px ${({ theme }) => theme.colors.gray04};
 `
 const Box = styled.form`
-    display: grid;
-    justify-content: center;
-    align-items: flex-start;
-    width: 600px;
-    margin: 0px auto;
-`
+  display: grid;
+  justify-content: center;
+  align-items: flex-start;
+  width: 600px;
+  margin: 0px auto;
+`;
 const Form = styled.form`
-    width: 500px;
-    border-radius: 15px;
-`
+  width: 500px;
+  border-radius: 15px;
+`;
 const H1 = styled.h1`
   margin-top: 80px;
   @media (max-width: 480px) {
     font-size: ${responsiveSize("24")};
   }
-`
+`;
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
   margin-bottom: ${responsiveSize(9)};
-`
+`;
 const TextInputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -204,7 +203,7 @@ const TextInputContainer = styled.div`
   @media (max-width: 480px) {
     margin-right: ${responsiveSize(16)};
   }
-`
+`;
 const Input = styled.input`
   width: ${responsiveSize(120)};
   padding: 13px;
@@ -218,28 +217,28 @@ const Input = styled.input`
     height: ${responsiveSize(30)};
     font-size: ${responsiveSize(15)};
   }
-`
+`;
 const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
 
 const SignUpButton = styled.button`
-    align-items: flex-end;
-    width: 100%;
-    height: ${responsiveSize(60)};
-    background-color: #653eff;
-    color: white;
-    font-size: ${responsiveSize("20")};
-    padding: 15px;
-    margin-top: 50px;
-    border-radius: 10px;
-    border: none;
-    box-sizing: border-box;
-    cursor: pointer;
-    &:disabled{
-        cursor: not-allowed;
-        background-color: #9a9a9a;
-    }
-`
+  align-items: flex-end;
+  width: 100%;
+  height: ${responsiveSize(60)};
+  background-color: #653eff;
+  color: white;
+  font-size: ${responsiveSize("20")};
+  padding: 15px;
+  margin-top: 50px;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #9a9a9a;
+  }
+`;

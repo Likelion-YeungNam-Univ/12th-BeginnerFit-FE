@@ -16,8 +16,12 @@ import Setting from "../components/MyPage/Setting";
 import Videos from "../components/MyPage/Videos";
 import BottomNav from "../components/BottomNav";
 import { useNavigate } from "react-router-dom";
+import { useChallenge } from "../store/useChallenge";
 
 export default function MyPage() {
+  // 완료한 챌린지 갯수 zustand 스토어에서 가져오기
+  const { count } = useChallenge();
+
   // 현재 달 구하는 코드
   const todayMonth = new Date().getMonth() + 1;
 
@@ -31,9 +35,7 @@ export default function MyPage() {
   // 챌린지 전체보기 버튼 누른 경우 실행할 함수
   const onViewAllChallenge = () => {
     nav("/myChallengeList");
-
   };
-
 
   // 홈트 내역 전체보기 누른 경우 실행할 함수
   const onViewHomeTrainList = () => {
@@ -67,7 +69,7 @@ export default function MyPage() {
             <MainH3>
               {todayMonth}월 한달동안
               <br />
-              23개의 챌린지를 성공했어요!
+              {count}개의 챌린지를 성공했어요!
             </MainH3>
             <Total onClick={onViewAllChallenge}>전체보기</Total>
           </TextWrap>

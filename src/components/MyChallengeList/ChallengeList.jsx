@@ -1,26 +1,18 @@
 import React from "react";
 import Challenge from "../Main/Challenge";
-
-const challengeList = [
-  { content: "30분 이상 운동하기", isComplete: true },
-  { content: "물 2L 이상 마시기", isComplete: true },
-  { content: "헬스장 가기", isComplete: true },
-  { content: "물 2L 이상 마시기", isComplete: true },
-  { content: "헬스장 가기", isComplete: true },
-  { content: "30분 이상 운동하기", isComplete: true },
-  { content: "헬스장 가기", isComplete: true },
-  { content: "물 2L 이상 마시기", isComplete: true },
-];
+import { useChallenge } from "../../store/useChallenge";
 
 export const ChallengeList = () => {
+  const { list } = useChallenge();
+
   return (
     <div>
-      {challengeList.map((item, idx) => (
+      {list.map((item, idx) => (
         <Challenge
-          key={idx}
-          index={idx + 1}
-          content={item.content}
-          complete={item.isComplete}
+          key={item.challengeId}
+          index={item.challengeId}
+          content={item.challengeContent}
+          complete={item.completed}
           handleCheck={() => {}}
         />
       ))}

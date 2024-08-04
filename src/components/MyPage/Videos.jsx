@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useFecthData from "../../hooks/useFetchData";
 import VideoList from "../PlayList/VideoList";
+import styled from "styled-components";
 export default function Videos() {
   // videoId들 저장할 state
   const [videoIds, setVideoIds] = useState(null);
@@ -21,5 +22,18 @@ export default function Videos() {
     setVideoIds(arr);
   }, [data]);
 
-  return <div>{videoIds && data && <VideoList videoIds={videoIds} />}</div>;
+  return (
+    <div>
+      {videoIds && videoIds.length === 0 ? (
+        <P>시청한 영상이 없습니다!</P>
+      ) : (
+        videoIds && data && <VideoList videoIds={videoIds} />
+      )}
+    </div>
+  );
 }
+
+const P = styled.p`
+  font-size: 16px;
+  margin-top: 0px;
+`;

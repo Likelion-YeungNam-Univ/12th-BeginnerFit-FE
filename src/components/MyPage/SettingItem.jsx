@@ -2,9 +2,9 @@ import React from "react";
 import { Image } from "../../styles/GlobalStyle";
 import styled from "styled-components";
 
-export const SettingItem = ({ img, text }) => {
+export const SettingItem = ({ img, text, onClick }) => {
   return (
-    <ImageWrap>
+    <ImageWrap onClick={onClick}>
       <Image src={img} width={50} />
       <P>{text}</P>
     </ImageWrap>

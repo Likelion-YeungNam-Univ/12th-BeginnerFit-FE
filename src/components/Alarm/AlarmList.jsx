@@ -1,21 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AlarmItem } from "./AlarmItem";
-
-// 임시 데이터
-const alarm = [
-  { type: "add", data: "yeongi" },
-  { type: "completedFriend", data: 5 },
-  { type: "completedChallenge" },
-  { type: "remainChallenge", data: 3 },
-  { type: "completedFriend", data: 5 },
-];
-
+import useFetchData from "../../hooks/useFetchData";
+import { useAlarmStore } from "../../store/useAlarmStore";
 export const AlarmList = () => {
+  // 알람 데이터 저장할 state
+  const [alarmList, setAlarmList] = useState([]);
+
+  // 안읽은 알람 수 저장할 함수 가져오는 코드
+  const { setCount } = useAlarmStore();
+
+  // 알람 데이터 불러오는 코드
+  const { data, isLoading, error } = useFetchData("/alarm");
+
+  useEffect(() => {
+    if (data) {
+      // 안 읽은 알람 수 저장할 변수
+      let count = 0;
+      // 최신 순으로 업데이트
+      let arr = data.sort((a, b) => {
+        if (!a.alarmChecked) count++;
+        return new Date(b.alarmDate) - new Date(a.alarmDate);
+      });
+      setCount(count);
+      setAlarmList(arr);
+    }
+  }, [data]);
+
   return (
     <div>
-      {alarm.map((item) => (
-        <AlarmItem {...item} />
-      ))}
+      {data && alarmList.length === 0
+        ? "알림이 없어요!"
+        : data?.map((item) => (
+            <AlarmItem
+              type={item.alarmType}
+              data={item.alarmMessage}
+              time={item.alarmDate}
+              id={item.alarmId}
+              key={item.alarmId}
+              userId={item.userId}
+              check={item.alarmChecked}
+            />
+          ))}
     </div>
   );
 };
