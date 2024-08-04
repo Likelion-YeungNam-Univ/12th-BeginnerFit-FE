@@ -82,7 +82,6 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   // type에 따라 이미지와 텍스트 바꿈
   useEffect(() => {
     // 댓글 관련 데이터인 경우 문자열 띄어쓰기로 데이터가 와서 split으로 데이터 분리
-    console.log(data);
     let splitData = data.split(" ");
     let imageUrl = setImgUrl(type);
     let data2 = set(type, splitData[0]);

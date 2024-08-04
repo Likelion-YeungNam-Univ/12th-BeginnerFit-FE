@@ -14,7 +14,6 @@ export const AlarmList = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       // 안 읽은 알람 수 저장할 변수
       let count = 0;
 
@@ -44,7 +43,11 @@ export const AlarmList = () => {
               time={item.alarmDate}
               id={item.alarmId}
               key={item.alarmId}
-              userId={item.userId}
+              userId={
+                item.alarmType === "FRIEND_REQUEST"
+                  ? item.alarmMessage.split(" ")[1]
+                  : item.userId
+              }
               check={item.alarmChecked}
             />
           ))}
