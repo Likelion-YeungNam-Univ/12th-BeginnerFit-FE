@@ -7,10 +7,8 @@ export const handleFriendRequest = async (type, id) => {
   // type이 sure이면 친구 추가, 아니면 거절
   if (type === "sure") {
     const res = await api.put(url);
-    console.log(res);
   } else {
     const res = await api.delete(url);
-    console.log(res);
   }
 };
 
