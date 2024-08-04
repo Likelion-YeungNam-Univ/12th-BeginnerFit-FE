@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import api from "../../apis/axios";
 import { useEffect, useState } from "react";
 import { useUserInfo } from "../../store/useUserInfo";
-import  AlarmDialog  from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 const ITEM_HEIGHT = 48;
 
@@ -29,7 +29,7 @@ export default function CommentDropDown({
   const myInfo = user?.userId;
   const isMyComment = myInfo === comment?.userId ? "mycomment" : "notmycomment";
   // post가 없을 경우 기본 UI만 렌더링
-  if (isMyComment==="notmycomment") {
+  if (isMyComment === "notmycomment") {
     return <></>;
   }
   if (!comment) {
@@ -74,7 +74,11 @@ export default function CommentDropDown({
         const response = await api.delete(`/posts/comments/${comment.id}`);
         response.data?.message || "댓글이 삭제되었습니다.";
         //console.log(message);
-        alert("댓글이 삭제되었습니다.");
+        AlarmDialog({
+          title: "댓글 삭제",
+          type:"success",
+          content: "댓글이 삭제되었습니다.",
+        });
         //댓글 리랜더링
         reloadComments();
       } catch (error) {

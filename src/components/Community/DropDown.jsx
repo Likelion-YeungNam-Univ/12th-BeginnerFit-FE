@@ -6,7 +6,7 @@ import api from "../../apis/axios";
 import useFetchData from "../../hooks/useFetchData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AlarmDialog from "../../styles/AlarmDialog"
+import AlarmDialog from "../../styles/AlarmDialog";
 const ITEM_HEIGHT = 48;
 
 export default function DropDown({ post = null }) {
@@ -82,14 +82,22 @@ export default function DropDown({ post = null }) {
         const response = await api.delete(`/posts/${post.id}`);
         const message = response.data?.message || "게시물이 삭제되었습니다.";
         //console.log(message);
-        alert("게시물이 삭제되었습니다.");
+        AlarmDialog({
+          title: "게시물 삭제",
+          content: "게시물이 삭제되었습니다.",
+          type: "success",
+        });
         // 게시물 목록으로 이동
         navigate("/posts");
       } catch (error) {
         const errorMessage =
           error.response?.data?.message || "게시물 삭제 오류";
         //console.log(errorMessage, error);
-        alert(errorMessage);
+        AlarmDialog({
+          title: "오류",
+          content: "게시물 삭제 오류",
+          type: "error",
+        });
       }
     }
   };
@@ -127,7 +135,11 @@ export default function DropDown({ post = null }) {
         reason: selectReason,
       });
       //console.log(response);
-      alert("게시물이 신고되었습니다.");
+      AlarmDialog({
+        title:"신고",
+        type:"info",
+        content:"해당 게시물에 신고되었습니다."
+      })
       // 게시물 목록으로 이동
       navigate("/posts");
     } catch (error) {
@@ -138,13 +150,21 @@ export default function DropDown({ post = null }) {
   //게시물 저장함수
   const scrapPost = async () => {
     if (post?.id === undefined) {
-      alert("게시물 ID가 유효하지 않습니다.");
+      AlarmDialog({
+        title:"오류",
+        content:"해당 게시글은 존재하지않습니다.",
+        type:"warning"
+      })
       return;
     }
     try {
       await api.post(`/posts/${post.id}/scraps`);
       //console.log(response);
-      alert("게시물이 저장되었습니다.");
+      AlarmDialog({
+        title:"저장",
+        content:"게시물이 저장되었습니다.",
+        type:"success"
+      })
     } catch (error) {
       //console.log("게시물 저장 오류", error);
     }

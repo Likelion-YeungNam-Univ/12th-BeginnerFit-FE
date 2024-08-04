@@ -33,7 +33,7 @@ export const useComment = (post) => {
       //새 댓글이 작성된 새로운 댓글 목록 불러오기.
       await getCommentApi(post.id, 1, setComments, setIsLoading, setHasMore);
     } catch (error) {
-      console.log("댓글 전송 실패", error);
+      //onsole.log("댓글 전송 실패", error);
     }
   };
 
@@ -57,7 +57,7 @@ export const useComment = (post) => {
         setHasMore(false);
       }
     } catch (error) {
-      console.log("댓글 로딩 실패", error);
+      //console.log("댓글 로딩 실패", error);
     } finally {
       setIsLoading(false);
     }

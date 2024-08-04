@@ -9,6 +9,7 @@ import { useRef, useCallback, useState, useEffect } from "react";
 import CommentDropDown from "./CommentDropDown";
 import api from "../../apis/axios";
 import { useUserInfo } from "../../store/useUserInfo";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Comment({ post }) {
   const {
@@ -66,7 +67,11 @@ export default function Comment({ post }) {
       reloadComments();
     } catch (error) {
       const errorMessage = error.response?.data?.message || "댓글 수정 오류";
-      alert(errorMessage);
+      AlarmDialog({
+        title:"오류",
+        content:"댓글 수정애 실패했습니다.",
+        type:"error",
+      })
     }
   };
   //댓글 최신순 정리

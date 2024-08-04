@@ -116,11 +116,9 @@ export default function EditUserInfo() {
       //빈문자열 판단.
       return value !== "" && value !== null;
     };
-    console.log("Current form state:", form);
     // 카테고리 유효성 (각 카테고리별 1개 이상은 선택)
     let isCategoriesValid = Object.values(categories).every((arr) => {
       let isValid = arr.length > 0 && arr.some((value) => isValuesValid(value));
-      console.log(`Category validity: ${isValid}`, arr);
       return isValid;
     });
 

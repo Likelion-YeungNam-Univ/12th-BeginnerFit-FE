@@ -32,7 +32,7 @@ export const getCommentApi = async (
       setHasMore(false);
     }
   } catch (error) {
-    console.error("댓글을 불러오는 중 오류가 발생했습니다:", error);
+    //console.error("댓글을 불러오는 중 오류가 발생했습니다:", error);
   } finally {
     if (setIsLoading) setIsLoading(false); //로딩 상태를 false로
   }
