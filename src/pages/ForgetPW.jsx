@@ -51,9 +51,6 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* .swiper-pagination {
-    top: 20px; // 페이지 인디케이터를 상단으로 이동
-  } */
 `;
 
 const PrevButton = styled(IoIosArrowBack)`
@@ -76,29 +73,4 @@ const NextButton = styled.div`
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-`;
-
-const PaginationContainer = styled.div`
-  position: absolute;
-  top: 30px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
-`;
-
-const PaginationDots = styled.div`
-  display: flex;
-  justify-content: center;
-  flex: 1;
-
-  .swiper-pagination-bullet {
-    background-color: #d9d9d9; // 인디케이터 색상 설정
-    opacity: 1;
-  }
-
-  .swiper-pagination-bullet-active {
-    background-color: #653eff; // 활성화된 인디케이터 색상 설정
-  }
 `;

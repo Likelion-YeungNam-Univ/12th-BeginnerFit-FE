@@ -8,6 +8,7 @@ import { FormContext } from './FormContext';
 import api from "../../apis/axios";
 
 export default function Page3 () {
+    const navigate = useNavigate();
 
     // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
     const {formData, setFormData} = useContext(FormContext);
@@ -65,9 +66,6 @@ export default function Page3 () {
         }
         setAllow(false);
     },[ isFormValid ]);
-
-    // 회원가입 성공 시 메인 화면으로 이동
-    const navigate = useNavigate();
 
     const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
     // formData.categories의 값을 categoryName 배열과 매핑
@@ -172,7 +170,6 @@ export default function Page3 () {
 
 const Wrapper = styled.div`
     display: flex;
-    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};
@@ -197,7 +194,6 @@ const H1 = styled.h1`
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
-  /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(9)};
 `
 const TextInputContainer = styled.div`
