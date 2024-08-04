@@ -69,22 +69,30 @@ export default function CommentDropDown({
 
   // 댓글 삭제 함수
   const deleteComment = async () => {
-    if (window.confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+    const confirmed = await AlarmDialog({
+      title: "댓글 삭제",
+      text: "정말로 이 댓글을 삭제하시겠습니까?",
+      type: "warning",
+      showCancel: true,
+    });
+
+    if (confirmed) {
       try {
         const response = await api.delete(`/posts/comments/${comment.id}`);
         response.data?.message || "댓글이 삭제되었습니다.";
-        //console.log(message);
         AlarmDialog({
           title: "댓글 삭제",
-          type:"success",
+          type: "success",
           text: "댓글이 삭제되었습니다.",
         });
-        //댓글 리랜더링
         reloadComments();
       } catch (error) {
         const errorMessage = error.response?.data?.message || "댓글 삭제 오류";
-        //console.log(errorMessage, error);
-        //alert(errorMessage);
+        AlarmDialog({
+          title: "오류",
+          type: "error",
+          text: errorMessage,
+        });
       }
     }
   };

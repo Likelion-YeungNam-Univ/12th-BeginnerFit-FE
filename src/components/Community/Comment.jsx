@@ -59,7 +59,11 @@ export default function Comment({ post }) {
       const response = await api.put(`/posts/comments/${commentId}`, {
         content: editCommentText,
       });
-      const message = response.data?.message || "댓글이 수정되었습니다.";
+      AlarmDialog({
+        title:"댓글 수정",
+        text:"댓글이 수정되었습니다.",
+        type:"success"
+      })
       // alert(message);
       setIsEditMode(false);
       setEditCommentText("");

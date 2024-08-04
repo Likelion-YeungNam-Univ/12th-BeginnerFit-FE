@@ -160,7 +160,7 @@ export default function DropDown({ post = null }) {
     try {
       await api.post(`/posts/${post.id}/scraps`);
       //console.log(response);
-      AlarmDialog({
+      await AlarmDialog({
         title:"저장",
         text:"게시물이 저장되었습니다.",
         type:"success"
