@@ -15,7 +15,7 @@ import { useUserInfo } from "../../store/useUserInfo";
 import { useLikeApi } from "../../apis/communityApi/useLikeApi";
 import { motion } from "framer-motion";
 import { usePostData } from "../../hooks/usePostData";
-import  AlarmDialog  from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function WriteBoardMain({ post }) {
   const [totalComments, setTotalComments] = useState(0);
@@ -28,9 +28,11 @@ export default function WriteBoardMain({ post }) {
   const user = useUserInfo((state) => state.user);
 
   //친구 판단
-  const { arr: friends } = useFetchData(`/friends`);
-  const { arr: friendsPending } = useFetchData(`/friends/pending`); //친구 요청대기
-  const { arr: friendsWaiting } = useFetchData("/friends/waiting"); //친구 요청목록
+  const { arr: friends, isLoading: friendsLoading } = useFetchData(`/friends`);
+  const { arr: friendsPending, isLoading: friendsPendingLoading } =
+    useFetchData(`/friends/pending`); //친구 요청대기
+  const { arr: friendsWaiting, isLoading: friendsWaitingLoading } =
+    useFetchData("/friends/waiting"); //친구 요청목록
   const postWriterId = post.userId;
 
   //친구요청보내기
@@ -41,10 +43,10 @@ export default function WriteBoardMain({ post }) {
     if (data && user) {
       setIsMyPost(Number(user.userId) === Number(postWriterId));
     }
-    console.log(isMyPost);
-    console.log("유저", user.userId);
-    console.log("게시글", postWriterId);
-  }, [data, user, postWriterId,isMyPost]);
+    //console.log(isMyPost);
+    //console.log("유저", user.userId);
+    //console.log("게시글", postWriterId);
+  }, [data, user, postWriterId, isMyPost]);
 
   useEffect(() => {
     //아래 조건 다 만족하면(true) 친구가 아님(또는 요청 중)
@@ -57,8 +59,15 @@ export default function WriteBoardMain({ post }) {
 
   const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);
 
-  if (isLoading || isLikeLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading user info</div>;
+  if (
+    isLoading ||
+    isLikeLoading ||
+    friendsLoading ||
+    friendsPendingLoading ||
+    friendsWaitingLoading
+  )
+    return <div>Loading...</div>;
+  //if (error) return <div>Error loading user info</div>;
 
   const handleClicked = () => {
     //알람 다이얼로그 띄우기
@@ -75,7 +84,7 @@ export default function WriteBoardMain({ post }) {
 
   let content;
   //내 게시글인 경우
-  if (isMyPost) content=null;
+  if (isMyPost) content = null;
   //친구가 아닌 상태
   else if (isMyFriend) {
     content = (
