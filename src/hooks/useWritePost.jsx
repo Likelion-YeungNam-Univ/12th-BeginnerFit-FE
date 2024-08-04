@@ -56,10 +56,7 @@ export const useWritePost = () => {
       formData.append("postPicture", file);
     }
 
-    // FormData 확인
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    
 
     //수정과 작성서버 주소
     const SERVER_URL =

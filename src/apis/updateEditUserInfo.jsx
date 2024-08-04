@@ -1,5 +1,6 @@
 import axios from "axios";
 import api from "./axios";
+import AlarmDialog from "../styles/AlarmDialog";
 
 export const updateEditUserInfo = async (form, email) => {
   //이메일 Zustand에서 가져오기
@@ -31,8 +32,14 @@ export const updateEditUserInfo = async (form, email) => {
   try {
     const response = await api.put("/users/health-info", initialForm);
     console.log("응답:", response.data);
-    alert("회원님의 건강정보가 수정되었습니다.");
+    AlarmDialog({
+      title: "회원님의 정보가 수정되었습니다.",
+      type: "info",
+    });
   } catch (error) {
-    alert("회원정보 수정에 실패했습니다.", error);
+    AlarmDialog({
+      title: "오류가 발생했습니다.",
+      type: "error",
+    })
   }
 };

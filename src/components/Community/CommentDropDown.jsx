@@ -84,7 +84,7 @@ export default function CommentDropDown({
       } catch (error) {
         const errorMessage = error.response?.data?.message || "댓글 삭제 오류";
         //console.log(errorMessage, error);
-        alert(errorMessage);
+        //alert(errorMessage);
       }
     }
   };
