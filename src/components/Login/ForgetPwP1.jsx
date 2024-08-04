@@ -176,6 +176,7 @@ const ValidButton = styled.button`
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
+    cursor: pointer;
     &:disabled{
         cursor: not-allowed;
         background-color: #9a9a9a;
