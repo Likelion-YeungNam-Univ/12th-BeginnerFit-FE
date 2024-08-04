@@ -3,7 +3,7 @@ const AlarmDialog = async({
   isOptions = false,
   inputOptions = {},
   title = "",
-  content = "",
+  text = "",
   type,
   showCancel = false,
 }) => {
@@ -16,7 +16,7 @@ const AlarmDialog = async({
   //물음표-question
   const swalOptions = {
     title: title,
-    content: content,
+    text: text,
     //아이콘
     icon: type,
     showCloseButton: true,

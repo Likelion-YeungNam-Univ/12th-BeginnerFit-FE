@@ -84,7 +84,7 @@ export default function DropDown({ post = null }) {
         //console.log(message);
         AlarmDialog({
           title: "게시물 삭제",
-          content: "게시물이 삭제되었습니다.",
+          text: "게시물이 삭제되었습니다.",
           type: "success",
         });
         // 게시물 목록으로 이동
@@ -95,7 +95,7 @@ export default function DropDown({ post = null }) {
         //console.log(errorMessage, error);
         AlarmDialog({
           title: "오류",
-          content: "게시물 삭제 오류",
+          text: "게시물 삭제 오류",
           type: "error",
         });
       }
@@ -107,13 +107,13 @@ export default function DropDown({ post = null }) {
     if (post?.id === undefined) {
       await AlarmDialog({
         title: "오류",
-        content: "게시글이 존재하지 않습니다.",
+        text: "게시글이 존재하지 않습니다.",
         type: "warning",
       });
     }
     const selectReason = await AlarmDialog({
       title: "신고 사유",
-      content: "해당 게시글의 신고 사유를 선택해주세요.",
+      text: "해당 게시글의 신고 사유를 선택해주세요.",
       type: "question",
       isOptions: true,
       //서버에 키값 전달s
@@ -138,7 +138,7 @@ export default function DropDown({ post = null }) {
       AlarmDialog({
         title:"신고",
         type:"info",
-        content:"해당 게시물에 신고되었습니다."
+        text:"해당 게시물에 신고되었습니다."
       })
       // 게시물 목록으로 이동
       navigate("/posts");
@@ -152,7 +152,7 @@ export default function DropDown({ post = null }) {
     if (post?.id === undefined) {
       AlarmDialog({
         title:"오류",
-        content:"해당 게시글은 존재하지않습니다.",
+        text:"해당 게시글은 존재하지않습니다.",
         type:"warning"
       })
       return;
@@ -162,7 +162,7 @@ export default function DropDown({ post = null }) {
       //console.log(response);
       AlarmDialog({
         title:"저장",
-        content:"게시물이 저장되었습니다.",
+        text:"게시물이 저장되었습니다.",
         type:"success"
       })
     } catch (error) {

@@ -77,7 +77,7 @@ export default function CommentDropDown({
         AlarmDialog({
           title: "댓글 삭제",
           type:"success",
-          content: "댓글이 삭제되었습니다.",
+          text: "댓글이 삭제되었습니다.",
         });
         //댓글 리랜더링
         reloadComments();

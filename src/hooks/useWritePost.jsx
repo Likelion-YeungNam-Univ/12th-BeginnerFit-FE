@@ -84,13 +84,13 @@ export const useWritePost = () => {
       if (method === "put") {
         AlarmDialog({
           title: "수정",
-          content: "게시물이 수정되었습니다.",
+          text: "게시물이 수정되었습니다.",
           type: "success",
         });
       } else if (method === "post") {
         AlarmDialog({
           title: "게시",
-          content: "게시물이 게시되었습니다.",
+          text: "게시물이 게시되었습니다.",
           type: "success",
         });
       }
@@ -104,7 +104,7 @@ export const useWritePost = () => {
     } catch (error) {
       AlarmDialog({
         title: "오류",
-        content: "게시글 등록 중 오류가 발생했습니다.",
+        text: "게시글 등록 중 오류가 발생했습니다.",
         type: "error",
       });
     }

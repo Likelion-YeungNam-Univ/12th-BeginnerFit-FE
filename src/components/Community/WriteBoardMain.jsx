@@ -73,7 +73,7 @@ export default function WriteBoardMain({ post }) {
     //알람 다이얼로그 띄우기
     AlarmDialog({
       title: "친구요청",
-      content: "친구 요청을 보냈습니다.",
+      text: "친구 요청을 보냈습니다.",
       type: "success",
     });
     //친구요청 보내기

@@ -69,7 +69,7 @@ export default function Comment({ post }) {
       const errorMessage = error.response?.data?.message || "댓글 수정 오류";
       AlarmDialog({
         title:"오류",
-        content:"댓글 수정애 실패했습니다.",
+        text:"댓글 수정에 실패했습니다.",
         type:"error",
       })
     }
