@@ -34,6 +34,7 @@ export default function PlayListList() {
       <SlideContainer $currentSlide={currentSlide} $dataLength={data?.length}>
         {data?.map((item) => (
           <PlayList
+            $dataLength={data?.length}
             key={item.id}
             id={item.id}
             title={item.title}
