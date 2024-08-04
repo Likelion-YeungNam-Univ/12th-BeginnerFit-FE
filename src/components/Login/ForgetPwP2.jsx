@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { resetPassword } from "../../apis/findPW";
+import { AlarmDialog } from "../../styles/AlarmDialog";
 
 export default function ForgetPwP2({email}) {
     const navigate = useNavigate();
@@ -51,11 +52,19 @@ export default function ForgetPwP2({email}) {
     const handleResetPassword = async () => {
         try {
             await resetPassword(email, password);
-            alert("비밀번호가 성공적으로 변경되었습니다.");
+            console.log("비밀번호가 성공적으로 변경되었습니다.");
+            AlarmDialog({
+                title: "비밀번호가 성공적으로 변경되었습니다.",
+                type: "success",
+            });
             navigate('/'); // 로그인 페이지로 이동
         } catch (error) {
             console.error(error)
-            alert("비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
+            console.log("비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
+            AlarmDialog({
+                title: "비밀번호 재설정에 실패했습니다. 다시 시도해주세요.",
+                type: "error",
+            });
         }
     };
 

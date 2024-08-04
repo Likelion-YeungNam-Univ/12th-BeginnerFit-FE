@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import api from "../apis/axios";
 import { useUserInfo } from "../store/useUserInfo";
+import { AlarmDialog } from "../styles/AlarmDialog";
 
 function Login() {
   const [email, setEmail] = useState("dusrl123@naver.com");
@@ -53,15 +54,21 @@ function Login() {
       //로그인 성공 시 홈화면으로 이동
       navigate("/main");
     } catch (error) {
-      // console.error('로그인 실패:', error.response? error.response.data : error.message);
-      // alert(`로그인 실패: ${error.response?.data?.message || '서버 에러'}`);
       console.error("로그인 실패:", error);
       if (error.response) {
         console.error("서버 응답:", error.response.data);
-        alert(`로그인 실패: ${error.response.data.message || "서버 에러"}`);
+        AlarmDialog({
+          title: "로그인 실패",
+          content: error.response.data.message || "서버 에러",
+          type: "error",
+        });
       } else {
         console.error("오류 메시지:", error.message);
-        alert(`로그인 실패: ${error.message}`);
+        AlarmDialog({
+          title: "로그인 실패",
+          content: error.message,
+          type: "error"
+        });
       }
     }
   };

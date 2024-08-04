@@ -5,6 +5,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
+import { AlarmDialog } from "../../styles/AlarmDialog";
 
 export default function Page3 () {
     const navigate = useNavigate();
@@ -16,10 +17,18 @@ export default function Page3 () {
     const onInput = (e) => {
       if (Number(e.target.value) > 24) {
         e.target.value = 0;
-        alert("하루 이내의 시간만 입력가능합니다.");
+        console.log("하루 이내의 시간만 입력가능합니다.");
+        AlarmDialog({
+          title: "하루 이내의 시간만 입력 가능합니다.",
+          type: "warning",
+        });
       } else if (e.target.value < 0) {
         e.target.value = 0;
-        alert("음수값은 입력할 수 없습니다.");
+        console.log("음수값은 입력할 수 없습니다.");
+        AlarmDialog({
+          title: "음수값은 입력할 수 없습니다.",
+          type: "warning",
+        });
       }
     };
 
@@ -107,14 +116,21 @@ export default function Page3 () {
                     console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
                     
                     console.log("회원가입 성공:", formData);
-                    alert('회원가입 성공!');
+                    AlarmDialog({
+                      title: "회원가입 성공!",
+                      type: "success",
+                    });
                     navigate("/"); //로그인 페이지로 이동
                 } catch (error){
                     console.error("건강 정보 등록 실패:", error.response ? error.response.data : error.message);
                 }
             } catch(error){
                 console.error("회원가입 실패:", error.response ? error.response.data : error.message);
-                alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
+                AlarmDialog({
+                  title: "회원가입 실패",
+                  content: error.response?.data?.message || "서버 에러",
+                  type: "error",
+                });
             }
         }
     };
