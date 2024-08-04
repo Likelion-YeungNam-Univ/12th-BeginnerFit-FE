@@ -28,7 +28,7 @@ export const User = ({ id, nickname, image, type, onClick }) => {
     postData();
     AlarmDialog({
       title: "친구 요청 완료",
-      content: "친구 요청을 보냈습니다",
+      text: "친구 요청을 보냈습니다",
       type: "success",
     });
   };
