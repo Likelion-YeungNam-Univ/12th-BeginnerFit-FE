@@ -5,8 +5,8 @@ import AlarmDialog from "../styles/AlarmDialog";
 export const updateEditUserInfo = async (form, email) => {
   //이메일 Zustand에서 가져오기
 
-  const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
-  //const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"];
+  //const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
+  const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"];
 
   // form.categories의 값을 categoryName 배열과 매핑
   const setCategory = categoryName.reduce((acc, key, idx) => {
@@ -28,12 +28,13 @@ export const updateEditUserInfo = async (form, email) => {
     exerciseGoals: setCategory["exerciseGoals"],
     concernedAreas: setCategory["concernedAreas"],
   };
-  console.log(initialForm);
+  //console.log('업데이트',initialForm);
   try {
     const response = await api.put("/users/health-info", initialForm);
-    console.log("응답:", response.data);
+    //console.log("응답:", response.data);
     AlarmDialog({
-      title: "회원님의 정보가 수정되었습니다.",
+      text:"회원님의 정보가 수정되었습니다.",
+      title: "정보 수정",
       type: "info",
     });
   } catch (error) {
