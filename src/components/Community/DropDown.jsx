@@ -6,8 +6,7 @@ import api from "../../apis/axios";
 import useFetchData from "../../hooks/useFetchData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-
+import AlarmDialog from "../../styles/AlarmDialog"
 const ITEM_HEIGHT = 48;
 
 export default function DropDown({ post = null }) {
@@ -98,7 +97,7 @@ export default function DropDown({ post = null }) {
   // 게시물 신고 함수
   const reportPost = async () => {
     if (post?.id === undefined) {
-      AlarmDialog({
+      await AlarmDialog({
         title: "오류",
         content: "게시글이 존재하지 않습니다.",
         type: "warning",

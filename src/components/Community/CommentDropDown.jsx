@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import api from "../../apis/axios";
 import { useEffect, useState } from "react";
 import { useUserInfo } from "../../store/useUserInfo";
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import  AlarmDialog  from "../../styles/AlarmDialog";
 
 const ITEM_HEIGHT = 48;
 

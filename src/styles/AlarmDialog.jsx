@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-export const AlarmDialog = async({
+const AlarmDialog = async({
   isOptions = false,
   inputOptions = {},
   title = "",
@@ -58,3 +58,4 @@ export const AlarmDialog = async({
   }
   return null;
 };
+export default AlarmDialog;
