@@ -5,6 +5,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { usePostData } from "../../hooks/usePostData";
+import { AlarmDialog } from "../../styles/AlarmDialog";
 
 // type으로 친구 추가할지 삭제할지 설정
 export const User = ({ id, nickname, image, type, onClick }) => {
@@ -25,6 +26,11 @@ export const User = ({ id, nickname, image, type, onClick }) => {
     setIsPlused(true);
     // 서버에게 친구 추가 api 요청
     postData();
+    AlarmDialog({
+      title: "친구 요청 완료",
+      content: "친구 요청을 보냈습니다",
+      type: "success",
+    });
   };
 
   return (
