@@ -17,7 +17,7 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" > .env
+          echo "VITE_TEST_SERVER_URL=${{ secrets.VITE_TEST_SERVER_URL }}" > .env
           echo "VITE_YOUTUBE_API=${{ secrets.VITE_YOUTUBE_API }}" >> .env
           echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" >> .env
           cat .env
