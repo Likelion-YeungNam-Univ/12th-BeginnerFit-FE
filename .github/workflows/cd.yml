@@ -1,0 +1,48 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: ["develop"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      # 코드 받기
+      - name: Checkout PR
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.push.base_ref }}
+
+      - name: Create .env file
+        run: |
+          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" > .env
+          echo "VITE_YOUTUBE_API=${{ secrets.VITE_YOUTUBE_API }}" >> .env
+          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" >> .env
+          cat .env
+
+      # .env 파일 넣기
+      - name: Upload files to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_SSH_PORT }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_KEY }}
+          source: ".env"
+          target: "/home/ubuntu/12th-BeginnerFit-FE/.env"
+
+      # 실행하기
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_SSH_PORT }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_KEY }}
+          script: |
+            cd /home/ubuntu/12th-BeginnerFit-FE/
+            git pull origin develop
+            npm install
+            npm run dev -- --host 0.0.0.0
