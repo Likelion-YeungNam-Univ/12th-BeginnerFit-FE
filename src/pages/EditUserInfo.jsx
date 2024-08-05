@@ -47,7 +47,22 @@ export default function EditUserInfo() {
       e.target.value = 0;
       AlarmDialog({
         title: "음수값은 입력할 수 없습니다.",
-        type: "info",
+        type: "warning",
+      });
+    }
+  };
+  const onInput2 = (e) => {
+    if (e.target.value.length >3) {
+      e.target.value = 0;
+      AlarmDialog({
+        title: "세 자릿수까지 입력 가능합니다.",
+        type: "warning",
+      });
+    } else if (e.target.value < 0) {
+      e.target.value = 0;
+      AlarmDialog({
+        title: "음수값은 입력할 수 없습니다.",
+        type: "warning",
       });
     }
   };
@@ -149,7 +164,6 @@ export default function EditUserInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate(form);
-
   };
   //내 정보불러오기 오류
   if (myInfoError) {
@@ -175,7 +189,7 @@ export default function EditUserInfo() {
             <SubContainer>
               <Input
                 type="number"
-                onInput={onInput}
+                onInput={onInput2}
                 name="height"
                 value={form.height}
                 onChange={handleInputChange}
@@ -189,7 +203,7 @@ export default function EditUserInfo() {
               <SubContainer>
                 <Input
                   type="number"
-                  onInput={onInput}
+                  onInput={onInput2}
                   name="weight"
                   value={form.weight}
                   onChange={handleInputChange}
@@ -202,7 +216,7 @@ export default function EditUserInfo() {
               <SubContainer>
                 <Input
                   type="number"
-                  onInput={onInput}
+                  onInput={onInput2}
                   name="targetWeight"
                   value={form.targetWeight}
                   onChange={handleInputChange}
