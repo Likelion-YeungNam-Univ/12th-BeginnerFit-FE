@@ -37,6 +37,7 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   // 친구 요청 수락 거절 버튼 눌렀을 때 실행할 함수
   const handleOnFriend = (text, userId) => {
     setCount(count - 1);
+    handleAlarmClick(id);
     setAlarmCheck(true);
     // api 호출
     handleFriendRequest(text, userId);

@@ -10,7 +10,6 @@ import { useAlarmStore } from "../store/useAlarmStore";
 
 export default function Alaram() {
   const { count } = useAlarmStore();
-  console.log(count)
   return (
     <MainWrapper>
       <MainContainer>
