@@ -3,6 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
 import { FormContext } from './FormContext';
 import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Page1({swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);
@@ -78,8 +79,10 @@ export default function Page1({swiperRef}) {
         console.log('인증번호버튼이 클릭됨.');
         await sendAuthCode(formData.email);
         setEmailSent(true);
-        alert('인증 번호가 이메일로 전송되었습니다.');
-        
+        AlarmDialog({
+            title: "인증 번호가 이메일로 전송되었습니다.",
+            type: "info",
+        });
     };
 
     const handleAuthCodeCheck = async (e) => {
@@ -87,11 +90,17 @@ export default function Page1({swiperRef}) {
         try {
             await verifyAuthCode(formData.email, authCode);
             setAuthCodeValid(true);
-            alert('인증 번호가 확인되었습니다.');
+            AlarmDialog({
+                title: "인증 번호가 확인되었습니다.",
+                type: "success",
+            });
         } catch (error) {
             console.error('Error:', error);
             setAuthCodeValid(false);
-            alert('인증 번호가 유효하지 않습니다. 다시 시도해주세요.');
+            AlarmDialog({
+                title: "인증 번호가 유효하지 않습니다. 다시 시도해주세요.",
+                type: "warning",
+            });
         }
     };
 
@@ -135,7 +144,7 @@ export default function Page1({swiperRef}) {
                         ></MyInput>
                     <ValidButton
                         onClick={handleAuthCodeCheck}
-                        disabled={!authCode || authCodeValid}
+                        disabled={ authCode.length < 8 || authCodeValid}
                     >
                         확인
                     </ValidButton>

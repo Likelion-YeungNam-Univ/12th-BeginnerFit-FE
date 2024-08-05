@@ -5,7 +5,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { usePostData } from "../../hooks/usePostData";
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 // type으로 친구 추가할지 삭제할지 설정
 export const User = ({ id, nickname, image, type, onClick }) => {

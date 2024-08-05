@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
 import { FormContext } from './FormContext';
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Page2 ({swiperRef}) {
     const [nameValid, setNameValid] = useState('')
@@ -29,10 +30,16 @@ export default function Page2 ({swiperRef}) {
     const onInput = (e) => {
         if (e.target.value.length > 3) {
         e.target.value = 0;
-        alert("3자리까지만 입력가능합니다.");
+        AlarmDialog({
+            title: "3자리까지만 입력가능합니다.",
+            type: "warning",
+        });
         } else if (e.target.value < 0) {
         e.target.value = 0;
-        alert("음수값은 입력할 수 없습니다.");
+        AlarmDialog({
+            title: "음수값은 입력할 수 없습니다.",
+            type: "warning",
+        });
         }
     };
 
