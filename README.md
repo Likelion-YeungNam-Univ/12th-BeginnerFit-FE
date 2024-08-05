@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/dc352726-846f-474d-a26f-56e74e86f462" />
+  <img src="https://github.com/user-attachments/assets/987f287b-ecf4-496f-8038-5902f2ba3e55"/>
 </p>
 
 # [👟BiginnerFit 이용하러 가기](http://43.201.203.128:5173/)
@@ -47,18 +47,64 @@
 - 잊어버린 ID/PW를 찾거나 재설정할 수 있어요
 
 
-## 기술스택
+### 📱커뮤니티
+
+
+<img width=400 alt="스크린샷 2024-08-06 00 41 12" src="https://github.com/user-attachments/assets/bdb40402-d7a7-4017-9c3c-18a7fe5f62a3"/>
+
+<br/>
+
+- 커뮤니티를 통해서 다른 사람들과 여러 정보를 공유해보세요
+- 카테고리별로 글을 모아서 볼 수 있어요
+
+
+<div > 
+  <img src="https://github.com/user-attachments/assets/98228501-1237-4cee-9ccd-e33e0b0cf40a" width=400/>
+</div>
+
+- 궁금한 점이나 하고싶은 말을 댓글로 달아보세요
+- 좋아요를 눌러 마음에 드는 게시물을 알려주세요
+
+
+<div align="left"><img width=400 alt="스크린샷 2024-08-06 00 44 46" src="https://github.com/user-attachments/assets/e02bd1e7-647d-4112-9c2e-460fa9f34128"/></div>
+  <div align="left"><img width=400 alt="스크린샷 2024-08-06 00 44 27" src="https://github.com/user-attachments/assets/cfef1a58-8557-4dc5-93bb-c3a5f57f495d"/></div>
+
+
+
+- 마음에 드는 게시물은 저장해보세요
+- 게시물 신고기능을 이용해 부적절한 게시물은 신고해주세요
+
+
+<hr/>
+
+## 🛠️기술스택
+### FE
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"> <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=react query&logoColor=purple"> <img src="https://img.shields.io/badge/zustand-000000?style=for-the-badge&logo=zustand&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> 
 
-## 팀원
-### FRONT
-[박연기](https://github.com/yeongipark)
-[김도연](https://github.com/tkv00)
-[김지현](https://github.com/jihyun132)
+### BE
+
+<hr/>
+
+## 👥팀원
+
+### FrontEnd
+|<img src="https://avatars.githubusercontent.com/u/122340316?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/144890194?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/164824197?v=4" width="150" height="150"/>|
+|:-:|:-:|:-:|
+|박연기<br/>[@yeongipark](https://github.com/yeongipark)|김도연<br/>[@tkv00](https://github.com/tkv00)|김지현<br/>[@jihyun132](https://github.com/jihyun132)|
 
 ### BACKEND
-[진서연](https://github.com/jjjjjinseo)
-[박하](https://github.com/HaHaPark)
+|<img src="https://avatars.githubusercontent.com/u/164891776?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/154950095?v=4" width="150" height="150"/>|
+|:-:|:-:|
+|진서연<br/>[@jjjjjinseo](https://github.com/jjjjjinseo)|박하<br/>[@HaHaPark](https://github.com/HaHaPark)|
 
 ### DESGIN
-[김규희](https://github.com/9ooi)
+|<img src="https://avatars.githubusercontent.com/u/165015500?v=4" width="150" height="150"/>|
+|:-:|
+|김규희<br/>[@9ooi](https://github.com/9ooi)|
+
+
+
+
+
+
+
