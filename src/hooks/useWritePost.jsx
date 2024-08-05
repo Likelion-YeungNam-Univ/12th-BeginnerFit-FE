@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { postStore } from "../store/postStore";
 import axios from "axios";
 import api from "../apis/axios";
+import AlarmDialog from "../styles/AlarmDialog";
 export const useWritePost = () => {
   //Zustand 상태 가져오기
   const {
@@ -55,21 +56,17 @@ export const useWritePost = () => {
       formData.append("postPicture", file);
     }
 
-    // FormData 확인
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    
 
     //수정과 작성서버 주소
     const SERVER_URL =
       import.meta.env.VITE_SERVER_URL +
       (isEdit && postId ? `/posts/${postId}` : `/posts`);
-    console.log("Server URL:", SERVER_URL);
+
     //게시글 수정이면 put,게시물 작성이면 post
     const method = isEdit ? "PUT" : "POST";
-    console.log("HTTP Method:", method);
 
-    const accessToken=localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     try {
       const response = await axios({
         method: method,
@@ -82,11 +79,17 @@ export const useWritePost = () => {
       });
       //게시물 작성 성공
       if (method === "put") {
-        alert("게시물이 수정되었습니다.");
-        console.log("게시물 수정", response.data);
+        AlarmDialog({
+          title: "수정",
+          text: "게시물이 수정되었습니다.",
+          type: "success",
+        });
       } else if (method === "post") {
-        alert("게시물이 등록되었습니다.");
-        console.log("게시물 등록", response.data);
+        AlarmDialog({
+          title: "게시",
+          text: "게시물이 게시되었습니다.",
+          type: "success",
+        });
       }
 
       //입력칸 초기화
@@ -96,20 +99,11 @@ export const useWritePost = () => {
 
       navigate("/posts"); //커뮤니티 페이지 이동
     } catch (error) {
-      console.error("게시물 등록 중 오류가 발생", error);
-      if (error.response) {
-        // 서버가 응답한 경우
-        console.error("서버 응답 데이터:", error.response.data);
-        console.error("서버 응답 상태:", error.response.status);
-        console.error("서버 응답 헤더:", error.response.headers);
-      } else if (error.request) {
-        // 요청이 만들어졌지만 응답이 없는 경우
-        console.error("요청 데이터:", error.request);
-      } else {
-        // 요청을 설정하는 중에 오류가 발생한 경우
-        console.error("오류 메시지:", error.message);
-      }
-      console.error("전체 오류 설정:", error.config);
+      AlarmDialog({
+        title: "오류",
+        text: "게시글 등록 중 오류가 발생했습니다.",
+        type: "error",
+      });
     }
   };
 

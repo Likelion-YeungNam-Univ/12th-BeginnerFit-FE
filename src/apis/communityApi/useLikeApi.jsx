@@ -9,7 +9,6 @@ export const useLikeApi = (post) => {
     queryKey: ["likesCnt", post.id],
     queryFn: async () => {
       const response = await api.get(`/posts/${post.id}`);
-      //console.log("좋아요", response.data.likeCnt);
       return response.data.likeCnt;
     },
   });

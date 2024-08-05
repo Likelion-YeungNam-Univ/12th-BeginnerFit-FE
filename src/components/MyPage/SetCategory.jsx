@@ -35,7 +35,7 @@ export default function SetCategory({ onSubmit, isSignUp, initialCategories }) {
     onSubmit,
     initialCategories
   );
-  console.log('셀렉카테고리'+selectedItems);
+  //console.log('셀렉카테고리'+selectedItems);
   return (
     <Container>
       {Object.entries(list).map(([key, values]) => (

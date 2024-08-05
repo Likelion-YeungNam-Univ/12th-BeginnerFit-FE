@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import api from "../../apis/axios";
 import { useEffect, useState } from "react";
 import { useUserInfo } from "../../store/useUserInfo";
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 const ITEM_HEIGHT = 48;
 
@@ -29,7 +29,7 @@ export default function CommentDropDown({
   const myInfo = user?.userId;
   const isMyComment = myInfo === comment?.userId ? "mycomment" : "notmycomment";
   // post가 없을 경우 기본 UI만 렌더링
-  if (isMyComment==="notmycomment") {
+  if (isMyComment === "notmycomment") {
     return <></>;
   }
   if (!comment) {
@@ -69,18 +69,30 @@ export default function CommentDropDown({
 
   // 댓글 삭제 함수
   const deleteComment = async () => {
-    if (window.confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+    const confirmed = await AlarmDialog({
+      title: "댓글 삭제",
+      text: "정말로 이 댓글을 삭제하시겠습니까?",
+      type: "warning",
+      showCancel: true,
+    });
+
+    if (confirmed) {
       try {
         const response = await api.delete(`/posts/comments/${comment.id}`);
         response.data?.message || "댓글이 삭제되었습니다.";
-        //console.log(message);
-        alert("댓글이 삭제되었습니다.");
-        //댓글 리랜더링
+        AlarmDialog({
+          title: "댓글 삭제",
+          type: "success",
+          text: "댓글이 삭제되었습니다.",
+        });
         reloadComments();
       } catch (error) {
         const errorMessage = error.response?.data?.message || "댓글 삭제 오류";
-        //console.log(errorMessage, error);
-        alert(errorMessage);
+        AlarmDialog({
+          title: "오류",
+          type: "error",
+          text: errorMessage,
+        });
       }
     }
   };

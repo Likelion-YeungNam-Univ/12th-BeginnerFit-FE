@@ -29,7 +29,7 @@ export const useCategorySelect = (list, onSubmit, initialCategories = null) => {
         newSelected[key].push(value);
       }
 
-      console.log("newSelected:", newSelected); //테스트
+      //console.log("newSelected:", newSelected); //테스트
       return newSelected;
     });
   };
