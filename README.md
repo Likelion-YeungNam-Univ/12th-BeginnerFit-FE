@@ -58,16 +58,15 @@
 - 카테고리별로 글을 모아서 볼 수 있어요
 
 
-<div > 
-  <img src="https://github.com/user-attachments/assets/98228501-1237-4cee-9ccd-e33e0b0cf40a" width=400/>
-</div>
+![화면 기록 2024-08-06 00 41 44](https://github.com/user-attachments/assets/21bb487f-fcaa-4d21-8d1e-cd5b0c89b914)
+
 
 - 궁금한 점이나 하고싶은 말을 댓글로 달아보세요
 - 좋아요를 눌러 마음에 드는 게시물을 알려주세요
 
 
 <div align="left"><img width=400 alt="스크린샷 2024-08-06 00 44 46" src="https://github.com/user-attachments/assets/e02bd1e7-647d-4112-9c2e-460fa9f34128"/></div>
-  <div align="left"><img width=400 alt="스크린샷 2024-08-06 00 44 27" src="https://github.com/user-attachments/assets/cfef1a58-8557-4dc5-93bb-c3a5f57f495d"/></div>
+<div align="left"><img width=400 alt="스크린샷 2024-08-06 00 44 27" src="https://github.com/user-attachments/assets/cfef1a58-8557-4dc5-93bb-c3a5f57f495d"/></div>
 
 
 
