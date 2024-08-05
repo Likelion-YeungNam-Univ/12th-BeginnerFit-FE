@@ -18,7 +18,6 @@ export default function ForgetID() {
   const [name, setName] = useState('');
   const swiperRef = useRef(null);
   const navigate = useNavigate();
-  // localStorage.removeItem('findName'); // 이전 값 삭제
 
   return (
     <Container>
@@ -33,7 +32,7 @@ export default function ForgetID() {
             }}
         >
             <SwiperSlide>
-            <PrevButton onClick={() => (navigate(-1))}></PrevButton>
+            <PrevButton onClick={() => (navigate('/'))}></PrevButton>
             <ForgetIdP1 name={name} setName={setName} swiperRef={swiperRef}/>
             {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
@@ -52,9 +51,6 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* .swiper-pagination {
-    top: 20px; // 페이지 인디케이터를 상단으로 이동
-  } */
 `;
 
 const PrevButton = styled(IoIosArrowBack)`

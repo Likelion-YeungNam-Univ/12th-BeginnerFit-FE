@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled, {css} from 'styled-components';
 import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function ForgetPwP1({email, setEmail, swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);
@@ -17,18 +18,27 @@ export default function ForgetPwP1({email, setEmail, swiperRef}) {
         console.log('인증번호버튼이 클릭됨.');
         await sendAuthCode(email);
         setEmailSent(true);
-        alert('인증 번호가 이메일로 전송되었습니다.');
+        AlarmDialog({
+            title: "인증 번호가 이메일로 전송되었습니다.",
+            type: "info",
+        });
     };
     const handleAuthCodeCheck = async (e) => {
         e.preventDefault();
         try {
             await verifyAuthCode(email, authCode);
             setAuthCodeValid(true);
-            alert('인증 번호가 확인되었습니다.');
+            AlarmDialog({
+                title: "인증 번호가 확인되었습니다.",
+                type: "success",
+            });
         } catch (error) {
             console.error('Error:', error);
             setAuthCodeValid(false);
-            alert('인증 번호가 유효하지 않습니다. 다시 시도해주세요.');
+            AlarmDialog({
+                title: "인증 번호가 유효하지 않습니다. 다시 시도해주세요.",
+                type: "warning",
+            });
         }
     };
 
@@ -176,6 +186,7 @@ const ValidButton = styled.button`
     border-radius: 10px;
     border: none;
     box-sizing: border-box;
+    cursor: pointer;
     &:disabled{
         cursor: not-allowed;
         background-color: #9a9a9a;

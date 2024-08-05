@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
 import { FormContext } from './FormContext';
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Page2 ({swiperRef}) {
     const [nameValid, setNameValid] = useState('')
@@ -29,10 +30,16 @@ export default function Page2 ({swiperRef}) {
     const onInput = (e) => {
         if (e.target.value.length > 3) {
         e.target.value = 0;
-        alert("3자리까지만 입력가능합니다.");
+        AlarmDialog({
+            title: "3자리까지만 입력가능합니다.",
+            type: "warning",
+        });
         } else if (e.target.value < 0) {
         e.target.value = 0;
-        alert("음수값은 입력할 수 없습니다.");
+        AlarmDialog({
+            title: "음수값은 입력할 수 없습니다.",
+            type: "warning",
+        });
         }
     };
 
@@ -101,6 +108,11 @@ export default function Page2 ({swiperRef}) {
                         onChange={handleName}
                     ></MyInput>
                     {/* 에러 메시지 필요 */}
+                    <ErrorMsg>
+                        {!nameValid && formData.name.length > 0 && (
+                            <div>영문, 숫자, 특수문자 포함 3자~10자 입력해주세요.</div>
+                        )}
+                    </ErrorMsg>
                     <TextInputContainer>
                         <P>키</P>
                         <SubContainer>
@@ -186,7 +198,6 @@ export default function Page2 ({swiperRef}) {
 
 const Wrapper = styled.div`
     display: flex;
-    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};
@@ -214,7 +225,6 @@ const ItemName = styled.div`
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
-  /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(9)};
 
   //글씨 채우기용(화면 상에서는 안보이도록 )
@@ -226,8 +236,6 @@ const P = styled.p`
 
 const MyInput = styled.input`
     width: 100%;
-    /* height: ${responsiveSize(40)}; */
-    /* font-size: ${responsiveSize("17")}; */
     font-weight: 400;
     border-radius: ${responsiveSize("12")};
     background-color: ${({ theme }) => theme.colors.gray01};
@@ -236,6 +244,11 @@ const MyInput = styled.input`
     border: none;
     box-sizing: border-box;
 `
+const ErrorMsg = styled.div`
+    color: red;
+    font-size: small;
+`
+
 const TextInputContainer = styled.div`
   display: flex;
   flex-direction: column;

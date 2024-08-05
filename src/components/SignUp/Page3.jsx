@@ -4,34 +4,41 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from "./FormContext";
+import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
-import axios from "axios";
+import AlarmDialog from "../../styles/AlarmDialog";
 
-export default function Page3 () {
-    const navigate = useNavigate();
+export default function Page3() {
+  const navigate = useNavigate();
 
-    // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
-    const { formData, setFormData } = useContext(FormContext);
+  // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
+  const { formData, setFormData } = useContext(FormContext);
 
     //음수값 자릿수 제한
     const onInput = (e) => {
       if (Number(e.target.value) > 24) {
         e.target.value = 0;
-        alert("하루 이내의 시간만 입력가능합니다.");
+        AlarmDialog({
+          title: "하루 이내의 시간만 입력 가능합니다.",
+          type: "warning",
+        });
       } else if (e.target.value < 0) {
         e.target.value = 0;
-        alert("음수값은 입력할 수 없습니다.");
+        AlarmDialog({
+          title: "음수값은 입력할 수 없습니다.",
+          type: "warning",
+        });
       }
     };
-
-    //입력값 관리
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    };
+    
+  //입력값 관리
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
     //setCategory 컴포넌트에서 선택된 카테고리가져오기
     const handleCategorySubmit = (selectedCategories) => {
@@ -57,7 +64,6 @@ export default function Page3 () {
       isCategoriesValid;
       setIsFormValid(isValid);      
     }, [formData]);
-
 
     // 버튼 활성화
     useEffect(()=>{
@@ -96,12 +102,12 @@ export default function Page3 () {
         console.log(formData);
         if (allow){
             try{
-//                 const userLoginResponse = await api.post("/auth/sign-up", {
-//                     email: formData.email,
-//                     name: formData.name,
-//                     password: formData.password
-//                 });
-//                 console.log("유저 로그인 정보 등록 성공:", userLoginResponse.data);
+                const userLoginResponse = await api.post("/auth/sign-up", {
+                    email: formData.email,
+                    name: formData.name,
+                    password: formData.password
+                });
+                console.log("유저 로그인 정보 등록 성공:", userLoginResponse.data);
 
                 //유저 정보 등록 후 건강 정보 등록 기능 실행되도록 함.
                 try{
@@ -110,65 +116,69 @@ export default function Page3 () {
                     const userHealthResponse = await api.put("/users/health-info", initialForm);
                     console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
                     
-                    console.log("회원가입 성공:", formData);
-                    alert('회원가입 성공!');
+                    AlarmDialog({
+                      title: "회원가입 성공!",
+                      type: "success",
+                    });
                     navigate("/"); //로그인 페이지로 이동
                 } catch (error){
                     console.error("건강 정보 등록 실패:", error.response ? error.response.data : error.message);
                 }
             } catch(error){
-                console.error("회원가입 실패:", error.response ? error.response.data : error.message);
-                alert(`회원가입 실패: ${error.response?.data?.message || "서버 에러"}`);
+                AlarmDialog({
+                  title: "회원가입 실패",
+                  content: error.response?.data?.message || "서버 에러",
+                  type: "error",
+                });
             }
         }
     };
 
-
-  const formRef = useRef(null);
-  const handleButtonClick = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    // 폼 수동 제출
-    if (isFormValid) {
-      handleSubmit(e);
-    }
-  };
-  return (
-    <Wrapper>
-      <Box>
-        <H1>
-          하루 운동 시간과
-          <br />
-          운동 목표를 설정해주세요.
-        </H1>
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <TextInputContainer>
-            <P>운동시간</P>
-            <SubContainer>
-              <Input
-                type="number"
-                onInput={onInput}
-                name="exerciseTime"
-                value={formData.exerciseTime}
-                onChange={handleInputChange}
-              ></Input>
-              <P>시간</P>
-            </SubContainer>
-          </TextInputContainer>
-          <SetCategory
-            onSubmit={handleCategorySubmit}
-            isSignUp={true}
-          ></SetCategory>
-          <SignUpButton
-            type="submit"
-            disabled={!allow}
-            onClick={handleButtonClick}
-          >
-            시작하기
-          </SignUpButton>
-        </Form>
-      </Box>
-    </Wrapper>
+    const formRef = useRef(null);
+    const handleButtonClick = (e) => {
+        e.preventDefault();
+        console.log(formData);
+        // 폼 수동 제출
+        if (isFormValid) {
+            handleSubmit(e);
+        }
+    };
+    return(
+        <Wrapper>
+            <Box>
+                <H1>
+                    하루 운동 시간과
+                    <br/>
+                    운동 목표를 설정해주세요.
+                </H1>
+                <Form 
+                ref={formRef} 
+                onSubmit={handleSubmit}
+                >
+                    <TextInputContainer>
+                        <P>운동시간</P>
+                        <SubContainer>
+                            <Input
+                                type="number"
+                                onInput={onInput}
+                                name="exerciseTime"
+                                value={formData.exerciseTime}
+                                onChange={handleInputChange}
+                            ></Input>
+                            <P>시간</P>
+                        </SubContainer>
+                    </TextInputContainer>
+                    <SetCategory onSubmit={handleCategorySubmit} isSignUp={true}></SetCategory>
+                </Form>
+                <SignUpButton 
+                    type="button" 
+                    disabled={!allow}
+                    onClick={handleButtonClick}
+                >
+                    시작하기
+                </SignUpButton>
+            </Box>
+        </Wrapper>
   );
 }
 
@@ -185,21 +195,25 @@ const Box = styled.form`
   width: 600px;
   margin: 0px auto;
 `;
+
 const Form = styled.form`
   width: 500px;
   border-radius: 15px;
 `;
+
 const H1 = styled.h1`
   margin-top: 80px;
   @media (max-width: 480px) {
     font-size: ${responsiveSize("24")};
   }
 `;
+
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
   margin-bottom: ${responsiveSize(9)};
 `;
+
 const TextInputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -209,6 +223,7 @@ const TextInputContainer = styled.div`
     margin-right: ${responsiveSize(16)};
   }
 `;
+
 const Input = styled.input`
   width: ${responsiveSize(120)};
   padding: 13px;
@@ -223,11 +238,13 @@ const Input = styled.input`
     font-size: ${responsiveSize(15)};
   }
 `;
+
 const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
+
 
 const SignUpButton = styled.button`
   align-items: flex-end;
@@ -247,3 +264,4 @@ const SignUpButton = styled.button`
     background-color: #9a9a9a;
   }
 `;
+

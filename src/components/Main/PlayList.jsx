@@ -3,7 +3,13 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import playButton from "../../images/play button.png";
 import { useNavigate } from "react-router-dom";
 
-export default function PlayList({ videoYoutubeId, title, time, id }) {
+export default function PlayList({
+  videoYoutubeId,
+  title,
+  time,
+  id,
+  $dataLength,
+}) {
   const nav = useNavigate();
 
   const thumbnailurl = `https://img.youtube.com/vi/${videoYoutubeId}/0.jpg`;
@@ -16,7 +22,7 @@ export default function PlayList({ videoYoutubeId, title, time, id }) {
     });
   };
   return (
-    <Container $thumbnailurl={thumbnailurl}>
+    <Container $thumbnailurl={thumbnailurl} $dataLength={$dataLength}>
       <Overlay>
         <div>
           <H2>{title}</H2>
@@ -34,7 +40,7 @@ const Container = styled.div`
   background-image: url(${({ $thumbnailurl }) => $thumbnailurl});
   background-size: cover;
   background-position: center;
-  width: 20%;
+  width: ${({ $dataLength }) => `${100 / $dataLength}%`};
   border-radius: 31px;
   height: ${responsiveSize("300")};
   position: relative;

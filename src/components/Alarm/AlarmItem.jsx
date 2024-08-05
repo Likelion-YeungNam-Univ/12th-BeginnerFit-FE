@@ -36,18 +36,16 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
 
   // 친구 요청 수락 거절 버튼 눌렀을 때 실행할 함수
   const handleOnFriend = (text, userId) => {
+    setCount(count - 1);
+    handleAlarmClick(id);
     setAlarmCheck(true);
     // api 호출
     handleFriendRequest(text, userId);
-    // ui 변경 트리거
-    if (text === "sure") {
-      setSure(true);
-    } else {
-      setSure(false);
-    }
   };
 
   const handleOnChat = (postId) => {
+    // 안 읽은 알람수 -1 하기
+    setCount(count - 1);
     setAlarmCheck(true);
     // 알람을 읽음 상태로 만들기
     handleAlarmClick(id);
@@ -55,6 +53,8 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
   };
 
   const handleChallenge = () => {
+    // 안 읽은 알람수 -1 하기
+    setCount(count - 1);
     setAlarmCheck(true);
     // 알람을 읽음 상태로 만들기
     handleAlarmClick(id);
@@ -72,12 +72,12 @@ export const AlarmItem = ({ type, data, time, userId, id, check }) => {
       // 친구 요청인 경우 이미지 클릭해도 바뀌지 않게 수정
       () => {};
     } else {
+      // 안 읽은 알람수 -1 하기
+      setCount(count - 1);
       setAlarmCheck(true);
       handleAlarmClick(id);
       nav("/friendList");
     }
-    // 안 읽은 알람수 -1 하기
-    setCount(count - 1);
   };
 
   // type에 따라 이미지와 텍스트 바꿈

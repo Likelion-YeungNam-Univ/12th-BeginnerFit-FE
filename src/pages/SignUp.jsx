@@ -37,12 +37,12 @@ export default function SignUp() {
             <SwiperSlide>
             <PrevButton onClick={() => (navigate(-1))}></PrevButton>
             <Page1 swiperRef={swiperRef}/>
-            <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> {/* 테스트용 */}
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
             <Page2 swiperRef={swiperRef}/>
-            <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> {/* 테스트용 */}
+            {/* <NextButton onClick={() => swiperRef.current.slideNext()}>다음으로</NextButton> */} {/* 테스트용 */}
             </SwiperSlide>
             <SwiperSlide>
             <PrevButton onClick={() => swiperRef.current.slidePrev()}>&#10094;</PrevButton>
@@ -61,9 +61,6 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* .swiper-pagination {
-    top: 20px; // 페이지 인디케이터를 상단으로 이동
-  } */
 `;
 
 const PrevButton = styled(IoIosArrowBack)`

@@ -1,4 +1,5 @@
 import api from "../axios";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 // 알림창에서 친구 요청 수락 거절
 export const handleFriendRequest = async (type, id) => {
@@ -7,8 +8,16 @@ export const handleFriendRequest = async (type, id) => {
   // type이 sure이면 친구 추가, 아니면 거절
   if (type === "sure") {
     const res = await api.put(url);
+    AlarmDialog({
+      title: "친구 추가 완료!",
+      type: "success",
+    });
   } else {
     const res = await api.delete(url);
+    AlarmDialog({
+      title: "친구 거절 완료!",
+      type: "success",
+    });
   }
 };
 
