@@ -182,7 +182,6 @@ export default function Page1({swiperRef}) {
 
 const Wrapper = styled.div`
     display: flex;
-    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};

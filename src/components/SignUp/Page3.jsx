@@ -5,7 +5,6 @@ import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
-import axios from "axios";
 
 export default function Page3() {
   // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
@@ -62,7 +61,7 @@ export default function Page3() {
   // 회원가입 성공 시 메인 화면으로 이동
   const navigate = useNavigate();
 
-  const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"]; //8월 4일 순서변경
+  const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"];
   // formData.categories의 값을 categoryName 배열과 매핑
   const setCategory = categoryName.reduce((acc, key, idx) => {
     const formKey = Object.keys(formData.categories)[idx]; // formData.categories의 키 값을 가져옴
@@ -98,13 +97,13 @@ export default function Page3() {
         //유저 정보 등록 후 건강 정보 등록 기능 실행되도록 함.
         try {
           console.log(initialForm);
+
           const userHealthResponse = await api.put(
             "/users/health-info",
             initialForm
           );
-
-
           console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
+
           console.log("회원가입 성공:", formData);
           alert("회원가입 성공!");
           navigate("/"); //로그인 페이지로 이동
@@ -160,14 +159,14 @@ export default function Page3() {
             onSubmit={handleCategorySubmit}
             isSignUp={true}
           ></SetCategory>
-          <SignUpButton
-            type="submit"
-            disabled={!allow}
-            onClick={handleButtonClick}
-          >
-            시작하기
-          </SignUpButton>
         </Form>
+        <SignUpButton
+          type="button"
+          disabled={!allow}
+          onClick={handleButtonClick}
+        >
+          시작하기
+        </SignUpButton>
       </Box>
     </Wrapper>
   );

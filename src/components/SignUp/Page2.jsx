@@ -101,6 +101,11 @@ export default function Page2 ({swiperRef}) {
                         onChange={handleName}
                     ></MyInput>
                     {/* 에러 메시지 필요 */}
+                    <ErrorMsg>
+                        {!nameValid && formData.name.length > 0 && (
+                            <div>영문, 숫자, 특수문자 포함 3자~10자 입력해주세요.</div>
+                        )}
+                    </ErrorMsg>
                     <TextInputContainer>
                         <P>키</P>
                         <SubContainer>
@@ -186,7 +191,6 @@ export default function Page2 ({swiperRef}) {
 
 const Wrapper = styled.div`
     display: flex;
-    /* align-items: center; */
     height: 100vh;
     background-color: ${({ theme }) => theme.colors.white};
     border: solid 1px ${({ theme }) => theme.colors.gray04};
@@ -214,7 +218,6 @@ const ItemName = styled.div`
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
-  /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(9)};
 
   //글씨 채우기용(화면 상에서는 안보이도록 )
@@ -226,8 +229,6 @@ const P = styled.p`
 
 const MyInput = styled.input`
     width: 100%;
-    /* height: ${responsiveSize(40)}; */
-    /* font-size: ${responsiveSize("17")}; */
     font-weight: 400;
     border-radius: ${responsiveSize("12")};
     background-color: ${({ theme }) => theme.colors.gray01};
@@ -236,6 +237,11 @@ const MyInput = styled.input`
     border: none;
     box-sizing: border-box;
 `
+const ErrorMsg = styled.div`
+    color: red;
+    font-size: small;
+`
+
 const TextInputContainer = styled.div`
   display: flex;
   flex-direction: column;

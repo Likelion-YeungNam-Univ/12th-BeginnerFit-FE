@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 export default function ForgetIdP1({name, setName, swiperRef}) {
     const [value, setValue] = useState('');
-    // const [name, setName] = useState('');
     const [allow, setAllow] = useState(false);
 
     // 버튼 활성화
@@ -18,7 +17,6 @@ export default function ForgetIdP1({name, setName, swiperRef}) {
 
     const handleNext = () => {
         if (allow) {
-            // localStorage.setItem('findName', name);
             setName(value);
             swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
         }
