@@ -45,4 +45,4 @@ jobs:
             cd /home/ubuntu/12th-BeginnerFit-FE/
             git pull origin develop
             npm install
-            npm run dev -- --host 0.0.0.0
+            nohup npm run dev -- --host 0.0.0.0 &
