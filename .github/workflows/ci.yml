@@ -1,0 +1,26 @@
+name: Check Build Possibility
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  # 1. Build 명령어를 활용한 테스트 진행
+  build-test:
+    runs-on: ubuntu-20.04
+    env:
+      DISABLE_ESLINT_PLUGIN: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version: "21.2.0"
+      - name: Install dependencies
+        run: npm install
+      - name: Create .env file
+        run: echo "VITE_SERVER_URL${{ secrets.VITE_SERVER_URL }}" > .env
+          echo "VITE_YOUTUBE_API =${{ secrets.VITE_YOUTUBE_API }}" >> .env
+          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" >> .env
+          cat .env
+      - name: Try build
+        run: npm run build
