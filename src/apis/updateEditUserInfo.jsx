@@ -23,7 +23,7 @@ export const updateEditUserInfo = async (form, email) => {
     targetWeight: parseFloat(form.targetWeight),
     date: form.date,
     targetDate: form.targetDate,
-    exerciseTime: parseInt(form.exerciseTime),
+    exerciseTime: parseInt(form.exerciseTime)*60,
     exerciseIntensity: setCategory["exerciseIntensity"],
     exerciseGoals: setCategory["exerciseGoals"],
     concernedAreas: setCategory["concernedAreas"],
@@ -42,5 +42,6 @@ export const updateEditUserInfo = async (form, email) => {
       title: "오류가 발생했습니다.",
       type: "error",
     })
+    console.log(error)
   }
 };

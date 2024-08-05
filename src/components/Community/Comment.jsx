@@ -219,7 +219,7 @@ const CommentItem = styled.div`
 `;
 
 const TextInput = styled.input`
-  padding: ${responsiveSize("10")};
+  padding: ${responsiveSize("8")};
   border-radius: ${responsiveSize("30")};
   height: ${responsiveSize("35")};
   font-size: ${responsiveSize("20")};

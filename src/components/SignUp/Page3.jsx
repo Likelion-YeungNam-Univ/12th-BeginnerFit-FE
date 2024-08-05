@@ -4,7 +4,6 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from "./FormContext";
-import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
 import AlarmDialog from "../../styles/AlarmDialog";
 

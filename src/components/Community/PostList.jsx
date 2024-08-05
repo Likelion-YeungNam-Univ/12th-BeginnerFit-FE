@@ -45,7 +45,7 @@ export default function PostList({ category }) {
     }
   }, [arr]);
   useEffect(() => {
-    console.log("Fetched data: ", arr);
+    //console.log("Fetched data: ", arr);
     async function loadInitialCommentCounts() {
       if (arr && arr.length > 0) {
         for (const post of arr) {

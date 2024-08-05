@@ -41,7 +41,7 @@ api.interceptors.response.use(
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
-        console.error("Token refresh failed:", refreshError);
+       
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
@@ -54,17 +54,14 @@ api.interceptors.response.use(
 );
 
 const refreshToken = async () => {
-  try {
+  
     const refreshToken = localStorage.getItem("refreshToken");
     if (!refreshToken) {
       throw new Error("No refresh token available");
     }
     const response = await api.post("/refresh-token", { token: refreshToken });
     return response.data.accessToken;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  
 };
 
 export default api;
