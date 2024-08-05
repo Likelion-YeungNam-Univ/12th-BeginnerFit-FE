@@ -17,14 +17,12 @@ export default function Page3 () {
     const onInput = (e) => {
       if (Number(e.target.value) > 24) {
         e.target.value = 0;
-        console.log("하루 이내의 시간만 입력가능합니다.");
         AlarmDialog({
           title: "하루 이내의 시간만 입력 가능합니다.",
           type: "warning",
         });
       } else if (e.target.value < 0) {
         e.target.value = 0;
-        console.log("음수값은 입력할 수 없습니다.");
         AlarmDialog({
           title: "음수값은 입력할 수 없습니다.",
           type: "warning",
@@ -115,7 +113,6 @@ export default function Page3 () {
                     const userHealthResponse = await api.put("/users/health-info", initialForm);
                     console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
                     
-                    console.log("회원가입 성공:", formData);
                     AlarmDialog({
                       title: "회원가입 성공!",
                       type: "success",
@@ -125,7 +122,6 @@ export default function Page3 () {
                     console.error("건강 정보 등록 실패:", error.response ? error.response.data : error.message);
                 }
             } catch(error){
-                console.error("회원가입 실패:", error.response ? error.response.data : error.message);
                 AlarmDialog({
                   title: "회원가입 실패",
                   content: error.response?.data?.message || "서버 에러",

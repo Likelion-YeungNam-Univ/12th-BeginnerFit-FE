@@ -56,14 +56,12 @@ function Login() {
     } catch (error) {
       console.error("로그인 실패:", error);
       if (error.response) {
-        console.error("서버 응답:", error.response.data);
         AlarmDialog({
           title: "로그인 실패",
           content: error.response.data.message || "서버 에러",
           type: "error",
         });
       } else {
-        console.error("오류 메시지:", error.message);
         AlarmDialog({
           title: "로그인 실패",
           content: error.message,
