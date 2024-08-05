@@ -27,7 +27,7 @@ export default function WriteBoardMain({ post }) {
   const [isMyFriend, setIsMyFriend] = useState(false);
   const navigate = useNavigate();
 
-  // post가 없는 경우를 
+  // post가 없는 경우를
   useEffect(() => {
     if (!post) {
       AlarmDialog({
@@ -55,9 +55,6 @@ export default function WriteBoardMain({ post }) {
     if (data && user) {
       setIsMyPost(Number(user.userId) === Number(postWriterId));
     }
-    //console.log(isMyPost);
-    //console.log("유저", user.userId);
-    //console.log("게시글", postWriterId);
   }, [data, user, postWriterId, isMyPost]);
 
   useEffect(() => {
@@ -79,7 +76,7 @@ export default function WriteBoardMain({ post }) {
       !friendsLoading &&
       !friendsPendingLoading &&
       !friendsWaitingLoading &&
-      (error )
+      error
     ) {
       AlarmDialog({
         title: "유효하지 않은 게시물입니다.",

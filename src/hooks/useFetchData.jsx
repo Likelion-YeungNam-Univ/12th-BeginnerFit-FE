@@ -19,7 +19,7 @@ const useFetchData = (url) => {
         setArr(response.data);
         setTotal(Object.entries(response.data).length);
       } catch (err) {
-        //console.log(err);
+  
         setError(err);
       } finally {
         setIsLoading(false);

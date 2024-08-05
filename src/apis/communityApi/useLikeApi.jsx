@@ -19,10 +19,8 @@ export const useLikeApi = (post) => {
     queryFn: async () => {
       const response = await api.get(`/posts/${post?.id}/likes/check`);
       //좋아요 되어 있으면 true
-      //console.log(response);
       return response.data;
     },
-    //refetchInterval: 1000, //1초마다 한 번씩 수동 통신
   });
 
   //Mutation

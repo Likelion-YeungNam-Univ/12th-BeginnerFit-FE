@@ -49,8 +49,6 @@ export default function DropDown({ post = null }) {
   if (!myInfo) {
     return <div>Loading user info...</div>;
   }
-  //console.log("내정보 id:", myInfo[0].id);
-  //console.log("게시물정보 id:", post.userId);
   const isMyPost = myInfo[0]?.id === post?.userId ? "mypost" : "notmypost";
 
   // 옵션 구성 함수
@@ -88,7 +86,6 @@ export default function DropDown({ post = null }) {
       try {
         const response = await api.delete(`/posts/${post.id}`);
         const message = response.data?.message || "게시물이 삭제되었습니다.";
-        //console.log(message);
         AlarmDialog({
           title: "게시물 삭제",
           text: "게시물이 삭제되었습니다.",
@@ -99,7 +96,6 @@ export default function DropDown({ post = null }) {
       } catch (error) {
         const errorMessage =
           error.response?.data?.message || "게시물 삭제 오류";
-        //console.log(errorMessage, error);
         AlarmDialog({
           title: "오류",
           text: "게시물 삭제 오류",
@@ -135,46 +131,38 @@ export default function DropDown({ post = null }) {
         기타사유: "기타 사유",
       },
     });
-    //console.log("게시물 신고", selectReason);
 
     try {
       await api.post(`/posts/${post.id}/declarations`, {
         reason: selectReason,
       });
-      //console.log(response);
       AlarmDialog({
-        title:"신고",
-        type:"info",
-        text:"해당 게시물에 신고되었습니다."
-      })
+        title: "신고",
+        type: "info",
+        text: "해당 게시물에 신고되었습니다.",
+      });
       // 게시물 목록으로 이동
       navigate("/posts");
-    } catch (error) {
-      //console.log("게시물 신고 오류", error);
-    }
+    } catch (error) {}
   };
 
   //게시물 저장함수
   const scrapPost = async () => {
     if (post?.id === undefined) {
       AlarmDialog({
-        title:"오류",
-        text:"해당 게시글은 존재하지않습니다.",
-        type:"warning"
-      })
+        title: "오류",
+        text: "해당 게시글은 존재하지않습니다.",
+        type: "warning",
+      });
       return;
     }
-    try {
-      await api.post(`/posts/${post.id}/scraps`);
-      //console.log(response);
-      await AlarmDialog({
-        title:"저장",
-        text:"게시물이 저장되었습니다.",
-        type:"success"
-      })
-    } catch (error) {
-      //console.log("게시물 저장 오류", error);
-    }
+
+    await api.post(`/posts/${post.id}/scraps`);
+    await AlarmDialog({
+      title: "저장",
+      text: "게시물이 저장되었습니다.",
+      type: "success",
+    });
   };
   // 각 옵션별 수행 함수
   const handleAction = (action) => {

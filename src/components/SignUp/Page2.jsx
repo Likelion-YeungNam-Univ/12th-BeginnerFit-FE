@@ -85,10 +85,6 @@ export default function Page2 ({swiperRef}) {
         setAllow(false);
     },[ nameValid, isFormValid ]);
 
-    //폼 값 확인용
-    const handleFormCheck = () => {
-        console.log("formData: ",formData);
-    };
 
     return(
         <Wrapper>
@@ -185,7 +181,7 @@ export default function Page2 ({swiperRef}) {
                     type="button"
                     disabled={!allow}
                     onClick={() => {
-                        handleFormCheck();
+                       
                         swiperRef.current.slideNext(); // 다음 페이지로 이동 (page3으로)
                     }}
                 >

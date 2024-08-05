@@ -16,11 +16,9 @@ export default function ForgetIdP2({name}) {
             if (name) {
                 try {
                     const data = await findId(name);
-                    console.log(data);
                     setEmail(data);
                 } catch (error) {
                     setEmail('') //유효한 name 입력 후 유효하지 않은 name 입력 시 email 값 초기화
-                    console.error('Error fetching email:', error);
                     setError('서버 오류');
                 } finally {
                     setLoading(false);

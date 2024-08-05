@@ -65,7 +65,6 @@ export default function EditUserInfo() {
     },
     //회원정보 불러오기 성공 시
     onSuccess: (data) => {
-      //console.log(userInfo);
       setForm({
         height: data.height,
         weight: data.weight,
@@ -85,7 +84,11 @@ export default function EditUserInfo() {
   const { mutate, error } = useMutation({
     mutationFn: (form) => updateEditUserInfo(form, user.email),
     onError: () => {
-      //console.log(error);
+      AlarmDialog({
+        title: "게시물 오류",
+        text: "게시물을 불러오는데 오류가 발생했습니다.",
+        type: "error",
+      });
     },
     onSuccess: () => {
       navigate("/mypage");
@@ -146,7 +149,7 @@ export default function EditUserInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate(form);
-    //console.log(" form state:", form);
+
   };
   //내 정보불러오기 오류
   if (myInfoError) {

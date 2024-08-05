@@ -33,14 +33,10 @@ function Login() {
       email,
       password,
     };
-    console.log("로그인 요청 데이터:", data);
-    console.log(
-      "API 엔드포인트:",
-      import.meta.env.VITE_SERVER_URL + "/auth/sign-in"
-    );
+
     try {
       const res = await api.post("/auth/sign-in", data);
-      console.log("로그인 성공", res.data);
+
       // 토큰 저장
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("refreshToken", res.data.refreshToken);
