@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { responsiveSize } from "../../utils/Mediaquery";
 import styled, {css} from 'styled-components';
 import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function ForgetPwP1({email, setEmail, swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);

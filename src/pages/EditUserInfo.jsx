@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 
 import api from "../apis/axios.jsx";
+import AlarmDialog from "../styles/AlarmDialog.jsx";
 export default function EditUserInfo() {
   const user = useUserInfo((state) => state.user);
   const navigate = useNavigate();
@@ -38,10 +39,16 @@ export default function EditUserInfo() {
   const onInput = (e) => {
     if (e.target.value.length > 3) {
       e.target.value = 0;
-      alert("3자리까지만 입력가능합니다.");
+      AlarmDialog({
+        title: "3자리까지만 입력가능합니다.",
+        type: "info",
+      });
     } else if (e.target.value < 0) {
       e.target.value = 0;
-      alert("음수값은 입력할 수 없습니다.");
+      AlarmDialog({
+        title: "음수값은 입력할 수 없습니다.",
+        type: "info",
+      });
     }
   };
 
@@ -78,7 +85,7 @@ export default function EditUserInfo() {
   const { mutate, error } = useMutation({
     mutationFn: (form) => updateEditUserInfo(form, user.email),
     onError: () => {
-      console.log(error);
+      //console.log(error);
     },
     onSuccess: () => {
       navigate("/mypage");
@@ -116,11 +123,9 @@ export default function EditUserInfo() {
       //빈문자열 판단.
       return value !== "" && value !== null;
     };
-    console.log("Current form state:", form);
     // 카테고리 유효성 (각 카테고리별 1개 이상은 선택)
     let isCategoriesValid = Object.values(categories).every((arr) => {
       let isValid = arr.length > 0 && arr.some((value) => isValuesValid(value));
-      console.log(`Category validity: ${isValid}`, arr);
       return isValid;
     });
 
@@ -141,7 +146,7 @@ export default function EditUserInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate(form);
-    console.log(" form state:", form);
+    //console.log(" form state:", form);
   };
   //내 정보불러오기 오류
   if (myInfoError) {

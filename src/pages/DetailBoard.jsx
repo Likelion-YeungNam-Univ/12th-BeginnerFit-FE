@@ -11,8 +11,6 @@ export default function DetailBoard() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //Zustand에서 데이터 가져오기
-
   //게시물 불러오기
   const handleGetPosts = async () => {
     setLoading(true);
@@ -20,7 +18,6 @@ export default function DetailBoard() {
       //게시물 불러오는 함수 호출
       await getPostApi(idx, setPost, setLoading);
     } catch (error) {
-      console.log("게시물 불러오기 실패", error);
       setLoading(false);
     }
   };

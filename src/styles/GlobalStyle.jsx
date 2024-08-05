@@ -69,7 +69,7 @@ export const BottomNavContainer = styled.nav`
   justify-content: space-around;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.black};
-  height: ${responsiveSize("90")};
+  height: ${responsiveSize("70")};
   border-top-left-radius: ${responsiveSize("30")};
   border-top-right-radius: ${responsiveSize("30")};
   z-index: 1;

@@ -62,7 +62,6 @@ export default function ChallengeList() {
   // 챌린지 가져오고 state에 저장
   useEffect(() => {
     if (data) {
-      console.log(data);
       setChallengeList(data);
       setAllComplete(data.length === 3 && data.every((item) => item.completed));
     }

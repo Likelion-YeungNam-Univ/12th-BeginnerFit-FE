@@ -14,6 +14,8 @@ import useFetchData from "../../hooks/useFetchData";
 import { useUserInfo } from "../../store/useUserInfo";
 import { useLikeApi } from "../../apis/communityApi/useLikeApi";
 import { motion } from "framer-motion";
+import { usePostData } from "../../hooks/usePostData";
+import AlarmDialog from "../../styles/AlarmDialog";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function WriteBoardMain({ post }) {
   const [totalComments, setTotalComments] = useState(0);
@@ -23,40 +25,91 @@ export default function WriteBoardMain({ post }) {
   //친구인가
   const [isMyFriend, setIsMyFriend] = useState(false);
   const { data, isLoading, error } = useFetchData(`/posts/${post.id}`);
-  //친구 판단 API
-  // const {
-  //   data: friendData,
-  //   isLoading: friendLoading,
-  //   error: friendError,
-  // } = useFetchData(``);
   const user = useUserInfo((state) => state.user);
-  //친구 확인 API구현
-  //1.게시글을 쓴 유저정보(유저아이디)가져오기
 
-  // const response = async () => {
-  //   try {
-  //     const response = await api.post("/friends/request",post.);
+  //친구 판단
+  const { arr: friends, isLoading: friendsLoading } = useFetchData(`/friends`);
+  const { arr: friendsPending, isLoading: friendsPendingLoading } =
+    useFetchData(`/friends/pending`); //친구 요청대기
+  const { arr: friendsWaiting, isLoading: friendsWaitingLoading } =
+    useFetchData("/friends/waiting"); //친구 요청목록
+  const postWriterId = post.userId;
 
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  //친구요청보내기
+  const { postData } = usePostData(`/friends/request/${postWriterId}`);
+
   //내 게시물인지 판단.
   useEffect(() => {
     if (data && user) {
-      setIsMyPost(Number(user.userId) === Number(data?.userId));
+      setIsMyPost(Number(user.userId) === Number(postWriterId));
     }
-  }, [data, user]);
+    //console.log(isMyPost);
+    //console.log("유저", user.userId);
+    //console.log("게시글", postWriterId);
+  }, [data, user, postWriterId, isMyPost]);
+
+  useEffect(() => {
+    //아래 조건 다 만족하면(true) 친구가 아님(또는 요청 중)
+    const isFriend =
+      !friends.some((friend) => friend.id === postWriterId) &&
+      !friendsPending.some((friend) => friend.id === postWriterId) &&
+      !friendsWaiting.some((friend) => friend.id === postWriterId);
+    setIsMyFriend(isFriend);
+  }, [friends, friendsPending, friendsWaiting, postWriterId]);
 
   const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);
 
-  if (isLoading || isLikeLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading user info</div>;
+  if (
+    isLoading ||
+    isLikeLoading ||
+    friendsLoading ||
+    friendsPendingLoading ||
+    friendsWaitingLoading
+  )
+    return <div>Loading...</div>;
+  //if (error) return <div>Error loading user info</div>;
 
   const handleClicked = () => {
+    //알람 다이얼로그 띄우기
+    AlarmDialog({
+      title: "친구요청",
+      text: "친구 요청을 보냈습니다.",
+      type: "success",
+    });
+    //친구요청 보내기
+    postData();
     //친구요청을 보낸 상태유지(체크표시유지)
     setIsClicked(true);
   };
+
+  let content;
+  //내 게시글인 경우
+  if (isMyPost) content = null;
+  //친구가 아닌 상태
+  else if (isMyFriend) {
+    content = (
+      <IconHover onClick={handleClicked}>
+        {isClicked ? (
+          <AnimationCheck size={20} />
+        ) : (
+          <IoPersonAddOutline
+            style={{
+              width: `${responsiveSize("20")}`,
+              height: "auto",
+              cursor: "pointer",
+            }}
+          />
+        )}
+      </IconHover>
+    );
+  } //친구일 때
+  else if (!isMyFriend) {
+    content = (
+      <IconHover>
+        <AnimationCheck size={20} />
+      </IconHover>
+    );
+  }
 
   return (
     <>
@@ -70,21 +123,7 @@ export default function WriteBoardMain({ post }) {
           {/* 이미 친구이면 체크표시 */}
           {/* 친구가 아니면 +표시 */}
           {/* 내 게시물이면 친구 추가 버튼 없애기 */}
-          {!isMyPost && (
-            <IconHover onClick={handleClicked}>
-              {isClicked ? (
-                <AnimationCheck size={20} />
-              ) : (
-                <IoPersonAddOutline
-                  style={{
-                    width: `${responsiveSize("20")}`,
-                    height: "auto",
-                    cursor: "pointer",
-                  }}
-                />
-              )}
-            </IconHover>
-          )}
+          {content}
         </RowContainer>
         <TitleContentContainer>
           <Title>{post?.title}</Title>

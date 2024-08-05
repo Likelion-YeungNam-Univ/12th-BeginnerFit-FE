@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { resetPassword } from "../../apis/findPW";
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function ForgetPwP2({email}) {
     const navigate = useNavigate();

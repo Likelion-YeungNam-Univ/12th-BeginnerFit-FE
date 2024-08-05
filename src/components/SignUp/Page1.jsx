@@ -3,7 +3,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import styled, { css } from 'styled-components';
 import { FormContext } from './FormContext';
 import { sendAuthCode, verifyAuthCode } from '../../apis/emailVerify';
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Page1({swiperRef}) {
     const [emailValid, setEmailValid] = useState(false);

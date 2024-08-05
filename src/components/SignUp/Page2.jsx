@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { responsiveSize } from "../../utils/Mediaquery";
 import { RowContainer } from "../../styles/GlobalStyle";
 import { FormContext } from './FormContext';
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Page2 ({swiperRef}) {
     const [nameValid, setNameValid] = useState('')

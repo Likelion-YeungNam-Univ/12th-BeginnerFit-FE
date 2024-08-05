@@ -5,13 +5,13 @@ import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
-import { AlarmDialog } from "../../styles/AlarmDialog";
+import AlarmDialog from "../../styles/AlarmDialog";
 
-export default function Page3 () {
-    const navigate = useNavigate();
+export default function Page3() {
+  const navigate = useNavigate();
 
-    // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
-    const { formData, setFormData } = useContext(FormContext);
+  // page1,2,3 입력 데이터 받아오기 위한 전역 상태 함수
+  const { formData, setFormData } = useContext(FormContext);
 
     //음수값 자릿수 제한
     const onInput = (e) => {
@@ -29,15 +29,15 @@ export default function Page3 () {
         });
       }
     };
-
-    //입력값 관리
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    };
+    
+  //입력값 관리
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
     //setCategory 컴포넌트에서 선택된 카테고리가져오기
     const handleCategorySubmit = (selectedCategories) => {
@@ -176,15 +176,16 @@ export default function Page3 () {
                 </SignUpButton>
             </Box>
         </Wrapper>
-    );
+  );
 }
 
 const Wrapper = styled.div`
-    display: flex;
-    height: 100vh;
-    background-color: ${({ theme }) => theme.colors.white};
-    border: solid 1px ${({ theme }) => theme.colors.gray04};
-`
+  display: flex;
+  /* align-items: center; */
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: solid 1px ${({ theme }) => theme.colors.gray04};
+`;
 const Box = styled.form`
   display: grid;
   justify-content: center;
@@ -205,6 +206,7 @@ const H1 = styled.h1`
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
+  /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(9)};
 `;
 const TextInputContainer = styled.div`

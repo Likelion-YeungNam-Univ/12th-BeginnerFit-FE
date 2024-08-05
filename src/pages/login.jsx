@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import api from "../apis/axios";
 import { useUserInfo } from "../store/useUserInfo";
-import { AlarmDialog } from "../styles/AlarmDialog";
+import AlarmDialog from "../styles/AlarmDialog";
 
 function Login() {
   const [email, setEmail] = useState("dusrl123@naver.com");

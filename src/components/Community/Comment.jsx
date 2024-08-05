@@ -9,6 +9,7 @@ import { useRef, useCallback, useState, useEffect } from "react";
 import CommentDropDown from "./CommentDropDown";
 import api from "../../apis/axios";
 import { useUserInfo } from "../../store/useUserInfo";
+import AlarmDialog from "../../styles/AlarmDialog";
 
 export default function Comment({ post }) {
   const {
@@ -58,7 +59,11 @@ export default function Comment({ post }) {
       const response = await api.put(`/posts/comments/${commentId}`, {
         content: editCommentText,
       });
-      const message = response.data?.message || "댓글이 수정되었습니다.";
+      AlarmDialog({
+        title:"댓글 수정",
+        text:"댓글이 수정되었습니다.",
+        type:"success"
+      })
       // alert(message);
       setIsEditMode(false);
       setEditCommentText("");
@@ -66,7 +71,11 @@ export default function Comment({ post }) {
       reloadComments();
     } catch (error) {
       const errorMessage = error.response?.data?.message || "댓글 수정 오류";
-      alert(errorMessage);
+      AlarmDialog({
+        title:"오류",
+        text:"댓글 수정에 실패했습니다.",
+        type:"error",
+      })
     }
   };
   //댓글 최신순 정리
