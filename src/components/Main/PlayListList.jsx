@@ -15,7 +15,6 @@ export default function PlayListList() {
 
   // 자동 슬라이드 효과
   useEffect(() => {
-    console.log(data);
     if (!isAutoSliding) return;
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % data.length);
@@ -34,6 +33,7 @@ export default function PlayListList() {
       <SlideContainer $currentSlide={currentSlide} $dataLength={data?.length}>
         {data?.map((item) => (
           <PlayList
+            $dataLength={data?.length}
             key={item.id}
             id={item.id}
             title={item.title}

@@ -16,11 +16,17 @@ export const AlarmList = () => {
     if (data) {
       // 안 읽은 알람 수 저장할 변수
       let count = 0;
+
+      // 알림 안 읽은 갯수 카운트
+      // sort문 안에 작성하니 이상하게 동작하여 따로 반복문을 돌도록 수정하였습니다
+      data.forEach((item) => {
+        if (!item.alarmChecked) count++;
+      });
       // 최신 순으로 업데이트
       let arr = data.sort((a, b) => {
-        if (!a.alarmChecked) count++;
         return new Date(b.alarmDate) - new Date(a.alarmDate);
       });
+
       setCount(count);
       setAlarmList(arr);
     }
@@ -37,7 +43,11 @@ export const AlarmList = () => {
               time={item.alarmDate}
               id={item.alarmId}
               key={item.alarmId}
-              userId={item.userId}
+              userId={
+                item.alarmType === "FRIEND_REQUEST"
+                  ? item.alarmMessage.split(" ")[1]
+                  : item.userId
+              }
               check={item.alarmChecked}
             />
           ))}
