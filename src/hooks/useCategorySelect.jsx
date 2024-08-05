@@ -14,7 +14,7 @@ export const useCategorySelect = (list, onSubmit, initialCategories = null) => {
   const [selectedItems, setSelectedItems] = useState(
     initialCategories || initialSelected(list)
   );
- // console.log(selectedItems);
+
   //카테고리 선택 시 객체 생성
   const handleSelectedItems = (key, value) => {
     setSelectedItems((prev) => {
@@ -29,13 +29,13 @@ export const useCategorySelect = (list, onSubmit, initialCategories = null) => {
         newSelected[key].push(value);
       }
 
-      //console.log("newSelected:", newSelected); //테스트
+
       return newSelected;
     });
   };
   useEffect(() => {
     if (initialCategories) {
-      //console.log("Setting initial categories:", initialCategories);
+
       setSelectedItems(initialCategories);
     }
   }, [initialCategories]);

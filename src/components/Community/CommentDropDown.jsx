@@ -25,7 +25,6 @@ export default function CommentDropDown({
   };
 
   const user = useUserInfo((state) => state.user);
-  //console.log(user);
   const myInfo = user?.userId;
   const isMyComment = myInfo === comment?.userId ? "mycomment" : "notmycomment";
   // post가 없을 경우 기본 UI만 렌더링

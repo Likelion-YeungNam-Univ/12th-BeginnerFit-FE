@@ -89,7 +89,7 @@ export default function Page3() {
         targetWeight: parseFloat(formData.targetWeight),
         date: formData.date,
         targetDate: formData.targetDate,
-        exerciseTime: parseInt(formData.exerciseTime)*60, //시간으로 받은 데이터 값 -> 분 단위로 변경
+        exerciseTime: parseInt(formData.exerciseTime), //시간으로 받은 데이터 값 -> 분 단위로 변경
         exerciseIntensity: setCategory["exerciseIntensity"],
         exerciseGoals: setCategory["exerciseGoals"],
         concernedAreas: setCategory["concernedAreas"],
@@ -98,7 +98,6 @@ export default function Page3() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         if (allow){
             try{
                 const userLoginResponse = await api.post("/auth/sign-up", {
@@ -106,23 +105,15 @@ export default function Page3() {
                     name: formData.name,
                     password: formData.password
                 });
-                console.log("유저 로그인 정보 등록 성공:", userLoginResponse.data);
-
+            
                 //유저 정보 등록 후 건강 정보 등록 기능 실행되도록 함.
-                try{
-                    console.log(initialForm);
-
                     const userHealthResponse = await api.put("/users/health-info", initialForm);
-                    console.log("유저 건강 정보 등록 성공:", userHealthResponse.data);
-                    
                     AlarmDialog({
                       title: "회원가입 성공!",
                       type: "success",
                     });
                     navigate("/"); //로그인 페이지로 이동
-                } catch (error){
-                    console.error("건강 정보 등록 실패:", error.response ? error.response.data : error.message);
-                }
+                
             } catch(error){
                 AlarmDialog({
                   title: "회원가입 실패",
@@ -136,7 +127,7 @@ export default function Page3() {
     const formRef = useRef(null);
     const handleButtonClick = (e) => {
         e.preventDefault();
-        console.log(formData);
+
         // 폼 수동 제출
         if (isFormValid) {
             handleSubmit(e);

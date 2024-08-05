@@ -69,14 +69,11 @@ export default function Page1({swiperRef}) {
         }
     }
 
-    //폼 값 확인용
-    const handleFormCheck = () => {
-        console.log("formData: ",formData);
-    };
+
 
     const handleAuthCodeRequest = async (e) => {
         e.preventDefault();
-        console.log('인증번호버튼이 클릭됨.');
+
         await sendAuthCode(formData.email);
         setEmailSent(true);
         AlarmDialog({
@@ -178,7 +175,6 @@ export default function Page1({swiperRef}) {
                     type="button"
                     disabled={!allow}
                     onClick={() => {
-                        handleFormCheck();
                         swiperRef.current.slideNext(); // 다음 페이지로 이동 (page2로)
                     }} 
                 >

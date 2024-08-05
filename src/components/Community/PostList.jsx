@@ -40,12 +40,10 @@ export default function PostList({ category }) {
       const sortedPosts = [...arr].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
-      //console.log(sortedPosts);
       setPosts(sortedPosts);
     }
   }, [arr]);
   useEffect(() => {
-    //console.log("Fetched data: ", arr);
     async function loadInitialCommentCounts() {
       if (arr && arr.length > 0) {
         for (const post of arr) {
@@ -161,7 +159,7 @@ const ContentText = styled.div`
   overflow: hidden;
   -webkit-line-clamp: 1;
   font-weight: 400;
-  -webkit-box-orient: vertical
+  -webkit-box-orient: vertical;
 `;
 
 const IdText = styled.span`

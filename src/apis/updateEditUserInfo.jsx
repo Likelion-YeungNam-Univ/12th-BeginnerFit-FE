@@ -23,15 +23,14 @@ export const updateEditUserInfo = async (form, email) => {
     targetWeight: parseFloat(form.targetWeight),
     date: form.date,
     targetDate: form.targetDate,
-    exerciseTime: parseInt(form.exerciseTime)*60,
+    exerciseTime: parseInt(form.exerciseTime),
     exerciseIntensity: setCategory["exerciseIntensity"],
     exerciseGoals: setCategory["exerciseGoals"],
     concernedAreas: setCategory["concernedAreas"],
   };
-  //console.log('업데이트',initialForm);
+  
   try {
     const response = await api.put("/users/health-info", initialForm);
-    //console.log("응답:", response.data);
     AlarmDialog({
       text:"회원님의 정보가 수정되었습니다.",
       title: "정보 수정",
@@ -42,5 +41,7 @@ export const updateEditUserInfo = async (form, email) => {
       title: "오류가 발생했습니다.",
       type: "error",
     })
+    
+   
   }
 };

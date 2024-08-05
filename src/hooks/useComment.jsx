@@ -56,8 +56,6 @@ export const useComment = (post) => {
       } else {
         setHasMore(false);
       }
-    } catch (error) {
-      //console.log("댓글 로딩 실패", error);
     } finally {
       setIsLoading(false);
     }

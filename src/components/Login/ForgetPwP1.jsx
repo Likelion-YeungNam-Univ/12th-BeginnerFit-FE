@@ -15,7 +15,6 @@ export default function ForgetPwP1({email, setEmail, swiperRef}) {
     
     const handleAuthCodeRequest = async (e) => {
         e.preventDefault();
-        console.log('인증번호버튼이 클릭됨.');
         await sendAuthCode(email);
         setEmailSent(true);
         AlarmDialog({
