@@ -26,5 +26,5 @@ export const handleAlarmClick = async (alarmId) => {
   let url = `/alarm/${alarmId}/check`;
 
   const res = await api.put(url);
-  console.log(res);
+  //console.log(res);
 };

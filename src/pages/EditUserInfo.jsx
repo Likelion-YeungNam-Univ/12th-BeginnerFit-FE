@@ -146,7 +146,7 @@ export default function EditUserInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate(form);
-    console.log(" form state:", form);
+    //console.log(" form state:", form);
   };
   //내 정보불러오기 오류
   if (myInfoError) {

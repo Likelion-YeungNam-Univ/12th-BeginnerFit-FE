@@ -42,6 +42,5 @@ export const updateEditUserInfo = async (form, email) => {
       title: "오류가 발생했습니다.",
       type: "error",
     })
-    console.log(error)
   }
 };
