@@ -41,6 +41,12 @@
 
 - 알림을 모아볼 수 있어요
 
+### 🔐회원가입
+- 초기 건강정보를 입력해요
+### 🖥로그인 페이지
+- 잊어버린 ID/PW를 찾거나 재설정할 수 있어요
+
+
 ## 기술스택
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"> <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=react query&logoColor=purple"> <img src="https://img.shields.io/badge/zustand-000000?style=for-the-badge&logo=zustand&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> 
 
