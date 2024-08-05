@@ -4,6 +4,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { useState, useEffect, useContext, useRef } from "react";
 import SetCategory from "../MyPage/SetCategory";
 import { FormContext } from "./FormContext";
+import { FormContext } from "./FormContext";
 import api from "../../apis/axios";
 import AlarmDialog from "../../styles/AlarmDialog";
 
@@ -186,7 +187,19 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${({ theme }) => theme.colors.gray04};
 `;
+  display: flex;
+  /* align-items: center; */
+  height: 100vh;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: solid 1px ${({ theme }) => theme.colors.gray04};
+`;
 const Box = styled.form`
+  display: grid;
+  justify-content: center;
+  align-items: flex-start;
+  width: 600px;
+  margin: 0px auto;
+`;
   display: grid;
   justify-content: center;
   align-items: flex-start;
@@ -197,17 +210,22 @@ const Form = styled.form`
   width: 500px;
   border-radius: 15px;
 `;
+  width: 500px;
+  border-radius: 15px;
+`;
 const H1 = styled.h1`
   margin-top: 80px;
   @media (max-width: 480px) {
     font-size: ${responsiveSize("24")};
   }
 `;
+`;
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
   /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(9)};
+`;
 `;
 const TextInputContainer = styled.div`
   display: flex;
@@ -217,6 +235,7 @@ const TextInputContainer = styled.div`
   @media (max-width: 480px) {
     margin-right: ${responsiveSize(16)};
   }
+`;
 `;
 const Input = styled.input`
   width: ${responsiveSize(120)};
@@ -232,13 +251,33 @@ const Input = styled.input`
     font-size: ${responsiveSize(15)};
   }
 `;
+`;
 const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
+`;
 
 const SignUpButton = styled.button`
+  align-items: flex-end;
+  width: 100%;
+  height: ${responsiveSize(60)};
+  background-color: #653eff;
+  color: white;
+  font-size: ${responsiveSize("20")};
+  padding: 15px;
+  margin-top: 50px;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #9a9a9a;
+  }
+`;
+
   align-items: flex-end;
   width: 100%;
   height: ${responsiveSize(60)};
