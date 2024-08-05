@@ -16,6 +16,7 @@ import { useLikeApi } from "../../apis/communityApi/useLikeApi";
 import { motion } from "framer-motion";
 import { usePostData } from "../../hooks/usePostData";
 import AlarmDialog from "../../styles/AlarmDialog";
+import { useNavigate } from "react-router-dom";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 export default function WriteBoardMain({ post }) {
   const [totalComments, setTotalComments] = useState(0);
@@ -24,17 +25,28 @@ export default function WriteBoardMain({ post }) {
   const [isMyPost, setIsMyPost] = useState(false);
   //친구인가
   const [isMyFriend, setIsMyFriend] = useState(false);
-  const { data, isLoading, error } = useFetchData(`/posts/${post.id}`);
-  const user = useUserInfo((state) => state.user);
+  const navigate = useNavigate();
 
+  // post가 없는 경우를 
+  useEffect(() => {
+    if (!post) {
+      AlarmDialog({
+        title: "유효하지 않은 게시물입니다.",
+        type: "error",
+      });
+      navigate(-1);
+    }
+  }, [post, navigate]);
+
+  const { data, isLoading, error } = useFetchData(`/posts/${post?.id}`);
+  const user = useUserInfo((state) => state.user);
   //친구 판단
   const { arr: friends, isLoading: friendsLoading } = useFetchData(`/friends`);
   const { arr: friendsPending, isLoading: friendsPendingLoading } =
     useFetchData(`/friends/pending`); //친구 요청대기
   const { arr: friendsWaiting, isLoading: friendsWaitingLoading } =
     useFetchData("/friends/waiting"); //친구 요청목록
-  const postWriterId = post.userId;
-
+  const postWriterId = post?.userId;
   //친구요청보내기
   const { postData } = usePostData(`/friends/request/${postWriterId}`);
 
@@ -59,6 +71,24 @@ export default function WriteBoardMain({ post }) {
 
   const { likeCnt, isLiked, toggleLikes, isLikeLoading } = useLikeApi(post);
 
+  // 오류 처리 및 존재하지 않는 게시물인 경우 처리
+  useEffect(() => {
+    if (
+      !isLoading &&
+      !isLikeLoading &&
+      !friendsLoading &&
+      !friendsPendingLoading &&
+      !friendsWaitingLoading &&
+      (error )
+    ) {
+      AlarmDialog({
+        title: "유효하지 않은 게시물입니다.",
+        type: "error",
+      });
+      navigate(-1);
+    }
+  }, [error, isLoading, data, navigate]);
+
   if (
     isLoading ||
     isLikeLoading ||
@@ -67,7 +97,6 @@ export default function WriteBoardMain({ post }) {
     friendsWaitingLoading
   )
     return <div>Loading...</div>;
-  //if (error) return <div>Error loading user info</div>;
 
   const handleClicked = () => {
     //알람 다이얼로그 띄우기

@@ -50,7 +50,6 @@ function Login() {
         email: data.email,
         userId: res.data.userId,
       });
-      console.log(setUser);
       //로그인 성공 시 홈화면으로 이동
       navigate("/main");
     } catch (error) {

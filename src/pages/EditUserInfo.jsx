@@ -37,11 +37,11 @@ export default function EditUserInfo() {
 
   //음수값 자릿수 제한
   const onInput = (e) => {
-    if (e.target.value.length > 3) {
+    if (Number(e.target.value) > 24) {
       e.target.value = 0;
       AlarmDialog({
-        title: "3자리까지만 입력가능합니다.",
-        type: "info",
+        title: "하루 이내의 시간만 입력 가능합니다.",
+        type: "warning",
       });
     } else if (e.target.value < 0) {
       e.target.value = 0;

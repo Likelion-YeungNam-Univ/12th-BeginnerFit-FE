@@ -73,7 +73,8 @@ export default function Page3() {
       setAllow(false);
     },[ isFormValid ]);
 
-    const categoryName = ["concernedAreas", "exerciseIntensity", "exerciseGoals"];
+
+    const categoryName = ["exerciseIntensity", "exerciseGoals", "concernedAreas"];
     // formData.categories의 값을 categoryName 배열과 매핑
     const setCategory = categoryName.reduce((acc, key, idx) => {
         const formKey = Object.keys(formData.categories)[idx]; // formData.categories의 키 값을 가져옴
@@ -93,6 +94,7 @@ export default function Page3() {
         exerciseGoals: setCategory["exerciseGoals"],
         concernedAreas: setCategory["concernedAreas"],
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -180,12 +182,11 @@ export default function Page3() {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  /* align-items: center; */
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: solid 1px ${({ theme }) => theme.colors.gray04};
-`;
+    display: flex;
+    height: 100vh;
+    background-color: ${({ theme }) => theme.colors.white};
+    border: solid 1px ${({ theme }) => theme.colors.gray04};
+`
 const Box = styled.form`
   display: grid;
   justify-content: center;
@@ -193,22 +194,25 @@ const Box = styled.form`
   width: 600px;
   margin: 0px auto;
 `;
+
 const Form = styled.form`
   width: 500px;
   border-radius: 15px;
 `;
+
 const H1 = styled.h1`
   margin-top: 80px;
   @media (max-width: 480px) {
     font-size: ${responsiveSize("24")};
   }
 `;
+
 const P = styled.p`
   margin-top: 15px;
   padding-left: 10px;
-  /* font-size: ${responsiveSize("20")}; */
   margin-bottom: ${responsiveSize(9)};
 `;
+
 const TextInputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -218,6 +222,7 @@ const TextInputContainer = styled.div`
     margin-right: ${responsiveSize(16)};
   }
 `;
+
 const Input = styled.input`
   width: ${responsiveSize(120)};
   padding: 13px;
@@ -232,11 +237,13 @@ const Input = styled.input`
     font-size: ${responsiveSize(15)};
   }
 `;
+
 const SubContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
+
 
 const SignUpButton = styled.button`
   align-items: flex-end;
@@ -256,3 +263,4 @@ const SignUpButton = styled.button`
     background-color: #9a9a9a;
   }
 `;
+
