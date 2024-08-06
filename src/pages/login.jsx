@@ -6,8 +6,8 @@ import { useUserInfo } from "../store/useUserInfo";
 import AlarmDialog from "../styles/AlarmDialog";
 
 function Login() {
-  const [email, setEmail] = useState("dusrl123@naver.com");
-  const [password, setPassword] = useState("password123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   //유저정보를 로컬에 담아 사용하기 위해 Zustand에 유저정보를 저장
   const setUser = useUserInfo((state) => state.setUser);
