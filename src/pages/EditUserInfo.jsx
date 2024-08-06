@@ -163,6 +163,7 @@ export default function EditUserInfo() {
   //폼 제출
   const handleSubmit = (e) => {
     e.preventDefault();
+    setForm((prev) => ({ ...prev, categories: selectedCategories }))
     mutate(form);
   };
   //내 정보불러오기 오류

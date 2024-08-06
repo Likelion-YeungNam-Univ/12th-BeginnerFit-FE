@@ -81,12 +81,14 @@
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"> <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=react query&logoColor=purple"> <img src="https://img.shields.io/badge/zustand-000000?style=for-the-badge&logo=zustand&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> 
 
 ### BE
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=OpenJDK&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"> <img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=white"> <img src="https://img.shields.io/badge/Amazon%20S3-569A31?style=for-the-badge&logo=Amazon%20S3&logoColor=white"> <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white"> 
+
 
 <hr/>
 
 ## 👥팀원
 
-### FrontEnd
+### FRONTEND
 |<img src="https://avatars.githubusercontent.com/u/122340316?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/144890194?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/164824197?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|
 |박연기<br/>[@yeongipark](https://github.com/yeongipark)|김도연<br/>[@tkv00](https://github.com/tkv00)|김지현<br/>[@jihyun132](https://github.com/jihyun132)|

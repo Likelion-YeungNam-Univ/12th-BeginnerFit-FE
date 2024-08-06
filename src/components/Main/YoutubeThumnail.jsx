@@ -20,6 +20,7 @@ const YouTubeThumbnail = ({ videoId }) => {
 
   // videoId 뽑아내기 위한 코드
   useEffect(() => {
+    console.log(data)
     const videoId = data?.url.match(/v=([^&]+)/)[1];
     setId(data?.id);
     setThumbnailurl(`https://img.youtube.com/vi/${videoId}/0.jpg`);

@@ -14,7 +14,7 @@ export default function ChallengeList() {
   const [allComplete, setAllComplete] = useState(false);
 
   // 챌린지 3개 가져오기
-  const { data } = useFetchData("/challengeparticipant/today-challenges");
+  const { data } = useFetchData("/challengeparticipant/today");
 
   // 오늘의 챌린지 완료한 친구 수 가져오기
   const { data: total } = useFetchData(
@@ -62,6 +62,7 @@ export default function ChallengeList() {
   // 챌린지 가져오고 state에 저장
   useEffect(() => {
     if (data) {
+      console.log(data)
       setChallengeList(data);
       setAllComplete(data.length === 3 && data.every((item) => item.completed));
     }
