@@ -89,7 +89,7 @@ export default function Page3() {
         targetWeight: parseFloat(formData.targetWeight),
         date: formData.date,
         targetDate: formData.targetDate,
-        exerciseTime: parseInt(formData.exerciseTime), //시간으로 받은 데이터 값 -> 분 단위로 변경
+        exerciseTime: parseInt(formData.exerciseTime)*60, //시간으로 받은 데이터 값 -> 분 단위로 변경
         exerciseIntensity: setCategory["exerciseIntensity"],
         exerciseGoals: setCategory["exerciseGoals"],
         concernedAreas: setCategory["concernedAreas"],
