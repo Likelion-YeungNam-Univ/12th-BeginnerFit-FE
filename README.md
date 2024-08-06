@@ -98,7 +98,7 @@
 |:-:|:-:|
 |진서연<br/>[@jjjjjinseo](https://github.com/jjjjjinseo)|박하<br/>[@HaHaPark](https://github.com/HaHaPark)|
 
-### DESGIN
+### DESIGN
 |<img src="https://avatars.githubusercontent.com/u/165015500?v=4" width="150" height="150"/>|
 |:-:|
 |김규희<br/>[@9ooi](https://github.com/9ooi)|
