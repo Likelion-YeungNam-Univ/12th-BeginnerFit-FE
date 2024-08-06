@@ -42,7 +42,8 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_KEY }}
           script: |
-            cd /home/ubuntu/12th-BeginnerFit-FE/
+           cd /home/ubuntu/12th-BeginnerFit-FE/
             git pull origin develop
             npm install
-            nohup npm run dev -- --host 0.0.0.0 &
+            nohup npm run dev -- --host 0.0.0.0 > app.log 2>&1 &
+            disown
