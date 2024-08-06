@@ -5,6 +5,7 @@ import { responsiveSize } from "../../utils/Mediaquery";
 import { GoDotFill } from "react-icons/go";
 import useFetchData from "../../hooks/useFetchData";
 
+
 export default function PlayListList() {
   // 상태로 현재 슬라이드 인덱스를 관리
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -16,10 +17,14 @@ export default function PlayListList() {
   // 자동 슬라이드 효과
   useEffect(() => {
     if (!isAutoSliding) return;
+    if(data){
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % data.length);
     }, 1500); // 0.5초마다 슬라이드 이동
+
     return () => clearInterval(interval);
+  }
+
   }, [isAutoSliding, data]);
 
   // 버튼 클릭 핸들러
@@ -31,7 +36,10 @@ export default function PlayListList() {
   return (
     <Container>
       <SlideContainer $currentSlide={currentSlide} $dataLength={data?.length}>
-        {data?.map((item) => (
+        {
+        (data === undefined || data === null) ?
+        "데이터 없음"
+         : data?.map((item) => (
           <PlayList
             $dataLength={data?.length}
             key={item.id}
