@@ -75,6 +75,7 @@
 
 
 <hr/>
+
 ## 🎤발표자료
 
 [영남대학교_새싹들_BeginnerFit (1).pdf](https://github.com/user-attachments/files/16922387/_._BeginnerFit.1.pdf)
